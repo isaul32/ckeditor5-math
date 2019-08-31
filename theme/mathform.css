@@ -1,0 +1,35 @@
+@import "@ckeditor/ckeditor5-ui/theme/mixins/_rwd.css";
+
+.ck.ck-math-form {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    @mixin ck-media-phone {
+		flex-wrap: wrap;
+
+        & .ck-math-view {
+			flex-basis: 100%;
+
+            & .ck-labeled-input {
+			    flex-basis: 100%;
+		    }
+
+            & .ck-label {
+			    flex-basis: 100%;
+		    }
+		}
+
+		& .ck-button {
+			flex-basis: 50%;
+		}
+	}
+
+}
+
+/* FIXME: mathjax isn't working with .ck.ck-reset_all * without this fix*/
+.ck.ck-math-preview * {
+	vertical-align: initial;
+    text-align: center;
+}

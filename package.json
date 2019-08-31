@@ -1,0 +1,50 @@
+{
+  "name": "ckeditor5-math",
+  "version": "1.0.0",
+  "description": "Math feature for CKEditor 5.",
+  "keywords": [
+    "ckeditor",
+    "ckeditor5",
+    "ckeditor 5",
+    "ckeditor5-feature",
+    "ckeditor5-plugin"
+  ],
+  "dependencies": {
+    "@ckeditor/ckeditor5-core": "^12.3.0",
+    "@ckeditor/ckeditor5-ui": "^14.0.0",
+    "@ckeditor/ckeditor5-utils": "^14.0.0"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-editor-inline": "^12.3.0",
+    "@ckeditor/ckeditor5-essentials": "^11.0.5",
+    "eslint": "^5.5.0",
+    "eslint-config-ckeditor5": "^2.0.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=5.7.1"
+  },
+  "author": "isaul32",
+  "license": "ISC",
+  "files": [
+    "lang",
+    "src",
+    "theme"
+  ],
+  "scripts": {
+    "lint": "eslint --quiet **/*.js",
+    "lint:fix": "eslint --quiet **/*.js --fix"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --quiet"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
