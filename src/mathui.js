@@ -8,6 +8,7 @@ import MainFormView from './ui/mainformview';
 
 // Need math commands from there
 import MathEditing from './mathediting';
+import { defaultConfig } from './utils';
 
 import pluginIcon from '../theme/icons/icon.svg';
 
@@ -58,11 +59,12 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		const mathConfig = editor.config.get( 'math' );
-		// Todo: better checks
-		const engine = typeof mathConfig !== 'undefined' && typeof mathConfig.engine !== 'undefined' ? mathConfig.engine : 'mathjax';
+		const mathConfig = {
+			...defaultConfig,
+			...this.editor.config.get( 'math' )
+		}
 
-		const formView = new MainFormView( editor.locale, engine );
+		const formView = new MainFormView( editor.locale, mathConfig.engine );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'displayIsOn' ).to( mathCommand, 'display');

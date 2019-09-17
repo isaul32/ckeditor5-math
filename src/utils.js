@@ -32,3 +32,10 @@ export function getSelectedMathModelWidget( selection ) {
 
 	return null;
 }
+
+
+export const defaultConfig = {
+	engine: 'mathjax',
+	outputMode: 'script',
+	forceOutputMode: false
+}

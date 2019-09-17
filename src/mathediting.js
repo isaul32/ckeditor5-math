@@ -5,7 +5,7 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
 
-import { renderEquation } from './utils';
+import { renderEquation, defaultConfig } from './utils';
 
 export default class MathEditing extends Plugin {
 	static get requires() {
@@ -37,9 +37,10 @@ export default class MathEditing extends Plugin {
 
 	_defineConverters() {
 		const conversion = this.editor.conversion;
-		const mathConfig = this.editor.config.get( 'math' );
-		// Todo: better checks
-		const engine = typeof mathConfig !== 'undefined' && typeof mathConfig.engine !== 'undefined' ? mathConfig.engine : 'mathjax';
+		const mathConfig = {
+			...defaultConfig,
+			...this.editor.config.get( 'math' )
+		}
 		
 		// View -> Model
 		conversion.for( 'upcast' )
@@ -122,7 +123,7 @@ export default class MathEditing extends Plugin {
 			const uiElement = viewWriter.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 
-				renderEquation( equation, domElement, engine, display );
+				renderEquation( equation, domElement, mathConfig.engine, display );
 
 				return domElement;
 			} );
