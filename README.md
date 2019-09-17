@@ -57,6 +57,7 @@ Supported input and output formats are:
 <!-- MathJax style http://docs.mathjax.org/en/v2.7-latest/advanced/model.html#how-mathematics-is-stored-in-the-page -->
 <script type="math/tex">\sqrt{\frac{a}{b}}</script>
 <script type="math/tex; mode=display">\sqrt{\frac{a}{b}}</script>
+
 <!-- CKEditor 4 style https://ckeditor.com/docs/ckeditor4/latest/features/mathjax.html -->
 <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>
 <span class="math-tex">\[ \sqrt{\frac{a}{b}} \]</span>
@@ -90,7 +91,7 @@ InlineEditor.defaultConfig = {
 ```
 ## Styles
 - Styles requires PostCSS like offical CKEditor plugins
-- 
+
 ## Todo
 - AutoMath like AutoMediaEmbed
 - Convert equation images to mathtex when paste from word
