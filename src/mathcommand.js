@@ -3,7 +3,6 @@ import { getSelectedMathModelWidget } from './utils';
 
 export default class MathCommand extends Command {
 	execute( equation, display, outputType, forceOutputType ) {
-		console.log( 'execute', display, outputType, forceOutputType );
 		const model = this.editor.model;
 		const selection = model.document.selection;
 		const selectedElement = selection.getSelectedElement();
