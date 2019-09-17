@@ -37,7 +37,9 @@ export default class MathEditing extends Plugin {
 
 	_defineConverters() {
 		const conversion = this.editor.conversion;
-
+		const mathConfig = this.editor.config.get( 'math' );
+		// Todo: better checks
+		const engine = typeof mathConfig !== 'undefined' && typeof mathConfig.engine !== 'undefined' ? mathConfig.engine : 'mathjax';
 		
 		// View -> Model
 		conversion.for( 'upcast' )
@@ -120,7 +122,7 @@ export default class MathEditing extends Plugin {
 			const uiElement = viewWriter.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 
-				renderEquation( equation, domElement, 'mathjax', display );
+				renderEquation( equation, domElement, engine, display );
 
 				return domElement;
 			} );

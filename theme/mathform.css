@@ -6,6 +6,16 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
+	& .ck.ck-math-preview {
+		user-select: none;
+	}
+
+	/* FIXME: mathjax isn't working with .ck.ck-reset_all * without this fix*/
+	& .ck.ck-math-preview * {
+		vertical-align: initial;
+		text-align: center;
+	}
+
     @mixin ck-media-phone {
 		flex-wrap: wrap;
 
@@ -25,11 +35,4 @@
 			flex-basis: 50%;
 		}
 	}
-
-}
-
-/* FIXME: mathjax isn't working with .ck.ck-reset_all * without this fix*/
-.ck.ck-math-preview * {
-	vertical-align: initial;
-    text-align: center;
 }

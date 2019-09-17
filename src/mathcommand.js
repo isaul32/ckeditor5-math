@@ -30,7 +30,6 @@ export default class MathCommand extends Command {
 		this.isEnabled = isAllowed;
 
 		const selectedEquation = getSelectedMathModelWidget( selection );
-		console.log(selectedEquation);
 		this.value = selectedEquation ? selectedEquation.getAttribute( 'equation' ) : null;
 		this.display = selectedEquation ? selectedEquation.getAttribute( 'display' ) : null;
 	}

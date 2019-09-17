@@ -8,17 +8,18 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 		/* eslint-disable */
 		MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
 		/* eslint-enable */
-	}
-	else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
+	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
 		/* eslint-disable */
         katex.render( equation, element, {
 			throwOnError: false,
 			displayMode: display
         } );
         /* eslint-enable */
+	} else if ( typeof engine === 'function' ) {
+		engine(equation, element, display);
 	} else {
 		element.innerHTML = equation;
-		console.warn( 'math-tex-typesetting-missing: Missing the mathematical typesetting engine for tex.' );
+		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.` );
 	}
 }
 

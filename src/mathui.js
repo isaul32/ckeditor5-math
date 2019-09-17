@@ -57,7 +57,10 @@ export default class MathUI extends Plugin {
 	_createFormView() {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
-		const engine = 'mathjax';
+
+		const mathConfig = editor.config.get( 'math' );
+		// Todo: better checks
+		const engine = typeof mathConfig !== 'undefined' && typeof mathConfig.engine !== 'undefined' ? mathConfig.engine : 'mathjax';
 
 		const formView = new MainFormView( editor.locale, engine );
 
