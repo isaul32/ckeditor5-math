@@ -2,6 +2,7 @@ import View from '@ckeditor/ckeditor5-ui/src/view';
 import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
 import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 import LabelView from '@ckeditor/ckeditor5-ui/src/label/labelview';
@@ -38,6 +39,9 @@ export default class MainFormView extends View {
 		// Math element
 		this.mathView = new MathView( engine, locale );
 
+		// Display button
+		this.displayButtonView = this._createDisplayButton();
+
 		// Submit button
 		this.saveButtonView = this._createButton( t( 'Save' ), checkIcon, 'ck-button-save', null );
 		this.saveButtonView.type = 'submit';
@@ -66,6 +70,7 @@ export default class MainFormView extends View {
 					},
 					children: [
 						this.mathInputView,
+						this.displayButtonView,
 						this.previewLabel,
 						this.mathView
 					]
@@ -87,6 +92,7 @@ export default class MainFormView extends View {
 		// Register form elements to focusable elements
 		const childViews = [
 			this.mathInputView,
+			this.displayButtonView,
 			this.saveButtonView,
 			this.cancelButtonView,
 		];
@@ -163,5 +169,34 @@ export default class MainFormView extends View {
 		}
 
 		return button;
+	}
+
+	_createDisplayButton() {
+		const t = this.locale.t;
+
+		const switchButton = new SwitchButtonView( this.locale );
+
+		switchButton.set( {
+			label: t( 'Display mode' ),
+			withText: true
+		} );
+
+		switchButton.extendTemplate( {
+			attributes: {
+				class: 'ck-button-display-toggle'
+			}
+		} );
+
+		switchButton.bind( 'isOn' ).to( this, 'displayIsOn' );
+
+		switchButton.on( 'execute', () => {
+			// Toggle state
+			this.set('displayIsOn', !this.displayIsOn);
+
+			// Update preview view
+			this.mathView.display = this.displayIsOn;
+		} );
+
+		return switchButton;
 	}
 }

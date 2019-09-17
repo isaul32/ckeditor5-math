@@ -8,8 +8,9 @@ export default class MathView extends View {
 		this.engine = engine;
 
 		this.set( 'value', '' );
+		this.set( 'display', false);
 
-		this.on( 'change:value', () => {
+		this.on( 'change', () => {
 			this.updateMath();
 		} );
 
@@ -25,7 +26,7 @@ export default class MathView extends View {
 	}
 
 	updateMath() {
-		renderEquation( this.value, this.element, this.engine );
+		renderEquation( this.value, this.element, this.engine, this.display );
 	}
 
 	render() {

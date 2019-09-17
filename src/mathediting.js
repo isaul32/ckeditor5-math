@@ -107,11 +107,13 @@ export default class MathEditing extends Plugin {
 			const equation = modelItem.getAttribute( 'equation' );
 			const display = modelItem.getAttribute( 'display' );
 
+			const styles = 'user-select: none; ' + (display ? 'display: block;' : 'display: inline-block;');
+			const classes = 'ck-math-tex ' + (display ? 'ck-math-tex-display' : 'ck-math-tex-inline');
 
 			// CKEngine render multiple times if using span instead of div
 			const mathtexView = viewWriter.createContainerElement( 'div', {
-				style: display ? 'display: block;' : 'display: inline-block;',
-				class: 'mathtex'
+				style: styles,
+				class: classes
 			} );
 
 			// Div is formatted as parent container

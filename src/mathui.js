@@ -62,10 +62,11 @@ export default class MathUI extends Plugin {
 		const formView = new MainFormView( editor.locale, engine );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
+		formView.displayButtonView.bind( 'displayIsOn' ).to( mathCommand, 'display');
 
-		// Listen to 'submit' button click
+		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
-			editor.execute( 'math', formView.equation );
+			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn );
 			this._closeFormView();
 		} );
 
@@ -101,6 +102,7 @@ export default class MathUI extends Plugin {
 		}
 
 		this._form.equation = mathCommand.value || '';
+		this._form.displayButtonView.isOn = mathCommand.display || false;
 	}
 
 	_hideUI() {
