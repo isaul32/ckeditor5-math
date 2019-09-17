@@ -35,7 +35,12 @@ export function getSelectedMathModelWidget( selection ) {
 
 
 export const defaultConfig = {
+	/*
+	engine: (equation, element, display) => {
+	console.log(equation, element, display);
+	},
+	*/
 	engine: 'mathjax',
-	outputMode: 'script',
-	forceOutputMode: false
+	outputType: 'script',
+	forceOutputType: false
 }

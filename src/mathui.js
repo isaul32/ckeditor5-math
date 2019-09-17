@@ -71,7 +71,7 @@ export default class MathUI extends Plugin {
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
-			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn );
+			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn, mathConfig.outputType, mathConfig.forceOutputType );
 			this._closeFormView();
 		} );
 

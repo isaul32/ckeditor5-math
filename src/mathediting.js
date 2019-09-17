@@ -54,7 +54,7 @@ export default class MathEditing extends Plugin {
 				},
 				model: ( viewElement, modelWriter ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
-					return modelWriter.createElement( 'mathtex', { equation, type: 'script', display: false } );
+					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'script', display: false } );
 				}
 			} )
 			// MathJax display way (e.g. <script type="math/tex; mode=display">\sqrt{\frac{a}{b}}</script>)
@@ -67,7 +67,7 @@ export default class MathEditing extends Plugin {
 				},
 				model: ( viewElement, modelWriter ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
-					return modelWriter.createElement( 'mathtex', { equation, type: 'script', display: true } );
+					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'script', display: true } );
 				}
 			} )
 			// CKEditor 4 way (e.g. <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>)
@@ -86,7 +86,7 @@ export default class MathEditing extends Plugin {
 						equation = equation.substring( 2, equation.length - 2 ).trim();
 					}
 
-					return modelWriter.createElement( 'mathtex', { equation, type: 'span', display: hasDisplayDelimiters } );
+					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'span', display: hasDisplayDelimiters } );
 				}
 			} );
 
