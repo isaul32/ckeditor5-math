@@ -32,12 +32,8 @@ export default class MainFormView extends View {
 		// Equation input
 		this.mathInputView = this._createMathInput();
 
-		// Preview label
-		this.previewLabel = new LabelView( locale );
-		this.previewLabel.text = t( 'Equation preview' );
-
-		// Math element
-		this.mathView = new MathView( engine, locale );
+		// Preview isn't available in katex, because .ck-reset_all * css rule breaks it
+		this.previewEnabled = engine !== 'katex';
 
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
@@ -49,6 +45,30 @@ export default class MainFormView extends View {
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
+		// Preview label
+		this.previewLabel = new LabelView( locale );
+
+		let children = [];
+		if (this.previewEnabled) {
+			this.previewLabel.text = t( 'Equation preview' );
+
+			// Math element
+			this.mathView = new MathView( engine, locale );
+
+			children = [
+				this.mathInputView,
+				this.displayButtonView,
+				this.previewLabel,
+				this.mathView
+			]
+		} else {
+			this.previewLabel.text = t( `Equation preview isn't available` );
+			children = [
+				this.mathInputView,
+				this.displayButtonView,
+				this.previewLabel
+			]
+		}
 
 		// Add UI elements to template
 		this.setTemplate( {
@@ -68,12 +88,7 @@ export default class MainFormView extends View {
 							'ck-math-view'
 						]
 					},
-					children: [
-						this.mathInputView,
-						this.displayButtonView,
-						this.previewLabel,
-						this.mathView
-					]
+					children
 				},
 				this.saveButtonView,
 				this.cancelButtonView,
@@ -116,7 +131,9 @@ export default class MainFormView extends View {
 
 	set equation( equation ) {
 		this.mathInputView.inputView.element.value = equation;
-		this.mathView.value = equation;
+		if (this.previewEnabled) {
+			this.mathView.value = equation;
+		}
 	}
 
 	_createKeyAndFocusTrackers() {
@@ -143,7 +160,9 @@ export default class MainFormView extends View {
 		const inputView = mathInput.inputView;
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 		inputView.on( 'input', () => {
-			this.mathView.value = inputView.element.value;
+			if (this.previewEnabled) {
+				this.mathView.value = inputView.element.value;
+			}
 		} );
 
 		return mathInput;
@@ -193,8 +212,10 @@ export default class MainFormView extends View {
 			// Toggle state
 			this.set('displayIsOn', !this.displayIsOn);
 
-			// Update preview view
-			this.mathView.display = this.displayIsOn;
+			if (this.previewEnabled) {
+				// Update preview view
+				this.mathView.display = this.displayIsOn;
+			}
 		} );
 
 		return switchButton;

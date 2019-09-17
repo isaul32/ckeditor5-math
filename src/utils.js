@@ -1,5 +1,5 @@
 export function renderEquation( equation, element, engine = 'katex', display = false ) {
-	if ( engine === 'mathjax' && typeof katex !== 'mathjax' ) {
+	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if (display) {
 			element.innerHTML = '\\[' + equation + '\\]';
 		} else {
