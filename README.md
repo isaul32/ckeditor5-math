@@ -49,7 +49,7 @@ InlineEditor.defaultConfig = {
 };
 ```
 ### Copying plugin's theme for Lark
-Copy __theme/ckeditor5-link__ folder from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository fork.
+Copy __theme/ckeditor5-math__ folder from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository fork.
 
 ## Supported input and output formats
 Supported input and output formats are:
