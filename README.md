@@ -4,10 +4,12 @@ This is the best TeX-based mathematical plugin for CKEditor 5. You can use it to
 
 ## Demo (todo)
 [Link to classic editor demo](https://www.example.com)
+
 [Link to inline editor demo](https://www.example.com)
 
 ## Installation
 Install plugin with NPM or Yarn
+
 `npm install ckeditor5-math --save-dev`
 
 Add import into ckeditor.js file
