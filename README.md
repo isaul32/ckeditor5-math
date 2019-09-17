@@ -94,6 +94,6 @@ InlineEditor.defaultConfig = {
 
 ## Todo
 - AutoMath like AutoMediaEmbed
-- Convert equation images to mathtex when paste from word
+- Convert equation to mathtex when paste from word
 - Fix KaTex preview
-- Make better way import lark theme for plugin
+- Make better way to import lark theme for plugin
