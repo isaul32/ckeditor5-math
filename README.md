@@ -113,3 +113,4 @@ It's possible to paste equations in mathtex by using __delimiters__. For example
 - Fix KaTex preview
 - Make better way to import lark theme for plugin
 - MathML input and output when using MathJax version 3
+- Make tests
