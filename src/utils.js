@@ -1,4 +1,4 @@
-export const EQUATION_REGEXP = /^\\(\[|\().*?\\(\]|\))$/;
+export const EQUATION_REGEXP = /^(\\\[.*?\\\]|\\\(.*?\\\))$/;
 
 export const defaultConfig = {
 	engine: 'mathjax',
