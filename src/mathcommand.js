@@ -15,7 +15,7 @@ export default class MathCommand extends Command {
 
 				// Use already set type if found and is not forced
 				const type = forceOutputType ? outputType : typeAttr || outputType;
-				
+
 				mathtex = writer.createElement( 'mathtex', { equation, type, display } );
 			} else {
 				// Create new model element

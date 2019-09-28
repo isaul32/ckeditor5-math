@@ -62,12 +62,12 @@ export default class MathUI extends Plugin {
 		const mathConfig = {
 			...defaultConfig,
 			...this.editor.config.get( 'math' )
-		}
+		};
 
 		const formView = new MainFormView( editor.locale, mathConfig.engine );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
-		formView.displayButtonView.bind( 'displayIsOn' ).to( mathCommand, 'display');
+		formView.displayButtonView.bind( 'displayIsOn' ).to( mathCommand, 'display' );
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
@@ -125,7 +125,7 @@ export default class MathUI extends Plugin {
 		// Remove form first because it's on top of the stack.
 		this._removeFormView();
 	}
-	
+
 	_closeFormView() {
 		const mathCommand = this.editor.commands.get( 'math' );
 		if ( mathCommand.value !== undefined ) {

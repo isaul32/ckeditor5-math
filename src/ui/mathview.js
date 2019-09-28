@@ -6,9 +6,9 @@ export default class MathView extends View {
 		super( locale );
 
 		this.engine = engine;
-		
+
 		this.set( 'value', '' );
-		this.set( 'display', false);
+		this.set( 'display', false );
 
 		this.on( 'change', () => {
 			this.updateMath();

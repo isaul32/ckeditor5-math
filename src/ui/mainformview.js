@@ -2,7 +2,6 @@ import View from '@ckeditor/ckeditor5-ui/src/view';
 import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
 import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 import LabelView from '@ckeditor/ckeditor5-ui/src/label/labelview';
@@ -49,7 +48,7 @@ export default class MainFormView extends View {
 		this.previewLabel = new LabelView( locale );
 
 		let children = [];
-		if (this.previewEnabled) {
+		if ( this.previewEnabled ) {
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
@@ -60,14 +59,14 @@ export default class MainFormView extends View {
 				this.displayButtonView,
 				this.previewLabel,
 				this.mathView
-			]
+			];
 		} else {
-			this.previewLabel.text = t( `Equation preview isn't available` );
+			this.previewLabel.text = t( 'Equation preview isn\'t available' );
 			children = [
 				this.mathInputView,
 				this.displayButtonView,
 				this.previewLabel
-			]
+			];
 		}
 
 		// Add UI elements to template
@@ -131,7 +130,7 @@ export default class MainFormView extends View {
 
 	set equation( equation ) {
 		this.mathInputView.inputView.element.value = equation;
-		if (this.previewEnabled) {
+		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
 		}
 	}
@@ -160,7 +159,7 @@ export default class MainFormView extends View {
 		const inputView = mathInput.inputView;
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 		inputView.on( 'input', () => {
-			if (this.previewEnabled) {
+			if ( this.previewEnabled ) {
 				this.mathView.value = inputView.element.value;
 			}
 		} );
@@ -193,7 +192,7 @@ export default class MainFormView extends View {
 	_createDisplayButton() {
 		const t = this.locale.t;
 
-		const switchButton = new SwitchButtonView( this.locale );
+		const switchButton = new ButtonView( this.locale );
 
 		switchButton.set( {
 			label: t( 'Display mode' ),
@@ -210,9 +209,9 @@ export default class MainFormView extends View {
 
 		switchButton.on( 'execute', () => {
 			// Toggle state
-			this.set('displayIsOn', !this.displayIsOn);
+			this.set( 'displayIsOn', !this.displayIsOn );
 
-			if (this.previewEnabled) {
+			if ( this.previewEnabled ) {
 				// Update preview view
 				this.mathView.display = this.displayIsOn;
 			}
