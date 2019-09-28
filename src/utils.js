@@ -39,7 +39,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 }
 
 export function isMathJaxVersion3( version ) {
-	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[0] === '3';
+	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
 }
 
 export function getSelectedMathModelWidget( selection ) {

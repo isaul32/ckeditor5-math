@@ -5,7 +5,7 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
 
-import { renderEquation, defaultConfig } from './utils';
+import { defaultConfig, renderEquation } from './utils';
 
 export default class MathEditing extends Plugin {
 	static get requires() {
@@ -40,8 +40,8 @@ export default class MathEditing extends Plugin {
 		const mathConfig = {
 			...defaultConfig,
 			...this.editor.config.get( 'math' )
-		}
-		
+		};
+
 		// View -> Model
 		conversion.for( 'upcast' )
 			// MathJax inline way (e.g. <script type="math/tex">\sqrt{\frac{a}{b}}</script>)
@@ -54,7 +54,11 @@ export default class MathEditing extends Plugin {
 				},
 				model: ( viewElement, modelWriter ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
-					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'script', display: false } );
+					return modelWriter.createElement( 'mathtex', {
+						equation,
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'script',
+						display: false
+					} );
 				}
 			} )
 			// MathJax display way (e.g. <script type="math/tex; mode=display">\sqrt{\frac{a}{b}}</script>)
@@ -67,9 +71,33 @@ export default class MathEditing extends Plugin {
 				},
 				model: ( viewElement, modelWriter ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
-					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'script', display: true } );
+					return modelWriter.createElement( 'mathtex', {
+						equation,
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'script',
+						display: true
+					} );
 				}
 			} )
+			// Todo: Implement input conversion
+			/*
+			// MathML (e.g. <math type="math/tex; mode=display" alttext="\sqrt{\frac{a}{b}}">...</script>)
+			.elementToElement( {
+				view: {
+					name: 'math',
+				},
+				model: ( viewElement, modelWriter ) => {
+					const equation = viewElement.getAttribute( 'alttext' );
+					const display = viewElement.getAttribute( 'display' );
+					if ( equation ) {
+						return modelWriter.createElement( 'mathtex', {
+							equation,
+							type: mathConfig.forceOutputType ? mathConfig.outputType : 'math',
+							display: display === 'block' ? true : false
+						} );
+					}
+				}
+			} )
+			*/
 			// CKEditor 4 way (e.g. <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>)
 			.elementToElement( {
 				view: {
@@ -86,7 +114,11 @@ export default class MathEditing extends Plugin {
 						equation = equation.substring( 2, equation.length - 2 ).trim();
 					}
 
-					return modelWriter.createElement( 'mathtex', { equation, type: mathConfig.forceOutputType ? mathConfig.outputType : 'span', display: hasDisplayDelimiters } );
+					return modelWriter.createElement( 'mathtex', {
+						equation,
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span',
+						display: hasDisplayDelimiters
+					} );
 				}
 			} );
 
@@ -110,8 +142,8 @@ export default class MathEditing extends Plugin {
 			const equation = modelItem.getAttribute( 'equation' );
 			const display = modelItem.getAttribute( 'display' );
 
-			const styles = 'user-select: none; ' + (display ? 'display: block;' : 'display: inline-block;');
-			const classes = 'ck-math-tex ' + (display ? 'ck-math-tex-display' : 'ck-math-tex-inline');
+			const styles = 'user-select: none; ' + ( display ? 'display: block;' : 'display: inline-block;' );
+			const classes = 'ck-math-tex ' + ( display ? 'ck-math-tex-display' : 'ck-math-tex-inline' );
 
 			// CKEngine render multiple times if using span instead of div
 			const mathtexView = viewWriter.createContainerElement( 'div', {
@@ -143,7 +175,7 @@ export default class MathEditing extends Plugin {
 				const mathtexView = viewWriter.createContainerElement( 'span', {
 					class: 'math-tex'
 				} );
-	
+
 				if ( display ) {
 					viewWriter.insert( viewWriter.createPositionAt( mathtexView, 0 ), viewWriter.createText( '\\[' + equation + '\\]' ) );
 				} else {
@@ -151,11 +183,23 @@ export default class MathEditing extends Plugin {
 				}
 
 				return mathtexView;
-			} else {
-				const mathtexView = viewWriter.createContainerElement( 'script', {
-					type: display ? 'math/tex; mode=display': 'math/tex'
+			}
+
+			/*
+			else if ( type === 'math' ) {
+				const mathtexView = viewWriter.createContainerElement( 'math', {
+					display: display ? 'block' : 'inline',
+					alttex: equation
 				} );
-	
+				// Todo: Implement output conversion
+				return mathtexView;
+			}
+			*/
+			else {
+				const mathtexView = viewWriter.createContainerElement( 'script', {
+					type: display ? 'math/tex; mode=display' : 'math/tex'
+				} );
+
 				viewWriter.insert( viewWriter.createPositionAt( mathtexView, 0 ), viewWriter.createText( equation ) );
 
 				return mathtexView;

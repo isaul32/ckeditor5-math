@@ -65,7 +65,7 @@ Supported input and output formats are:
 
 ## Available typesetting engines
 ### MathJax
-- Tested by using version __2.7.5__ and __TeX-MML-AM_HTMLorMML__ configuration
+- Tested by using version __2.7.5__ and __TeX-MML-AM_HTMLorMML__ configuration. It works also with version __3.0.0__ or newer!
 - Use __\\( \\)__ delimiters for inline and __\\[ \\]__ delimiters for display
 ### KaTeX
 - Tested by using version __0.11.0__
@@ -83,7 +83,7 @@ InlineEditor.defaultConfig = {
     // ...
     math: {
         engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
-        outputType: 'script', // or span
+        outputType: 'script', // or span or math
         forceOutputType: false // forces output to use outputType
     }
     // ...
@@ -97,3 +97,4 @@ InlineEditor.defaultConfig = {
 - Convert equation to mathtex when paste from word
 - Fix KaTex preview
 - Make better way to import lark theme for plugin
+- MathML input and output when using MathJax version 3
