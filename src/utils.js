@@ -1,4 +1,15 @@
+export const EQUATION_REGEXP = /^\\(\[|\().*?\\(\]|\))$/;
+
+export const defaultConfig = {
+	engine: 'mathjax',
+	outputType: 'script',
+	forceOutputType: false
+};
+
 export function renderEquation( equation, element, engine = 'katex', display = false ) {
+	if ( !element ) {
+		return;
+	}
 	/* eslint-disable */
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		const version = MathJax.version;
@@ -22,7 +33,10 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			} else {
 				element.innerHTML = '\\(' + equation + '\\)';
 			}
-			MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
+			// Fixme: MathJax render occasionally math processing error without timeout
+			setTimeout( () => {
+				MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
+			}, 100);
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
         katex.render( equation, element, {
@@ -38,6 +52,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 	/* eslint-enable */
 }
 
+// Simple MathJax 3 version check
 export function isMathJaxVersion3( version ) {
 	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
 }
@@ -52,8 +67,19 @@ export function getSelectedMathModelWidget( selection ) {
 	return null;
 }
 
-export const defaultConfig = {
-	engine: 'mathjax',
-	outputType: 'script',
-	forceOutputType: false
-};
+// Remove delimiters and figure display mode for the model
+export function removeDelimiters( equation ) {
+	equation = equation.trim();
+
+	// Remove delimiters (e.g. \( \) or \[ \])
+	const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
+	const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
+	if ( hasInlineDelimiters || hasDisplayDelimiters ) {
+		equation = equation.substring( 2, equation.length - 2 ).trim();
+	}
+
+	return {
+		equation,
+		display: hasDisplayDelimiters
+	};
+}

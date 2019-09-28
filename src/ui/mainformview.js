@@ -15,6 +15,8 @@ import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
 
 import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
 
+import { removeDelimiters, EQUATION_REGEXP } from '../utils';
+
 import MathView from './mathview';
 
 import '../../theme/mathform.css';
@@ -53,6 +55,7 @@ export default class MainFormView extends View {
 
 			// Math element
 			this.mathView = new MathView( engine, locale );
+			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
 			children = [
 				this.mathInputView,
@@ -160,7 +163,25 @@ export default class MainFormView extends View {
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 		inputView.on( 'input', () => {
 			if ( this.previewEnabled ) {
-				this.mathView.value = inputView.element.value;
+				const equationInput = inputView.element.value.trim();
+
+				// If input has delimiters
+				if ( equationInput.match( EQUATION_REGEXP ) ) {
+					// Get equation without delimiters
+					const params = removeDelimiters( equationInput );
+
+					// Remove delimiters from input field
+					inputView.element.value = params.equation;
+
+					// update display button and preview
+					this.displayButtonView.isOn = params.display;
+					if ( this.previewEnabled ) {
+						// Update preview view
+						this.mathView.value = params.equation;
+					}
+				} else {
+					this.mathView.value = equationInput;
+				}
 			}
 		} );
 
@@ -205,15 +226,13 @@ export default class MainFormView extends View {
 			}
 		} );
 
-		switchButton.bind( 'isOn' ).to( this, 'displayIsOn' );
-
 		switchButton.on( 'execute', () => {
 			// Toggle state
-			this.set( 'displayIsOn', !this.displayIsOn );
+			switchButton.isOn = !switchButton.isOn;
 
 			if ( this.previewEnabled ) {
 				// Update preview view
-				this.mathView.display = this.displayIsOn;
+				this.mathView.display = switchButton.isOn;
 			}
 		} );
 

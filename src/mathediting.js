@@ -5,7 +5,7 @@ import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
 
-import { defaultConfig, renderEquation } from './utils';
+import { defaultConfig, renderEquation, removeDelimiters } from './utils';
 
 export default class MathEditing extends Plugin {
 	static get requires() {
@@ -105,20 +105,14 @@ export default class MathEditing extends Plugin {
 					classes: [ 'math-tex' ]
 				},
 				model: ( viewElement, modelWriter ) => {
-					let equation = viewElement.getChild( 0 ).data.trim();
+					const equation = viewElement.getChild( 0 ).data.trim();
 
-					// Remove delimiters (e.g. \( \) or \[ \])
-					const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
-					const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
-					if ( hasInlineDelimiters || hasDisplayDelimiters ) {
-						equation = equation.substring( 2, equation.length - 2 ).trim();
-					}
+					const params = {
+						...removeDelimiters( equation ),
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
+					};
 
-					return modelWriter.createElement( 'mathtex', {
-						equation,
-						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span',
-						display: hasDisplayDelimiters
-					} );
+					return modelWriter.createElement( 'mathtex', params );
 				}
 			} );
 

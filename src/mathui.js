@@ -67,7 +67,7 @@ export default class MathUI extends Plugin {
 		const formView = new MainFormView( editor.locale, mathConfig.engine );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
-		formView.displayButtonView.bind( 'displayIsOn' ).to( mathCommand, 'display' );
+		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
