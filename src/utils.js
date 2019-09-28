@@ -28,15 +28,15 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 				MathJax.startup.document.updateDocument();
 			  } );
 		} else {
-			if ( display ) {
-				element.innerHTML = '\\[' + equation + '\\]';
-			} else {
-				element.innerHTML = '\\(' + equation + '\\)';
-			}
-			// Fixme: MathJax render occasionally math processing error without timeout
+			// Fixme: MathJax typesetting cause occasionally math processing error without timeout
 			setTimeout( () => {
+				if ( display ) {
+					element.innerHTML = '\\[' + equation + '\\]';
+				} else {
+					element.innerHTML = '\\(' + equation + '\\)';
+				}
 				MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
-			}, 100);
+			}, 50);
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
         katex.render( equation, element, {
