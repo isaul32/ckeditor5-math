@@ -44,7 +44,8 @@ InlineEditor.defaultConfig = {
 };
 ```
 ### Copying plugin's theme for Lark
-Copy __theme/ckeditor5-math__ folder from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository fork.
+Copy __theme/ckeditor5-math__ folder from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository fork or install
+`npm install @ckeditor/ckeditor5-theme-lark@https://github.com/isaul32/ckeditor5-theme-lark --save-dev`
 
 ### Styles
 Styles requires PostCSS like offical CKEditor plugins.
