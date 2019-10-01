@@ -15,7 +15,7 @@ import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
 
 import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
 
-import { removeDelimiters, EQUATION_REGEXP } from '../utils';
+import { extractDelimiters, hasDelimiters } from '../utils';
 
 import MathView from './mathview';
 
@@ -33,8 +33,9 @@ export default class MainFormView extends View {
 		// Equation input
 		this.mathInputView = this._createMathInput();
 
+		// Fixme:
 		// Preview isn't available in katex, because .ck-reset_all * css rule breaks it
-		this.previewEnabled = engine !== 'katex';
+		this.previewEnabled = engine !== 'katex' || true;
 
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
@@ -166,9 +167,9 @@ export default class MainFormView extends View {
 				const equationInput = inputView.element.value.trim();
 
 				// If input has delimiters
-				if ( equationInput.match( EQUATION_REGEXP ) ) {
+				if ( hasDelimiters( equationInput ) ) {
 					// Get equation without delimiters
-					const params = removeDelimiters( equationInput );
+					const params = extractDelimiters( equationInput );
 
 					// Remove delimiters from input field
 					inputView.element.value = params.equation;

@@ -1,61 +1,8 @@
-export const EQUATION_REGEXP = /^(\\\[.*?\\\]|\\\(.*?\\\))$/;
-
 export const defaultConfig = {
 	engine: 'mathjax',
 	outputType: 'script',
 	forceOutputType: false
 };
-
-export function renderEquation( equation, element, engine = 'katex', display = false ) {
-	if ( !element ) {
-		return;
-	}
-	/* eslint-disable */
-	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
-		const version = MathJax.version;
-		// If major version is 3
-		if ( isMathJaxVersion3( version ) ) {
-			const options = MathJax.getMetricsFor( element );
-
-			MathJax.texReset();
-			MathJax.tex2chtmlPromise( equation, options ).then( node => {
-				if ( element.firstChild ) {
-					element.firstChild.replaceWith( node );
-				} else {
-					element.appendChild( node );
-				}
-				MathJax.startup.document.clear();
-				MathJax.startup.document.updateDocument();
-			  } );
-		} else {
-			// Fixme: MathJax typesetting cause occasionally math processing error without timeout
-			setTimeout( () => {
-				if ( display ) {
-					element.innerHTML = '\\[' + equation + '\\]';
-				} else {
-					element.innerHTML = '\\(' + equation + '\\)';
-				}
-				MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
-			}, 50);
-		}
-	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
-        katex.render( equation, element, {
-			throwOnError: false,
-			displayMode: display
-        } );
-	} else if ( typeof engine === 'function' ) {
-		engine( equation, element, display );
-	} else {
-		element.innerHTML = equation;
-		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.` );
-	}
-	/* eslint-enable */
-}
-
-// Simple MathJax 3 version check
-export function isMathJaxVersion3( version ) {
-	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
-}
 
 export function getSelectedMathModelWidget( selection ) {
 	const selectedElement = selection.getSelectedElement();
@@ -67,8 +14,66 @@ export function getSelectedMathModelWidget( selection ) {
 	return null;
 }
 
-// Remove delimiters and figure display mode for the model
-export function removeDelimiters( equation ) {
+export function renderEquation( equation, element, engine = 'katex', display = false ) {
+	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
+		if ( isMathJaxVersion3( MathJax.version ) ) {
+			const options = MathJax.getMetricsFor( element, display );
+			let promiseFunction = undefined;
+			if ( typeof MathJax.tex2chtmlPromise !== 'undefined' ) {
+				promiseFunction = MathJax.tex2chtmlPromise;
+			} else if ( typeof MathJax.tex2svgPromise !== 'undefined' ) {
+				promiseFunction = MathJax.tex2svgPromise;
+			}
+
+			if ( typeof promiseFunction !== 'undefined' ) {
+				promiseFunction( equation, options ).then( node => {
+					if ( element.firstChild ) {
+						element.firstChild.replaceWith( node );
+					} else {
+						element.appendChild( node );
+					}
+					MathJax.startup.document.clear();
+					MathJax.startup.document.updateDocument();
+				} );
+			}
+		} else {
+			// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
+			// eslint-disable-next-line
+			setTimeout( () => {
+				if ( display ) {
+					element.innerHTML = '\\[' + equation + '\\]';
+				} else {
+					element.innerHTML = '\\(' + equation + '\\)';
+				}
+				MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] ); // eslint-disable-line
+			} );
+		}
+	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
+		katex.render( equation, element, {
+			throwOnError: false,
+			displayMode: display
+		} );
+	} else if ( typeof engine === 'function' ) {
+		engine( equation, element, display );
+	} else {
+		element.innerHTML = equation;
+		// eslint-disable-next-line
+		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.` );
+	}
+}
+
+// Simple MathJax 3 version check
+export function isMathJaxVersion3( version ) {
+	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
+}
+
+// Check if equation has delimiters
+export function hasDelimiters( text ) {
+	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
+}
+
+// Extract delimiters and figure display mode for the model
+export function extractDelimiters( equation ) {
 	equation = equation.trim();
 
 	// Remove delimiters (e.g. \( \) or \[ \])

@@ -4,7 +4,7 @@ import Undo from '@ckeditor/ckeditor5-undo/src/undo';
 import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
 import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
 
-import { defaultConfig, removeDelimiters, EQUATION_REGEXP } from './utils';
+import { defaultConfig, extractDelimiters, hasDelimiters } from './utils';
 
 export default class AutoMath extends Plugin {
 	static get requires() {
@@ -66,19 +66,19 @@ export default class AutoMath extends Plugin {
 		const equationRange = new LiveRange( leftPosition, rightPosition );
 		const walker = equationRange.getWalker( { ignoreElementEnd: true } );
 
-		let equation = '';
+		let text = '';
 
 		// Get equation text
 		for ( const node of walker ) {
 			if ( node.item.is( 'textProxy' ) ) {
-				equation += node.item.data;
+				text += node.item.data;
 			}
 		}
 
-		equation = equation.trim();
+		text = text.trim();
 
-		// Check if equation
-		if ( !equation.match( EQUATION_REGEXP ) ) {
+		// Skip if don't have delimiters
+		if ( !hasDelimiters( text ) ) {
 			return;
 		}
 
@@ -107,7 +107,7 @@ export default class AutoMath extends Plugin {
 
 				editor.model.change( writer => {
 					const params = {
-						...removeDelimiters( equation ),
+						...extractDelimiters( text ),
 						type: mathConfig.outputType,
 					};
 					const mathElement = writer.createElement( 'mathtex', params );

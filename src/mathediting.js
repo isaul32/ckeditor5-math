@@ -1,11 +1,10 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-
 import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
 
-import { defaultConfig, renderEquation, removeDelimiters } from './utils';
+import { defaultConfig, renderEquation, extractDelimiters } from './utils';
 
 export default class MathEditing extends Plugin {
 	static get requires() {
@@ -78,26 +77,6 @@ export default class MathEditing extends Plugin {
 					} );
 				}
 			} )
-			// Todo: Implement input conversion
-			/*
-			// MathML (e.g. <math type="math/tex; mode=display" alttext="\sqrt{\frac{a}{b}}">...</script>)
-			.elementToElement( {
-				view: {
-					name: 'math',
-				},
-				model: ( viewElement, modelWriter ) => {
-					const equation = viewElement.getAttribute( 'alttext' );
-					const display = viewElement.getAttribute( 'display' );
-					if ( equation ) {
-						return modelWriter.createElement( 'mathtex', {
-							equation,
-							type: mathConfig.forceOutputType ? mathConfig.outputType : 'math',
-							display: display === 'block' ? true : false
-						} );
-					}
-				}
-			} )
-			*/
 			// CKEditor 4 way (e.g. <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>)
 			.elementToElement( {
 				view: {
@@ -108,7 +87,7 @@ export default class MathEditing extends Plugin {
 					const equation = viewElement.getChild( 0 ).data.trim();
 
 					const params = {
-						...removeDelimiters( equation ),
+						...extractDelimiters( equation ),
 						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
 					};
 
@@ -136,7 +115,7 @@ export default class MathEditing extends Plugin {
 			const equation = modelItem.getAttribute( 'equation' );
 			const display = modelItem.getAttribute( 'display' );
 
-			const styles = 'user-select: none; ' + ( display ? 'display: block;' : 'display: inline-block;' );
+			const styles = 'user-select: none; ' + ( display ? '' : 'display: inline-block;' );
 			const classes = 'ck-math-tex ' + ( display ? 'ck-math-tex-display' : 'ck-math-tex-inline' );
 
 			// CKEngine render multiple times if using span instead of div
@@ -177,19 +156,7 @@ export default class MathEditing extends Plugin {
 				}
 
 				return mathtexView;
-			}
-
-			/*
-			else if ( type === 'math' ) {
-				const mathtexView = viewWriter.createContainerElement( 'math', {
-					display: display ? 'block' : 'inline',
-					alttex: equation
-				} );
-				// Todo: Implement output conversion
-				return mathtexView;
-			}
-			*/
-			else {
+			} else {
 				const mathtexView = viewWriter.createContainerElement( 'script', {
 					type: display ? 'math/tex; mode=display' : 'math/tex'
 				} );

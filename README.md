@@ -54,7 +54,7 @@ Styles requires PostCSS like offical CKEditor plugins.
 
 ### Available typesetting engines
 __MathJax__
-- Tested by using version __2.7.5__ and __TeX-MML-AM_HTMLorMML__ configuration. It works also with version __3.0.0__ or newer!
+- Tested by using version __2.7.5__ and __TeX-MML-AM_HTMLorMML__ configuration. It has also experimental (__CHTML__, __SVG__) support for __3.0.0__ or newer version.
 - Use __\\( \\)__ delimiters for inline and __\\[ \\]__ delimiters for display
 
 __KaTeX__

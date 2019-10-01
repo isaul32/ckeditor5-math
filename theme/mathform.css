@@ -7,13 +7,9 @@
     flex-wrap: nowrap;
 
 	& .ck.ck-math-preview {
-		user-select: none;
-	}
-
-	/* FIXME: mathjax isn't working with .ck.ck-reset_all * without this fix*/
-	& .ck.ck-math-preview * {
-		vertical-align: initial;
-		text-align: center;
+		// Todo: calculate content size
+		width: 234px;
+		height: 10em;
 	}
 
     @mixin ck-media-phone {
