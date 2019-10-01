@@ -7,7 +7,7 @@
     flex-wrap: nowrap;
 
 	& .ck.ck-math-preview {
-		// Todo: calculate content size
+		/* Todo: calculate content size */
 		width: 234px;
 		height: 10em;
 	}
