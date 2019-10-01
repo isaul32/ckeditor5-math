@@ -1,11 +1,9 @@
 # CKEditor 5 mathematical feature
 
-This is the best TeX-based mathematical plugin for CKEditor 5. You can use it to insert, edit and view mathematical equation and formulas. This plugin supports MathJax, KaTeX and custom typesetting engines.
+This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it to insert, edit and view mathematical equation and formulas. This plugin supports MathJax, KaTeX and custom typesetting engines.
 
-## Demo (todo)
-[Link to classic editor demo](https://www.example.com)
-
-[Link to inline editor demo](https://www.example.com)
+## Examples
+[Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
 
 ## Installation
 Install plugin with NPM or Yarn
@@ -74,9 +72,9 @@ InlineEditor.defaultConfig = {
 	}
 }
 ```
-- __equation__ is equation in TeX format without delimiters
-- __element__ is DOM element reserved for rendering
-- __display__ is boolean. Typesetting should be inline when false
+- __equation__ is equation in TeX format without delimiters.
+- __element__ is DOM element reserved for rendering.
+- __display__ is boolean. Typesetting should be inline when false.
 
 
 ### Plugin options
@@ -103,14 +101,35 @@ Supported input and output formats are:
 <span class="math-tex">\[ \sqrt{\frac{a}{b}} \]</span>
 ```
 
-### Math paste support
-It's possible to paste equations in mathtex by using __delimiters__. For example:
-- __\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__ (inline mode)
-- __\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__ (display mode)
+### Paste support
+
+#### Plain TeX paste
+Paste equations with __delimiters__. For example:
+__\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__
+or
+__\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
+
+#### Paste support from Microsoft Word
+Use [__paste from office__](https://github.com/isaul32/ckeditor5-paste-from-office) fork instead of offical.
+
+Install paste from office fork
+`npm install @ckeditor/ckeditor5-paste-from-office@github:isaul32/ckeditor5-paste-from-office --save-dev`
+
+```js
+import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import Mathematics from 'ckeditor5-math/src/math';
+// ...
+InlineEditor.builtinPlugins = [
+	// ...
+	PasteFromOffice,
+	Mathematics
+];
+```
 
 ## Todo
-- Convert equations to mathtex when paste document from word
 - Fix KaTex preview
-- Make better way to import lark theme for plugin
 - MathML input and output when using MathJax version 3
 - Make tests
+
+
+[*] at least in my opinion
