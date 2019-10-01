@@ -21,7 +21,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			MathJax.tex2chtmlPromise( equation, options ).then( node => {
 				if ( element.firstChild ) {
 					element.firstChild.replaceWith( node );
-				} {
+				} else {
 					element.appendChild( node );
 				}
 				MathJax.startup.document.clear();
