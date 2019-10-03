@@ -74,7 +74,7 @@ It's possible to implement with engine config. For example, this feature can be 
 InlineEditor.defaultConfig = {
 	// ...
 	math: {
-		engine: (equation, element, display, previewHack) => {
+		engine: (equation, element, display, preview) => {
 			// ...
 		}
 	}
@@ -83,7 +83,7 @@ InlineEditor.defaultConfig = {
 - __equation__ is equation in TeX format without delimiters.
 - __element__ is DOM element reserved for rendering.
 - __display__ is boolean. Typesetting should be inline when false.
-- __previewHack__ is boolean. Enable preview hack when true. It adds equation element to end of the body and use absolute position.
+- __preview__ is boolean. Preview Rendering when true.
 
 
 ### Supported input and output formats

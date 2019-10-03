@@ -15,30 +15,36 @@ export function getSelectedMathModelWidget( selection ) {
 	return null;
 }
 
-export function renderEquation( equation, element, engine = 'katex', display = false, previewHack = false ) {
+export function renderEquation( equation, element, engine = 'katex', display = false, preview = false ) {
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if ( isMathJaxVersion3( MathJax.version ) ) {
-			selectRenderMode( element, previewHack, el => {
+			selectRenderMode( element, preview, el => {
 				renderMathJax3( equation, el, display, () => {
-					if ( previewHack ) {
+					if ( preview ) {
 						moveAndScaleElement( element, el );
 					}
 				} );
 			} );
 		} else {
-			selectRenderMode( element, previewHack, el => {
+			selectRenderMode( element, preview, el => {
 				renderMathJax2( equation, el, display );
+				if ( preview ) {
+					moveAndScaleElement( element, el );
+				}
 			} );
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
-		selectRenderMode( element, previewHack, el => {
+		selectRenderMode( element, preview, el => {
 			katex.render( equation, el, {
 				throwOnError: false,
 				displayMode: display
 			} );
+			if ( preview ) {
+				moveAndScaleElement( element, el );
+			}
 		} );
 	} else if ( typeof engine === 'function' ) {
-		engine( equation, element, display, previewHack );
+		engine( equation, element, display,  );
 	} else {
 		element.innerHTML = equation;
 		// eslint-disable-next-line
@@ -95,7 +101,6 @@ function renderMathJax2( equation, element, display ) {
 function createPreviewElement( element, render ) {
 	const prewviewEl = getPreviewElement( element );
 	render( prewviewEl );
-	moveAndScaleElement( element, prewviewEl );
 }
 
 export function getPreviewElement( element ) {
