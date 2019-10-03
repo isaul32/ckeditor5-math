@@ -64,7 +64,7 @@ export default class MathUI extends Plugin {
 			...this.editor.config.get( 'math' )
 		};
 
-		const formView = new MainFormView( editor.locale, mathConfig.engine );
+		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );
@@ -106,6 +106,13 @@ export default class MathUI extends Plugin {
 			this._form.mathInputView.select();
 		}
 
+		// Show preview element
+		const elId = 'math-preview';
+		let prewviewEl = document.getElementById( elId );// eslint-disable-line
+		if ( prewviewEl ) {
+			prewviewEl.style.display = 'block';
+		}
+
 		this._form.equation = mathCommand.value || '';
 		this._form.displayButtonView.isOn = mathCommand.display || false;
 	}
@@ -140,6 +147,13 @@ export default class MathUI extends Plugin {
 			this._form.saveButtonView.focus();
 
 			this._balloon.remove( this._form );
+
+			// Hide preview element
+			const elId = 'math-preview';
+			let prewviewEl = document.getElementById( elId );// eslint-disable-line
+			if ( prewviewEl ) {
+				prewviewEl.style.display = 'none';
+			}
 
 			this.editor.editing.view.focus();
 		}

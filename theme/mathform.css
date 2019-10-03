@@ -6,12 +6,6 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
-	& .ck.ck-math-preview {
-		/* Todo: calculate content size */
-		width: 234px;
-		height: 10em;
-	}
-
     @mixin ck-media-phone {
 		flex-wrap: wrap;
 
@@ -31,4 +25,9 @@
 			flex-basis: 50%;
 		}
 	}
+}
+
+// Increase toolbar default z-index by one because math preview should be below of it
+.ck.ck-toolbar-container {
+	z-index: calc(var(--ck-z-modal) + 2);
 }

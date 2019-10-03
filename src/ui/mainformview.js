@@ -22,7 +22,7 @@ import MathView from './mathview';
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine ) {
+	constructor( locale, engine, previewEnabled ) {
 		super( locale );
 
 		const t = locale.t;
@@ -32,10 +32,6 @@ export default class MainFormView extends View {
 
 		// Equation input
 		this.mathInputView = this._createMathInput();
-
-		// Fixme:
-		// Preview isn't available in katex, because .ck-reset_all * css rule breaks it
-		this.previewEnabled = engine !== 'katex' || true;
 
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
@@ -47,11 +43,12 @@ export default class MainFormView extends View {
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
-		// Preview label
-		this.previewLabel = new LabelView( locale );
+		this.previewEnabled = previewEnabled;
 
 		let children = [];
 		if ( this.previewEnabled ) {
+			// Preview label
+			this.previewLabel = new LabelView( locale );
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
@@ -65,11 +62,9 @@ export default class MainFormView extends View {
 				this.mathView
 			];
 		} else {
-			this.previewLabel.text = t( 'Equation preview isn\'t available' );
 			children = [
 				this.mathInputView,
-				this.displayButtonView,
-				this.previewLabel
+				this.displayButtonView
 			];
 		}
 
