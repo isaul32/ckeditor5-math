@@ -53,7 +53,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			}
 		} );
 	} else if ( typeof engine === 'function' ) {
-		engine( equation, element, display,  );
+		engine( equation, element, display );
 	} else {
 		element.innerHTML = equation;
 		// eslint-disable-next-line
