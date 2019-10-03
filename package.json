@@ -33,6 +33,11 @@
   },
   "author": "isaul32",
   "license": "ISC",
+  "bugs": "https://github.com/isaul32/ckeditor5-math/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isaul32/ckeditor5-math.git"
+  },
   "files": [
     "lang",
     "src",
