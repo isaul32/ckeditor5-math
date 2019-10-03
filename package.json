@@ -30,7 +30,7 @@
     "node": ">=8.0.0",
     "npm": ">=5.7.1"
   },
-  "author": "isaul32",
+  "author": "Sauli Anto",
   "license": "ISC",
   "bugs": "https://github.com/isaul32/ckeditor5-math/issues",
   "repository": {
