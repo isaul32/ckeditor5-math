@@ -51,7 +51,7 @@ Add import into ckeditor.js file
 import Mathematics from 'ckeditor5-math/src/math';
 ```
 
-Add it to builtinPlugins
+Add it to built-in plugins
 
 ```js
 InlineEditor.builtinPlugins = [
@@ -60,7 +60,7 @@ InlineEditor.builtinPlugins = [
 ];
 ```
 
-__Add math button to toolbar__ and optional math config to default config
+__Add math button to toolbar__
 
 ```js
 InlineEditor.defaultConfig = {
@@ -73,7 +73,7 @@ InlineEditor.defaultConfig = {
 };
 ```
 ### Styles for Lark theme
-Copy __theme/ckeditor5-math__ folder from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository or install
+__Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository or install
 
 `npm install @ckeditor/ckeditor5-theme-lark@https://github.com/isaul32/ckeditor5-theme-lark --save-dev`
 
@@ -96,9 +96,9 @@ InlineEditor.defaultConfig = {
 
 ### Available typesetting engines
 __MathJax__
-- Tested by using version __latest 2.7__.
-- Also has experimental (__CHTML__, __SVG__) support for __3.0.0__ or newer version.
-- Use __\\( \\)__ delimiters for inline and __\\[ \\]__ delimiters for display
+- Tested by using __latest 2.7__
+- Has experimental (__CHTML__, __SVG__) support for __3.0.0__ or newer version
+- Use only __\\( \\)__ delimiters for inline and __\\[ \\]__ delimiters for display
 
 [<img src="https://www.mathjax.org/badge/badge-square.svg" width="130" alt="KaTeX">](https://www.mathjax.org/)
 
@@ -123,7 +123,7 @@ InlineEditor.defaultConfig = {
 - __equation__ is equation in TeX format without delimiters.
 - __element__ is DOM element reserved for rendering.
 - __display__ is boolean. Typesetting should be inline when false.
-- __preview__ is boolean. Preview Rendering when true.
+- __preview__ is boolean. Rendering in preview when true.
 
 
 ### Supported input and output formats
@@ -142,12 +142,15 @@ Supported input and output formats are:
 
 #### From plain text
 Paste TeX equations with __delimiters__. For example:
+
 __\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__
+
 or
+
 __\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
 
 #### From Microsoft Word
-Use [__paste from office__](https://github.com/isaul32/ckeditor5-paste-from-office) fork instead of official. This feature is __experimental__ and might not work always (look source code).
+Use [__paste from office__](https://github.com/isaul32/ckeditor5-paste-from-office) fork instead of official. This feature is __experimental__ and might not work always (look source codes).
 
 Install paste from office fork
 
