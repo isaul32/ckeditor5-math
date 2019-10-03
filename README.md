@@ -34,12 +34,6 @@ InlineEditor.defaultConfig = {
 			// ...
 			'math'
 		]
-	},
-	// ...
-	math: {
-		engine: 'mathjax',
-		outputType: 'script',
-		forceOutputType: false
 	}
 };
 ```
@@ -51,6 +45,19 @@ Copy __theme/ckeditor5-math__ folder from [https://github.com/isaul32/ckeditor5-
 Styles requires PostCSS like offical CKEditor plugins.
 
 ## Configuration & Usage
+
+### Plugin options
+```js
+InlineEditor.defaultConfig = {
+    // ...
+    math: {
+        engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
+        outputType: 'script', // or span or math
+		forceOutputType: false, // forces output to use outputType
+		enablePreview: true // Enable preview view
+    }
+}
+```
 
 ### Available typesetting engines
 __MathJax__
@@ -67,7 +74,7 @@ It's possible to implement with engine config. For example, this feature can be 
 InlineEditor.defaultConfig = {
 	// ...
 	math: {
-		engine: (equation, element, display) => {
+		engine: (equation, element, display, previewHack) => {
 			// ...
 		}
 	}
@@ -76,19 +83,8 @@ InlineEditor.defaultConfig = {
 - __equation__ is equation in TeX format without delimiters.
 - __element__ is DOM element reserved for rendering.
 - __display__ is boolean. Typesetting should be inline when false.
+- __previewHack__ is boolean. Enable preview hack when true. It adds equation element to end of the body and use absolute position.
 
-
-### Plugin options
-```js
-InlineEditor.defaultConfig = {
-    // ...
-    math: {
-        engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
-        outputType: 'script', // or span or math
-        forceOutputType: false // forces output to use outputType
-    }
-}
-```
 
 ### Supported input and output formats
 Supported input and output formats are:
