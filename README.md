@@ -85,7 +85,7 @@ Styles requires PostCSS like official CKEditor 5 plugins.
 ```js
 InlineEditor.defaultConfig = {
 	// ...
-		math: {
+	math: {
 		engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
 		outputType: 'script', // or span or math
 		forceOutputType: false, // forces output to use outputType
