@@ -59,10 +59,7 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		const mathConfig = {
-			...defaultConfig,
-			...this.editor.config.get( 'math' )
-		};
+		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
 
 		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview );
 

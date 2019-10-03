@@ -36,10 +36,7 @@ export default class MathEditing extends Plugin {
 
 	_defineConverters() {
 		const conversion = this.editor.conversion;
-		const mathConfig = {
-			...defaultConfig,
-			...this.editor.config.get( 'math' )
-		};
+		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
 
 		// View -> Model
 		conversion.for( 'upcast' )
@@ -86,10 +83,9 @@ export default class MathEditing extends Plugin {
 				model: ( viewElement, modelWriter ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
 
-					const params = {
-						...extractDelimiters( equation ),
+					const params = Object.assign( extractDelimiters( equation ), {
 						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
-					};
+					} );
 
 					return modelWriter.createElement( 'mathtex', params );
 				}

@@ -58,10 +58,7 @@ export default class AutoMath extends Plugin {
 	_mathBetweenPositions( leftPosition, rightPosition ) {
 		const editor = this.editor;
 
-		const mathConfig = {
-			...defaultConfig,
-			...this.editor.config.get( 'math' )
-		};
+		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
 
 		const equationRange = new LiveRange( leftPosition, rightPosition );
 		const walker = equationRange.getWalker( { ignoreElementEnd: true } );
@@ -106,10 +103,9 @@ export default class AutoMath extends Plugin {
 				}
 
 				editor.model.change( writer => {
-					const params = {
-						...extractDelimiters( text ),
-						type: mathConfig.outputType,
-					};
+					const params = Object.assign( extractDelimiters( text ), {
+						type: mathConfig.outputType
+					} );
 					const mathElement = writer.createElement( 'mathtex', params );
 
 					editor.model.insertContent( mathElement, insertPosition );
