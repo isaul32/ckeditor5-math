@@ -76,7 +76,8 @@ export default class MainFormView extends View {
 					'ck',
 					'ck-math-form',
 				],
-				tabindex: '-1'
+				tabindex: '-1',
+				spellcheck: 'false'
 			},
 			children: [
 				{

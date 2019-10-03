@@ -27,10 +27,19 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			} );
 		} else {
 			selectRenderMode( element, preview, el => {
-				renderMathJax2( equation, el, display );
-				if ( preview ) {
-					moveAndScaleElement( element, el );
-				}
+				// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
+				// eslint-disable-next-line
+				setTimeout( () => {
+					renderMathJax2( equation, el, display );
+
+					// Move and scale after rendering
+					if ( preview ) {
+						// eslint-disable-next-line
+						MathJax.Hub.Queue( () => {
+							moveAndScaleElement( element, el );
+						} );
+					}
+				} );
 			} );
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
@@ -86,16 +95,12 @@ function renderMathJax3( equation, element, display, after ) {
 }
 
 function renderMathJax2( equation, element, display ) {
-	// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
-	// eslint-disable-next-line
-	setTimeout( () => {
-		if ( display ) {
-			element.innerHTML = '\\[' + equation + '\\]';
-		} else {
-			element.innerHTML = '\\(' + equation + '\\)';
-		}
-		MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] ); // eslint-disable-line
-	} );
+	if ( display ) {
+		element.innerHTML = '\\[' + equation + '\\]';
+	} else {
+		element.innerHTML = '\\(' + equation + '\\)';
+	}
+	MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] ); // eslint-disable-line
 }
 
 function createPreviewElement( element, render ) {
