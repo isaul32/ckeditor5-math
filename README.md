@@ -7,14 +7,14 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 - [Screenshots](#screenshots)
 - [Examples](#examples)
 - [Installation](#installation)
-  * [Styles for Lark theme](#styles-for-lark-theme)
+	* [Styles for Lark theme](#styles-for-lark-theme)
 - [Configuration & Usage](#configuration--usage)
-  * [Plugin options](#plugin-options)
-  * [Available typesetting engines](#available-typesetting-engines)
-  * [Supported input and output formats](#supported-input-and-output-formats)
+	* [Plugin options](#plugin-options)
+	* [Available typesetting engines](#available-typesetting-engines)
+	* [Supported input and output formats](#supported-input-and-output-formats)
 - [Paste support](#paste-support)
-  * [From plain text](#from-plain-text)
-  * [From Microsoft Word](#from-microsoft-word)
+	* [From plain text](#from-plain-text)
+	* [From Microsoft Word](#from-microsoft-word)
 - [Preview workaround](#preview-workaround)
 - [Todo](#todo)
 
@@ -25,8 +25,8 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 - Multiple typesetting engines
 - Have multiple input and output format
 - Paste support
-  - from plain text
-  - from Microsoft Word
+	- from plain text
+	- from Microsoft Word
 
 ## Screenshots
 ![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
@@ -84,13 +84,13 @@ Styles requires PostCSS like official CKEditor 5 plugins.
 ### Plugin options
 ```js
 InlineEditor.defaultConfig = {
-    // ...
-    math: {
-        engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
-        outputType: 'script', // or span or math
+	// ...
+		math: {
+		engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
+		outputType: 'script', // or span or math
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true // Enable preview view
-    }
+	}
 }
 ```
 
