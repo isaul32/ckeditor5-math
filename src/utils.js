@@ -140,7 +140,7 @@ function moveAndScaleElement( parent, element ) {
 
 	// Scale parent element same as preview
 	const domRect = element.getBoundingClientRect();
-	// element.style.width = domRect.width + 'px';
+	parent.style.width = domRect.width + 'px';
 	parent.style.height = domRect.height + 'px';
 }
 
