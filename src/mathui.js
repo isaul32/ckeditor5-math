@@ -105,9 +105,10 @@ export default class MathUI extends Plugin {
 
 		// Show preview element
 		const elId = 'math-preview';
-		let prewviewEl = document.getElementById( elId );// eslint-disable-line
-		if ( prewviewEl ) {
-			prewviewEl.style.display = 'block';
+		let prewviewEl = document.getElementById( elId ); // eslint-disable-line
+		if ( prewviewEl && this._form.previewEnabled ) {
+			// Force refresh preview
+			this._form.mathView.updateMath();
 		}
 
 		this._form.equation = mathCommand.value || '';

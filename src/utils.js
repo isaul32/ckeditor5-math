@@ -21,6 +21,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			selectRenderMode( element, preview, el => {
 				renderMathJax3( equation, el, display, () => {
 					if ( preview ) {
+						el.style.display = 'block';
 						moveAndScaleElement( element, el );
 					}
 				} );
@@ -36,6 +37,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 					if ( preview ) {
 						// eslint-disable-next-line
 						MathJax.Hub.Queue( () => {
+							el.style.display = 'block';
 							moveAndScaleElement( element, el );
 						} );
 					}
@@ -49,6 +51,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 				displayMode: display
 			} );
 			if ( preview ) {
+				el.style.display = 'block';
 				moveAndScaleElement( element, el );
 			}
 		} );
@@ -72,7 +75,6 @@ function selectRenderMode( element, preview, cb ) {
 }
 
 function renderMathJax3( equation, element, display, after ) {
-	const options = MathJax.getMetricsFor( element, display );
 	let promiseFunction = undefined;
 	if ( typeof MathJax.tex2chtmlPromise !== 'undefined' ) {
 		promiseFunction = MathJax.tex2chtmlPromise;
@@ -81,12 +83,11 @@ function renderMathJax3( equation, element, display, after ) {
 	}
 
 	if ( typeof promiseFunction !== 'undefined' ) {
-		promiseFunction( equation, options ).then( node => {
+		promiseFunction( equation, { display } ).then( node => {
 			if ( element.firstChild ) {
-				element.firstChild.replaceWith( node );
-			} else {
-				element.appendChild( node );
+				element.removeChild( element.firstChild );
 			}
+			element.appendChild( node );
 			after();
 		} );
 	}
@@ -135,24 +136,25 @@ export function getPreviewElement( element ) {
 	return prewviewEl;
 }
 
-function moveAndScaleElement( parent, element ) {
-	moveElement( parent, element );
+function moveAndScaleElement( parent, child ) {
+	// Move to right place
+	moveElement( parent, child );
 
 	// Scale parent element same as preview
-	const domRect = element.getBoundingClientRect();
+	const domRect = child.getBoundingClientRect();
 	parent.style.width = domRect.width + 'px';
 	parent.style.height = domRect.height + 'px';
 }
 
-function moveElement( parent, element ) {
+function moveElement( parent, child ) {
 	const domRect = parent.getBoundingClientRect();
 	const left = window.scrollX + domRect.left; // eslint-disable-line
 	const top = window.scrollY + domRect.top; // eslint-disable-line
-	element.style.position = 'absolute';
-	element.style.left = left + 'px';
-	element.style.top = top + 'px';
-	element.style.zIndex = 'var(--ck-z-modal)';
-	element.style.pointerEvents = 'none';
+	child.style.position = 'absolute';
+	child.style.left = left + 'px';
+	child.style.top = top + 'px';
+	child.style.zIndex = 'var(--ck-z-modal)';
+	child.style.pointerEvents = 'none';
 }
 
 // Simple MathJax 3 version check

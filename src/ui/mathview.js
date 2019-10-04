@@ -12,7 +12,9 @@ export default class MathView extends View {
 		this.set( 'display', false );
 
 		this.on( 'change', () => {
-			this.updateMath();
+			if ( this.isRendered ) {
+				this.updateMath();
+			}
 		} );
 
 		this.setTemplate( {
@@ -27,10 +29,7 @@ export default class MathView extends View {
 	}
 
 	updateMath() {
-		const el = this.element;
-		if ( el ) {
-			renderEquation( this.value, el, this.engine, this.display, true );
-		}
+		renderEquation( this.value, this.element, this.engine, this.display, true );
 	}
 
 	render() {

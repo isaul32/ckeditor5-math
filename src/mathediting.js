@@ -124,7 +124,7 @@ export default class MathEditing extends Plugin {
 			const uiElement = viewWriter.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 
-				renderEquation( equation, domElement, mathConfig.engine, display );
+				renderEquation( equation, domElement, mathConfig.engine, display, false );
 
 				return domElement;
 			} );
