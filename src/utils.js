@@ -87,8 +87,6 @@ function renderMathJax3( equation, element, display, after ) {
 			} else {
 				element.appendChild( node );
 			}
-			MathJax.startup.document.clear();
-			MathJax.startup.document.updateDocument();
 			after();
 		} );
 	}
