@@ -4,6 +4,7 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 
 ## Table of contents
 - [Features](#features)
+- [Demos](#demos)
 - [Screenshots](#screenshots)
 - [Examples](#examples)
 - [Installation](#installation)
@@ -28,15 +29,15 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 	- from plain text
 	- from Microsoft Word
 
-## Screenshots
-![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
-
-![Screenshot 2](/screenshots/2.png?raw=true "Screenshot 2")
-
 # Demos
 [Classic editor with KaTex](https://jsfiddle.net/isaul32/qktj9h7x/42/)
 
 [Classic editor with MathJax](https://jsfiddle.net/isaul32/3wjrkLdv/3/)
+
+## Screenshots
+![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
+
+![Screenshot 2](/screenshots/2.png?raw=true "Screenshot 2")
 
 ## Examples
 [Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
