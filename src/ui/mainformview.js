@@ -22,7 +22,7 @@ import MathView from './mathview';
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, previewEnabled ) {
+	constructor( locale, engine, previewEnabled, previewUid ) {
 		super( locale );
 
 		const t = locale.t;
@@ -52,7 +52,7 @@ export default class MainFormView extends View {
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
-			this.mathView = new MathView( engine, locale );
+			this.mathView = new MathView( engine, locale, previewUid );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
 			children = [

@@ -2,6 +2,7 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
+import uid from '@ckeditor/ckeditor5-utils/src/uid';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import MainFormView from './ui/mainformview';
@@ -26,6 +27,8 @@ export default class MathUI extends Plugin {
 	init() {
 		const editor = this.editor;
 		editor.editing.view.addObserver( ClickObserver );
+
+		this._previewUid = `math-preview-${ uid() }`;
 
 		this._form = this._createFormView();
 
@@ -61,7 +64,7 @@ export default class MathUI extends Plugin {
 
 		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
 
-		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview );
+		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview, this._previewUid );
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );
@@ -104,8 +107,7 @@ export default class MathUI extends Plugin {
 		}
 
 		// Show preview element
-		const elId = 'math-preview';
-		let prewviewEl = document.getElementById( elId ); // eslint-disable-line
+		let prewviewEl = document.getElementById( this._previewUid ); // eslint-disable-line
 		if ( prewviewEl && this._form.previewEnabled ) {
 			// Force refresh preview
 			this._form.mathView.updateMath();
@@ -147,8 +149,7 @@ export default class MathUI extends Plugin {
 			this._balloon.remove( this._form );
 
 			// Hide preview element
-			const elId = 'math-preview';
-			let prewviewEl = document.getElementById( elId );// eslint-disable-line
+			let prewviewEl = document.getElementById( this._previewUid );// eslint-disable-line
 			if ( prewviewEl ) {
 				prewviewEl.style.display = 'none';
 			}

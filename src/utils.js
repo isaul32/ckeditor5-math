@@ -15,10 +15,37 @@ export function getSelectedMathModelWidget( selection ) {
 	return null;
 }
 
-export function renderEquation( equation, element, engine = 'katex', display = false, preview = false ) {
+// Simple MathJax 3 version check
+export function isMathJaxVersion3( version ) {
+	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
+}
+
+// Check if equation has delimiters
+export function hasDelimiters( text ) {
+	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
+}
+
+// Extract delimiters and figure display mode for the model
+export function extractDelimiters( equation ) {
+	equation = equation.trim();
+
+	// Remove delimiters (e.g. \( \) or \[ \])
+	const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
+	const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
+	if ( hasInlineDelimiters || hasDisplayDelimiters ) {
+		equation = equation.substring( 2, equation.length - 2 ).trim();
+	}
+
+	return {
+		equation,
+		display: hasDisplayDelimiters
+	};
+}
+
+export function renderEquation( equation, element, engine = 'katex', display = false, preview = false, previewUid ) {
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if ( isMathJaxVersion3( MathJax.version ) ) {
-			selectRenderMode( element, preview, el => {
+			selectRenderMode( element, preview, previewUid, el => {
 				renderMathJax3( equation, el, display, () => {
 					if ( preview ) {
 						el.style.display = 'block';
@@ -27,7 +54,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 				} );
 			} );
 		} else {
-			selectRenderMode( element, preview, el => {
+			selectRenderMode( element, preview, previewUid, el => {
 				// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
 				// eslint-disable-next-line
 				setTimeout( () => {
@@ -45,7 +72,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			} );
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
-		selectRenderMode( element, preview, el => {
+		selectRenderMode( element, preview, previewUid, el => {
 			katex.render( equation, el, {
 				throwOnError: false,
 				displayMode: display
@@ -64,9 +91,9 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 	}
 }
 
-function selectRenderMode( element, preview, cb ) {
+function selectRenderMode( element, preview, previewUid, cb ) {
 	if ( preview ) {
-		createPreviewElement( element, prewviewEl => {
+		createPreviewElement( element, previewUid, prewviewEl => {
 			cb( prewviewEl );
 		} );
 	} else {
@@ -102,17 +129,17 @@ function renderMathJax2( equation, element, display ) {
 	MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] ); // eslint-disable-line
 }
 
-function createPreviewElement( element, render ) {
-	const prewviewEl = getPreviewElement( element );
+function createPreviewElement( element, previewUid, render ) {
+	const prewviewEl = getPreviewElement( element, previewUid );
 	render( prewviewEl );
 }
 
-export function getPreviewElement( element ) {
-	const elId = 'math-preview';
-	let prewviewEl = document.getElementById( elId ); // eslint-disable-line
+function getPreviewElement( element, previewUid ) {
+	let prewviewEl = document.getElementById( previewUid ); // eslint-disable-line
+	// Create if not found
 	if ( !prewviewEl ) {
 		prewviewEl = document.createElement( 'div' ); // eslint-disable-line
-		prewviewEl.setAttribute( 'id', elId );
+		prewviewEl.setAttribute( 'id', previewUid );
 		document.body.appendChild( prewviewEl ); // eslint-disable-line
 
 		let ticking = false;
@@ -155,31 +182,4 @@ function moveElement( parent, child ) {
 	child.style.top = top + 'px';
 	child.style.zIndex = 'var(--ck-z-modal)';
 	child.style.pointerEvents = 'none';
-}
-
-// Simple MathJax 3 version check
-export function isMathJaxVersion3( version ) {
-	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
-}
-
-// Check if equation has delimiters
-export function hasDelimiters( text ) {
-	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
-}
-
-// Extract delimiters and figure display mode for the model
-export function extractDelimiters( equation ) {
-	equation = equation.trim();
-
-	// Remove delimiters (e.g. \( \) or \[ \])
-	const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
-	const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
-	if ( hasInlineDelimiters || hasDisplayDelimiters ) {
-		equation = equation.substring( 2, equation.length - 2 ).trim();
-	}
-
-	return {
-		equation,
-		display: hasDisplayDelimiters
-	};
 }
