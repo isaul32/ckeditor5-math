@@ -33,6 +33,11 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 
 ![Screenshot 2](/screenshots/2.png?raw=true "Screenshot 2")
 
+# Demos
+[Classic editor with KaTex](https://jsfiddle.net/isaul32/qktj9h7x/42/)
+
+[Classic editor with MathJax](https://jsfiddle.net/isaul32/3wjrkLdv/3/)
+
 ## Examples
 [Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
 
