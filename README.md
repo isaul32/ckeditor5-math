@@ -30,9 +30,9 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 	- from Microsoft Word
 
 # Demos
-[Classic editor with KaTex](https://jsfiddle.net/isaul32/qktj9h7x/42/)
+[Classic editor with MathJax](https://jsfiddle.net/isaul32/qktj9h7x/)
 
-[Classic editor with MathJax](https://jsfiddle.net/isaul32/3wjrkLdv/3/)
+[Classic editor with KaTex](https://jsfiddle.net/isaul32/3wjrkLdv/)
 
 ## Screenshots
 ![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
