@@ -180,7 +180,5 @@ My solution for this is use rendering element outside of CKEditor DOM and place 
 
 ## Todo
 - MathML input and output when using MathJax version 3
-- Make tests
-
 
 [*] at least in my opinion 😄

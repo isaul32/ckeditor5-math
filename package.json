@@ -19,6 +19,7 @@
     "@ckeditor/ckeditor5-widget": "^11.1.0"
   },
   "devDependencies": {
+    "@ckeditor/ckeditor5-dev-tests": "^16.9.0",
     "@ckeditor/ckeditor5-editor-inline": "^12.3.0",
     "@ckeditor/ckeditor5-essentials": "^11.0.5",
     "eslint": "^5.5.0",
@@ -44,7 +45,8 @@
   ],
   "scripts": {
     "lint": "eslint --quiet **/*.js",
-    "lint:fix": "eslint --quiet **/*.js --fix"
+    "lint:fix": "eslint --quiet **/*.js --fix",
+    "test": "node ./node_modules/.bin/ckeditor5-dev-tests"
   },
   "lint-staged": {
     "**/*.js": [
