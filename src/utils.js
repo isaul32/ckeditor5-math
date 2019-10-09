@@ -1,3 +1,7 @@
+/* globals MathJax, katex, console */
+
+import global from '@ckeditor/ckeditor5-utils/src/dom/global';
+
 export const defaultConfig = {
 	engine: 'mathjax',
 	outputType: 'script',
@@ -56,8 +60,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 		} else {
 			selectRenderMode( element, preview, previewUid, el => {
 				// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
-				// eslint-disable-next-line
-				setTimeout( () => {
+				global.window.setTimeout( () => {
 					renderMathJax2( equation, el, display );
 
 					// Move and scale after rendering
@@ -86,8 +89,7 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 		engine( equation, element, display );
 	} else {
 		element.innerHTML = equation;
-		// eslint-disable-next-line
-		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.` );
+		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ engine }) for tex.` );
 	}
 }
 
@@ -126,7 +128,8 @@ function renderMathJax2( equation, element, display ) {
 	} else {
 		element.innerHTML = '\\(' + equation + '\\)';
 	}
-	MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] ); // eslint-disable-line
+	// eslint-disable-next-line
+	MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
 }
 
 function createPreviewElement( element, previewUid, render ) {
@@ -135,20 +138,19 @@ function createPreviewElement( element, previewUid, render ) {
 }
 
 function getPreviewElement( element, previewUid ) {
-	let prewviewEl = document.getElementById( previewUid ); // eslint-disable-line
+	let prewviewEl = global.document.getElementById( previewUid );
 	// Create if not found
 	if ( !prewviewEl ) {
-		prewviewEl = document.createElement( 'div' ); // eslint-disable-line
+		prewviewEl = global.document.createElement( 'div' );
 		prewviewEl.setAttribute( 'id', previewUid );
 		prewviewEl.style.visibility = 'hidden';
-		document.body.appendChild( prewviewEl ); // eslint-disable-line
+		global.document.body.appendChild( prewviewEl );
 
 		let ticking = false;
 
 		const renderTransformation = () => {
 			if ( !ticking ) {
-				// eslint-disable-next-line
-				window.requestAnimationFrame( () => {
+				global.window.requestAnimationFrame( () => {
 					moveElement( element, prewviewEl );
 					ticking = false;
 				} );
@@ -158,8 +160,8 @@ function getPreviewElement( element, previewUid ) {
 		};
 
 		// Create scroll listener for following
-		window.addEventListener( 'resize', renderTransformation ); // eslint-disable-line
-		window.addEventListener( 'scroll', renderTransformation ); // eslint-disable-line
+		global.window.addEventListener( 'resize', renderTransformation );
+		global.window.addEventListener( 'scroll', renderTransformation );
 	}
 	return prewviewEl;
 }
@@ -176,8 +178,8 @@ function moveAndScaleElement( parent, child ) {
 
 function moveElement( parent, child ) {
 	const domRect = parent.getBoundingClientRect();
-	const left = window.scrollX + domRect.left; // eslint-disable-line
-	const top = window.scrollY + domRect.top; // eslint-disable-line
+	const left = global.window.scrollX + domRect.left;
+	const top = global.window.scrollY + domRect.top;
 	child.style.position = 'absolute';
 	child.style.left = left + 'px';
 	child.style.top = top + 'px';

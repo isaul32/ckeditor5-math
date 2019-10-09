@@ -3,6 +3,7 @@ import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
 import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
 import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
+import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
 import { defaultConfig, extractDelimiters, hasDelimiters } from './utils';
 
@@ -46,7 +47,7 @@ export default class AutoMath extends Plugin {
 
 		editor.commands.get( 'undo' ).on( 'execute', () => {
 			if ( this._timeoutId ) {
-				global.window.clearTimeout( this._timeoutId ); // eslint-disable-line
+				global.window.clearTimeout( this._timeoutId );
 				this._positionToInsert.detach();
 
 				this._timeoutId = null;
@@ -89,7 +90,7 @@ export default class AutoMath extends Plugin {
 		this._positionToInsert = LivePosition.fromPosition( leftPosition );
 
 		// With timeout user can undo conversation if want use plain text
-		this._timeoutId = global.window.setTimeout( () => { // eslint-disable-line
+		this._timeoutId = global.window.setTimeout( () => {
 			editor.model.change( writer => {
 				this._timeoutId = null;
 

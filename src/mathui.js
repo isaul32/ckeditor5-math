@@ -3,6 +3,7 @@ import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobs
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import uid from '@ckeditor/ckeditor5-utils/src/uid';
+import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import MainFormView from './ui/mainformview';
@@ -11,7 +12,7 @@ import MainFormView from './ui/mainformview';
 import MathEditing from './mathediting';
 import { defaultConfig } from './utils';
 
-import pluginIcon from '../theme/icons/icon.svg';
+import mathIcon from '../theme/icons/math.svg';
 
 const mathKeystroke = 'Ctrl+M';
 
@@ -30,7 +31,7 @@ export default class MathUI extends Plugin {
 
 		this._previewUid = `math-preview-${ uid() }`;
 
-		this._form = this._createFormView();
+		this.formView = this._createFormView();
 
 		this._balloon = editor.plugins.get( ContextualBalloon );
 
@@ -42,10 +43,10 @@ export default class MathUI extends Plugin {
 	destroy() {
 		super.destroy();
 
-		this._form.destroy();
+		this.formView.destroy();
 
 		// Destroy preview element
-		let prewviewEl = document.getElementById( this._previewUid ); // eslint-disable-line
+		const prewviewEl = global.document.getElementById( this._previewUid );
 		if ( prewviewEl ) {
 			prewviewEl.parentNode.removeChild( prewviewEl );
 		}
@@ -104,23 +105,23 @@ export default class MathUI extends Plugin {
 		const mathCommand = editor.commands.get( 'math' );
 
 		this._balloon.add( {
-			view: this._form,
+			view: this.formView,
 			position: this._getBalloonPositionData(),
 		} );
 
-		if ( this._balloon.visibleView === this._form ) {
-			this._form.mathInputView.select();
+		if ( this._balloon.visibleView === this.formView ) {
+			this.formView.mathInputView.select();
 		}
 
 		// Show preview element
-		let prewviewEl = document.getElementById( this._previewUid ); // eslint-disable-line
-		if ( prewviewEl && this._form.previewEnabled ) {
+		const prewviewEl = global.document.getElementById( this._previewUid );
+		if ( prewviewEl && this.formView.previewEnabled ) {
 			// Force refresh preview
-			this._form.mathView.updateMath();
+			this.formView.mathView.updateMath();
 		}
 
-		this._form.equation = mathCommand.value || '';
-		this._form.displayButtonView.isOn = mathCommand.display || false;
+		this.formView.equation = mathCommand.value || '';
+		this.formView.displayButtonView.isOn = mathCommand.display || false;
 	}
 
 	_hideUI() {
@@ -150,12 +151,12 @@ export default class MathUI extends Plugin {
 
 	_removeFormView() {
 		if ( this._isFormInPanel ) {
-			this._form.saveButtonView.focus();
+			this.formView.saveButtonView.focus();
 
-			this._balloon.remove( this._form );
+			this._balloon.remove( this.formView );
 
 			// Hide preview element
-			let prewviewEl = document.getElementById( this._previewUid );// eslint-disable-line
+			const prewviewEl = global.document.getElementById( this._previewUid );
 			if ( prewviewEl ) {
 				prewviewEl.style.visibility = 'hidden';
 			}
@@ -191,7 +192,7 @@ export default class MathUI extends Plugin {
 
 			button.isEnabled = true;
 			button.label = t( 'Insert math' );
-			button.icon = pluginIcon;
+			button.icon = mathIcon;
 			button.keystroke = mathKeystroke;
 			button.tooltip = true;
 			button.isToggleable = true;
@@ -215,7 +216,7 @@ export default class MathUI extends Plugin {
 
 		// Close on click outside of balloon panel element.
 		clickOutsideHandler( {
-			emitter: this._form,
+			emitter: this.formView,
 			activator: () => this._isFormInPanel,
 			contextElements: [ this._balloon.view.element ],
 			callback: () => this._hideUI()
@@ -225,10 +226,10 @@ export default class MathUI extends Plugin {
 	get _isUIVisible() {
 		const visibleView = this._balloon.visibleView;
 
-		return visibleView == this._form;
+		return visibleView == this.formView;
 	}
 
 	get _isFormInPanel() {
-		return this._balloon.hasView( this._form );
+		return this._balloon.hasView( this.formView );
 	}
 }
