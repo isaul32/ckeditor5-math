@@ -43,6 +43,12 @@ export default class MathUI extends Plugin {
 		super.destroy();
 
 		this._form.destroy();
+
+		// Destroy preview element
+		let prewviewEl = document.getElementById( this._previewUid ); // eslint-disable-line
+		if ( prewviewEl ) {
+			prewviewEl.parentNode.removeChild( prewviewEl );
+		}
 	}
 
 	_showUI() {
@@ -151,7 +157,7 @@ export default class MathUI extends Plugin {
 			// Hide preview element
 			let prewviewEl = document.getElementById( this._previewUid );// eslint-disable-line
 			if ( prewviewEl ) {
-				prewviewEl.style.display = 'none';
+				prewviewEl.style.visibility = 'hidden';
 			}
 
 			this.editor.editing.view.focus();

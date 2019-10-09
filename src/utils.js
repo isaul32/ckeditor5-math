@@ -48,8 +48,8 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 			selectRenderMode( element, preview, previewUid, el => {
 				renderMathJax3( equation, el, display, () => {
 					if ( preview ) {
-						el.style.display = 'block';
 						moveAndScaleElement( element, el );
+						el.style.visibility = 'visible';
 					}
 				} );
 			} );
@@ -64,8 +64,8 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 					if ( preview ) {
 						// eslint-disable-next-line
 						MathJax.Hub.Queue( () => {
-							el.style.display = 'block';
 							moveAndScaleElement( element, el );
+							el.style.visibility = 'visible';
 						} );
 					}
 				} );
@@ -78,8 +78,8 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 				displayMode: display
 			} );
 			if ( preview ) {
-				el.style.display = 'block';
 				moveAndScaleElement( element, el );
+				el.style.visibility = 'visible';
 			}
 		} );
 	} else if ( typeof engine === 'function' ) {
@@ -140,6 +140,7 @@ function getPreviewElement( element, previewUid ) {
 	if ( !prewviewEl ) {
 		prewviewEl = document.createElement( 'div' ); // eslint-disable-line
 		prewviewEl.setAttribute( 'id', previewUid );
+		prewviewEl.style.visibility = 'hidden';
 		document.body.appendChild( prewviewEl ); // eslint-disable-line
 
 		let ticking = false;
