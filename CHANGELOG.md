@@ -1,6 +1,20 @@
 Changelog
 =========
 
+## [1.0.3](https://github.com/isaul32/ckeditor5-math/compare/v1.0.2...v1.0.3) (2019-10-11)
+
+### Bug fixes
+
+* Fix preview flickering effect. ([70fefa8](https://github.com/isaul32/ckeditor5-math/commit/70fefa8))
+
+* Fix disabled eslint lines. ([1f96286](https://github.com/isaul32/ckeditor5-math/commit/1f96286))
+
+### Other changes
+
+* Update some tests.
+
+* Update readme.
+
 ## [1.0.2](https://github.com/isaul32/ckeditor5-math/compare/v1.0.1...v1.0.2) (2019-10-07)
 
 ### Other changes
