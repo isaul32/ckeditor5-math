@@ -17,7 +17,16 @@ describe( 'AutoMath - integration', () => {
 
 		return ClassicTestEditor
 			.create( editorElement, {
-				plugins: [ Mathematics, AutoMath, Typing, Paragraph ]
+				plugins: [ Mathematics, AutoMath, Typing, Paragraph ],
+				math: {
+					engine: ( equation, element, display ) => {
+						if ( display ) {
+							element.innerHTML = '\\[' + equation + '\\]';
+						} else {
+							element.innerHTML = '\\(' + equation + '\\)';
+						}
+					}
+				}
 			} )
 			.then( newEditor => {
 				editor = newEditor;

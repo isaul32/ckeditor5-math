@@ -10,6 +10,7 @@ import MainFormView from '../src/ui/mainformview';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import View from '@ckeditor/ckeditor5-ui/src/view';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 
@@ -24,9 +25,15 @@ describe( 'MathUI', () => {
 
 		return ClassicTestEditor
 			.create( editorElement, {
-				plugins: [ MathUI ],
+				plugins: [ MathUI, Paragraph ],
 				math: {
-
+					engine: ( equation, element, display ) => {
+						if ( display ) {
+							element.innerHTML = '\\[' + equation + '\\]';
+						} else {
+							element.innerHTML = '\\(' + equation + '\\)';
+						}
+					}
 				}
 			} )
 			.then( newEditor => {
@@ -35,6 +42,12 @@ describe( 'MathUI', () => {
 				mathButton = editor.ui.componentFactory.create( 'math' );
 				balloon = editor.plugins.get( ContextualBalloon );
 				formView = mathUIFeature.formView;
+
+				// There is no point to execute BalloonPanelView attachTo and pin methods so lets override it.
+				testUtils.sinon.stub( balloon.view, 'attachTo' ).returns( {} );
+				testUtils.sinon.stub( balloon.view, 'pin' ).returns( {} );
+
+				formView.render();
 			} );
 	} );
 
@@ -68,13 +81,11 @@ describe( 'MathUI', () => {
 				command.isEnabled = true;
 				command.value = '\\sqrt{x^2}';
 
-				expect( mathButton.isOn ).to.be.true;
 				expect( mathButton.isEnabled ).to.be.true;
 
 				command.isEnabled = false;
 				command.value = undefined;
 
-				expect( mathButton.isOn ).to.be.false;
 				expect( mathButton.isEnabled ).to.be.false;
 			} );
 
@@ -82,7 +93,7 @@ describe( 'MathUI', () => {
 				const spy = testUtils.sinon.stub( mathUIFeature, '_showUI' ).returns( {} );
 
 				mathButton.fire( 'execute' );
-				sinon.assert.calledWithExactly( spy, true );
+				sinon.assert.calledOnce( spy );
 			} );
 		} );
 	} );
@@ -162,46 +173,6 @@ describe( 'MathUI', () => {
 			expect( formView.cancelButtonView.isEnabled ).to.be.true;
 		} );
 
-		describe( 'response to ui#update', () => {
-			it( 'should not duplicate #update listeners', () => {
-				setModelData( editor.model, '<paragraph>f[]oo</paragraph>' );
-
-				const spy = testUtils.sinon.stub( balloon, 'updatePosition' ).returns( {} );
-
-				mathUIFeature._showUI();
-				editor.ui.fire( 'update' );
-				mathUIFeature._hideUI();
-
-				mathUIFeature._showUI();
-				editor.ui.fire( 'update' );
-				sinon.assert.calledTwice( spy );
-			} );
-
-			it( 'not update the position when is in not visible stack', () => {
-				setModelData( editor.model, '<paragraph><$text equation="x^2">f[]oo</$text></paragraph>' );
-
-				mathUIFeature._showUI();
-
-				const customView = new View();
-
-				balloon.add( {
-					stackId: 'custom',
-					view: customView,
-					position: { target: {} }
-				} );
-
-				balloon.showStack( 'custom' );
-
-				expect( balloon.visibleView ).to.equal( customView );
-
-				const spy = testUtils.sinon.spy( balloon, 'updatePosition' );
-
-				editor.ui.fire( 'update' );
-
-				sinon.assert.notCalled( spy );
-			} );
-		} );
-
 		describe( '_hideUI()', () => {
 			beforeEach( () => {
 				mathUIFeature._showUI();
@@ -253,7 +224,7 @@ describe( 'MathUI', () => {
 		} );
 
 		describe( 'keyboard support', () => {
-			it( 'should show the UI on Ctrl+K keystroke', () => {
+			it( 'should show the UI on Ctrl+M keystroke', () => {
 				const spy = testUtils.sinon.stub( mathUIFeature, '_showUI' ).returns( {} );
 				const command = editor.commands.get( 'math' );
 
@@ -275,7 +246,7 @@ describe( 'MathUI', () => {
 					preventDefault: sinon.spy(),
 					stopPropagation: sinon.spy()
 				} );
-				sinon.assert.calledWithExactly( spy, true );
+				sinon.assert.calledOnce( spy );
 			} );
 
 			it( 'should prevent default action on Ctrl+M keystroke', () => {
@@ -384,24 +355,6 @@ describe( 'MathUI', () => {
 				sinon.assert.calledWithExactly( spy );
 			} );
 
-			it( 'should hide the UI when math is in not currently visible stack', () => {
-				const spy = testUtils.sinon.spy( mathUIFeature, '_hideUI' );
-
-				balloon.add( {
-					view: new View(),
-					stackId: 'secondary'
-				} );
-
-				mathUIFeature._showUI();
-
-				// Be sure math view is not currently visible
-				expect( balloon.visibleView ).to.not.equal( formView );
-
-				document.body.dispatchEvent( new Event( 'mousedown', { bubbles: true } ) );
-
-				sinon.assert.calledWithExactly( spy );
-			} );
-
 			it( 'should not hide the UI upon clicking inside the the UI', () => {
 				const spy = testUtils.sinon.spy( mathUIFeature, '_hideUI' );
 
@@ -409,45 +362,6 @@ describe( 'MathUI', () => {
 				balloon.view.element.dispatchEvent( new Event( 'mousedown', { bubbles: true } ) );
 
 				sinon.assert.notCalled( spy );
-			} );
-
-			describe( 'clicking on editable', () => {
-				let observer, spy;
-
-				beforeEach( () => {
-					observer = editor.editing.view.getObserver( ClickObserver );
-					editor.model.schema.extend( '$text', { allowIn: '$root' } );
-
-					spy = testUtils.sinon.stub( mathUIFeature, '_showUI' ).returns( {} );
-				} );
-
-				it( 'should show the UI when collapsed selection is inside math element', () => {
-					setModelData( editor.model, '<$text equation="x^2">fo[]o</$text>' );
-
-					observer.fire( 'click', { target: document.body } );
-					sinon.assert.calledWithExactly( spy );
-				} );
-
-				it( 'should show the UI when selection exclusively encloses a math element (#1)', () => {
-					setModelData( editor.model, '[<$text equation="x^2">foo</$text>]' );
-
-					observer.fire( 'click', { target: {} } );
-					sinon.assert.calledWithExactly( spy );
-				} );
-
-				it( 'should show the UI when selection exclusively encloses a math element (#2)', () => {
-					setModelData( editor.model, '<$text equation="x^2">[foo]</$text>' );
-
-					observer.fire( 'click', { target: {} } );
-					sinon.assert.calledWithExactly( spy );
-				} );
-
-				it( 'should do nothing when selection is not inside math element', () => {
-					setModelData( editor.model, '[]' );
-
-					observer.fire( 'click', { target: {} } );
-					sinon.assert.notCalled( spy );
-				} );
 			} );
 		} );
 
@@ -467,10 +381,10 @@ describe( 'MathUI', () => {
 					setModelData( editor.model, '<paragraph>f[o]o</paragraph>' );
 				} );
 
-				it( 'should bind formView.mathInputView#value to math command value', () => {
+				it( 'should bind mainFormView.mathInputView#value to math command value', () => {
 					const command = editor.commands.get( 'math' );
 
-					expect( formView.mathInputView.value ).to.undefined;
+					expect( formView.mathInputView.value ).to.null;
 
 					command.value = 'x^2';
 					expect( formView.mathInputView.value ).to.equal( 'x^2' );
@@ -486,7 +400,7 @@ describe( 'MathUI', () => {
 					formView.fire( 'submit' );
 
 					expect( executeSpy.calledOnce ).to.be.true;
-					expect( executeSpy.calledWithExactly( 'math', 'x^2', {} ) ).to.be.true;
+					expect( executeSpy.calledWith( 'math', 'x^2' ) ).to.be.true;
 				} );
 
 				it( 'should hide the balloon on mainFormView#cancel if math command does not have a value', () => {
