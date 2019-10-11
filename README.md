@@ -92,8 +92,8 @@ Styles requires PostCSS like official CKEditor 5 plugins.
 InlineEditor.defaultConfig = {
 	// ...
 	math: {
-		engine: 'mathjax', // or katex or function (equation, element, display) => { ... }
-		outputType: 'script', // or span or math
+		engine: 'mathjax', // or katex or function. E.g. (equation, element, display) => { ... }
+		outputType: 'script', // or span
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true // Enable preview view
 	}
@@ -120,7 +120,7 @@ It's possible to implement with engine config. For example, this feature can be 
 InlineEditor.defaultConfig = {
 	// ...
 	math: {
-		engine: (equation, element, display, preview) => {
+		engine: ( equation, element, display, preview ) => {
 			// ...
 		}
 	}
