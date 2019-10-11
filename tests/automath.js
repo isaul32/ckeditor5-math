@@ -2,6 +2,7 @@ import Mathematics from '../src/math';
 import AutoMath from '../src/automath';
 import ClassicTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/classictesteditor';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
 import Typing from '@ckeditor/ckeditor5-typing/src/typing';
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
@@ -16,7 +17,7 @@ describe( 'AutoMath - integration', () => {
 
 		return ClassicTestEditor
 			.create( editorElement, {
-				plugins: [ Mathematics, AutoMath, Typing ]
+				plugins: [ Mathematics, AutoMath, Typing, Paragraph ]
 			} )
 			.then( newEditor => {
 				editor = newEditor;
@@ -63,7 +64,7 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'[<mathtex equation="x^2" display="true"></mathtex>]'
+				'<paragraph>[<mathtex display="true" equation="x^2" type="script"></mathtex>]</paragraph>'
 			);
 		} );
 
@@ -78,7 +79,7 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'[<mathtex equation="x^2" display="false"></mathtex>]'
+				'<paragraph>[<mathtex display="false" equation="x^2" type="script"></mathtex>]</paragraph>'
 			);
 		} );
 
@@ -106,7 +107,7 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'[<mathtex equation="x^2"" display="true"></mathtex>]'
+				'<paragraph>[<mathtex display="true" equation="x^2" type="script"></mathtex>]</paragraph>'
 			);
 		} );
 
@@ -117,7 +118,7 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'<paragraph>Fo</paragraph>[<mathtex equation="x^2" display="true"></mathtex>]<paragraph>r</paragraph>'
+				'<paragraph>Fo[<mathtex display="true" equation="x^2" type="script"></mathtex>]r</paragraph>'
 			);
 		} );
 
@@ -128,22 +129,22 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'<paragraph>Foo </paragraph>' +
-				'[<mathtex equation="x^2" display="true"></mathtex>]' +
-				'<paragraph>Bar</paragraph>'
+				'<paragraph>Foo ' +
+				'[<mathtex display="true" equation="x^2" type="script"></mathtex>]' +
+				'Bar</paragraph>'
 			);
 		} );
 
-		it( 'inserts media in-place (non-collapsed selection)', () => {
+		it( 'inserts math in-place (non-collapsed selection)', () => {
 			setData( editor.model, '<paragraph>Foo [Bar] Baz</paragraph>' );
 			pasteHtml( editor, '\\[x^2\\]' );
 
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'<paragraph>Foo </paragraph>' +
-				'[<mathtex equation="x^2" display="true"></mathtex>]' +
-				'<paragraph> Baz</paragraph>'
+				'<paragraph>Foo ' +
+				'[<mathtex display="true" equation="x^2" type="script"></mathtex>]' +
+				' Baz</paragraph>'
 			);
 		} );
 
@@ -154,7 +155,7 @@ describe( 'AutoMath - integration', () => {
 			clock.tick( 100 );
 
 			expect( getData( editor.model ) ).to.equal(
-				'\\[x^2\\] \\[\\sqrt{x}2\\]'
+				'<paragraph>\\[x^2\\] \\[\\sqrt{x}2\\][]</paragraph>'
 			);
 		} );
 	} );

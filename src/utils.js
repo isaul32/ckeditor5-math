@@ -29,6 +29,11 @@ export function hasDelimiters( text ) {
 	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
 }
 
+// Find delimiters count
+export function delimitersCounts( text ) {
+	return text.match( /(\\\[|\\\]|\\\(|\\\))/g ).length;
+}
+
 // Extract delimiters and figure display mode for the model
 export function extractDelimiters( equation ) {
 	equation = equation.trim();

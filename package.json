@@ -46,7 +46,7 @@
   "scripts": {
     "lint": "eslint --quiet **/*.js",
     "lint:fix": "eslint --quiet **/*.js --fix",
-    "test": "node ./node_modules/.bin/ckeditor5-dev-tests"
+    "test": "node node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js"
   },
   "lint-staged": {
     "**/*.js": [
