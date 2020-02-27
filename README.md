@@ -6,6 +6,7 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 - [Features](#features)
 - [Demos](#demos)
 - [Screenshots](#screenshots)
+- [Requirements](#requirements)
 - [Examples](#examples)
 - [Installation](#installation)
 	* [Styles for Lark theme](#styles-for-lark-theme)
@@ -39,6 +40,10 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 ![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
 
 ![Screenshot 2](/screenshots/2.png?raw=true "Screenshot 2")
+
+## Requirements
+
+- CKEditor v17.0.0
 
 ## Examples
 [Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
