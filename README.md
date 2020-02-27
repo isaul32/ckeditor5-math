@@ -45,6 +45,8 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 
 - CKEditor v17.0.0
 
+If you get duplicated modules error, you have mismatching versions in your build package.json.
+
 ## Examples
 [Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
 
