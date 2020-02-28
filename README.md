@@ -43,7 +43,7 @@ This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it t
 
 ## Requirements
 
-- CKEditor v17.0.0
+- CKEditor 5 v17.0.0
 
 If you get duplicated modules error, you have mismatching versions in your build package.json.
 
