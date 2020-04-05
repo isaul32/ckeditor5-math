@@ -5,7 +5,7 @@ import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
 import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
-import { defaultConfig, extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
+import { extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
 
 export default class AutoMath extends Plugin {
 	static get requires() {
@@ -59,7 +59,7 @@ export default class AutoMath extends Plugin {
 	_mathBetweenPositions( leftPosition, rightPosition ) {
 		const editor = this.editor;
 
-		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
+		const mathConfig = this.editor.config.get( 'math' );
 
 		const equationRange = new LiveRange( leftPosition, rightPosition );
 		const walker = equationRange.getWalker( { ignoreElementEnd: true } );

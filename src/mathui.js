@@ -10,7 +10,6 @@ import MainFormView from './ui/mainformview';
 
 // Need math commands from there
 import MathEditing from './mathediting';
-import { defaultConfig } from './utils';
 
 import mathIcon from '../theme/icons/math.svg';
 
@@ -69,7 +68,7 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
+		const mathConfig = this.editor.config.get( 'math' );
 
 		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview, this._previewUid );
 
@@ -111,7 +110,7 @@ export default class MathUI extends Plugin {
 
 		this._balloon.add( {
 			view: this.formView,
-			position: this._getBalloonPositionData(),
+			position: this._getBalloonPositionData()
 		} );
 
 		if ( this._balloon.visibleView === this.formView ) {

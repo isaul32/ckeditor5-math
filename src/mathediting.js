@@ -1,10 +1,10 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils';
+import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
 
-import { defaultConfig, renderEquation, extractDelimiters } from './utils';
+import { renderEquation, extractDelimiters } from './utils';
 
 export default class MathEditing extends Plugin {
 	static get requires() {
@@ -21,6 +21,17 @@ export default class MathEditing extends Plugin {
 
 		this._defineSchema();
 		this._defineConverters();
+
+		editor.editing.mapper.on(
+			'viewToModelPosition',
+			viewToModelPositionOutsideModelElement( editor.model, viewElement => viewElement.hasClass( 'math' ) )
+		);
+		editor.config.define( 'math', {
+			engine: 'mathjax',
+			outputType: 'script',
+			forceOutputType: false,
+			enablePreview: true
+		} );
 	}
 
 	_defineSchema() {
@@ -36,7 +47,7 @@ export default class MathEditing extends Plugin {
 
 	_defineConverters() {
 		const conversion = this.editor.conversion;
-		const mathConfig = Object.assign( defaultConfig, this.editor.config.get( 'math' ) );
+		const mathConfig = this.editor.config.get( 'math' );
 
 		// View -> Model
 		conversion.for( 'upcast' )
@@ -114,13 +125,11 @@ export default class MathEditing extends Plugin {
 			const styles = 'user-select: none; ' + ( display ? '' : 'display: inline-block;' );
 			const classes = 'ck-math-tex ' + ( display ? 'ck-math-tex-display' : 'ck-math-tex-inline' );
 
-			// CKEngine render multiple times if using span instead of div
-			const mathtexView = viewWriter.createContainerElement( 'div', {
+			const mathtexView = viewWriter.createContainerElement( 'span', {
 				style: styles,
 				class: classes
 			} );
 
-			// Div is formatted as parent container
 			const uiElement = viewWriter.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 

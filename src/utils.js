@@ -2,13 +2,6 @@
 
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
-export const defaultConfig = {
-	engine: 'mathjax',
-	outputType: 'script',
-	forceOutputType: false,
-	enablePreview: true
-};
-
 export function getSelectedMathModelWidget( selection ) {
 	const selectedElement = selection.getSelectedElement();
 
@@ -24,7 +17,7 @@ export function isMathJaxVersion3( version ) {
 	return version && typeof version === 'string' && version.split( '.' ).length === 3 && version.split( '.' )[ 0 ] === '3';
 }
 
-// Check if equation has delimiters
+// Check if equation has delimiters.
 export function hasDelimiters( text ) {
 	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
 }
@@ -108,7 +101,7 @@ function selectRenderMode( element, preview, previewUid, cb ) {
 	}
 }
 
-function renderMathJax3( equation, element, display, after ) {
+function renderMathJax3( equation, element, display, cb ) {
 	let promiseFunction = undefined;
 	if ( typeof MathJax.tex2chtmlPromise !== 'undefined' ) {
 		promiseFunction = MathJax.tex2chtmlPromise;
@@ -122,7 +115,7 @@ function renderMathJax3( equation, element, display, after ) {
 				element.removeChild( element.firstChild );
 			}
 			element.appendChild( node );
-			after();
+			cb();
 		} );
 	}
 }
