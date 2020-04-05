@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## [18.0.1](https://github.com/isaul32/ckeditor5-math/compare/v18.0.0...18.0.1) (2020-04-05)
+
+### Bug fixes
+
+* Fix spacebar before formula bug in Firefox. [isaul32/ckeditor5-math#2](https://github.com/isaul32/ckeditor5-math/issues/2). ([9d15010](https://github.com/isaul32/ckeditor5-math/commit/9d15010))
+
 ## [18.0.0](https://github.com/isaul32/ckeditor5-math/compare/v17.0.1...18.0.0) (2020-03-30)
 
 * Update dependencies.
