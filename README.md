@@ -1,6 +1,6 @@
 # CKEditor 5 mathematical feature
 
-This is the best* TeX-based mathematical plugin for CKEditor 5. You can use it to insert, edit and view mathematical equations and formulas. This plugin supports MathJax, KaTeX and custom typesetting engines.
+This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, edit and view mathematical equations and formulas. This plugin supports MathJax, KaTeX and custom typesetting engines.
 
 ## Table of contents
 - [Features](#features)
@@ -199,5 +199,4 @@ Run test suite
 
 ## Todo
 - MathML input and output when using MathJax version 3
-
-[*] at least in my opinion 😄
+- Support multiple equations when pasting as plain text
