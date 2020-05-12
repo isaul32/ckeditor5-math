@@ -43,8 +43,9 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 
 ## Requirements
 
-- With CKEditor 5 v17.0.0, use ckeditor5-math@17.0.1 version
+- With CKEditor 5 v19.0.0, use ckeditor5-math@19.0.0 version
 - With CKEditor 5 v18.0.0, use ckeditor5-math@18.0.0 version
+- With CKEditor 5 v17.0.0, use ckeditor5-math@17.0.1 version
 
 If you get duplicated modules error, you have mismatching versions in your editor build package.json.
 
@@ -90,7 +91,7 @@ InlineEditor.defaultConfig = {
 ### Styles for Lark theme
 __Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository or install
 
-`npm install @ckeditor/ckeditor5-theme-lark@github:isaul32/ckeditor5-theme-lark#v18.0.0 --save-dev`
+`npm install @ckeditor/ckeditor5-theme-lark@github:isaul32/ckeditor5-theme-lark#v19.0.0 --save-dev`
 
 Styles requires PostCSS like official CKEditor 5 plugins. Use same tag version as the editor.
 
@@ -169,7 +170,7 @@ Use [__paste from office__](https://github.com/isaul32/ckeditor5-paste-from-offi
 
 Install paste from office fork. Use same tag version as the editor.
 
-`npm install @ckeditor/ckeditor5-paste-from-office@github:isaul32/ckeditor5-paste-from-office#v18.0.0 --save-dev`
+`npm install @ckeditor/ckeditor5-paste-from-office@github:isaul32/ckeditor5-paste-from-office#v19.0.0 --save-dev`
 
 ```js
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
