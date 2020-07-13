@@ -43,6 +43,7 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 
 ## Requirements
 
+- With CKEditor 5 v20.0.0, use ckeditor5-math@20.0.0 version
 - With CKEditor 5 v19.0.0, use ckeditor5-math@19.0.0 version
 - With CKEditor 5 v18.0.0, use ckeditor5-math@18.0.0 version
 - With CKEditor 5 v17.0.0, use ckeditor5-math@17.0.1 version

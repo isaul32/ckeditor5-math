@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [20.0.0](https://github.com/isaul32/ckeditor5-math/compare/v19.0.0...20.0.0) (2020-07-13)
+
+* Update dependencies.
+
 ## [19.0.0](https://github.com/isaul32/ckeditor5-math/compare/v18.0.1...19.0.0) (2020-05-12)
 
 * Update dependencies.
