@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-math",
-  "version": "20.0.0",
+  "version": "21.0.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
@@ -10,19 +10,19 @@
     "ckeditor5-plugin"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^20.0.0",
-    "@ckeditor/ckeditor5-core": "^20.0.0",
-    "@ckeditor/ckeditor5-engine": "^20.0.0",
-    "@ckeditor/ckeditor5-ui": "^20.0.0",
-    "@ckeditor/ckeditor5-undo": "^20.0.0",
-    "@ckeditor/ckeditor5-utils": "^20.0.0",
-    "@ckeditor/ckeditor5-widget": "^20.0.0"
+    "@ckeditor/ckeditor5-clipboard": "^21.0.0",
+    "@ckeditor/ckeditor5-core": "^21.0.0",
+    "@ckeditor/ckeditor5-engine": "^21.0.0",
+    "@ckeditor/ckeditor5-ui": "^21.0.0",
+    "@ckeditor/ckeditor5-undo": "^21.0.0",
+    "@ckeditor/ckeditor5-utils": "^21.0.0",
+    "@ckeditor/ckeditor5-widget": "^21.0.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-tests": "^20.0.0",
-    "@ckeditor/ckeditor5-editor-inline": "^20.0.0",
-    "@ckeditor/ckeditor5-essentials": "^20.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^20.0.0",
+    "@ckeditor/ckeditor5-dev-tests": "^21.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^21.0.0",
+    "@ckeditor/ckeditor5-essentials": "^21.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^21.0.0",
     "eslint": "^5.5.0",
     "eslint-config-ckeditor5": "^2.0.0",
     "husky": "^1.3.1",
