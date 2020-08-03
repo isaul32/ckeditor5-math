@@ -43,6 +43,7 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 
 ## Requirements
 
+- With CKEditor 5 v21.0.0, use ckeditor5-math@21.0.0 version
 - With CKEditor 5 v20.0.0, use ckeditor5-math@20.0.0 version
 - With CKEditor 5 v19.0.0, use ckeditor5-math@19.0.0 version
 - With CKEditor 5 v18.0.0, use ckeditor5-math@18.0.0 version
@@ -90,11 +91,7 @@ InlineEditor.defaultConfig = {
 };
 ```
 ### Styles for Lark theme
-__Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository or install
-
-`npm install @ckeditor/ckeditor5-theme-lark@github:isaul32/ckeditor5-theme-lark#v19.0.0 --save-dev`
-
-Styles requires PostCSS like official CKEditor 5 plugins. Use same tag version as the editor.
+__Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository
 
 ## Configuration & Usage
 
@@ -165,24 +162,6 @@ __\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__
 or
 
 __\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
-
-#### From Microsoft Word
-Use [__paste from office__](https://github.com/isaul32/ckeditor5-paste-from-office) fork instead of official. This feature is __experimental__ and might not work always (look source codes).
-
-Install paste from office fork. Use same tag version as the editor.
-
-`npm install @ckeditor/ckeditor5-paste-from-office@github:isaul32/ckeditor5-paste-from-office#v19.0.0 --save-dev`
-
-```js
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import Mathematics from 'ckeditor5-math/src/math';
-// ...
-InlineEditor.builtinPlugins = [
-	// ...
-	PasteFromOffice,
-	Mathematics
-];
-```
 
 ## Preview workaround
 __.ck-reset_all *__ css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
