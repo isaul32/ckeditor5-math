@@ -16,7 +16,6 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 	* [Supported input and output formats](#supported-input-and-output-formats)
 - [Paste support](#paste-support)
 	* [From plain text](#from-plain-text)
-	* [From Microsoft Word](#from-microsoft-word)
 - [Preview workaround](#preview-workaround)
 - [Testing](#testing)
 - [Todo](#todo)
