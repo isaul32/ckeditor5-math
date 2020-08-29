@@ -1,24 +1,22 @@
-@import "@ckeditor/ckeditor5-ui/theme/mixins/_rwd.css";
-
 .ck.ck-math-form {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: nowrap;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+	flex-wrap: nowrap;
 
-    @mixin ck-media-phone {
+	@media screen and (max-width: 600px) {
 		flex-wrap: wrap;
 
-        & .ck-math-view {
+		& .ck-math-view {
 			flex-basis: 100%;
 
-            & .ck-labeled-input {
-			    flex-basis: 100%;
-		    }
+			& .ck-labeled-input {
+				flex-basis: 100%;
+			}
 
-            & .ck-label {
-			    flex-basis: 100%;
-		    }
+			& .ck-label {
+				flex-basis: 100%;
+			}
 		}
 
 		& .ck-button {
@@ -27,7 +25,7 @@
 	}
 }
 
-// Increase toolbar default z-index by one because math preview should be below of it
+/* Increase toolbar default z-index by one because math preview should be below of it */
 .ck.ck-toolbar-container {
 	z-index: calc(var(--ck-z-modal) + 2);
 }

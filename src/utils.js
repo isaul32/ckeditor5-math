@@ -1,11 +1,9 @@
-/* globals MathJax, katex, console */
-
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
 export function getSelectedMathModelWidget( selection ) {
 	const selectedElement = selection.getSelectedElement();
 
-	if ( selectedElement && selectedElement.is( 'mathtex' ) ) {
+	if ( selectedElement && ( selectedElement.is( 'element', 'mathtex-inline' ) || selectedElement.is( 'element', 'mathtex-display' ) ) ) {
 		return selectedElement;
 	}
 

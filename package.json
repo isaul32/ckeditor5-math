@@ -1,37 +1,38 @@
 {
   "name": "ckeditor5-math",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
     "ckeditor5",
     "ckeditor 5",
     "ckeditor5-feature",
-    "ckeditor5-plugin"
+    "ckeditor5-plugin",
+    "ckeditor5-math"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^21.0.0",
-    "@ckeditor/ckeditor5-core": "^21.0.0",
-    "@ckeditor/ckeditor5-engine": "^21.0.0",
-    "@ckeditor/ckeditor5-ui": "^21.0.0",
-    "@ckeditor/ckeditor5-undo": "^21.0.0",
-    "@ckeditor/ckeditor5-utils": "^21.0.0",
-    "@ckeditor/ckeditor5-widget": "^21.0.0"
+    "@ckeditor/ckeditor5-clipboard": "^22.0.0",
+    "@ckeditor/ckeditor5-core": "^22.0.0",
+    "@ckeditor/ckeditor5-engine": "^22.0.0",
+    "@ckeditor/ckeditor5-ui": "^22.0.0",
+    "@ckeditor/ckeditor5-undo": "^22.0.0",
+    "@ckeditor/ckeditor5-utils": "^22.0.0",
+    "@ckeditor/ckeditor5-widget": "^22.0.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-tests": "^21.0.0",
-    "@ckeditor/ckeditor5-editor-inline": "^21.0.0",
-    "@ckeditor/ckeditor5-essentials": "^21.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^21.0.0",
-    "eslint": "^5.5.0",
-    "eslint-config-ckeditor5": "^2.0.0",
-    "husky": "^1.3.1",
-    "lint-staged": "^7.0.0",
-    "stylelint": "^11.1.1",
-    "stylelint-config-ckeditor5": "^1.0.0"
+    "@ckeditor/ckeditor5-dev-tests": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^22.0.0",
+    "@ckeditor/ckeditor5-essentials": "^22.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^22.0.0",
+    "eslint": "^7.1.0",
+    "eslint-config-ckeditor5": "^3.0.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
+    "stylelint": "^13.5.0",
+    "stylelint-config-ckeditor5": "^2.0.0"
   },
   "engines": {
-    "node": ">=8.0.0",
+    "node": ">=12.0.0",
     "npm": ">=5.7.1"
   },
   "author": "Sauli Anto",
@@ -61,8 +62,10 @@
     ]
   },
   "eslintIgnore": [
-    "src/lib/**",
-    "packages/**"
+    "node_modules/**",
+    "packages/*/node_modules/**",
+    "packages/*/build/**",
+    "packages/*/src/lib/**"
   ],
   "husky": {
     "hooks": {

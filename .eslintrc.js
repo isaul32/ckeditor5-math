@@ -6,6 +6,7 @@ module.exports = {
 	extends: 'ckeditor5',
 	globals: {
 		'MathJax': true,
-		'katex': true
+		'katex': true,
+		'console': true
 	}
 };

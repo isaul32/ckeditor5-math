@@ -28,7 +28,6 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 - Have multiple input and output format
 - Paste support
 	- from plain text
-	- from Microsoft Word
 
 # Demos
 [Classic editor with MathJax](https://jsfiddle.net/isaul32/qktj9h7x/)
@@ -42,11 +41,7 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 
 ## Requirements
 
-- With CKEditor 5 v21.0.0, use ckeditor5-math@21.0.0 version
-- With CKEditor 5 v20.0.0, use ckeditor5-math@20.0.0 version
-- With CKEditor 5 v19.0.0, use ckeditor5-math@19.0.0 version
-- With CKEditor 5 v18.0.0, use ckeditor5-math@18.0.0 version
-- With CKEditor 5 v17.0.0, use ckeditor5-math@17.0.1 version
+- Use same version as CKEditor 5
 
 If you get duplicated modules error, you have mismatching versions in your editor build package.json.
 
@@ -176,7 +171,3 @@ Replace ckeditor5-core with git version
 Run test suite
 
 `npm run test`
-
-## Todo
-- MathML input and output when using MathJax version 3
-- Support multiple equations when pasting as plain text
