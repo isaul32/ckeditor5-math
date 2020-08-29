@@ -1,6 +1,18 @@
 Changelog
 =========
 
+## [22.0.0](https://github.com/isaul32/ckeditor5-math/compare/v21.0.0...22.0.0) (2020-08-29)
+
+* Seperate schema to display and inline.
+
+### Bug fixes
+
+* Fix writer. ([7d0cd01](https://github.com/isaul32/ckeditor5-math/commit/7d0cd01))
+
+### Other changes
+
+* Update dependencies.
+
 ## [21.0.0](https://github.com/isaul32/ckeditor5-math/compare/v20.0.0...21.0.0) (2020-08-03)
 
 * Update dependencies.
