@@ -17,8 +17,6 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 - [Paste support](#paste-support)
 	* [From plain text](#from-plain-text)
 - [Preview workaround](#preview-workaround)
-- [Testing](#testing)
-- [Todo](#todo)
 
 ## Features
 - TeX syntax
@@ -160,14 +158,4 @@ __\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
 ## Preview workaround
 __.ck-reset_all *__ css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
 
-My solution for this is use rendering element outside of CKEditor DOM and place it right place by using absolute position. Alternative solution could be using iframe, but then we have to copy typesetting engine's scripts and styles to child document.
-
-## Testing
-
-Replace ckeditor5-core with git version
-
-`rm -rf node_modules/@ckeditor/ckeditor5-core && git clone https://github.com/ckeditor/ckeditor5-core.git node_modules/@ckeditor/ckeditor5-core`
-
-Run test suite
-
-`npm run test`
+My solution for this is use rendering element outside of CKEditor DOM and place it to right place by using absolute position. Alternative solution could be using iframe, but then typesetting engine's scripts and styles have to copy to child document.
