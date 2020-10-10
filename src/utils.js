@@ -42,7 +42,7 @@ export function extractDelimiters( equation ) {
 	};
 }
 
-export function renderEquation( equation, element, engine = 'katex', display = false, preview = false, previewUid ) {
+export async function renderEquation( equation, element, engine = 'katex', lazyLoad, display = false, preview = false, previewUid ) {
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if ( isMathJaxVersion3( MathJax.version ) ) {
 			selectRenderMode( element, preview, previewUid, el => {
@@ -84,8 +84,23 @@ export function renderEquation( equation, element, engine = 'katex', display = f
 	} else if ( typeof engine === 'function' ) {
 		engine( equation, element, display );
 	} else {
-		element.innerHTML = equation;
-		console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ engine }) for tex.` );
+		if ( typeof lazyLoad !== 'undefined' ) {
+			try {
+				if ( !global.window.CKEDITOR_MATH_LAZY_LOAD ) {
+					global.window.CKEDITOR_MATH_LAZY_LOAD = lazyLoad();
+				}
+				element.innerHTML = equation;
+				await global.window.CKEDITOR_MATH_LAZY_LOAD;
+				renderEquation( equation, element, engine, undefined, display, preview, previewUid );
+			}
+			catch ( err ) {
+				element.innerHTML = equation;
+				console.error( `math-tex-typesetting-lazy-load-failed: Lazy load failed: ${ err }` );
+			}
+		} else {
+			element.innerHTML = equation;
+			console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ engine }) for tex.` );
+		}
 	}
 }
 
