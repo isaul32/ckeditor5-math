@@ -103,15 +103,15 @@ export default class AutoMath extends Plugin {
 					insertPosition = this._positionToInsert;
 				}
 
-				editor.model.change( writer => {
+				editor.model.change( innerWriter => {
 					const params = Object.assign( extractDelimiters( text ), {
 						type: mathConfig.outputType
 					} );
-					const mathElement = writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
+					const mathElement = innerWriter.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
 
 					editor.model.insertContent( mathElement, insertPosition );
 
-					writer.setSelection( mathElement, 'on' );
+					innerWriter.setSelection( mathElement, 'on' );
 				} );
 
 				this._positionToInsert.detach();
