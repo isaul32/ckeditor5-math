@@ -70,7 +70,13 @@ export default class MathUI extends Plugin {
 
 		const mathConfig = this.editor.config.get( 'math' );
 
-		const formView = new MainFormView( editor.locale, mathConfig.engine, mathConfig.enablePreview, this._previewUid );
+		const formView = new MainFormView(
+			editor.locale,
+			mathConfig.engine,
+			mathConfig.lazyLoad,
+			mathConfig.enablePreview,
+			this._previewUid
+		);
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );

@@ -93,6 +93,7 @@ InlineEditor.defaultConfig = {
 	// ...
 	math: {
 		engine: 'mathjax', // or katex or function. E.g. (equation, element, display) => { ... }
+		lazyLoad: undefined // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
 		outputType: 'script', // or span
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true // Enable preview view
@@ -102,14 +103,13 @@ InlineEditor.defaultConfig = {
 
 ### Available typesetting engines
 __MathJax__
-- Tested by using __latest 2.7__
+- Tested with __latest 2.7__
 - Has experimental (__CHTML__, __SVG__) support for __3.0.0__ or newer version
-- Use only __\\( \\)__ delimiters for inline and __\\[ \\]__ delimiters for display
 
 [<img src="https://www.mathjax.org/badge/badge-square.svg" width="130" alt="KaTeX">](https://www.mathjax.org/)
 
 __KaTeX__
-- Tested by using version __0.11.0__
+- Tested with version __0.12.0__
 
 [<img src="https://katex.org/img/katex-logo-black.svg" width="130" alt="KaTeX">](https://katex.org/)
 
