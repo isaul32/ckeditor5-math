@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [23.1.0](https://github.com/isaul32/ckeditor5-math/compare/v23.0.0...23.1.0) (2020-10-11)
+
+* Add typesetting auto load feature. ([a665b64](https://github.com/isaul32/ckeditor5-math/commit/a665b64))
+
 ## [23.0.0](https://github.com/isaul32/ckeditor5-math/compare/v22.0.0...23.0.0) (2020-10-02)
 
 * Update dependencies.
