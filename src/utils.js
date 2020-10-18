@@ -1,4 +1,5 @@
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
+import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
 
 export function getSelectedMathModelWidget( selection ) {
 	const selectedElement = selection.getSelectedElement();
@@ -101,6 +102,30 @@ export async function renderEquation( equation, element, engine = 'katex', lazyL
 			element.innerHTML = equation;
 			console.warn( `math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ engine }) for tex.` );
 		}
+	}
+}
+
+export function getBalloonPositionData( editor ) {
+	const view = editor.editing.view;
+	const defaultPositions = BalloonPanelView.defaultPositions;
+
+	const selectedElement = view.document.selection.getSelectedElement();
+	if ( selectedElement ) {
+		return {
+			target: view.domConverter.viewToDom( selectedElement ),
+			positions: [
+				defaultPositions.southArrowNorth
+			]
+		};
+	}
+	else {
+		const viewDocument = view.document;
+		return {
+			target: view.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
+			positions: [
+				defaultPositions.southArrowNorth
+			]
+		};
 	}
 }
 

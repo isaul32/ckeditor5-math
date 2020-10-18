@@ -4,6 +4,7 @@ import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextu
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import uid from '@ckeditor/ckeditor5-utils/src/uid';
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
+import { getBalloonPositionData } from './utils';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import MainFormView from './ui/mainformview';
@@ -68,7 +69,7 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		const mathConfig = this.editor.config.get( 'math' );
+		const mathConfig = editor.config.get( 'math' );
 
 		const formView = new MainFormView(
 			editor.locale,
@@ -116,7 +117,7 @@ export default class MathUI extends Plugin {
 
 		this._balloon.add( {
 			view: this.formView,
-			position: this._getBalloonPositionData()
+			position: getBalloonPositionData( editor )
 		} );
 
 		if ( this._balloon.visibleView === this.formView ) {
@@ -175,13 +176,6 @@ export default class MathUI extends Plugin {
 		}
 	}
 
-	_getBalloonPositionData() {
-		const view = this.editor.editing.view;
-		const viewDocument = view.document;
-		const target = view.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() );
-		return { target };
-	}
-
 	_createToolbarMathButton() {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
@@ -216,8 +210,21 @@ export default class MathUI extends Plugin {
 	}
 
 	_enableUserBalloonInteractions() {
+		const editor = this.editor;
+		if ( editor.constructor.name === 'BalloonEditor' ) {
+			const viewDocument = this.editor.editing.view.document;
+			this.listenTo( viewDocument, 'click', () => {
+				const mathCommand = editor.commands.get( 'math' );
+				if ( mathCommand.value ) {
+					if ( mathCommand.isEnabled ) {
+						this._showUI();
+					}
+				}
+			} );
+		}
+
 		// Close the panel on the Esc key press when the editable has focus and the balloon is visible.
-		this.editor.keystrokes.set( 'Esc', ( data, cancel ) => {
+		editor.keystrokes.set( 'Esc', ( data, cancel ) => {
 			if ( this._isUIVisible ) {
 				this._hideUI();
 				cancel();

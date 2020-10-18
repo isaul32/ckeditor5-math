@@ -48,8 +48,8 @@
     "theme"
   ],
   "scripts": {
-    "lint": "eslint --quiet **/*.js",
-    "lint:fix": "eslint --quiet **/*.js --fix",
+    "lint": "eslint --quiet src/**/*.js",
+    "lint:fix": "eslint --quiet src/**/*.js --fix",
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
     "test": "node node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js"
   },

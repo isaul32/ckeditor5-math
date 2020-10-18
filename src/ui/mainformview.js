@@ -74,7 +74,7 @@ export default class MainFormView extends View {
 			attributes: {
 				class: [
 					'ck',
-					'ck-math-form',
+					'ck-math-form'
 				],
 				tabindex: '-1',
 				spellcheck: 'false'
@@ -90,8 +90,8 @@ export default class MainFormView extends View {
 					children
 				},
 				this.saveButtonView,
-				this.cancelButtonView,
-			],
+				this.cancelButtonView
+			]
 		} );
 	}
 
@@ -100,7 +100,7 @@ export default class MainFormView extends View {
 
 		// Prevent default form submit event & trigger custom 'submit'
 		submitHandler( {
-			view: this,
+			view: this
 		} );
 
 		// Register form elements to focusable elements
@@ -108,7 +108,7 @@ export default class MainFormView extends View {
 			this.mathInputView,
 			this.displayButtonView,
 			this.saveButtonView,
-			this.cancelButtonView,
+			this.cancelButtonView
 		];
 
 		childViews.forEach( v => {
