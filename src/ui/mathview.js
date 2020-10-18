@@ -25,7 +25,7 @@ export default class MathView extends View {
 				class: [
 					'ck',
 					'ck-math-preview'
-				],
+				]
 			}
 		} );
 	}
