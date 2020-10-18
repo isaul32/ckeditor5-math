@@ -28,9 +28,9 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 	- from plain text
 
 # Demos
-[Classic editor with MathJax](https://jsfiddle.net/isaul32/qktj9h7x/)
-
-[Classic editor with KaTex](https://jsfiddle.net/isaul32/3wjrkLdv/)
+- [Classic editor with MathJax](https://jsfiddle.net/isaul32/qktj9h7x/)
+- [Classic editor with KaTex](https://jsfiddle.net/isaul32/3wjrkLdv/)
+- [Balloon block editor with KaTex](https://jsfiddle.net/isaul32/q01mu8kp/)
 
 ## Screenshots
 ![Screenshot 1](/screenshots/1.png?raw=true "Screenshot 1")
