@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [23.2.0](https://github.com/isaul32/ckeditor5-math/compare/v23.1.0...23.2.0) (2020-10-18)
+
+* Add math editing button for balloon editor. ([aa0392c](https://github.com/isaul32/ckeditor5-math/commit/aa0392c))
+
 ## [23.1.0](https://github.com/isaul32/ckeditor5-math/compare/v23.0.0...23.1.0) (2020-10-11)
 
 * Add typesetting auto load feature. ([a665b64](https://github.com/isaul32/ckeditor5-math/commit/a665b64))
