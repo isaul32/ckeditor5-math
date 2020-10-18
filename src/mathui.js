@@ -211,17 +211,15 @@ export default class MathUI extends Plugin {
 
 	_enableUserBalloonInteractions() {
 		const editor = this.editor;
-		if ( editor.constructor.name === 'BalloonEditor' ) {
-			const viewDocument = this.editor.editing.view.document;
-			this.listenTo( viewDocument, 'click', () => {
-				const mathCommand = editor.commands.get( 'math' );
-				if ( mathCommand.value ) {
-					if ( mathCommand.isEnabled ) {
-						this._showUI();
-					}
+		const viewDocument = this.editor.editing.view.document;
+		this.listenTo( viewDocument, 'click', () => {
+			const mathCommand = editor.commands.get( 'math' );
+			if ( mathCommand.value ) {
+				if ( mathCommand.isEnabled ) {
+					this._showUI();
 				}
-			} );
-		}
+			}
+		} );
 
 		// Close the panel on the Esc key press when the editable has focus and the balloon is visible.
 		editor.keystrokes.set( 'Esc', ( data, cancel ) => {
