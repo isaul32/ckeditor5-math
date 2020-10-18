@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [23.2.1](https://github.com/isaul32/ckeditor5-math/compare/v23.2.0...23.2.1) (2020-10-18)
+
+* Fix math editing button for balloon editor. ([3629401](https://github.com/isaul32/ckeditor5-math/commit/3629401))
+
 ## [23.2.0](https://github.com/isaul32/ckeditor5-math/compare/v23.1.0...23.2.0) (2020-10-18)
 
 * Add math editing button for balloon editor. ([aa0392c](https://github.com/isaul32/ckeditor5-math/commit/aa0392c))
