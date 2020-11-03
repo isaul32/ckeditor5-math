@@ -25,7 +25,10 @@
 	}
 }
 
-/* Increase toolbar default z-index by one because math preview should be below of it */
+.ck-math-tex.ck-placeholder::before {
+  display: none !important;
+}
+
 .ck.ck-toolbar-container {
 	z-index: calc(var(--ck-z-modal) + 2);
 }
