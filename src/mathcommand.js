@@ -24,7 +24,6 @@ export default class MathCommand extends Command {
 				mathtex = writer.createElement( display ? 'mathtex-display' : 'mathtex-inline', { equation, type: outputType, display } );
 			}
 			model.insertContent( mathtex );
-			writer.setSelection( mathtex, 'on' );
 		} );
 	}
 
