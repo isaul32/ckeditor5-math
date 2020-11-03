@@ -83,7 +83,7 @@ InlineEditor.defaultConfig = {
 };
 ```
 ### Styles for Lark theme
-__Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5-theme-lark) to your lark theme repository
+__Copy theme/ckeditor5-math folder__ from [https://github.com/isaul32/ckeditor5/tree/master/packages/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5/tree/master/packages/ckeditor5-theme-lark) to your lark theme repository
 
 ## Configuration & Usage
 
