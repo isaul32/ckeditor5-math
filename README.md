@@ -16,6 +16,7 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 	* [Supported input and output formats](#supported-input-and-output-formats)
 - [Paste support](#paste-support)
 	* [From plain text](#from-plain-text)
+- [Autoformat support](#autoformat-support)
 - [Preview workaround](#preview-workaround)
 
 ## Features
@@ -26,6 +27,7 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 - Have multiple input and output format
 - Paste support
 	- from plain text
+- Autoformat support
 
 # Demos
 - [Classic editor with MathJax](https://jsfiddle.net/isaul32/qktj9h7x/)
@@ -154,6 +156,26 @@ __\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__
 or
 
 __\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
+
+### Autoformat support
+
+#### Inline mode
+Ctrl+M can be used to add easily math formulas in inline mode.
+
+#### Display mode
+Autoformat for math can be used to add formula in display mode on a new line by adding `\[` or `$$`. This feature requires additional autoformat plugin to be added.
+
+Add following lines into your build
+
+```js
+// ...
+import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
+
+InlineEditor.builtinPlugins = [
+	// ...
+	AutoformatMathematics
+];
+```
 
 ## Preview workaround
 __.ck-reset_all *__ css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
