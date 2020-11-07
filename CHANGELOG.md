@@ -1,10 +1,15 @@
 Changelog
 =========
 
+## [23.3.0](https://github.com/isaul32/ckeditor5-math/compare/v23.2.2...23.3.0) (2020-11-07)
+
+* Add autoformat support. ([3354872](https://github.com/isaul32/ckeditor5-math/commit/3354872))
+
+
 ## [23.2.2](https://github.com/isaul32/ckeditor5-math/compare/v23.2.1...23.2.2) (2020-11-03)
 
 * Fix placeholder handling. ([dc288ea](https://github.com/isaul32/ckeditor5-math/commit/dc288ea))
-* Fix selection after entering inline expression ([2fea2e2](https://github.com/isaul32/ckeditor5-math/commit/2fea2e2))
+* Fix selection after entering inline expression. ([2fea2e2](https://github.com/isaul32/ckeditor5-math/commit/2fea2e2))
 
 ## [23.2.1](https://github.com/isaul32/ckeditor5-math/compare/v23.2.0...23.2.1) (2020-10-18)
 
