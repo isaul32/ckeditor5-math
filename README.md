@@ -39,9 +39,9 @@ This is TeX-based mathematical plugin for CKEditor 5. You can use it to insert, 
 
 ## Requirements
 
-- Use same version as CKEditor 5
+- Use same major version as your CKEditor 5 build
 
-If you get duplicated modules error, you have mismatching versions in your editor build package.json.
+If you get duplicated modules error, you have mismatching versions.
 
 ## Examples
 [Link to examples repository](https://github.com/isaul32/ckeditor5-math-examples)
