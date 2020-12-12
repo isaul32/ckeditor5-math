@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [24.0.0](https://github.com/isaul32/ckeditor5-math/compare/v23.3.0...24.0.0) (2020-12-12)
+
+*   Update dependencies.
+
 ## [23.3.0](https://github.com/isaul32/ckeditor5-math/compare/v23.2.2...23.3.0) (2020-11-07)
 
 * Add autoformat support. ([3354872](https://github.com/isaul32/ckeditor5-math/commit/3354872))
