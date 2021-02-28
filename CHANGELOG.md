@@ -1,9 +1,13 @@
 Changelog
 =========
 
+## [24.0.1](https://github.com/isaul32/ckeditor5-math/compare/v24.0.0...24.0.1) (2021-02-28)
+
+* Fix balloon view position.
+
 ## [24.0.0](https://github.com/isaul32/ckeditor5-math/compare/v23.3.0...24.0.0) (2020-12-12)
 
-*   Update dependencies.
+* Update dependencies.
 
 ## [23.3.0](https://github.com/isaul32/ckeditor5-math/compare/v23.2.2...23.3.0) (2020-11-07)
 
