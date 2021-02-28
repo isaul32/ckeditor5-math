@@ -114,7 +114,9 @@ export function getBalloonPositionData( editor ) {
 		return {
 			target: view.domConverter.viewToDom( selectedElement ),
 			positions: [
-				defaultPositions.southArrowNorth
+				defaultPositions.southArrowNorth,
+				defaultPositions.southArrowNorthWest,
+				defaultPositions.southArrowNorthEast,
 			]
 		};
 	}
@@ -123,7 +125,9 @@ export function getBalloonPositionData( editor ) {
 		return {
 			target: view.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
 			positions: [
-				defaultPositions.southArrowNorth
+				defaultPositions.southArrowNorth,
+				defaultPositions.southArrowNorthWest,
+				defaultPositions.southArrowNorthEast,
 			]
 		};
 	}
