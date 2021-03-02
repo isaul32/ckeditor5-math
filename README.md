@@ -95,7 +95,7 @@ InlineEditor.defaultConfig = {
 	// ...
 	math: {
 		engine: 'mathjax', // or katex or function. E.g. (equation, element, display) => { ... }
-		lazyLoad: undefined // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
+		lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
 		outputType: 'script', // or span
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true // Enable preview view
