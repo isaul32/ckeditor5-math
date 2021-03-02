@@ -1,6 +1,6 @@
 {
-  "name": "ckeditor5-math",
-  "version": "24.0.1",
+  "name": "@peergrade/ckeditor5-math",
+  "version": "25.0.0-next.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
