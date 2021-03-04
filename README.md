@@ -155,11 +155,15 @@ Supported input and output formats are:
 #### From plain text
 Paste TeX equations with __delimiters__. For example:
 
-__\\[__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\]__
+```latex
+\[ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \]
+```
 
 or
 
-__\\(__ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} __\\)__
+```latex
+\( x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \)
+```
 
 ### Autoformat support
 
