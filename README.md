@@ -185,6 +185,6 @@ InlineEditor.builtinPlugins = [
 ```
 
 ## Preview workaround
-__.ck-reset_all *__ css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
+`.ck-reset_all *` css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
 
 My solution for this is use rendering element outside of CKEditor DOM and place it to right place by using absolute position. Alternative solution could be using iframe, but then typesetting engine's scripts and styles have to copy to child document.
