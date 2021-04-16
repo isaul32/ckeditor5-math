@@ -30,7 +30,9 @@ export default class MathEditing extends Plugin {
 			engine: 'mathjax',
 			outputType: 'script',
 			forceOutputType: false,
-			enablePreview: true
+			enablePreview: true,
+			previewClassName: [],
+			popupClassName: []
 		} );
 	}
 

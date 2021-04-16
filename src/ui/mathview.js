@@ -3,12 +3,13 @@ import View from '@ckeditor/ckeditor5-ui/src/view';
 import { renderEquation } from '../utils';
 
 export default class MathView extends View {
-	constructor( engine, lazyLoad, locale, previewUid ) {
+	constructor( engine, lazyLoad, locale, previewUid, previewClassName ) {
 		super( locale );
 
 		this.engine = engine;
 		this.lazyLoad = lazyLoad;
 		this.previewUid = previewUid;
+		this.previewClassName = previewClassName;
 
 		this.set( 'value', '' );
 		this.set( 'display', false );
@@ -31,7 +32,7 @@ export default class MathView extends View {
 	}
 
 	updateMath() {
-		renderEquation( this.value, this.element, this.engine, this.lazyLoad, this.display, true, this.previewUid );
+		renderEquation( this.value, this.element, this.engine, this.lazyLoad, this.display, true, this.previewUid, this.previewClassName );
 	}
 
 	render() {

@@ -34,5 +34,5 @@ function getCallbackFunctionForBlockAutoformat( editor, command ) {
 
 		command.display = true;
 		editor.plugins.get( 'MathUI' )._showUI();
-	}
+	};
 }

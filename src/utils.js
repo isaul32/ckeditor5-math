@@ -43,10 +43,12 @@ export function extractDelimiters( equation ) {
 	};
 }
 
-export async function renderEquation( equation, element, engine = 'katex', lazyLoad, display = false, preview = false, previewUid ) {
+export async function renderEquation(
+	equation, element, engine = 'katex', lazyLoad, display = false, preview = false, previewUid, previewClassName = []
+) {
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if ( isMathJaxVersion3( MathJax.version ) ) {
-			selectRenderMode( element, preview, previewUid, el => {
+			selectRenderMode( element, preview, previewUid, previewClassName, el => {
 				renderMathJax3( equation, el, display, () => {
 					if ( preview ) {
 						moveAndScaleElement( element, el );
@@ -55,7 +57,7 @@ export async function renderEquation( equation, element, engine = 'katex', lazyL
 				} );
 			} );
 		} else {
-			selectRenderMode( element, preview, previewUid, el => {
+			selectRenderMode( element, preview, previewUid, previewClassName, el => {
 				// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
 				global.window.setTimeout( () => {
 					renderMathJax2( equation, el, display );
@@ -72,7 +74,7 @@ export async function renderEquation( equation, element, engine = 'katex', lazyL
 			} );
 		}
 	} else if ( engine === 'katex' && typeof katex !== 'undefined' ) {
-		selectRenderMode( element, preview, previewUid, el => {
+		selectRenderMode( element, preview, previewUid, previewClassName, el => {
 			katex.render( equation, el, {
 				throwOnError: false,
 				displayMode: display
@@ -92,7 +94,7 @@ export async function renderEquation( equation, element, engine = 'katex', lazyL
 				}
 				element.innerHTML = equation;
 				await global.window.CKEDITOR_MATH_LAZY_LOAD;
-				renderEquation( equation, element, engine, undefined, display, preview, previewUid );
+				renderEquation( equation, element, engine, undefined, display, preview, previewUid, previewClassName );
 			}
 			catch ( err ) {
 				element.innerHTML = equation;
@@ -133,9 +135,9 @@ export function getBalloonPositionData( editor ) {
 	}
 }
 
-function selectRenderMode( element, preview, previewUid, cb ) {
+function selectRenderMode( element, preview, previewUid, previewClassName, cb ) {
 	if ( preview ) {
-		createPreviewElement( element, previewUid, previewEl => {
+		createPreviewElement( element, previewUid, previewClassName, previewEl => {
 			cb( previewEl );
 		} );
 	} else {
@@ -172,17 +174,18 @@ function renderMathJax2( equation, element, display ) {
 	MathJax.Hub.Queue( [ 'Typeset', MathJax.Hub, element ] );
 }
 
-function createPreviewElement( element, previewUid, render ) {
-	const previewEl = getPreviewElement( element, previewUid );
+function createPreviewElement( element, previewUid, previewClassName, render ) {
+	const previewEl = getPreviewElement( element, previewUid, previewClassName );
 	render( previewEl );
 }
 
-function getPreviewElement( element, previewUid ) {
+function getPreviewElement( element, previewUid, previewClassName ) {
 	let previewEl = global.document.getElementById( previewUid );
 	// Create if not found
 	if ( !previewEl ) {
 		previewEl = global.document.createElement( 'div' );
 		previewEl.setAttribute( 'id', previewUid );
+		previewEl.classList.add( ...previewClassName );
 		previewEl.style.visibility = 'hidden';
 		global.document.body.appendChild( previewEl );
 
