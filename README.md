@@ -101,7 +101,9 @@ InlineEditor.defaultConfig = {
 		lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
 		outputType: 'script', // or span
 		forceOutputType: false, // forces output to use outputType
-		enablePreview: true // Enable preview view
+		enablePreview: true, // Enable preview view
+		previewClassName: [], // Class names to add to previews
+		popupClassName: [] // Class names to add to math popup balloon
 	}
 }
 ```
