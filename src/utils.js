@@ -116,7 +116,7 @@ export function getBalloonPositionData( editor ) {
 			positions: [
 				defaultPositions.southArrowNorth,
 				defaultPositions.southArrowNorthWest,
-				defaultPositions.southArrowNorthEast,
+				defaultPositions.southArrowNorthEast
 			]
 		};
 	}
@@ -127,7 +127,7 @@ export function getBalloonPositionData( editor ) {
 			positions: [
 				defaultPositions.southArrowNorth,
 				defaultPositions.southArrowNorthWest,
-				defaultPositions.southArrowNorthEast,
+				defaultPositions.southArrowNorthEast
 			]
 		};
 	}
@@ -135,8 +135,8 @@ export function getBalloonPositionData( editor ) {
 
 function selectRenderMode( element, preview, previewUid, cb ) {
 	if ( preview ) {
-		createPreviewElement( element, previewUid, prewviewEl => {
-			cb( prewviewEl );
+		createPreviewElement( element, previewUid, previewEl => {
+			cb( previewEl );
 		} );
 	} else {
 		cb( element );
@@ -173,25 +173,25 @@ function renderMathJax2( equation, element, display ) {
 }
 
 function createPreviewElement( element, previewUid, render ) {
-	const prewviewEl = getPreviewElement( element, previewUid );
-	render( prewviewEl );
+	const previewEl = getPreviewElement( element, previewUid );
+	render( previewEl );
 }
 
 function getPreviewElement( element, previewUid ) {
-	let prewviewEl = global.document.getElementById( previewUid );
+	let previewEl = global.document.getElementById( previewUid );
 	// Create if not found
-	if ( !prewviewEl ) {
-		prewviewEl = global.document.createElement( 'div' );
-		prewviewEl.setAttribute( 'id', previewUid );
-		prewviewEl.style.visibility = 'hidden';
-		global.document.body.appendChild( prewviewEl );
+	if ( !previewEl ) {
+		previewEl = global.document.createElement( 'div' );
+		previewEl.setAttribute( 'id', previewUid );
+		previewEl.style.visibility = 'hidden';
+		global.document.body.appendChild( previewEl );
 
 		let ticking = false;
 
 		const renderTransformation = () => {
 			if ( !ticking ) {
 				global.window.requestAnimationFrame( () => {
-					moveElement( element, prewviewEl );
+					moveElement( element, previewEl );
 					ticking = false;
 				} );
 
@@ -203,7 +203,7 @@ function getPreviewElement( element, previewUid ) {
 		global.window.addEventListener( 'resize', renderTransformation );
 		global.window.addEventListener( 'scroll', renderTransformation );
 	}
-	return prewviewEl;
+	return previewEl;
 }
 
 function moveAndScaleElement( parent, child ) {
