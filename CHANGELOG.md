@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## [27.0.1](https://github.com/isaul32/ckeditor5-math/compare/v27.0.0...v27.0.1) (2021-03-29)
+
+* Typo fix from #32.
+
 ## [27.0.0](https://github.com/isaul32/ckeditor5-math/compare/v26.0.0...v27.0.0) (2021-03-29)
 
 * Update dependencies.
