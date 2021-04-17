@@ -1,6 +1,23 @@
 Changelog
 =========
 
+## [27.1.0](https://github.com/isaul32/ckeditor5-math/compare/v27.0.1...v27.1.0) (2021-03-29)
+
+* #33: New optional config variables: `previewClassName` and `popupClassName` as an array
+  of classes, this makes it easier to style the preview:
+
+  ```javascript
+  {
+    "math": {
+	  "popupClassName": ["myeditor"],
+	  "previewClassName": ["myeditor"]
+	}
+  }
+  ```
+
+  This assures the preview appended to `document.body` and the popup both are
+  accessible via `.myeditor`.
+
 ## [27.0.1](https://github.com/isaul32/ckeditor5-math/compare/v27.0.0...v27.0.1) (2021-03-29)
 
 * Typo fix from #32.
