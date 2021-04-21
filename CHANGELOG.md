@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## [27.1.1](https://github.com/isaul32/ckeditor5-math/compare/v27.1.0...v27.1.1) (2021-03-29)
+
+* Update dependencies for CKEditor 27.1.0 ([Release
+  notes](https://github.com/ckeditor/ckeditor5/releases/tag/v27.1.0))
+
 ## [27.1.0](https://github.com/isaul32/ckeditor5-math/compare/v27.0.1...v27.1.0) (2021-03-29)
 
 * #33: New optional config variables: `previewClassName` and `popupClassName` as an array
