@@ -1,5 +1,6 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
+import ClipboardObserver from '@ckeditor/ckeditor5-clipboard/src/clipboardobserver';
 import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 import uid from '@ckeditor/ckeditor5-utils/src/uid';
@@ -28,6 +29,7 @@ export default class MathUI extends Plugin {
 	init() {
 		const editor = this.editor;
 		editor.editing.view.addObserver( ClickObserver );
+		editor.editing.view.addObserver( ClipboardObserver )
 
 		this._previewUid = `math-preview-${ uid() }`;
 
