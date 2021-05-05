@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## Current
+## [27.1.2](https://github.com/isaul32/ckeditor5-math/compare/v27.1.1...v27.1.2) (2021-03-29)
 
 * #38: You can now boot into a development instance with `yarn start` (supports
   live reload)
