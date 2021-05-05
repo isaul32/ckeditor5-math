@@ -192,3 +192,21 @@ InlineEditor.builtinPlugins = [
 `.ck-reset_all *` css rules from ckeditor5-ui and ckeditor5-theme-lark break rendering in preview mode.
 
 My solution for this is use rendering element outside of CKEditor DOM and place it to right place by using absolute position. Alternative solution could be using iframe, but then typesetting engine's scripts and styles have to copy to child document.
+
+## Development
+
+Contributions, improvements and bug fixes are welcome.  To aid in this, try out
+our developer environment w/ live reload support and [CKEditor 5 inspector].
+
+![Development environment](/screenshots/development-environment.png?raw=true "Screenshot of
+development environment")
+
+To enter a development loop with hot reload support:
+
+- `git clone https://github.com/isaul32/ckeditor5-math.git`
+- `cd ckeditor5-math`
+- `yarn`
+- `yarn start`
+- http://localhost:8080
+
+[CKEditor 5 inspector]: https://ckeditor.com/docs/ckeditor5/latest/framework/guides/development-tools.html#ckeditor-5-inspector
