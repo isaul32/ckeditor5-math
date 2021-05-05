@@ -60,6 +60,8 @@ Install plugin with NPM or Yarn
 
 `npm install ckeditor5-math --save-dev`
 
+`yarn add ckeditor5-math --dev`
+
 Add import into ckeditor.js file
 
 ```js
