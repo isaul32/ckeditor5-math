@@ -5,6 +5,7 @@ Changelog
 
 * #38: You can now boot into a development instance with `yarn start` (supports
   live reload)
+* #40 (fixed #39): Support for upcasting Quill style tags
 
 ## [27.1.1](https://github.com/isaul32/ckeditor5-math/compare/v27.1.0...v27.1.1) (2021-03-29)
 

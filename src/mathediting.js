@@ -108,6 +108,21 @@ export default class MathEditing extends Plugin {
 
 					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
 				}
+			} )
+			// KaTeX from Quill: https://github.com/quilljs/quill/blob/develop/formats/formula.js
+			.elementToElement( {
+				view: {
+					name: 'span',
+					classes: [ 'ql-formula' ]
+				},
+				model: ( viewElement, { writer } ) => {
+					const equation = viewElement.getAttribute( 'data-value' ).trim();
+					return writer.createElement( 'mathtex-inline', {
+						equation,
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'script',
+						display: false
+					} );
+				}
 			} );
 
 		// Model -> View (element)
