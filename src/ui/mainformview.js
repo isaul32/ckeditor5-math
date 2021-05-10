@@ -30,15 +30,15 @@ export default class MainFormView extends View {
 		// Create key event & focus trackers
 		this._createKeyAndFocusTrackers();
 
+		// Submit button
+		this.saveButtonView = this._createButton( t( 'Save' ), checkIcon, 'ck-button-save', null );
+		this.saveButtonView.type = 'submit';
+
 		// Equation input
 		this.mathInputView = this._createMathInput();
 
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
-
-		// Submit button
-		this.saveButtonView = this._createButton( t( 'Save' ), checkIcon, 'ck-button-save', null );
-		this.saveButtonView.type = 'submit';
 
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
@@ -159,9 +159,10 @@ export default class MainFormView extends View {
 		const mathInput = new LabeledInputView( this.locale, InputTextView );
 		const inputView = mathInput.inputView;
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
-		inputView.on( 'input', () => {
-			if ( this.previewEnabled ) {
-				const equationInput = inputView.element.value.trim();
+
+		const onInput = () => {
+			if ( inputView.element != null ) {
+				let equationInput = inputView.element.value.trim();
 
 				// If input has delimiters
 				if ( hasDelimiters( equationInput ) ) {
@@ -171,17 +172,22 @@ export default class MainFormView extends View {
 					// Remove delimiters from input field
 					inputView.element.value = params.equation;
 
+					equationInput = params.equation;
+
 					// update display button and preview
 					this.displayButtonView.isOn = params.display;
-					if ( this.previewEnabled ) {
-						// Update preview view
-						this.mathView.value = params.equation;
-					}
-				} else {
+				}
+				if ( this.previewEnabled ) {
+					// Update preview view
 					this.mathView.value = equationInput;
 				}
+
+				this.saveButtonView.isEnabled = !!equationInput;
 			}
-		} );
+		};
+
+		inputView.on( 'render', onInput );
+		inputView.on( 'input', onInput );
 
 		return mathInput;
 	}
