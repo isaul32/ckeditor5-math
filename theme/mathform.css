@@ -26,7 +26,7 @@
 }
 
 .ck-math-tex.ck-placeholder::before {
-  display: none !important;
+	display: none !important;
 }
 
 .ck.ck-toolbar-container {

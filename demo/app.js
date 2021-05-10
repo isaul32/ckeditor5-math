@@ -17,5 +17,6 @@ ClassicEditor.create(document.querySelector("#editor"), {
 		CKEditorInspector.attach(editor)
 	})
 	.catch((error) => {
+		console.error(error);
 		console.error(error.stack);
 	});
