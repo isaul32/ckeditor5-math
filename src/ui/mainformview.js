@@ -2,6 +2,7 @@ import View from '@ckeditor/ckeditor5-ui/src/view';
 import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
 
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/switchbuttonview';
 import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
 import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 import LabelView from '@ckeditor/ckeditor5-ui/src/label/labelview';
@@ -211,7 +212,7 @@ export default class MainFormView extends View {
 	_createDisplayButton() {
 		const t = this.locale.t;
 
-		const switchButton = new ButtonView( this.locale );
+		const switchButton = new SwitchButtonView( this.locale );
 
 		switchButton.set( {
 			label: t( 'Display mode' ),
