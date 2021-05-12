@@ -23,6 +23,7 @@
   "devDependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^27.1.0",
     "@ckeditor/ckeditor5-dev-tests": "^24.4.2",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^24.4.2",
     "@ckeditor/ckeditor5-editor-inline": "^27.1.0",
     "@ckeditor/ckeditor5-essentials": "^27.1.0",
     "@ckeditor/ckeditor5-paragraph": "^27.1.0",
@@ -32,12 +33,13 @@
     "eslint-config-ckeditor5": "^3.1.0",
     "html-webpack-plugin": "^5.3.1",
     "husky": "^4.2.5",
+    "karma-webpack": "^4.0.2",
     "lint-staged": "^10.2.6",
     "mini-css-extract-plugin": "^1.6.0",
     "raw-loader": "^4.0.2",
     "stylelint": "^13.5.0",
     "stylelint-config-ckeditor5": "^2.0.1",
-    "webpack": "^5.36.2",
+    "webpack": "^4.43.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },
@@ -61,7 +63,7 @@
     "lint": "eslint --quiet src/**/*.js",
     "lint:fix": "eslint --quiet src/**/*.js --fix",
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
-    "test": "node node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js",
+    "test": "node node_modules/.bin/ckeditor5-dev-tests --files=ckeditor5",
     "start": "node node_modules/.bin/webpack serve --mode development"
   },
   "lint-staged": {

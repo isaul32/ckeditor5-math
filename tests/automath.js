@@ -1,6 +1,6 @@
 import Mathematics from '../src/math';
 import AutoMath from '../src/automath';
-import ClassicTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/classictesteditor';
+import ClassicTestEditor from '../ckeditor5/packages/ckeditor5-core/tests/_utils/classictesteditor';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
