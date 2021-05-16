@@ -1,8 +1,9 @@
 # Changelog
 
-## [current](https://github.com/isaul32/ckeditor5-math/compare/v27.1.3...master) (current)
+## [27.1.4](https://github.com/isaul32/ckeditor5-math/compare/v27.1.3...v27.1.4) (current)
 
 -   #45: docs(README,CHANGELOG): Format with prettier 2.3.0
+-   #42: use `SwitchButton` to toggle "display mode". Thanks you @Jules-Bertholet!
 
 ## [27.1.3](https://github.com/isaul32/ckeditor5-math/compare/v27.1.2...27.1.3) (2021-05-16)
 
