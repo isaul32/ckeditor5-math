@@ -22,10 +22,10 @@
 
     ```javascript
     {
-      "math": {
-      "popupClassName": ["myeditor"],
-      "previewClassName": ["myeditor"]
-    }
+    	"math": {
+    		"popupClassName": ["myeditor"],
+    		"previewClassName": ["myeditor"]
+    	}
     }
     ```
 
