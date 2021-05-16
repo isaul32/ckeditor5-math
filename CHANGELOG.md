@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## [current](https://github.com/isaul32/ckeditor5-math/compare/v27.1.2...master) (unreleased)
+## [27.1.3](https://github.com/isaul32/ckeditor5-math/compare/v27.1.2...27.1.3) (2021-05-16)
 
 * #41: Prevent inserting empty equations, thank you @Jules-Bertholet.
 
