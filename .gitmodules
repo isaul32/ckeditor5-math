@@ -1,3 +1,5 @@
 [submodule "ckeditor5"]
 	path = ckeditor5
 	url = https://github.com/ckeditor/ckeditor5
+	update = checkout
+	shallow = true
