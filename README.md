@@ -233,17 +233,5 @@ To enter a development loop with hot reload support:
 
 ### Tests
 
-Run the below commands from the repo root directory to fetch files needed to run tests (you will only need to do this once):
-
-```
-git submodule deinit ckeditor5
-rm -rf ckeditor5
-git clone --no-checkout --depth=1 --filter=blob:none https://github.com/ckeditor/ckeditor5
-rm -rf .git/modules/ckeditor5
-git submodule absorbgitdirs
-git -C ckeditor5 sparse-checkout set 'packages/ckeditor5-core/tests/_utils/**'
-git submodule update --init --force --checkout ckeditor5
-```
-
-Then, use `yarn test`, optionally with `--coverage`, `--watch`, or `--source-map`, to run tests.
+To run tests, use `yarn test`, optionally with `--coverage`, `--watch`, or `--source-map`, to run tests.
 You will need to have run `git submodule init` and `git submodule update` first.

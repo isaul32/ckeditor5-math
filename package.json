@@ -63,6 +63,7 @@
     "lint": "eslint --quiet src/**/*.js",
     "lint:fix": "eslint --quiet src/**/*.js --fix",
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
+    "pretest": "bash -c 'if [ ! -e ckeditor5/.git ]; then git submodule deinit ckeditor5 && rm -rf ckeditor5 && git clone --no-checkout --depth=1 --filter=blob:none https://github.com/ckeditor/ckeditor5 && rm -rf .git/modules/ckeditor5 && git submodule absorbgitdirs && git -C ckeditor5 sparse-checkout set packages/ckeditor5-core/tests/_utils && git submodule update --init --force --checkout ckeditor5; fi'",
     "test": "node node_modules/.bin/ckeditor5-dev-tests --files=ckeditor5",
     "start": "node node_modules/.bin/webpack serve --mode development"
   },
