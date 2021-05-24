@@ -3,3 +3,5 @@ build/
 package-lock.json
 yarn.lock
 public
+coverage
+ckeditor5/

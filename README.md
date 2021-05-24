@@ -230,3 +230,8 @@ To enter a development loop with hot reload support:
 -   http://localhost:8080
 
 [ckeditor 5 inspector]: https://ckeditor.com/docs/ckeditor5/latest/framework/guides/development-tools.html#ckeditor-5-inspector
+
+### Tests
+
+To run tests, use `yarn test`, optionally with `--coverage`, `--watch`, or `--source-map`, to run tests.
+You will need to have run `git submodule init` and `git submodule update` first.
