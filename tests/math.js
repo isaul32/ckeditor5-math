@@ -1,4 +1,4 @@
-import ClassicTestEditor from '../ckeditor5/packages/ckeditor5-core/tests/_utils/classictesteditor';
+import ClassicTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/classictesteditor';
 import Mathematics from '../src/math';
 import MathEditing from '../src/mathediting';
 import MathUI from '../src/mathui';
