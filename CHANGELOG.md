@@ -1,5 +1,10 @@
 # Changelog
 
+## [28.0.0](https://github.com/isaul32/ckeditor5-math/compare/v27.1.4...v28.0.0) (current)
+
+-   Update dependencies for CKEditor 28.0.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/releases/tag/v28.0.0))
+
 ## [27.1.4](https://github.com/isaul32/ckeditor5-math/compare/v27.1.3...v27.1.4) (current)
 
 -   #45: docs(README,CHANGELOG): Format with prettier 2.3.0
