@@ -160,20 +160,24 @@ export default class MathEditing extends Plugin {
 			const styles = 'user-select: none; ' + ( display ? '' : 'display: inline-block;' );
 			const classes = 'ck-math-tex ' + ( display ? 'ck-math-tex-display' : 'ck-math-tex-inline' );
 
-			const mathtexView = writer.createContainerElement( display ? 'div' : 'span', {
-				style: styles,
-				class: classes
-			} );
+			const mathtexView = writer.createContainerElement(
+				display ? 'div' : 'span',
+				{
+					style: styles,
+					class: classes
+				}
+			);
 
-			const uiElement = writer.createUIElement( 'div', null, function( domDocument ) {
-				const domElement = this.toDomElement( domDocument );
+			const rawElement = writer.createRawElement(
+				'div',
+				null,
+				domElement => {
+					renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false );
+					return domElement;
+				}
+			);
 
-				renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false );
-
-				return domElement;
-			} );
-
-			writer.insert( writer.createPositionAt( mathtexView, 0 ), uiElement );
+			writer.insert( writer.createPositionAt( mathtexView, 0 ), rawElement );
 
 			return mathtexView;
 		}
@@ -185,23 +189,19 @@ export default class MathEditing extends Plugin {
 			const display = modelItem.getAttribute( 'display' );
 
 			if ( type === 'span' ) {
-				const mathtexView = writer.createContainerElement( 'span', {
-					class: 'math-tex'
-				} );
-
-				if ( display ) {
-					writer.insert( writer.createPositionAt( mathtexView, 0 ), writer.createText( '\\[' + equation + '\\]' ) );
-				} else {
-					writer.insert( writer.createPositionAt( mathtexView, 0 ), writer.createText( '\\(' + equation + '\\)' ) );
-				}
+				const mathtexView = writer.createRawElement(
+					'span',
+					{ class: 'math-tex' },
+					domElement => { domElement.innerHTML = display ? '\\[' + equation + '\\]' : '\\(' + equation + '\\)'; }
+				);
 
 				return mathtexView;
 			} else {
-				const mathtexView = writer.createContainerElement( 'script', {
-					type: display ? 'math/tex; mode=display' : 'math/tex'
-				} );
-
-				writer.insert( writer.createPositionAt( mathtexView, 0 ), writer.createText( equation ) );
+				const mathtexView = writer.createRawElement(
+					'script',
+					{ type: display ? 'math/tex; mode=display' : 'math/tex' },
+					domElement => { domElement.innerHTML = equation; }
+				);
 
 				return mathtexView;
 			}
