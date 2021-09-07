@@ -23,6 +23,7 @@
   "devDependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^29.1.0",
     "@ckeditor/ckeditor5-dev-tests": "^25.2.3",
+    "@ckeditor/ckeditor5-editor-classic": "^29.1.0",
     "@ckeditor/ckeditor5-editor-inline": "^29.1.0",
     "@ckeditor/ckeditor5-essentials": "^29.1.0",
     "@ckeditor/ckeditor5-paragraph": "^29.1.0",
