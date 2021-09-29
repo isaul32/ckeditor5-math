@@ -1,5 +1,10 @@
 # Changelog
 
+## [23.0.0](https://github.com/isaul32/ckeditor5-math/compare/v29.2.0...v30.0.0) (current)
+
+-   Update dependencies for CKEditor 30.0.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v30.0.0/CHANGELOG.md))
+
 ## [29.2.0](https://github.com/isaul32/ckeditor5-math/compare/v29.1.0...v29.2.0) (current)
 
 -   Update dependencies for CKEditor 29.2.0 ([Release

@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-math",
-  "version": "29.2.0",
+  "version": "30.0.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
@@ -11,23 +11,23 @@
     "ckeditor5-math"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^29.2.0",
-    "@ckeditor/ckeditor5-core": "^29.2.0",
-    "@ckeditor/ckeditor5-engine": "^29.2.0",
+    "@ckeditor/ckeditor5-clipboard": "^30.0.0",
+    "@ckeditor/ckeditor5-core": "^30.0.0",
+    "@ckeditor/ckeditor5-engine": "^30.0.0",
     "@ckeditor/ckeditor5-inspector": "^2.2.2",
-    "@ckeditor/ckeditor5-ui": "^29.2.0",
-    "@ckeditor/ckeditor5-undo": "^29.2.0",
-    "@ckeditor/ckeditor5-utils": "^29.2.0",
-    "@ckeditor/ckeditor5-widget": "^29.2.0"
+    "@ckeditor/ckeditor5-ui": "^30.0.0",
+    "@ckeditor/ckeditor5-undo": "^30.0.0",
+    "@ckeditor/ckeditor5-utils": "^30.0.0",
+    "@ckeditor/ckeditor5-widget": "^30.0.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^29.2.0",
-    "@ckeditor/ckeditor5-dev-tests": "^25.4.2",
-    "@ckeditor/ckeditor5-editor-classic": "^29.2.0",
-    "@ckeditor/ckeditor5-editor-inline": "^29.2.0",
-    "@ckeditor/ckeditor5-essentials": "^29.2.0",
-    "@ckeditor/ckeditor5-paragraph": "^29.2.0",
-    "@ckeditor/ckeditor5-theme-lark": "^29.2.0",
+    "@ckeditor/ckeditor5-basic-styles": "^30.0.0",
+    "@ckeditor/ckeditor5-dev-tests": "^25.4.4",
+    "@ckeditor/ckeditor5-editor-classic": "^30.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^30.0.0",
+    "@ckeditor/ckeditor5-essentials": "^30.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^30.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^30.0.0",
     "css-loader": "^5.2.4",
     "eslint": "^7.1.0",
     "eslint-config-ckeditor5": "^3.1.0",
