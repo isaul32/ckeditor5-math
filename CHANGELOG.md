@@ -1,5 +1,10 @@
 # Changelog
 
+## [33.0.0](https://github.com/isaul32/ckeditor5-math/compare/v32.0.0...v33.0.0) (current)
+
+-   Update dependencies for CKEditor 33.0.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v33.0.0/CHANGELOG.md))
+
 ## [32.0.0](https://github.com/isaul32/ckeditor5-math/compare/v31.1.0...v32.0.0) (current)
 
 -   Update dependencies for CKEditor 32.0.0 ([Release
