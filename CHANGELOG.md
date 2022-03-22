@@ -1,5 +1,11 @@
 # Changelog
 
+## Current
+
+-   Begin keeping a yarn lockfile. This will make it easier to track changes
+    aren't due to sub-dependencies shifting across time and development
+    conditions.
+
 ## [33.0.0](https://github.com/isaul32/ckeditor5-math/compare/v32.0.0...v33.0.0) (current)
 
 -   Update dependencies for CKEditor 33.0.0 ([Release
