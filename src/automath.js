@@ -1,5 +1,4 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
 import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
 import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
@@ -9,7 +8,7 @@ import { extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
 
 export default class AutoMath extends Plugin {
 	static get requires() {
-		return [ Clipboard, Undo ];
+		return [ Undo ];
 	}
 
 	static get pluginName() {
@@ -27,8 +26,9 @@ export default class AutoMath extends Plugin {
 	init() {
 		const editor = this.editor;
 		const modelDocument = editor.model.document;
-
-		this.listenTo( editor.plugins.get( Clipboard ), 'inputTransformation', () => {
+		//change < Clipboard > to < 'ClipboardPipeline' > because in version upgrade from 26 to 27
+		//the usage of this call changed
+		this.listenTo( editor.plugins.get( 'ClipboardPipeline' ), 'inputTransformation', () => {
 			const firstRange = modelDocument.selection.getFirstRange();
 
 			const leftLivePosition = LivePosition.fromPosition( firstRange.start );
