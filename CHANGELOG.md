@@ -4,7 +4,7 @@
 
 -   Add latest changes here
 
-## [34.0.0](https://github.com/isaul32/ckeditor5-math/compare/v33.0.0...v34.0.0) (current)
+## [34.0.0](https://github.com/isaul32/ckeditor5-math/compare/v33.0.0...v34.0.0)
 
 -   Update dependencies for CKEditor 34.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v34.0.0/CHANGELOG.md))
@@ -13,55 +13,55 @@
     aren't due to sub-dependencies shifting across time and development
     conditions.
 
-## [33.0.0](https://github.com/isaul32/ckeditor5-math/compare/v32.0.0...v33.0.0) (current)
+## [33.0.0](https://github.com/isaul32/ckeditor5-math/compare/v32.0.0...v33.0.0)
 
 -   Update dependencies for CKEditor 33.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v33.0.0/CHANGELOG.md))
 
-## [32.0.0](https://github.com/isaul32/ckeditor5-math/compare/v31.1.0...v32.0.0) (current)
+## [32.0.0](https://github.com/isaul32/ckeditor5-math/compare/v31.1.0...v32.0.0)
 
 -   Update dependencies for CKEditor 32.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v32.0.0/CHANGELOG.md))
 -   Update webpack, postcss-loader, mini-css-extract-plugin, minimum node version (12 to 14)
     per above.
 
-## [31.1.0](https://github.com/isaul32/ckeditor5-math/compare/v31.0.0...v31.1.0) (current)
+## [31.1.0](https://github.com/isaul32/ckeditor5-math/compare/v31.0.0...v31.1.0)
 
 -   Update dependencies for CKEditor 31.1.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v31.1.0/CHANGELOG.md))
 
-## [31.0.0](https://github.com/isaul32/ckeditor5-math/compare/v30.0.0...v31.0.0) (current)
+## [31.0.0](https://github.com/isaul32/ckeditor5-math/compare/v30.0.0...v31.0.0)
 
 -   Update dependencies for CKEditor 31.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v31.0.0/CHANGELOG.md))
 
-## [30.0.0](https://github.com/isaul32/ckeditor5-math/compare/v29.2.0...v30.0.0) (current)
+## [30.0.0](https://github.com/isaul32/ckeditor5-math/compare/v29.2.0...v30.0.0)
 
 -   Update dependencies for CKEditor 30.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v30.0.0/CHANGELOG.md))
 
-## [29.2.0](https://github.com/isaul32/ckeditor5-math/compare/v29.1.0...v29.2.0) (current)
+## [29.2.0](https://github.com/isaul32/ckeditor5-math/compare/v29.1.0...v29.2.0)
 
 -   Update dependencies for CKEditor 29.2.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v29.2.0/CHANGELOG.md))
 -   Fix `yarn start`'s missing classic editor dependency
 
-## [29.1.0](https://github.com/isaul32/ckeditor5-math/compare/v29.0.0...v29.1.0) (current)
+## [29.1.0](https://github.com/isaul32/ckeditor5-math/compare/v29.0.0...v29.1.0)
 
 -   Update dependencies for CKEditor 29.1.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v29.1.0/CHANGELOG.md))
 
-## [29.0.0](https://github.com/isaul32/ckeditor5-math/compare/v28.0.0...v29.0.0) (current)
+## [29.0.0](https://github.com/isaul32/ckeditor5-math/compare/v28.0.0...v29.0.0)
 
 -   Update dependencies for CKEditor 29.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v29.0.0/CHANGELOG.md))
 
-## [28.0.0](https://github.com/isaul32/ckeditor5-math/compare/v27.1.4...v28.0.0) (current)
+## [28.0.0](https://github.com/isaul32/ckeditor5-math/compare/v27.1.4...v28.0.0)
 
 -   Update dependencies for CKEditor 28.0.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/releases/tag/v28.0.0))
 
-## [27.1.4](https://github.com/isaul32/ckeditor5-math/compare/v27.1.3...v27.1.4) (current)
+## [27.1.4](https://github.com/isaul32/ckeditor5-math/compare/v27.1.3...v27.1.4)
 
 -   #45: docs(README,CHANGELOG): Format with prettier 2.3.0
 -   #42: use `SwitchButton` to toggle "display mode". Thanks you @Jules-Bertholet!
