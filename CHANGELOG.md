@@ -2,6 +2,13 @@
 
 ## Current
 
+-   Add latest changes here
+
+## [34.0.0](https://github.com/isaul32/ckeditor5-math/compare/v33.0.0...v34.0.0) (current)
+
+-   Update dependencies for CKEditor 34.0.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v34.0.0/CHANGELOG.md))
+
 -   Begin keeping a yarn lockfile. This will make it easier to track changes
     aren't due to sub-dependencies shifting across time and development
     conditions.

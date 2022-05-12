@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-math",
-  "version": "33.0.0",
+  "version": "34.0.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
@@ -8,42 +8,43 @@
     "ckeditor 5",
     "ckeditor5-feature",
     "ckeditor5-plugin",
-    "ckeditor5-math"
+    "ckeditor5-math",
+	"katex"
   ],
   "resolutions": {
-    "postcss-loader": "^4.0.0",
+    "postcss-loader": "^4.3.0",
     "mini-css-extract-plugin": "2.4.2"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^33.0.0",
-    "@ckeditor/ckeditor5-core": "^33.0.0",
-    "@ckeditor/ckeditor5-engine": "^33.0.0",
+    "@ckeditor/ckeditor5-clipboard": "^34.0.0",
+    "@ckeditor/ckeditor5-core": "^34.0.0",
+    "@ckeditor/ckeditor5-engine": "^34.0.0",
     "@ckeditor/ckeditor5-inspector": "^3.0.0",
-    "@ckeditor/ckeditor5-ui": "^33.0.0",
-    "@ckeditor/ckeditor5-undo": "^33.0.0",
-    "@ckeditor/ckeditor5-utils": "^33.0.0",
-    "@ckeditor/ckeditor5-widget": "^33.0.0"
+    "@ckeditor/ckeditor5-ui": "^34.0.0",
+    "@ckeditor/ckeditor5-undo": "^34.0.0",
+    "@ckeditor/ckeditor5-utils": "^34.0.0",
+    "@ckeditor/ckeditor5-widget": "^34.0.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^33.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "^34.0.0",
     "@ckeditor/ckeditor5-dev-tests": "^30.0.0",
-    "@ckeditor/ckeditor5-editor-classic": "^33.0.0",
-    "@ckeditor/ckeditor5-editor-inline": "^33.0.0",
-    "@ckeditor/ckeditor5-essentials": "^33.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^33.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^33.0.0",
-    "css-loader": "^5.2.4",
+    "@ckeditor/ckeditor5-editor-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-editor-inline": "^34.0.0",
+    "@ckeditor/ckeditor5-essentials": "^34.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^34.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
+    "css-loader": "^5.2.7",
     "eslint": "^7.1.0",
     "eslint-config-ckeditor5": "^3.1.1",
     "html-webpack-plugin": "^5.3.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "mini-css-extract-plugin": "^2.4.2",
-    "raw-loader": "^4.0.2",
+    "raw-loader": "^4.0.1",
     "stylelint": "^13.5.0",
     "stylelint-config-ckeditor5": "^2.0.1",
     "webpack": "^5.58.1",
-    "webpack-cli": "^4.6.0",
+    "webpack-cli": "^4.9.0",
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
