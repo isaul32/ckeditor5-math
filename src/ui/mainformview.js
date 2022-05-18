@@ -19,11 +19,12 @@ import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
 import { extractDelimiters, hasDelimiters } from '../utils';
 
 import MathView from './mathview';
+import MathLiveView from './mathliveview';
 
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor( locale, engine, lazyLoad, mathLiveEnabled, previewEnabled, previewUid, previewClassName, popupClassName ) {
 		super( locale );
 
 		const t = locale.t;
@@ -44,9 +45,13 @@ export default class MainFormView extends View {
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
+		this.mathLiveEnabled = mathLiveEnabled;
 		this.previewEnabled = previewEnabled;
 
-		let children = [];
+		const children = [
+			this.mathInputView,
+			this.displayButtonView
+		];
 		if ( this.previewEnabled ) {
 			// Preview label
 			this.previewLabel = new LabelView( locale );
@@ -56,17 +61,19 @@ export default class MainFormView extends View {
 			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
-			children = [
-				this.mathInputView,
-				this.displayButtonView,
-				this.previewLabel,
-				this.mathView
-			];
-		} else {
-			children = [
-				this.mathInputView,
-				this.displayButtonView
-			];
+			children.push( this.previewLabel, this.mathView );
+		}
+
+		if ( this.mathLiveEnabled ) {
+			this.mathLiveView = new MathLiveView( locale );
+			this.mathLiveView.on( 'input', event => {
+				this.mathInputView.inputView.value = event.source.value;
+				this.mathInputView.inputView.fire( event );
+			} );
+			this.mathInputView.on( 'render', () => {
+				this.mathLiveView.value = this.mathInputView.inputView.value || '';
+			} );
+			children.unshift( this.mathLiveView );
 		}
 
 		// Add UI elements to template
@@ -112,6 +119,9 @@ export default class MainFormView extends View {
 			this.saveButtonView,
 			this.cancelButtonView
 		];
+		if ( this.mathLiveEnabled ) {
+			childViews.unshift( this.mathLiveView );
+		}
 
 		childViews.forEach( v => {
 			this._focusables.add( v );
@@ -181,6 +191,9 @@ export default class MainFormView extends View {
 				if ( this.previewEnabled ) {
 					// Update preview view
 					this.mathView.value = equationInput;
+				}
+				if ( this.mathLiveEnabled ) {
+					this.mathLiveView.value = equationInput;
 				}
 
 				this.saveButtonView.isEnabled = !!equationInput;
