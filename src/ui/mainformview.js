@@ -70,9 +70,6 @@ export default class MainFormView extends View {
 				this.mathInputView.inputView.value = event.source.value;
 				this.mathInputView.inputView.fire( event );
 			} );
-			this.mathInputView.on( 'render', () => {
-				this.mathLiveView.value = this.mathInputView.inputView.value || '';
-			} );
 			children.unshift( this.mathLiveView );
 		}
 
@@ -119,9 +116,6 @@ export default class MainFormView extends View {
 			this.saveButtonView,
 			this.cancelButtonView
 		];
-		if ( this.mathLiveEnabled ) {
-			childViews.unshift( this.mathLiveView );
-		}
 
 		childViews.forEach( v => {
 			this._focusables.add( v );
@@ -144,6 +138,9 @@ export default class MainFormView extends View {
 		this.mathInputView.inputView.element.value = equation;
 		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
+		}
+		if ( this.mathLiveEnabled ) {
+			this.mathLiveView.value = equation;
 		}
 	}
 
