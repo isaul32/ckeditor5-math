@@ -39,13 +39,13 @@ export default class MathLiveView extends InputView {
 
 	_getAttributeOptions( options ) {
 		return Object.fromEntries(
-			options.entries()
+			Object.entries( options )
 				.filter( ( { 0: key } ) => attributeOptions[ key ] !== undefined )
 				.map( ( { 0: key, 1: value } ) => ( { 0: attributeOptions[ key ], 1: value } ) )
 		);
 	}
 
 	_getElementOptions( options ) {
-		return Object.fromEntries( options.entries().filter( ( { 0: key } ) => attributeOptions[ key ] === undefined ) );
+		return Object.fromEntries( Object.entries( options ).filter( ( { 0: key } ) => attributeOptions[ key ] === undefined ) );
 	}
 }
