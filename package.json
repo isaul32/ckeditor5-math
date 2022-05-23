@@ -23,8 +23,7 @@
     "@ckeditor/ckeditor5-ui": "^34.0.0",
     "@ckeditor/ckeditor5-undo": "^34.0.0",
     "@ckeditor/ckeditor5-utils": "^34.0.0",
-    "@ckeditor/ckeditor5-widget": "^34.0.0",
-    "mathlive": "^0.72.3"
+    "@ckeditor/ckeditor5-widget": "^34.0.0"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^34.0.0",

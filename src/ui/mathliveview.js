@@ -1,5 +1,4 @@
 import InputView from '@ckeditor/ckeditor5-ui/src/view';
-import 'mathlive';
 import { Template } from '@ckeditor/ckeditor5-ui';
 
 const attributeOptions = {
