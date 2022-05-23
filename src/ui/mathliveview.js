@@ -1,20 +1,17 @@
 import InputView from '@ckeditor/ckeditor5-ui/src/view';
 import { Template } from '@ckeditor/ckeditor5-ui';
 
-const attributeOptions = {
-	fontsDirectory: 'fonts-directory'
-};
-
 export default class MathLiveView extends InputView {
-	constructor( locale, options = {} ) {
+	constructor( locale, { options, attributes, style } ) {
 		super( locale );
-		this._elementOptions = this._getElementOptions( options );
+		this._options = options;
 		const bind = Template.bind( this, this );
 		this.set( 'value', '' );
 		this.setTemplate( {
 			tag: 'math-field',
 			attributes: {
-				...this._getAttributeOptions( options )
+				...attributes,
+				style
 			},
 			on: {
 				input: bind.to( event => {
@@ -33,18 +30,6 @@ export default class MathLiveView extends InputView {
 
 	render() {
 		super.render();
-		this.element.setOptions( this._elementOptions );
-	}
-
-	_getAttributeOptions( options ) {
-		return Object.fromEntries(
-			Object.entries( options )
-				.filter( ( { 0: key } ) => attributeOptions[ key ] !== undefined )
-				.map( ( { 0: key, 1: value } ) => ( { 0: attributeOptions[ key ], 1: value } ) )
-		);
-	}
-
-	_getElementOptions( options ) {
-		return Object.fromEntries( Object.entries( options ).filter( ( { 0: key } ) => attributeOptions[ key ] === undefined ) );
+		this.element.setOptions( this._options );
 	}
 }

@@ -31,9 +31,14 @@ export default class MathEditing extends Plugin {
 			outputType: 'script',
 			forceOutputType: false,
 			enableMathLive: false,
-			mathLiveOptions: {
-				fontsDirectory: 'fonts',
-				virtualKeyboardMode: 'manual'
+			mathLiveSettings: {
+				attributes: {
+					'fonts-directory': 'fonts'
+				},
+				style: {},
+				options: {
+					virtualKeyboardMode: 'manual'
+				}
 			},
 			enablePreview: true,
 			previewClassName: [],
