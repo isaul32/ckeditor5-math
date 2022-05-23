@@ -29,7 +29,7 @@ export default class MainFormView extends View {
 		engine,
 		lazyLoad,
 		mathLiveEnabled,
-		mathLiveOptions,
+		mathLiveSettings,
 		previewEnabled,
 		previewUid,
 		previewClassName,
@@ -75,7 +75,7 @@ export default class MainFormView extends View {
 		}
 
 		if ( this.mathLiveEnabled ) {
-			this.mathLiveView = new MathLiveView( locale, mathLiveOptions );
+			this.mathLiveView = new MathLiveView( locale, mathLiveSettings );
 			this.mathLiveView.on( 'input', event => {
 				this.mathInputView.inputView.value = event.source.value;
 				this.mathInputView.inputView.fire( event );
