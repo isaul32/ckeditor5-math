@@ -24,7 +24,17 @@ import MathLiveView from './mathliveview';
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, lazyLoad, mathLiveEnabled, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor(
+		locale,
+		engine,
+		lazyLoad,
+		mathLiveEnabled,
+		mathLiveOptions,
+		previewEnabled,
+		previewUid,
+		previewClassName,
+		popupClassName
+	) {
 		super( locale );
 
 		const t = locale.t;
@@ -65,7 +75,7 @@ export default class MainFormView extends View {
 		}
 
 		if ( this.mathLiveEnabled ) {
-			this.mathLiveView = new MathLiveView( locale );
+			this.mathLiveView = new MathLiveView( locale, mathLiveOptions );
 			this.mathLiveView.on( 'input', event => {
 				this.mathInputView.inputView.value = event.source.value;
 				this.mathInputView.inputView.fire( event );
