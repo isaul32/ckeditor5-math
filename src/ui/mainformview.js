@@ -28,7 +28,6 @@ export default class MainFormView extends View {
 		locale,
 		engine,
 		lazyLoad,
-		mathLiveEnabled,
 		mathLiveSettings,
 		previewEnabled,
 		previewUid,
@@ -55,7 +54,7 @@ export default class MainFormView extends View {
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
-		this.mathLiveEnabled = mathLiveEnabled;
+		this.mathLiveEnabled = mathLiveSettings.enabled;
 		this.previewEnabled = previewEnabled;
 
 		const children = [
@@ -76,10 +75,7 @@ export default class MainFormView extends View {
 
 		if ( this.mathLiveEnabled ) {
 			this.mathLiveView = new MathLiveView( locale, mathLiveSettings );
-			this.mathLiveView.on( 'input', event => {
-				this.mathInputView.inputView.value = event.source.value;
-				this.mathInputView.inputView.fire( event );
-			} );
+			this.mathLiveView.on( 'input', event => ( this.equation = event.source.value ) );
 			children.unshift( this.mathLiveView );
 		}
 

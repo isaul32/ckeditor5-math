@@ -1,11 +1,10 @@
 import InputView from '@ckeditor/ckeditor5-ui/src/view';
-import { Template } from '@ckeditor/ckeditor5-ui';
 
 export default class MathLiveView extends InputView {
 	constructor( locale, { options, attributes, style } ) {
 		super( locale );
 		this._options = options;
-		const bind = Template.bind( this, this );
+		const bind = this.bindTemplate;
 		this.set( 'value', '' );
 		this.setTemplate( {
 			tag: 'math-field',
@@ -14,13 +13,14 @@ export default class MathLiveView extends InputView {
 				style
 			},
 			on: {
-				input: bind.to( event => {
-					this.value = this.element.value;
-					this.fire( 'input', event );
-				} )
+				input: [
+					bind.to( () => ( this.value = this.element.value ) ),
+					bind.to( 'input' )
+				]
 			}
 		} );
 		this.on( 'input', event => {
+			// This handler should stop events loop
 			if ( event.path.indexOf( this ) !== event.path.lastIndexOf( this ) ) {
 				event.stop();
 			}
@@ -30,6 +30,8 @@ export default class MathLiveView extends InputView {
 
 	render() {
 		super.render();
+		// this.element is a mathlive's mathelement instance at this point
+		// https://cortexjs.io/mathlive/guides/interacting/
 		this.element.setOptions( this._options );
 	}
 }

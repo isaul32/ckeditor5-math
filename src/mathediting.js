@@ -30,14 +30,14 @@ export default class MathEditing extends Plugin {
 			engine: 'mathjax',
 			outputType: 'script',
 			forceOutputType: false,
-			enableMathLive: false,
 			mathLiveSettings: {
+				enabled: false,
 				attributes: {
-					'fonts-directory': 'fonts'
+					'fonts-directory': 'fonts' // https://cortexjs.io/docs/mathlive/?q=fontsDirectory
 				},
 				style: {},
 				options: {
-					virtualKeyboardMode: 'manual'
+					virtualKeyboardMode: 'manual' // https://cortexjs.io/docs/mathlive/?q=virtualKeyboardMode
 				}
 			},
 			enablePreview: true,
