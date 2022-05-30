@@ -10,7 +10,7 @@ import Math from "../src/math";
 ClassicEditor.create(document.querySelector("#editor"), {
 	plugins: [Essentials, Paragraph, Bold, Italic, Math],
 	toolbar: ["bold", "italic", "math"],
-	math: { engine: "katex", enableMathLive: true },
+	math: { engine: "katex", mathLiveSettings: { enabled: true } },
 })
 	.then((editor) => {
 		console.log("Editor was initialized", editor);
