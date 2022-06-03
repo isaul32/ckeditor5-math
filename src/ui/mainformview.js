@@ -19,11 +19,21 @@ import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
 import { extractDelimiters, hasDelimiters } from '../utils';
 
 import MathView from './mathview';
+import MathLiveView from './mathliveview';
 
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor(
+		locale,
+		engine,
+		lazyLoad,
+		mathLiveSettings,
+		previewEnabled,
+		previewUid,
+		previewClassName,
+		popupClassName
+	) {
 		super( locale );
 
 		const t = locale.t;
@@ -44,9 +54,13 @@ export default class MainFormView extends View {
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
+		this.mathLiveEnabled = mathLiveSettings.enabled;
 		this.previewEnabled = previewEnabled;
 
-		let children = [];
+		const children = [
+			this.mathInputView,
+			this.displayButtonView
+		];
 		if ( this.previewEnabled ) {
 			// Preview label
 			this.previewLabel = new LabelView( locale );
@@ -56,17 +70,13 @@ export default class MainFormView extends View {
 			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
-			children = [
-				this.mathInputView,
-				this.displayButtonView,
-				this.previewLabel,
-				this.mathView
-			];
-		} else {
-			children = [
-				this.mathInputView,
-				this.displayButtonView
-			];
+			children.push( this.previewLabel, this.mathView );
+		}
+
+		if ( this.mathLiveEnabled ) {
+			this.mathLiveView = new MathLiveView( locale, mathLiveSettings );
+			this.mathLiveView.on( 'input', event => ( this.equation = event.source.value ) );
+			children.unshift( this.mathLiveView );
 		}
 
 		// Add UI elements to template
@@ -135,6 +145,9 @@ export default class MainFormView extends View {
 		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
 		}
+		if ( this.mathLiveEnabled ) {
+			this.mathLiveView.value = equation;
+		}
 	}
 
 	_createKeyAndFocusTrackers() {
@@ -181,6 +194,9 @@ export default class MainFormView extends View {
 				if ( this.previewEnabled ) {
 					// Update preview view
 					this.mathView.value = equationInput;
+				}
+				if ( this.mathLiveEnabled ) {
+					this.mathLiveView.value = equationInput;
 				}
 
 				this.saveButtonView.isEnabled = !!equationInput;

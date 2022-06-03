@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-math",
-  "version": "34.0.0",
+  "version": "34.1.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
@@ -16,23 +16,23 @@
     "mini-css-extract-plugin": "2.4.2"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^34.0.0",
-    "@ckeditor/ckeditor5-core": "^34.0.0",
-    "@ckeditor/ckeditor5-engine": "^34.0.0",
-    "@ckeditor/ckeditor5-inspector": "^3.0.0",
-    "@ckeditor/ckeditor5-ui": "^34.0.0",
-    "@ckeditor/ckeditor5-undo": "^34.0.0",
-    "@ckeditor/ckeditor5-utils": "^34.0.0",
-    "@ckeditor/ckeditor5-widget": "^34.0.0"
+    "@ckeditor/ckeditor5-clipboard": "34.1.0",
+    "@ckeditor/ckeditor5-core": "34.1.0",
+    "@ckeditor/ckeditor5-engine": "34.1.0",
+    "@ckeditor/ckeditor5-inspector": "3.0.0",
+    "@ckeditor/ckeditor5-ui": "34.1.0",
+    "@ckeditor/ckeditor5-undo": "34.1.0",
+    "@ckeditor/ckeditor5-utils": "34.1.0",
+    "@ckeditor/ckeditor5-widget": "34.1.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^34.0.0",
-    "@ckeditor/ckeditor5-dev-tests": "^30.0.0",
-    "@ckeditor/ckeditor5-editor-classic": "^34.0.0",
-    "@ckeditor/ckeditor5-editor-inline": "^34.0.0",
-    "@ckeditor/ckeditor5-essentials": "^34.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^34.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "34.1.0",
+    "@ckeditor/ckeditor5-dev-tests": "30.0.0",
+    "@ckeditor/ckeditor5-editor-classic": "34.1.0",
+    "@ckeditor/ckeditor5-editor-inline": "34.1.0",
+    "@ckeditor/ckeditor5-essentials": "34.1.0",
+    "@ckeditor/ckeditor5-paragraph": "34.1.0",
+    "@ckeditor/ckeditor5-theme-lark": "34.1.0",
     "css-loader": "^5.2.7",
     "eslint": "^7.1.0",
     "eslint-config-ckeditor5": "^3.1.1",
@@ -48,8 +48,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=5.7.1"
+	"node": ">=16.14.2",
+	"npm": ">=8.5.0"
   },
   "author": "Sauli Anto",
   "license": "ISC",

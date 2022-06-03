@@ -213,6 +213,25 @@ InlineEditor.builtinPlugins = [
 
 My solution for this is use rendering element outside of CKEditor DOM and place it to right place by using absolute position. Alternative solution could be using iframe, but then typesetting engine's scripts and styles have to copy to child document.
 
+## Mathlive
+You can enable mathlive virtual keyboard by adding to configuration 
+```
+ClassicEditor.defaultConfig = {
+	// ...
+	math: {
+		// ...
+		mathLiveSettings: {
+		    enabled: true,
+        }
+    }
+}
+```
+mathLiveSettings accepts following properties: 
+ - attributes: are passed as math-live element attributes. You can put your own styles using `style` key: https://cortexjs.io/mathlive/guides/customizing/
+ - options: passed to setOptions method of math-live element
+
+Read more on https://cortexjs.io/mathlive/
+
 ## Development
 
 Contributions, improvements and bug fixes are welcome. To aid in this, try out
