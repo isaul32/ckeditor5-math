@@ -226,9 +226,8 @@ ClassicEditor.defaultConfig = {
     }
 }
 ```
-mathLiveSettings accepts 3 object: 
- - attributes: are passed as math-live element attributes
- - style: described here https://cortexjs.io/mathlive/guides/customizing/
+mathLiveSettings accepts following properties: 
+ - attributes: are passed as math-live element attributes. You can put your own styles using `style` key: https://cortexjs.io/mathlive/guides/customizing/
  - options: passed to setOptions method of math-live element
 
 Read more on https://cortexjs.io/mathlive/
