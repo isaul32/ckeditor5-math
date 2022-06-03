@@ -221,9 +221,9 @@ ClassicEditor.defaultConfig = {
 	math: {
 		// ...
 		mathLiveSettings: {
-		    enabled: true,
-        }
-    }
+			enabled: true,
+		}
+	}
 }
 ```
 mathLiveSettings accepts following properties: 
