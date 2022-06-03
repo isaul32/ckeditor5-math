@@ -1,17 +1,14 @@
 import InputView from '@ckeditor/ckeditor5-ui/src/view';
 
 export default class MathLiveView extends InputView {
-	constructor( locale, { options, attributes, style } ) {
+	constructor( locale, { options, attributes } ) {
 		super( locale );
 		this._options = options;
 		const bind = this.bindTemplate;
 		this.set( 'value', '' );
 		this.setTemplate( {
 			tag: 'math-field',
-			attributes: {
-				...attributes,
-				style
-			},
+			attributes,
 			on: {
 				input: [
 					bind.to( () => ( this.value = this.element.value ) ),
