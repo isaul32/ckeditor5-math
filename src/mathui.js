@@ -76,7 +76,7 @@ export default class MathUI extends Plugin {
 			mathConfig.engine,
 			mathConfig.lazyLoad,
 			mathConfig.mathLiveSettings,
-			mathConfig.enablePreview,
+			!mathConfig.mathLiveSettings.enabled && mathConfig.enablePreview,
 			this._previewUid,
 			mathConfig.previewClassName,
 			mathConfig.popupClassName
