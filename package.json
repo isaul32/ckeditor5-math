@@ -9,7 +9,7 @@
     "ckeditor5-feature",
     "ckeditor5-plugin",
     "ckeditor5-math",
-	"katex"
+    "katex"
   ],
   "resolutions": {
     "postcss-loader": "^4.3.0",
@@ -48,8 +48,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-	"node": ">=16.14.2",
-	"npm": ">=8.5.0"
+    "node": ">=16.14.2",
+    "npm": ">=8.5.0"
   },
   "author": "Sauli Anto",
   "license": "ISC",

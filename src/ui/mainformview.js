@@ -75,7 +75,10 @@ export default class MainFormView extends View {
 
 		if ( this.mathLiveEnabled ) {
 			this.mathLiveView = new MathLiveView( locale, mathLiveSettings );
-			this.mathLiveView.on( 'input', event => ( this.equation = event.source.value ) );
+			this.mathLiveView.on( 'input', event => {
+				this.equation = event.source.value;
+				this.saveButtonView.isEnabled = !!this.equation;
+			} );
 			children.unshift( this.mathLiveView );
 		}
 
