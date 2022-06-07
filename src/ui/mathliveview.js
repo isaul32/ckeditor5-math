@@ -11,7 +11,7 @@ export default class MathLiveView extends InputView {
 			attributes,
 			on: {
 				input: [
-					bind.to( () => ( this.value = this.element.value ) ),
+					bind.to( () => ( this.value = this.element.getValue( 'latex-expanded' ) ) ),
 					bind.to( 'input' )
 				]
 			}
@@ -22,7 +22,14 @@ export default class MathLiveView extends InputView {
 				event.stop();
 			}
 		}, { priority: 'high' } );
-		this.on( 'change:value', () => this.element.setValue( this.value, { suppressChangeNotifications: true } ) );
+		this.on( 'change:value', () => {
+			if ( this.value === this.element.getValue( 'latex-expanded' ) ) {
+				// Don't update mathlive again - probably text was changed by mathlive
+				return;
+			}
+
+			this.element.setValue( this.value, { format: 'latex', suppressChangeNotifications: true } );
+		} );
 	}
 
 	render() {
