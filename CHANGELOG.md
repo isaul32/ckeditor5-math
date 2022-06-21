@@ -8,6 +8,9 @@
 
 -   Update dependencies for CKEditor 34.1.0 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v34.1.0/CHANGELOG.md))
+-   Changelog:
+    -   Begin adding dates to releases
+    -   Remove _(current)_, which was being applied to old releases incorrectly up to last release
 
 ## [34.0.0](https://github.com/isaul32/ckeditor5-math/compare/v33.0.0...v34.0.0) (2022-05-12)
 
