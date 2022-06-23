@@ -42,14 +42,18 @@ export default class MathEditing extends Plugin {
 			allowWhere: '$text',
 			isInline: true,
 			isObject: true,
-			allowAttributes: [ 'equation', 'type', 'display' ]
+			allowAttributes: [
+				'equation', 'type', 'display', 'fontBackgroundColor', 'fontColor' //allow fontBackgroundColor and fontcolor
+			]
 		} );
 
 		schema.register( 'mathtex-display', {
 			allowWhere: '$block',
 			isInline: false,
 			isObject: true,
-			allowAttributes: [ 'equation', 'type', 'display' ]
+			allowAttributes: [
+				'equation', 'type', 'display', 'fontBackgroundColor', 'fontColor' //allow fontBackgroundColor and fontcolor
+			]
 		} );
 	}
 
