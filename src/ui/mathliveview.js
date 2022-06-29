@@ -13,6 +13,9 @@ export default class MathLiveView extends InputView {
 				input: [
 					bind.to( () => ( this.value = this.element.getValue( 'latex-expanded' ) ) ),
 					bind.to( 'input' )
+				],
+				mount: [
+					bind.to( () => this.element.setOptions( this._options ) )
 				]
 			}
 		} );
