@@ -78,7 +78,8 @@ export async function renderEquation(
 		selectRenderMode( element, preview, previewUid, previewClassName, el => {
 			katex.render( equation, el, {
 				throwOnError: false,
-				displayMode: display
+				displayMode: display,
+				strict: "ignore"
 			} );
 			if ( preview ) {
 				moveAndScaleElement( element, el );
