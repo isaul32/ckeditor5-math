@@ -96,6 +96,10 @@ export default class MathUI extends Plugin {
 			this._closeFormView();
 		} );
 
+		this.listenTo( formView, 'mathlive:virtualKeyboard:toggle', ( event, state ) => {
+			editor.fire( 'mathlive:virtualKeyboard:toggle', state );
+		} );
+
 		// Listen to cancel button click
 		this.listenTo( formView, 'cancel', () => {
 			this._closeFormView();

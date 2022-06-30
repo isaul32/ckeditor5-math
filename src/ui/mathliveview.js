@@ -16,6 +16,11 @@ export default class MathLiveView extends InputView {
 				],
 				mount: [
 					bind.to( () => this.element.setOptions( this._options ) )
+				],
+				'virtual-keyboard-toggle': [
+					bind.to( () => {
+						this.fire( 'mathlive:virtualKeyboard:toggle', this.element.virtualKeyboardState );
+					} )
 				]
 			}
 		} );
@@ -33,12 +38,5 @@ export default class MathLiveView extends InputView {
 
 			this.element.setValue( this.value, { format: 'latex', suppressChangeNotifications: true } );
 		} );
-	}
-
-	render() {
-		super.render();
-		// this.element is a mathlive's mathelement instance at this point
-		// https://cortexjs.io/mathlive/guides/interacting/
-		this.element.setOptions( this._options );
 	}
 }

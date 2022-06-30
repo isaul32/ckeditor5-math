@@ -79,6 +79,9 @@ export default class MainFormView extends View {
 				this.equation = event.source.value;
 				this.saveButtonView.isEnabled = !!this.equation;
 			} );
+			this.mathLiveView.on( 'mathlive:virtualKeyboard:toggle', ( event, state ) => {
+				this.fire( 'mathlive:virtualKeyboard:toggle', state );
+			} );
 			children.unshift( this.mathLiveView );
 		}
 
