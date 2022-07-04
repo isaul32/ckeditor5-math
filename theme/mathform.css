@@ -1,7 +1,3 @@
-.ck.ck-rounded-corners > .ck-balloon-panel {
-	border-radius: 4px;
-}
-
 .ck.ck-math-form {
 	display: flex;
 	align-items: flex-start;
@@ -31,10 +27,8 @@
 	& .ck-math-view {
 		padding: 16px;
 
-		& .ck-labeled-input {
-			& .ck-input {
-				width: 100%;
-			}
+		& .ck-input {
+			width: 100%;
 		}
 	}
 }
