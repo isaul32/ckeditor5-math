@@ -46,3 +46,7 @@
 .ck.ck-toolbar-container {
 	z-index: calc(var(--ck-z-modal) + 2);
 }
+
+.ck.ck-balloon-panel.ck-balloon-panel_visible {
+	z-index: 100;
+}
