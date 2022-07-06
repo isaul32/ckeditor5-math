@@ -1,8 +1,15 @@
+.ck-math-view {
+	min-width: 0;
+	width: auto;
+}
+
 .ck.ck-math-form {
 	display: flex;
 	align-items: flex-start;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	min-width: 0;
+	width: auto;
 
 	@media screen and (max-width: 600px) {
 		flex-wrap: wrap;
