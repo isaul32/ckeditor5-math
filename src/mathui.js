@@ -15,6 +15,7 @@ import MathEditing from './mathediting';
 import mathIcon from '../theme/icons/math.svg';
 
 const mathKeystroke = 'Ctrl+M';
+const MARGIN_FROM_THE_RIGHT = 10;
 
 export default class MathUI extends Plugin {
 	static get requires() {
@@ -96,6 +97,10 @@ export default class MathUI extends Plugin {
 			this._closeFormView();
 		} );
 
+		this.listenTo( formView, 'mathlive:virtualKeyboard:toggle', ( event, state ) => {
+			editor.fire( 'mathlive:virtualKeyboard:toggle', state );
+		} );
+
 		// Listen to cancel button click
 		this.listenTo( formView, 'cancel', () => {
 			this._closeFormView();
@@ -136,6 +141,11 @@ export default class MathUI extends Plugin {
 
 		this.formView.equation = mathCommand.value || '';
 		this.formView.displayButtonView.isOn = mathCommand.display || false;
+
+		if ( this._balloon && this._balloon.view && this._balloon.view.element ) {
+			const maxWidth = Math.floor( global.document.body.clientWidth - this._balloon.view.left - MARGIN_FROM_THE_RIGHT );
+			this._balloon.view.element.style.maxWidth = `${ maxWidth }px`;
+		}
 	}
 
 	_hideUI() {
