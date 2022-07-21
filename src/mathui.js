@@ -14,7 +14,7 @@ import MathEditing from './mathediting';
 
 import mathIcon from '../theme/icons/math.svg';
 
-const mathKeystroke = 'Ctrl+M';
+const mathKeystroke = 'Shift+3';
 
 export default class MathUI extends Plugin {
 	static get requires() {
