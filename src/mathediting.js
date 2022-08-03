@@ -32,7 +32,8 @@ export default class MathEditing extends Plugin {
 			forceOutputType: false,
 			enablePreview: true,
 			previewClassName: [],
-			popupClassName: []
+			popupClassName: [],
+			katexRenderOptions: {}
 		} );
 	}
 
@@ -168,7 +169,8 @@ export default class MathEditing extends Plugin {
 			const uiElement = writer.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 
-				renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false );
+				renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false, mathConfig.previewClassName,
+					null, mathConfig.katexRenderOptions );
 
 				return domElement;
 			} );
