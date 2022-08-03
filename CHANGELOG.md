@@ -3,6 +3,9 @@
 ## Current
 
 -   Add latest changes here
+
+## [34.1.1](https://github.com/isaul32/ckeditor5-math/compare/v34.1.0...v34.1.1) (2022-08-03)
+
 -   New configuration setting, `katexRenderOptions` (optional) - for KaTeX engines. Accepts object of `katex.render()` / `katex.renderToString()` [options](https://katex.org/docs/options.html):
 
     ```js
