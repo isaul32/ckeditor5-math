@@ -78,7 +78,8 @@ export default class MathUI extends Plugin {
 			mathConfig.enablePreview,
 			this._previewUid,
 			mathConfig.previewClassName,
-			mathConfig.popupClassName
+			mathConfig.popupClassName,
+			mathConfig.katexRenderOptions
 		);
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );

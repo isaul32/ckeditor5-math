@@ -23,7 +23,7 @@ import MathView from './mathview';
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName, katexRenderOptions ) {
 		super( locale );
 
 		const t = locale.t;
@@ -53,7 +53,7 @@ export default class MainFormView extends View {
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
-			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName );
+			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName, katexRenderOptions );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
 			children = [

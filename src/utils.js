@@ -44,7 +44,8 @@ export function extractDelimiters( equation ) {
 }
 
 export async function renderEquation(
-	equation, element, engine = 'katex', lazyLoad, display = false, preview = false, previewUid, previewClassName = []
+	equation, element, engine = 'katex', lazyLoad, display = false, preview = false, previewUid, previewClassName = [],
+	katexRenderOptions = {}
 ) {
 	if ( engine === 'mathjax' && typeof MathJax !== 'undefined' ) {
 		if ( isMathJaxVersion3( MathJax.version ) ) {
@@ -77,7 +78,8 @@ export async function renderEquation(
 		selectRenderMode( element, preview, previewUid, previewClassName, el => {
 			katex.render( equation, el, {
 				throwOnError: false,
-				displayMode: display
+				displayMode: display,
+				...katexRenderOptions
 			} );
 			if ( preview ) {
 				moveAndScaleElement( element, el );
@@ -94,7 +96,7 @@ export async function renderEquation(
 				}
 				element.innerHTML = equation;
 				await global.window.CKEDITOR_MATH_LAZY_LOAD;
-				renderEquation( equation, element, engine, undefined, display, preview, previewUid, previewClassName );
+				renderEquation( equation, element, engine, undefined, display, preview, previewUid, previewClassName, katexRenderOptions );
 			}
 			catch ( err ) {
 				element.innerHTML = equation;
