@@ -3,6 +3,24 @@
 ## Current
 
 -   Add latest changes here
+-   New configuration setting, `katexRenderOptions` (optional) - for KaTeX engines. Accepts object of `katex.render()` / `katex.renderToString()` [options](https://katex.org/docs/options.html):
+
+    ```js
+    InlineEditor.defaultConfig = {
+    	// ...
+    	math: {
+    		engine: 'katex'
+    		katexRenderOptions: {
+    			macros: {
+    				"\\neq": "\\mathrel{\\char`≠}",
+    			},
+    		},
+    	}
+    }
+    ```
+
+    via PR [#64](https://github.com/isaul32/ckeditor5-math/pull/64) by [Tony
+    Narlock](https://www.git-pull.com).
 
 ## [34.1.0](https://github.com/isaul32/ckeditor5-math/compare/v34.0.0...v34.1.0) (2022-06-21)
 
