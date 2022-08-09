@@ -98,6 +98,7 @@ export default class MathEditing extends Plugin {
 				}
 			} )
 			// CKEditor 4 way (e.g. <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>)
+			// our (studyly) way
 			.elementToElement( {
 				view: {
 					name: 'span',
@@ -109,6 +110,33 @@ export default class MathEditing extends Plugin {
 					const params = Object.assign( extractDelimiters( equation ), {
 						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
 					} );
+
+					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
+				}
+			} )
+			// upcast element that is created from editingDowncast. this element needs to be upcasted, because
+			// sometimes it happens that the changed HTML in the view is upcasted in the model - and the other upcast (CKeditor4 way)
+			// only is used when converting from the editor.setData('') command (the original HTML from backend)
+			// so we changed that the original equation is preserved in the element in the view and insert it again in the model
+			// see https://github.com/ckeditor/ckeditor5/issues/7358
+			.elementToElement( {
+				view: {
+					name: 'span',
+					classes: [ 'ck-math-tex', 'ck-math-tex-inline', 'ck-widget' ],
+					key: 'style',
+					value: /[\s\S]+/,
+					equation: /[\s\S]+/
+				},
+				model: ( viewElement, { writer } ) => {
+					console.log('upcastEditing new lele');
+					console.log(viewElement);
+					document.aa = viewElement;
+					const equation = viewElement.getAttribute('equation');
+
+					const params = Object.assign( extractDelimiters( equation ), {
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
+					} );
+					console.log(params);
 
 					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
 				}
@@ -166,7 +194,8 @@ export default class MathEditing extends Plugin {
 
 			const mathtexView = writer.createContainerElement( display ? 'div' : 'span', {
 				style: styles,
-				class: classes
+				class: classes,
+				'equation': equation
 			} );
 
 			const uiElement = writer.createUIElement( 'div', null, function( domDocument ) {
