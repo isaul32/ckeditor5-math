@@ -48,7 +48,7 @@ export default class MathEditing extends Plugin {
 		} );
 
 		schema.register( 'mathtex-display', {
-			allowWhere: '$block',
+			allowWhere: '$text',
 			isInline: false,
 			isObject: true,
 			allowAttributes: [
