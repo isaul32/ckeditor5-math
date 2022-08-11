@@ -24,6 +24,15 @@
 		}
 	}
 }
+.ck.ck-labeled-input {
+	width: 100%;
+}
+.ck.ck-labeled-input input {
+	width: inherit;
+}
+.ck-math-view {
+	max-width: 800px;
+}
 
 .ck-math-tex.ck-placeholder::before {
 	display: none !important;
