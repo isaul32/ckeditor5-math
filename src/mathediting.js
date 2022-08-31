@@ -128,15 +128,11 @@ export default class MathEditing extends Plugin {
 					equation: /[\s\S]+/
 				},
 				model: ( viewElement, { writer } ) => {
-					console.log('upcastEditing new lele');
-					console.log(viewElement);
-					document.aa = viewElement;
 					const equation = viewElement.getAttribute('equation');
 
 					const params = Object.assign( extractDelimiters( equation ), {
 						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
 					} );
-					console.log(params);
 
 					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
 				}

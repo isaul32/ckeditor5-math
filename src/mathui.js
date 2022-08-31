@@ -156,6 +156,7 @@ export default class MathUI extends Plugin {
 	_closeFormView() {
 		const mathCommand = this.editor.commands.get( 'math' );
 		if ( mathCommand.value !== undefined ) {
+			mathCommand.resetMathCommand();
 			this._removeFormView();
 		} else {
 			this._hideUI();
@@ -232,12 +233,12 @@ export default class MathUI extends Plugin {
 		} );
 
 		// Close on click outside of balloon panel element.
-		clickOutsideHandler( {
+/*		clickOutsideHandler( {
 			emitter: this.formView,
 			activator: () => this._isFormInPanel,
 			contextElements: [ this._balloon.view.element ],
 			callback: () => this._hideUI()
-		} );
+		} );*/
 	}
 
 	get _isUIVisible() {
