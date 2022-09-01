@@ -117,6 +117,8 @@ export default class AutoMath extends Plugin {
 				this._positionToInsert.detach();
 				this._positionToInsert = null;
 			} );
+			//don't make mathui appear after clicking after pasting formula into editor
+			mathCommand.resetMathCommand();
 		}, 100 );
 	}
 }
