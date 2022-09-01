@@ -3,6 +3,7 @@ import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/cked
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import MathCommand from './mathcommand';
+import ChangesBeforeFormView from './changesBeforeFormView';
 
 import { renderEquation, extractDelimiters } from './utils';
 
@@ -18,6 +19,8 @@ export default class MathEditing extends Plugin {
 	init() {
 		const editor = this.editor;
 		editor.commands.add( 'math', new MathCommand( editor ) );
+
+		(new ChangesBeforeFormView( editor )).init();
 
 		this._defineSchema();
 		this._defineConverters();

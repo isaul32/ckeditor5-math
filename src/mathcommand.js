@@ -37,6 +37,7 @@ export default class MathCommand extends Command {
 				const type = forceOutputType ? outputType : typeAttr || outputType;
 
 				mathtex = writer.createElement( display ? 'mathtex-display' : 'mathtex-inline', { equation, type, display } );
+				//this.rangeLastSelectedFormula = model.createSelection( this.lastSelectedFormulaSelection );
 				model.insertContent( mathtex , this.rangeLastSelectedFormula );
 				this.resetMathCommand();
 			} else {
