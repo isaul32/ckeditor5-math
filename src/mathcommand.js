@@ -58,6 +58,16 @@ export default class MathCommand extends Command {
 		this.display =  null;
 	}
 
+	enableChangesBeforeFormView() {
+		this.editor.model.document.on( 'change:data', ( evt, batch ) => {
+			if ( batch.isUndo || !batch.isLocal /*|| !plugin.isEnabled*/ ) {
+				return;
+			}
+
+			this.rangeLastSelectedFormula = this.editor.model.createSelection( this.lastSelectedElement, 'on' );
+		} );
+	}
+
 	refresh() {
 		const model = this.editor.model;
 		const selection = model.document.selection;
