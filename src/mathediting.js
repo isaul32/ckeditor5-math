@@ -42,7 +42,8 @@ export default class MathEditing extends Plugin {
 			},
 			enablePreview: true,
 			previewClassName: [],
-			popupClassName: []
+			popupClassName: [],
+			textareaInput: false
 		} );
 	}
 
