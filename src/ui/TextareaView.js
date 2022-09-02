@@ -5,7 +5,13 @@ export default class TextareaView extends InputView {
 		super( locale );
 		this.setTemplate( {
 			...this.template,
-			tag: 'textarea'
+			tag: 'textarea',
+			attributes: {
+				...this.template.attributes,
+				style: {
+					float: 'left'
+				}
+			}
 		} );
 	}
 }
