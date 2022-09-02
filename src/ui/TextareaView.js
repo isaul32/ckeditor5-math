@@ -9,7 +9,8 @@ export default class TextareaView extends InputView {
 			attributes: {
 				...this.template.attributes,
 				style: {
-					float: 'left'
+					resize: 'both',
+					overflow: 'auto'
 				}
 			}
 		} );
