@@ -4,6 +4,8 @@ import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
 import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
+const mathKeystroke = 'Shift+4';
+
 import {
 	extractDelimiters,
 	hasDelimiters,
@@ -39,25 +41,9 @@ export default class AutoMath extends Plugin {
 		//the usage of this call changed
 		console.log('1');
 		this.listenTo( editor.plugins.get( 'ClipboardPipeline' ), 'inputTransformation', (evt, data) => {
-			/*for( const element of data.content.getChildren() ) {
-				console.log( element );
-				document.ad = element;
-				for (const innerElem of element.getChildren()) {
-					document.lastElem = innerElem;
-					if (innerElem.data !== undefined &&
-						!hasDelimiters( innerElem.data )
-						&& delimitersCounts( innerElem.data ) % 2 === 0 ) {
-						this._convertToMath( innerElem );
-					}
-				}
-			}*/
+
 			const dataTransfer = data.dataTransfer;
 			console.log('2');
-			/*console.log(evt);
-			console.log(data);
-			console.log(dataTransfer);*/
-			/*document.dataTransfer = dataTransfer;
-			console.log(dataTransfer.getData( 'text/plain'));*/
 
 			const firstRange = modelDocument.selection.getFirstRange();
 			document.firstRange = firstRange;
@@ -104,13 +90,19 @@ export default class AutoMath extends Plugin {
 				this._positionToInsert = null;
 			}
 		}, { priority: 'high' } );
-	}
 
-	_convertToMath( element ) {
-		this.editor.model.change( writer => {
-			const range = writer.createRangeOn( element );
-			console.log( range );
-		} );
+
+/*		editor.keystrokes.set( mathKeystroke, ( keyEvtData, cancel ) => {
+			// Prevent focusing the search bar in FF and opening new tab in Edge. #153, #154.
+			cancel();
+
+			const modelDocument = editor.model.document;
+			const allRanges = modelDocument.selection.getRanges();
+			for (let range of allRanges) {
+				console.log(range.start);
+				console.log(range.end);
+			}
+		} );*/
 	}
 
 
@@ -145,18 +137,6 @@ export default class AutoMath extends Plugin {
 			return;
 		}
 
-		/*let mathFormsAndText = getMathFormsAndText( text );
-		console.log(mathFormsAndText);
-		console.log('delimsAreMatching');
-		console.log(delimitersAreMatching( mathFormsAndText ));
-
-		if (mathFormsAndText === undefined || delimitersAreMatching( mathFormsAndText ) === false) {
-			return;
-		}
-		console.log(mathFormsAndText);
-
-		let finishedFormulas = makeFormulas( mathFormsAndText );
-*/
 		const mathCommand = editor.commands.get( 'math' );
 
 		// Do not anything if math element cannot be inserted at the current position
@@ -164,11 +144,7 @@ export default class AutoMath extends Plugin {
 			return;
 		}
 		console.log('8');
-		this._positionToInsert = LivePosition.fromPosition( leftPosition, {stickiness: 'toNext'} );
-
-		let realLeftPosition = null;
-		let realRightPosition = null;
-
+		this._positionToInsert = LivePosition.fromPosition( leftPosition, {stickiness: 'toNone'} );
 		// With timeout user can undo conversation if want use plain text
 		this._timeoutId = global.window.setTimeout( () => {
 			console.log('9');
@@ -182,82 +158,60 @@ export default class AutoMath extends Plugin {
 					insertPosition = this._positionToInsert;
 				}
 				console.log('10');
+
+				let realLeftPosition = leftPosition;
+				let realRightPosition = null;
+
 				let walkerino = equationRange.getWalker( { ignoreElementEnd: true } );
 				let nodeArray = [];
 				for ( const node of walkerino ) {
+					console.log(node);
 					nodeArray.push(node);
 				}
-				//nodeArray.reverse();
+
 				for (let node of nodeArray) {
-					if ( this._positionToInsert !== null && this._positionToInsert.root.rootName !== '$graveyard' ) {
-						insertPosition = this._positionToInsert;
-					}
 					text = node.item.data;
 					console.log(text);
 					let mathFormsAndText = getMathFormsAndText( text );
 
-					if ( !node.item.is( '$textProxy' ) || !hasDelimiters( text ) || delimitersCounts( text ) % 2 !== 0 ||
-						mathFormsAndText === undefined || !delimitersAreMatching( mathFormsAndText ) ) {
-						editor.model.change(innerWriter => {
-							console.log('not math');
-
-							realLeftPosition = node.previousPosition;
-							realRightPosition = node.nextPosition;
-							const realRange = new LiveRange( realLeftPosition, realRightPosition );
-
-							writer.remove( realRange );
-							writer.insert( node, insertPosition );
-						});
-						walkerino = equationRange.getWalker( { ignoreElementEnd: true } );
-					} else {
+					if ( node.item.is( '$textProxy' ) && hasDelimiters( text ) && delimitersCounts( text ) % 2 === 0 &&
+						mathFormsAndText !== undefined && delimitersAreMatching( mathFormsAndText ) ) {
 
 					let finishedFormulas = makeFormulas( mathFormsAndText );
 
 					editor.model.change(innerWriter => {
 						console.log('math');
-						realLeftPosition = node.previousPosition;
-						realRightPosition = node.nextPosition;
-						const realRange = new LiveRange(realLeftPosition, realRightPosition);
+
+						console.log(realLeftPosition);
+						console.log(realRightPosition);
+						const realRange = writer.createRange(node.previousPosition,  node.nextPosition);
 
 						writer.remove(realRange);
+
+						realLeftPosition = node.previousPosition;
 
 						let mathElement;
 						for (let i = finishedFormulas.length - 1; i >= 0; i--) {
 							if (i % 2 === 0) {
 								console.log('insertText');
-								writer.insertText(finishedFormulas[i], insertPosition);
+								writer.insertText(finishedFormulas[i], realLeftPosition);
 							} else {
 								console.log('insertMath');
 								let params = Object.assign(finishedFormulas[i], {
 									type: mathConfig.outputType
 								});
-								mathElement = innerWriter.createElement(params.display ? 'mathtex-display' : 'mathtex-inline', params);
-								editor.model.insertContent(mathElement, insertPosition);
+								mathElement = writer.createElement(params.display ? 'mathtex-display' : 'mathtex-inline', params);
+								editor.model.insertContent(mathElement, realLeftPosition);
 							}
 						}
 
 						if (finishedFormulas.length === 3 && finishedFormulas[0].trim() === '' && finishedFormulas[2].trim() === '') {
 							innerWriter.setSelection(mathElement, 'on');
 						}
-
-						/*const params = Object.assign( extractDelimiters( text ), {
-							type: mathConfig.outputType
-						} );
-
-						console.log(params);
-						const mathElement = innerWriter.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
-
-						editor.model.insertContent( mathElement, insertPosition );
-
-
-						innerWriter.setSelection( mathElement, 'on' );*/
-						walkerino = equationRange.getWalker( { ignoreElementEnd: true } );
 					});
 				} }
 			} );
-			if ( this._positionToInsert !== null ) {
-				this._positionToInsert.detach();
-			}
+			this._positionToInsert.detach();
 			this._positionToInsert = null;
 			//don't make mathui appear after clicking after pasting formula into editor
 			mathCommand.resetMathCommand();
