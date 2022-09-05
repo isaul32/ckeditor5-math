@@ -19,12 +19,84 @@ export function isMathJaxVersion3( version ) {
 
 // Check if equation has delimiters.
 export function hasDelimiters( text ) {
-	return text.match( /^(\\\[.*?\\\]|\\\(.*?\\\))$/ );
+	return text.match( /(\\\[|\\\]|\\\(|\\\)|\$\$|\$)/g );
 }
 
 // Find delimiters count
 export function delimitersCounts( text ) {
-	return text.match( /(\\\[|\\\]|\\\(|\\\))/g ).length;
+
+	if (!text.match( /(\\\[|\\\]|\\\(|\\\)|\$\$|\$)/g )) {
+		return null;
+	}
+
+	return text.match( /(\\\[|\\\]|\\\(|\\\)|\$\$|\$)/g ).length;
+}
+
+export const openingBrackets = {
+	'\\(': 'bracketsInline',
+	'\\[': 'bracketsDisplay',
+	'$': 'dollarInline',
+	'$$': 'dollarDisplay'
+}
+
+export const closingBrackets = {
+	'\\)': 'bracketsInline',
+	'\\]': 'bracketsDisplay',
+	'$': 'dollarInline',
+	'$$': 'dollarDisplay'
+}
+
+export function delimitersAreMatching( mathFormsAndText ) {
+	let opening = true;
+	let	currentDelim;
+
+	for (let i = 1; i < mathFormsAndText.length; i+=2) {
+		if (opening) {
+			if (!openingBrackets[mathFormsAndText[i]]) {
+				return false;
+			}
+			currentDelim = openingBrackets[mathFormsAndText[i]];
+		} else {
+			if (!closingBrackets[mathFormsAndText[i]] || closingBrackets[mathFormsAndText[i]] !== currentDelim) {
+				return false;
+			}
+		}
+		opening = !opening;
+	}
+	return true;
+}
+
+export function getMathFormsAndText( text ) {
+	if ( text === undefined ) {
+		return undefined;
+	}
+	return text.split(/(\\\[|\\\]|\\\(|\\\)|\$\$|\$)/g);
+}
+
+export function makeFormulas ( mathFormsAndText ) {
+	let a = [];
+	let displayMode = false;
+	for (let i = 0; i < mathFormsAndText.length; i++) {
+		if (i % 4 === 0) {
+			a.push(mathFormsAndText[i]);
+			console.log(a);
+		} else if (i % 4 === 1) {
+			if ( openingBrackets[mathFormsAndText[i]] === 'bracketsDisplay' ||
+				openingBrackets[mathFormsAndText[i]] === 'dollarDisplay' ) {
+				displayMode = true;
+			}
+		} else if (i % 2 === 0) {
+			let text = mathFormsAndText[i];
+			a.push({
+				equation: text,
+				display: displayMode
+			});
+			displayMode = false;
+			console.log(a);
+		}
+	}
+	console.log(a);
+	return a;
 }
 
 // Extract delimiters and figure display mode for the model
@@ -32,6 +104,7 @@ export function extractDelimiters( equation ) {
 	equation = equation.trim();
 
 	// Remove delimiters (e.g. \( \) or \[ \])
+	const hasDollars = equation.substring(0,1).includes('$')
 	const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
 	const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
 	if ( hasInlineDelimiters || hasDisplayDelimiters ) {
