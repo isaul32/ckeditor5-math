@@ -13,7 +13,6 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 	math: {
 		engine: 'katex',
 		mathLiveSettings: { enabled: true },
-		textareaInput: true
 	}
 	} )
 	.then( ( editor ) => {

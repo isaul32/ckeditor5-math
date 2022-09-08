@@ -22,7 +22,6 @@ import MathView from './mathview';
 import MathLiveView from './mathliveview';
 
 import '../../theme/mathform.css';
-import { InputTextView } from '@ckeditor/ckeditor5-ui';
 
 export default class MainFormView extends View {
 	constructor(
@@ -33,8 +32,7 @@ export default class MainFormView extends View {
 		previewEnabled,
 		previewUid,
 		previewClassName,
-		popupClassName,
-		textareaInput
+		popupClassName
 	) {
 		super( locale );
 
@@ -48,7 +46,6 @@ export default class MainFormView extends View {
 		this.saveButtonView.type = 'submit';
 
 		// Equation input
-		this.textareaInput = textareaInput;
 		this.mathInputView = this._createMathInput();
 
 		// Display button
@@ -177,9 +174,9 @@ export default class MainFormView extends View {
 
 	_createMathInput() {
 		const t = this.locale.t;
+
 		// Create equation input
-		const mathInput = new LabeledInputView( this.locale, ( this.textareaInput ? TextareaView : InputTextView ) );
-		// mathInput.extendTemplate( { tag: 'textarea' } );
+		const mathInput = new LabeledInputView( this.locale, TextareaView );
 		const inputView = mathInput.inputView;
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 

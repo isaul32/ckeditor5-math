@@ -191,19 +191,6 @@ or
 
 Ctrl+M can be used to add easily math formulas in inline mode.
 
-#### Inline mode
-
-To replace latex input field with textarea pass to the config object textareaInput flag set to true
-```
-ClassicEditor.defaultConfig = {
-	// ...
-	math: {
-		// ...
-		textareaInput: true
-	}
-}
-```
-
 #### Display mode
 
 Autoformat for math can be used to add formula in display mode on a new line by adding `\[` or `$$`. This feature requires additional autoformat plugin to be added.
