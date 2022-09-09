@@ -1,7 +1,5 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
-import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
-import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 
 export default class Test extends Plugin {
@@ -16,7 +14,6 @@ export default class Test extends Plugin {
 	constructor(editor) {
 		super(editor);
 		this._timeoutId = null;
-		this._positionToInsert = null;
 	}
 
 	init() {
@@ -28,22 +25,20 @@ export default class Test extends Plugin {
 		this.listenTo(editor.plugins.get('ClipboardPipeline'), 'inputTransformation', (evt, data) => {
 			const firstRange = modelDocument.selection.getFirstRange();
 
-			const leftLivePosition = firstRange.start;
-			leftLivePosition.stickiness = 'toPrevious';
+			const leftPosition = firstRange.start;
+			leftPosition.stickiness = 'toPrevious';
 
-			const rightLivePosition = firstRange.end;
-			rightLivePosition.stickiness = 'toNext';
-
+			const rightPosition = firstRange.end;
+			rightPosition.stickiness = 'toNext';
 
 			modelDocument.once('change:data', () => {
-				this._boldBetweenPositions(leftLivePosition, rightLivePosition);
+				this._boldBetweenPositions(leftPosition, rightPosition);
 			}, {priority: 'high'});
 		});
 
 		editor.commands.get('undo').on('execute', () => {
 			if (this._timeoutId) {
 				global.window.clearTimeout(this._timeoutId);
-
 				this._timeoutId = null;
 			}
 		}, {priority: 'high'});
@@ -51,46 +46,36 @@ export default class Test extends Plugin {
 
 
 	_boldBetweenPositions(leftPosition, rightPosition) {
-
 		const editor = this.editor;
-		if ( editor.model.document.selection.isCollapsed ) {
-			console.log('isCollapsed');
-		}
-
-		// if the position is at the start,
+		// if the position is at the start, or at the end
 		rightPosition = editor.model.document.selection.getFirstRange().end;
 		rightPosition.stickiness = 'toNext';
-
-
 
 		// With timeout user can undo conversation if wants to use plain text
 		this._timeoutId = global.window.setTimeout(() => {
 			this._timeoutId = null;
 
 			editor.model.change(writer => {
-				const equationRange = writer.createRange(leftPosition, rightPosition);
+				const textRange = writer.createRange(leftPosition, rightPosition);
 
-				let walker = equationRange.getWalker({ignoreElementEnd: true});
+				let walker = textRange.getWalker({ignoreElementEnd: true});
 				let nodeArray = [];
 				for (const node of walker) { // remember nodes, because when they are changed model-textproxy-wrong-length error occurs
 					nodeArray.push(node);
 				}
 				for (let node of nodeArray) {
 					let text = node.item.data;
+					//do this operation only when the text matches the delimiters
 					if (node.item.is('$textProxy') && text !== undefined && text.match(/&/g)) {
+						let boldAndPlain = this._split(text);
+						const rangeToRemove = writer.createRange(node.previousPosition, node.nextPosition);
+						writer.remove(rangeToRemove);
 
-
-						let finishedFormulas = this._split(text);
-
-
-						const realRange = writer.createRange(node.previousPosition, node.nextPosition);
-						writer.remove(realRange);
-
-						for (let i = finishedFormulas.length - 1; i >= 0; i--) {
+						for (let i = boldAndPlain.length - 1; i >= 0; i--) {
 							if (i % 2 === 0) {
-								writer.insertText(finishedFormulas[i], node.previousPosition);
+								writer.insertText(boldAndPlain[i], node.previousPosition);
 							} else {
-								writer.insertText(finishedFormulas[i], {bold: true}, node.previousPosition);
+								writer.insertText(boldAndPlain[i], {bold: true}, node.previousPosition);
 							}
 						}
 					}
@@ -100,16 +85,16 @@ export default class Test extends Plugin {
 	}
 
 	_split(text) {
-		let mathFormsAndText = text.split(/(&)/g);
-		let mathTextArray = [];
-		for (let i = 0; i < mathFormsAndText.length; i++) {
+		let boldPlainDelimitersArray = text.split(/(&)/g);
+		let boldPlainArray = [];
+		for (let i = 0; i < boldPlainDelimitersArray.length; i++) {
 			if (i % 4 === 0) {
-				mathTextArray.push(mathFormsAndText[i]);
+				boldPlainArray.push(boldPlainDelimitersArray[i]);
 
 			} else if (i % 2 === 0) {
-				mathTextArray.push(mathFormsAndText[i]);
+				boldPlainArray.push(boldPlainDelimitersArray[i]);
 			}
 		}
-		return mathTextArray;
+		return boldPlainArray;
 	}
 }
