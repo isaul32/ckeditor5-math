@@ -20,7 +20,7 @@ export default class MathEditing extends Plugin {
 		editor.commands.add( 'math', new MathCommand( editor ) );
 
 		editor.commands.get( 'math' ).enableChangesBeforeFormView();
-
+		//const keepOpenWindow = true;
 		this._defineSchema();
 		this._defineConverters();
 
@@ -33,6 +33,7 @@ export default class MathEditing extends Plugin {
 			outputType: 'script',
 			forceOutputType: false,
 			enablePreview: true,
+			keepOpenView : false, //TODO: change to get setting from localstorage
 			previewClassName: [],
 			popupClassName: []
 		} );

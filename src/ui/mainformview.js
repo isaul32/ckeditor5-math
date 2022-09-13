@@ -41,12 +41,14 @@ export default class MainFormView extends View {
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
 
+		this.keepOpenView = this._createKeepOpenButton();
+
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
 		this.previewEnabled = previewEnabled;
 
-		let children = [];
+		let children;
 		if ( this.previewEnabled ) {
 			// Preview label
 			this.previewLabel = new LabelView( locale );
@@ -59,13 +61,15 @@ export default class MainFormView extends View {
 			children = [
 				this.mathInputView,
 				this.displayButtonView,
+				this.keepOpenView,
 				this.previewLabel,
-				this.mathView
+				this.mathView,
 			];
 		} else {
 			children = [
 				this.mathInputView,
-				this.displayButtonView
+				this.displayButtonView,
+				this.keepOpenView
 			];
 		}
 
@@ -109,6 +113,7 @@ export default class MainFormView extends View {
 		const childViews = [
 			this.mathInputView,
 			this.displayButtonView,
+			this.keepOpenView,
 			this.saveButtonView,
 			this.cancelButtonView
 		];
@@ -239,6 +244,30 @@ export default class MainFormView extends View {
 				// Update preview view
 				this.mathView.display = switchButton.isOn;
 			}
+		} );
+
+		return switchButton;
+	}
+	_createKeepOpenButton() {
+		const t = this.locale.t;
+
+		const switchButton = new SwitchButtonView( this.locale );
+
+		switchButton.set( {
+			label: t( 'Fenster offen lassen ' ),
+			withText: true,
+		} );
+
+		switchButton.extendTemplate( {
+			attributes: {
+				class: 'ck-button-display-toggle'
+			}
+		} );
+
+		switchButton.on( 'execute', () => {
+			// Toggle state
+			switchButton.isOn = !switchButton.isOn;
+				this.mathView.keepOpenView = switchButton.isOn;
 		} );
 
 		return switchButton;
