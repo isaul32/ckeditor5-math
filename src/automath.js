@@ -149,7 +149,9 @@ export default class AutoMath extends Plugin {
 					}
 				}
 			});
-			mathCommand.resetMathCommand();
+			if ( editor.commands.get( 'math' ).keepOpenView ) {
+				mathCommand.resetMathCommand();
+			}
 		}, 100);
 	}
 }
