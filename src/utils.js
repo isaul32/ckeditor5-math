@@ -79,7 +79,6 @@ export function makeFormulas ( mathFormsAndText ) {
 	for (let i = 0; i < mathFormsAndText.length; i++) {
 		if (i % 4 === 0) {
 			a.push(mathFormsAndText[i]);
-			console.log(a);
 		} else if (i % 4 === 1) {
 			if ( openingBrackets[mathFormsAndText[i]] === 'bracketsDisplay' ||
 				openingBrackets[mathFormsAndText[i]] === 'dollarDisplay' ) {
@@ -92,10 +91,8 @@ export function makeFormulas ( mathFormsAndText ) {
 				display: displayMode
 			});
 			displayMode = false;
-			console.log(a);
 		}
 	}
-	console.log(a);
 	return a;
 }
 

@@ -60,6 +60,14 @@ export default class MathUI extends Plugin {
 			return;
 		}
 
+		//solves this bug:  clicking on a formula with display true and then on
+		// 					another with display false will result in not changing display mode button when mathKeepOpen is true
+		//this checks whether a formula was clicked or not, if yes the last ui is hidden (even it mathKeepOpen)
+		//so the new ui is correcly put in the right place with the right options
+		if (editor.editing.view.document.selection.getSelectedElement()) {
+			this._hideUI();
+		}
+
 		this._addFormView();
 
 		this._balloon.showStack( 'main' );
@@ -72,6 +80,7 @@ export default class MathUI extends Plugin {
 		const mathConfig = editor.config.get( 'math' );
 
 		const formView = new MainFormView(
+			editor.model.document,
 			editor.locale,
 			mathConfig.engine,
 			mathConfig.lazyLoad,
@@ -89,17 +98,14 @@ export default class MathUI extends Plugin {
 		formView.saveButtonView.bind( 'isEnabled' ).to( mathCommand );
 		formView.displayButtonView.bind( 'isEnabled' ).to( mathCommand );
 
-		formView.keepOpenView.bind( 'isOn' ).to( mathConfig, 'keepOpenView' );
-		formView.keepOpenView.bind( 'isEnabled' ).to( mathCommand );
-		mathCommand.bind( 'keepOpenView' ).to( formView.keepOpenView, 'isOn' );
-
-		console.log('2');
-		console.log(formView.keepOpenView);
+		formView.keepOpenButtonView.bind( 'isOn' ).to( mathConfig, 'keepOpen' );
+		formView.keepOpenButtonView.bind( 'isEnabled' ).to( mathCommand );
+		mathCommand.bind( 'keepOpen' ).to( formView.keepOpenButtonView, 'isOn' );
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
 			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
-				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpenView );
+				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
 			this._closeFormView();
 		} );
 
@@ -227,6 +233,7 @@ export default class MathUI extends Plugin {
 			const mathCommand = editor.commands.get( 'math' );
 			if ( mathCommand.value ) {
 				if ( mathCommand.isEnabled ) {
+
 					this._showUI();
 				}
 			}
@@ -247,7 +254,7 @@ export default class MathUI extends Plugin {
 			contextElements: [ this._balloon.view.element ],
 			callback: () => {
 				const mathCommand = editor.commands.get( 'math' );
-				if (!mathCommand.keepOpenView) {
+				if (!mathCommand.keepOpen) {
 					this._hideUI();
 				}
 			}

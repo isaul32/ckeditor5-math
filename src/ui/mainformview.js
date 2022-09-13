@@ -23,10 +23,14 @@ import MathView from './mathview';
 import '../../theme/mathform.css';
 
 export default class MainFormView extends View {
-	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor( document, locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
 		super( locale );
 
 		const t = locale.t;
+
+		this.document = document;
+
+		this.locale = locale;
 
 		// Create key event & focus trackers
 		this._createKeyAndFocusTrackers();
@@ -41,7 +45,7 @@ export default class MainFormView extends View {
 		// Display button
 		this.displayButtonView = this._createDisplayButton();
 
-		this.keepOpenView = this._createKeepOpenButton();
+		this.keepOpenButtonView = this._createKeepOpenButton();
 
 		// Cancel button
 		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
@@ -61,7 +65,7 @@ export default class MainFormView extends View {
 			children = [
 				this.mathInputView,
 				this.displayButtonView,
-				this.keepOpenView,
+				this.keepOpenButtonView,
 				this.previewLabel,
 				this.mathView,
 			];
@@ -69,7 +73,7 @@ export default class MainFormView extends View {
 			children = [
 				this.mathInputView,
 				this.displayButtonView,
-				this.keepOpenView
+				this.keepOpenButtonView
 			];
 		}
 
@@ -113,7 +117,7 @@ export default class MainFormView extends View {
 		const childViews = [
 			this.mathInputView,
 			this.displayButtonView,
-			this.keepOpenView,
+			this.keepOpenButtonView,
 			this.saveButtonView,
 			this.cancelButtonView
 		];
@@ -267,7 +271,7 @@ export default class MainFormView extends View {
 		switchButton.on( 'execute', () => {
 			// Toggle state
 			switchButton.isOn = !switchButton.isOn;
-				this.mathView.keepOpenView = switchButton.isOn;
+			this.document.fire('mathKeepOpenChange', switchButton.isOn);
 		} );
 
 		return switchButton;

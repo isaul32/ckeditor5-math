@@ -33,7 +33,7 @@ export default class MathEditing extends Plugin {
 			outputType: 'script',
 			forceOutputType: false,
 			enablePreview: true,
-			keepOpenView : false, //TODO: change to get setting from localstorage
+			keepOpen : false, //TODO: change to get setting from localstorage
 			previewClassName: [],
 			popupClassName: []
 		} );

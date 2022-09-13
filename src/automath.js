@@ -10,7 +10,6 @@ import {
 	delimitersAreMatching,
 	makeFormulas
 } from './utils';
-import preventDefault from "@ckeditor/ckeditor5-ui/src/bindings/preventdefault";
 
 export default class AutoMath extends Plugin {
 	static get requires() {
@@ -50,9 +49,6 @@ export default class AutoMath extends Plugin {
 
 			const rightLivePosition = LivePosition.fromPosition( firstRange.end );
 			rightLivePosition.stickiness = 'toNext';
-			console.log(leftPosition);
-			console.log(rightPosition);
-			console.log(rightLivePosition);
 
 			modelDocument.once('change:data', () => {
 				this._mathBetweenPositions(leftPosition, rightPosition, rightLivePosition);
@@ -70,6 +66,7 @@ export default class AutoMath extends Plugin {
 			if (this._notUndoableOperation === 0) {
 				// Stop executing next callbacks.
 				evt.stop();
+				modelDocument.fire('notUndoablePaste'); //TODO STU-1225: listen to this in webapp
 				//evt.cancel();
 			} else if (this._notUndoableOperation !== -1) {
 				this._notUndoableOperation -= 1;
@@ -108,8 +105,12 @@ export default class AutoMath extends Plugin {
 				const equationRange = writer.createRange(leftPosition, rightPosition);
 				let walker = equationRange.getWalker({ignoreElementEnd: true});
 				let nodeArray = [];
-				for (const node of walker) {
-					nodeArray.push(node);
+				try {
+					for (const node of walker) {
+						nodeArray.push(node);
+					}
+				} catch (e) {
+					return;
 				}
 				if (nodeArray.length > 1) {
 					isMultiLine = true;
@@ -149,7 +150,7 @@ export default class AutoMath extends Plugin {
 					}
 				}
 			});
-			if ( editor.commands.get( 'math' ).keepOpenView ) {
+			if ( editor.commands.get( 'math' ).keepOpen ) {
 				mathCommand.resetMathCommand();
 			}
 		}, 100);
