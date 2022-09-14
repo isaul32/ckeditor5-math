@@ -3,3 +3,6 @@ build/
 package-lock.json
 yarn-error.log
 public
+.vscode
+demo
+.idea

@@ -1,0 +1,96 @@
+# Category: Allgemein
+
+\sqrt{}, 
+\cdot, 
+\frac{}{}, 
+\dfrac{}{}, 
+\pm, 
+\approx, 
+^\circ, 
+\cdots
+
+
+
+
+# Category: Trigonometrie
+
+\sin{}, \cos{}, \tan{}, 
+
+\sin^{-1}, \cos^{-1}, \tan^{-1}
+
+
+
+# Category: Griechisch
+
+$\alpha$	α
+
+$\beta$	β
+
+$\gamma$	γ
+
+$\delta$	δ
+
+$\epsilon$	ϵ
+
+$\zeta$	ζ
+
+$\theta$	θ
+
+$\Sigma$	Σ
+
+$\lambda$	λ
+
+$\mu$	μ
+
+$\tau$	τ
+
+$\phi$	ϕ
+
+$\pi$	π
+
+
+
+# Category: Pfeile
+
+\Leftrightarrow, 
+\xrightarrow{}, 
+\xleftarrow{}, 
+ightarrow, 
+\leftarrow, 
+\Rightarrow, 
+\Leftarrow
+
+
+# Category: Symbole
+
+\int\limits_{a}^{b}
+
+\parallel, 
+parallel,
+\perp, 
+ot\perp, 
+\in, 
+\cap, 
+\cup
+\ldots
+
+
+
+# Category: Speziell
+
+\begin{aligned} \end{aligned},
+
+\begin{array}, \end{array}, 
+
+\textcolor{red}{}
+
+\overline{}, 
+\underline{}
+
+\underbrace{}, 
+
+\left( 
+ight) \left[ 
+ight], 
+
+\text{}

@@ -21,9 +21,11 @@ import { extractDelimiters, hasDelimiters } from '../utils';
 import MathView from './mathview';
 
 import '../../theme/mathform.css';
+import shortcuts from './shortcutsview';
 
 export default class MainFormView extends View {
-	constructor( document, locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName ) {
+	constructor( document, locale, engine, lazyLoad, previewEnabled,
+				 previewUid, previewClassName, popupClassName, katexRenderOptions ) {
 		super( locale );
 
 		const t = locale.t;
@@ -59,8 +61,13 @@ export default class MainFormView extends View {
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
-			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName );
+			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName, katexRenderOptions );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
+
+			// Common commands label
+			this.commandsLabel = new LabelView( locale );
+			this.commandsLabel.text = t( 'Common commands' );
+
 
 			children = [
 				this.mathInputView,
@@ -68,6 +75,8 @@ export default class MainFormView extends View {
 				this.keepOpenButtonView,
 				this.previewLabel,
 				this.mathView,
+				this.commandsLabel,
+				shortcuts(this.mathInputView, this.mathView),
 			];
 		} else {
 			children = [
@@ -168,6 +177,7 @@ export default class MainFormView extends View {
 		// Create equation input
 		const mathInput = new LabeledInputView( this.locale, InputTextView );
 		const inputView = mathInput.inputView;
+		inputView.template.attributes.id[0] = 'math-input-field';
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 
 		const onInput = () => {
@@ -198,6 +208,8 @@ export default class MainFormView extends View {
 
 		inputView.on( 'render', onInput );
 		inputView.on( 'input', onInput );
+
+		mathInput.render();
 
 		return mathInput;
 	}

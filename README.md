@@ -115,7 +115,8 @@ InlineEditor.defaultConfig = {
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true, // Enable preview view
 		previewClassName: [], // Class names to add to previews
-		popupClassName: [] // Class names to add to math popup balloon
+		popupClassName: [], // Class names to add to math popup balloon
+		katexRenderOptions: {}  // KaTeX only options for katex.render(ToString)
 	}
 }
 ```
@@ -134,6 +135,22 @@ InlineEditor.defaultConfig = {
 -   Tested with version **0.12.0**
 
 [<img src="https://katex.org/img/katex-logo-black.svg" width="130" alt="KaTeX">](https://katex.org/)
+
+-   `katexRenderOptions` - pass [options](https://katex.org/docs/options.html).
+
+	```js
+	InlineEditor.defaultConfig = {
+		// ...
+		math: {
+			engine: 'katex',
+			katexRenderOptions: {
+				macros: {
+					"\\neq": "\\mathrel{\\char`≠}",
+				},
+			},
+		}
+	}
+	```
 
 **Custom typesetting**
 

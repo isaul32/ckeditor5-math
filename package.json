@@ -1,89 +1,92 @@
 {
   "name": "ckeditor5-math",
-  "version": "34.0.0",
+  "version": "35.0.1",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
-    "ckeditor",
-    "ckeditor5",
-    "ckeditor 5",
-    "ckeditor5-feature",
-    "ckeditor5-plugin",
-    "ckeditor5-math"
+	"ckeditor",
+	"ckeditor5",
+	"ckeditor 5",
+	"ckeditor5-feature",
+	"ckeditor5-plugin",
+	"ckeditor5-math",
+	"katex"
   ],
   "resolutions": {
-    "postcss-loader": "^4.0.0",
-    "mini-css-extract-plugin": "2.4.2"
+	"postcss-loader": "^4.0.0",
+	"mini-css-extract-plugin": "2.4.2"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^34.0.0",
-    "@ckeditor/ckeditor5-core": "^34.0.0",
-    "@ckeditor/ckeditor5-engine": "^34.0.0",
-    "@ckeditor/ckeditor5-inspector": "^3.0.0",
-    "@ckeditor/ckeditor5-ui": "^34.0.0",
-    "@ckeditor/ckeditor5-undo": "^34.0.0",
-    "@ckeditor/ckeditor5-utils": "^34.0.0",
-    "@ckeditor/ckeditor5-widget": "^34.0.0"
+	"@ckeditor/ckeditor5-clipboard": "^35.0.1",
+	"@ckeditor/ckeditor5-core": "^35.0.1",
+	"@ckeditor/ckeditor5-engine": "^35.0.1",
+	"@ckeditor/ckeditor5-inspector": "^3.0.0",
+	"@ckeditor/ckeditor5-ui": "^35.0.1",
+	"@ckeditor/ckeditor5-undo": "^35.0.1",
+	"@ckeditor/ckeditor5-utils": "^35.0.1",
+	"@ckeditor/ckeditor5-widget": "^35.0.1"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^34.0.0",
-    "@ckeditor/ckeditor5-editor-classic": "^34.0.0",
-    "@ckeditor/ckeditor5-editor-inline": "^34.0.0",
-    "@ckeditor/ckeditor5-essentials": "^34.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^34.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
-    "css-loader": "^5.2.4",
-    "eslint": "^7.1.0",
-    "eslint-config-ckeditor5": "^3.1.1",
-    "html-webpack-plugin": "^5.3.1",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.6",
-    "mini-css-extract-plugin": "^2.4.2",
-    "raw-loader": "^4.0.2",
-    "stylelint": "^13.5.0",
-    "stylelint-config-ckeditor5": "^2.0.1",
-    "webpack": "^5.58.1",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^4.8.1"
+	"@ckeditor/ckeditor5-basic-styles": "^35.0.1",
+	"@ckeditor/ckeditor5-editor-classic": "^35.0.1",
+	"@ckeditor/ckeditor5-editor-inline": "^35.0.1",
+	"@ckeditor/ckeditor5-essentials": "^35.0.1",
+	"@ckeditor/ckeditor5-paragraph": "^35.0.1",
+	"@ckeditor/ckeditor5-theme-lark": "^35.0.1",
+	"css-loader": "^5.2.4",
+	"eslint": "^7.1.0",
+	"eslint-config-ckeditor5": "^3.1.1",
+	"html-webpack-plugin": "^5.3.1",
+	"husky": "^4.2.5",
+	"lint-staged": "^10.2.6",
+	"lodash": "^4.17.21",
+	"mini-css-extract-plugin": "^2.4.2",
+	"raw-loader": "^4.0.2",
+	"stylelint": "^13.5.0",
+	"stylelint-config-ckeditor5": "^2.0.1",
+	"svg-inline-loader": "^0.8.2",
+	"webpack": "^5.58.1",
+	"webpack-cli": "^4.6.0",
+	"webpack-dev-server": "^4.8.1"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=5.7.1"
+	"node": ">=14.0.0",
+	"npm": ">=5.7.1"
   },
   "author": "Sauli Anto",
   "license": "ISC",
   "bugs": "https://github.com/isaul32/ckeditor5-math/issues",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/isaul32/ckeditor5-math.git"
+	"type": "git",
+	"url": "https://github.com/isaul32/ckeditor5-math.git"
   },
   "files": [
-    "lang",
-    "src",
-    "theme"
+	"lang",
+	"src",
+	"theme"
   ],
   "scripts": {
-    "lint": "eslint --quiet src/**/*.js",
-    "lint:fix": "eslint --quiet src/**/*.js --fix",
-    "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
-    "start": "node node_modules/.bin/webpack serve --mode development"
+	"lint": "eslint --quiet src/**/*.js",
+	"lint:fix": "eslint --quiet src/**/*.js --fix",
+	"stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
+	"start": "node node_modules/.bin/webpack serve --mode development"
   },
   "lint-staged": {
-    "**/*.js": [
-      "eslint --quiet"
-    ],
-    "**/*.css": [
-      "stylelint --quiet --allow-empty-input"
-    ]
+	"**/*.js": [
+	  "eslint --quiet"
+	],
+	"**/*.css": [
+	  "stylelint --quiet --allow-empty-input"
+	]
   },
   "eslintIgnore": [
-    "node_modules/**",
-    "packages/*/node_modules/**",
-    "packages/*/build/**",
-    "packages/*/src/lib/**"
+	"node_modules/**",
+	"packages/*/node_modules/**",
+	"packages/*/build/**",
+	"packages/*/src/lib/**"
   ],
   "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+	"hooks": {
+	  "pre-commit": "lint-staged"
+	}
   }
 }

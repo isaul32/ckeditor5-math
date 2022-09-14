@@ -35,7 +35,8 @@ export default class MathEditing extends Plugin {
 			enablePreview: true,
 			keepOpen : false, //TODO: change to get setting from localstorage
 			previewClassName: [],
-			popupClassName: []
+			popupClassName: [],
+			katexRenderOptions: {}
 		} );
 	}
 
@@ -136,6 +137,29 @@ export default class MathEditing extends Plugin {
 					const params = Object.assign( extractDelimiters( equation ), {
 						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
 					} );
+					console.log(params);
+
+					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
+				}
+			} )
+			.elementToElement( {
+				view: {
+					name: 'span',
+					classes: [ 'ck-math-tex', 'ck-math-tex-inline', 'ck-widget' ],
+					key: 'style',
+					value: /[\s\S]+/,
+					equation: /[\s\S]+/
+				},
+				model: ( viewElement, { writer } ) => {
+					console.log('upcastEditing new lele');
+					console.log(viewElement);
+					document.aa = viewElement;
+					const equation = viewElement.getAttribute('equation');
+
+					const params = Object.assign( extractDelimiters( equation ), {
+						type: mathConfig.forceOutputType ? mathConfig.outputType : 'span'
+					} );
+					console.log(params);
 
 					return writer.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params );
 				}
@@ -200,13 +224,17 @@ export default class MathEditing extends Plugin {
 			const uiElement = writer.createUIElement( 'div', null, function( domDocument ) {
 				const domElement = this.toDomElement( domDocument );
 
-				renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false );
+				renderEquation( equation, domElement, mathConfig.engine, mathConfig.lazyLoad, display, false, mathConfig.previewClassName,
+					null, mathConfig.katexRenderOptions );
 
 				return domElement;
 			} );
 
 			writer.insert( writer.createPositionAt( mathtexView, 0 ), uiElement );
 
+
+			console.log('downcastEditing')
+			console.log(mathtexView);
 			return mathtexView;
 		}
 

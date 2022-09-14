@@ -1,4 +1,5 @@
 .ck.ck-math-form {
+	padding: .5rem;
 	display: flex;
 	align-items: flex-start;
 	flex-direction: row;
@@ -40,4 +41,43 @@
 
 .ck.ck-toolbar-container {
 	z-index: calc(var(--ck-z-modal) + 2);
+}
+
+.math-icon {
+	width: 50px !important;
+	height: 50px !important;
+}
+
+.shortcuts-list {
+	margin-top: .5rem !important;
+	display: flex !important;
+	flex-direction: column;
+}
+
+.shortcuts-categories {
+	display: flex !important;
+	justify-content: space-between;
+}
+
+.shortcuts-categories p {
+	cursor: pointer !important;
+	font-weight: bold !important;
+	margin-inline: .2rem !important;
+	padding-inline: .5rem !important;
+}
+
+.shortcuts-categories p.active {
+	border: 2px solid lightgray !important;
+	border-radius: 8px !important;
+}
+
+.commands-list {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	margin-top: .5rem !important;
+}
+
+.commands-list li {
+	cursor: pointer !important;
 }
