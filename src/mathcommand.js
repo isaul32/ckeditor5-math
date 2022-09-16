@@ -67,13 +67,20 @@ export default class MathCommand extends Command {
 		} );
 	}
 
+	// gets the data of the selected equation (equation, displayMode) if it is a mathElement, and remembers it
+	// if keepOpen is true (keep math window open even if clicking out of editor), the last clicked formula (with its position)
+	// is used for the input on the window
 	refresh() {
 		const model = this.editor.model;
 		const selection = model.document.selection;
-		const selectedElement = selection.getSelectedElement();
-
-		this.isEnabled = selectedElement === null || ( selectedElement.is( 'element', 'mathtex-inline' ) ||
-				selectedElement.is( 'element', 'mathtex-display' ) );
+		let selectedElement = null;
+		this.isEnabled = false;
+		if (selection !== null) {
+				selectedElement = selection.getSelectedElement();
+		}
+		//if selected element is null, also remember formula
+		this.isEnabled = selectedElement === null || (selectedElement.is('element', 'mathtex-inline') ||
+			selectedElement.is('element', 'mathtex-display'));
 
 		//when a formula is clicked, preserve values for when click out of box happens (selection in editor is not on formula)
 		if (selectedElement !== null && (selectedElement.is('element', 'mathtex-inline') || selectedElement.is('element', 'mathtex-display'))) {
@@ -81,8 +88,8 @@ export default class MathCommand extends Command {
 			this.rangeLastSelectedFormula = model.createSelection(selection);
 			this.lastSelectedElement = selection.getSelectedElement();
 		}
-		if (this.keepOpen) {
 
+		if (this.keepOpen) {
 			//update values of the formula, otherwise keep old values (needed for keeping stuff when clicking out of the box)
 			const selectedEquation = getSelectedMathModelWidget(this.isEnabled ? selection : this.lastSelectedFormulaSelection);
 			this.value = selectedEquation ? selectedEquation.getAttribute('equation') : this.value;

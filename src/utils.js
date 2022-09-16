@@ -3,6 +3,9 @@ import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpa
 import katex from "katex/dist/katex.mjs";
 
 export function getSelectedMathModelWidget( selection ) {
+	if (selection == null) {
+		return null;
+	}
 	const selectedElement = selection.getSelectedElement();
 
 	if ( selectedElement && ( selectedElement.is( 'element', 'mathtex-inline' ) || selectedElement.is( 'element', 'mathtex-display' ) ) ) {
