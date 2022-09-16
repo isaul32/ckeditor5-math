@@ -76,7 +76,7 @@ export default class MathCommand extends Command {
 		let selectedElement = null;
 		this.isEnabled = false;
 		if (selection !== null) {
-				selectedElement = selection.getSelectedElement();
+			selectedElement = selection.getSelectedElement();
 		}
 		//if selected element is null, also remember formula
 		this.isEnabled = selectedElement === null || (selectedElement.is('element', 'mathtex-inline') ||

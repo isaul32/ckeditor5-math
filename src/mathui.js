@@ -256,6 +256,7 @@ export default class MathUI extends Plugin {
 				const mathCommand = editor.commands.get( 'math' );
 				if (!mathCommand.keepOpen) {
 					this._hideUI();
+					mathCommand.resetMathCommand();
 				}
 			}
 		} );
