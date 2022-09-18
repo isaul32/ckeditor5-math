@@ -4,7 +4,6 @@ import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/switchbuttonview';
 import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
-import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 import LabelView from '@ckeditor/ckeditor5-ui/src/label/labelview';
 
 import KeystrokeHandler from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
@@ -22,6 +21,7 @@ import MathView from './mathview';
 
 import '../../theme/mathform.css';
 import shortcuts from './shortcutsview';
+import MathInputView from "./mathinputview";
 
 export default class MainFormView extends View {
 	constructor( document, locale, engine, lazyLoad, previewEnabled,
@@ -145,11 +145,11 @@ export default class MainFormView extends View {
 	}
 
 	get equation() {
-		return this.mathInputView.inputView.element.value;
+		return this.mathInputView.inputView.element.textContent.trim();
 	}
 
 	set equation( equation ) {
-		this.mathInputView.inputView.element.value = equation;
+		this.mathInputView.inputView.element.textContent = equation;
 		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
 		}
@@ -175,14 +175,15 @@ export default class MainFormView extends View {
 		const t = this.locale.t;
 
 		// Create equation input
-		const mathInput = new LabeledInputView( this.locale, InputTextView );
+		const mathInput = new LabeledInputView( this.locale, MathInputView );
+		document.mathinput = MathInputView;
 		const inputView = mathInput.inputView;
 		inputView.template.attributes.id[0] = 'math-input-field';
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 
 		const onInput = () => {
 			if ( inputView.element != null ) {
-				let equationInput = inputView.element.value.trim();
+				let equationInput = inputView.element.textContent.trim();
 
 				// If input has delimiters
 				if ( hasDelimiters( equationInput ) ) {
@@ -190,7 +191,7 @@ export default class MainFormView extends View {
 					const params = extractDelimiters( equationInput );
 
 					// Remove delimiters from input field
-					inputView.element.value = params.equation;
+					inputView.element.textContent = params.equation;
 
 					equationInput = params.equation;
 

@@ -90,11 +90,11 @@ export default class MathUI extends Plugin {
 			mathConfig.popupClassName,
 		);
 
-		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
+		formView.mathInputView.bind( 'textContent' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );
 
 		// Form elements should be read-only when corresponding commands are disabled.
-		formView.mathInputView.bind( 'isReadOnly' ).to( mathCommand, 'isEnabled', value => !value );
+		formView.mathInputView.bind( 'isReadOnly' ).to( mathCommand, 'isEnabled', value => !value ); //TODO next
 		formView.saveButtonView.bind( 'isEnabled' ).to( mathCommand );
 		formView.displayButtonView.bind( 'isEnabled' ).to( mathCommand );
 

@@ -28,8 +28,10 @@
 .ck.ck-labeled-input {
 	width: 100%;
 }
-.ck.ck-labeled-input input {
+.ck.ck-labeled-input div {
 	width: inherit;
+	padding-top: 0.25rem;
+	white-space: normal
 }
 .ck-math-view {
 	max-width: 800px;
