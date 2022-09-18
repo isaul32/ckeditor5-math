@@ -1,5 +1,4 @@
 import View from "@ckeditor/ckeditor5-ui/src/view";
-import '../../theme/mathinputview.css';
 import FocusTracker from "@ckeditor/ckeditor5-utils/src/focustracker";
 
 /*

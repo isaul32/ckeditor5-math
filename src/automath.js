@@ -77,7 +77,7 @@ export default class AutoMath extends Plugin {
 
 	_mathBetweenPositions(leftPosition, rightPosition, rightLivePosition) {
 		const editor = this.editor;
-		let isAtStartOrEndOfText = false;
+		let hasMathContent = false;
 		let isMultiLine = false;
 
 		const mathCommand = editor.commands.get('math');
@@ -87,10 +87,10 @@ export default class AutoMath extends Plugin {
 			return;
 		}
 
-		if ( leftPosition.path[leftPosition.path.length -1] === 0 ||
+/*		if ( leftPosition.path[leftPosition.path.length -1] === 0 ||
 			(leftPosition.path[0] === rightLivePosition.path[0] && leftPosition.path[1] === rightLivePosition.path[1])) {
 			isAtStartOrEndOfText = true;
-		}
+		}*/
 		// if the position is at the start,
 		rightPosition = editor.model.document.selection.getFirstRange().end;
 		rightPosition.stickiness = 'toNext';
@@ -123,6 +123,10 @@ export default class AutoMath extends Plugin {
 					if (node.item.is('$textProxy') && hasDelimiters(text) && delimitersCounts(text) % 2 === 0 &&
 						mathFormsAndText !== undefined && delimitersAreMatching(mathFormsAndText)) {
 
+
+						hasMathContent = true;
+
+
 						let finishedFormulas = makeFormulas(mathFormsAndText);
 
 						const realRange = writer.createRange(node.previousPosition, node.nextPosition);
@@ -144,7 +148,7 @@ export default class AutoMath extends Plugin {
 						if (finishedFormulas.length === 3 && finishedFormulas[0].trim() === '' && finishedFormulas[2].trim() === '') {
 							writer.setSelection(mathElement, 'on');
 						}
-						if (!isAtStartOrEndOfText && isMultiLine) {
+						if (isMultiLine && hasMathContent) {
 							this._notUndoableOperation = 1;
 						}
 					}
