@@ -12,7 +12,7 @@ import MainFormView from './ui/mainformview';
 // Need math commands from there
 import MathEditing from './mathediting';
 
-import mathIcon from '../theme/icons/math.svg';
+import mathIcon from '../assets/math.svg';
 
 const mathKeystroke = 'Shift+3';
 

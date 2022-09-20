@@ -19,7 +19,7 @@ import { extractDelimiters, hasDelimiters } from '../utils';
 
 import MathView from './mathview';
 
-import '../../theme/mathform.css';
+import '../../styles/mathform.css';
 import shortcuts from './shortcutsview';
 import MathInputView from "./mathinputview";
 

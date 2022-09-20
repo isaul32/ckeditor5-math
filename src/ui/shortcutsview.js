@@ -1,7 +1,7 @@
 import { ListView } from '@ckeditor/ckeditor5-ui';
 import View from '@ckeditor/ckeditor5-ui/src/view';
 import { groupBy } from 'lodash';
-import svgIcons from '../../theme/icons/symbols-svg';
+import svgIcons from '../../assets/math-shortcut-icons';
 
 // choosen category
 let activeCategory = 'Allgemein';
@@ -36,7 +36,7 @@ const categories = Object.keys(groupedCommands).map(cat => {
     p.id = cat;
     p.innerText = cat;
     if(p.id == activeCategory) p.classList.add('active');
-    
+
     p.onclick = () => {
         activeCategory = p.innerText;
         document.querySelector('.active')?.classList.remove('active');
@@ -60,9 +60,9 @@ const renderCommands = (category) => {
         const li = document.createElement('li');
 
         li.onclick = () => {
-            document.querySelector('#math-input-field').value += command.element.id;
+            document.querySelector('#math-input-field').textContent += command.element.id;
             inputField.inputView.fire('input');
-    
+
             renderCommands(activeCategory);
         }
 
