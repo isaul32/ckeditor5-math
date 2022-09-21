@@ -153,6 +153,7 @@ export default class MainFormView extends View {
 		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
 		}
+		this.mathInputView.inputView.select();
 	}
 
 	_createKeyAndFocusTrackers() {
@@ -176,7 +177,6 @@ export default class MainFormView extends View {
 
 		// Create equation input
 		const mathInput = new LabeledInputView( this.locale, MathInputView );
-		document.mathinput = MathInputView;
 		const inputView = mathInput.inputView;
 		inputView.template.attributes.id[0] = 'math-input-field';
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
@@ -209,7 +209,6 @@ export default class MainFormView extends View {
 
 		inputView.on( 'render', onInput );
 		inputView.on( 'input', onInput );
-
 		mathInput.render();
 
 		return mathInput;

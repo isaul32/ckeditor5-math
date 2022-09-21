@@ -172,7 +172,14 @@ export default class MathInputView extends View {
 	 * Moves the focus to the input and selects the value.
 	 */
 	select() {
-		//this.element.select();
+		this.element.focus();
+		if (this.element.firstChild) {
+			const range = document.createRange();
+			range.selectNodeContents(this.element.firstChild);
+			const sel = window.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
 	}
 
 	/**
