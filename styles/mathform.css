@@ -48,6 +48,13 @@
 .math-icon {
 	width: 50px !important;
 	height: 50px !important;
+	cursor: pointer!important;
+	border: solid 1px transparent!important;
+	border-radius: 0.33rem;
+}
+
+.math-icon:hover {
+	border-color: #e5e5e5!important;
 }
 
 .shortcuts-list {
@@ -70,7 +77,7 @@
 
 .shortcuts-categories p.active {
 	border: 2px solid lightgray !important;
-	border-radius: 8px !important;
+	border-radius: 0.33rem !important;
 }
 
 .commands-list {

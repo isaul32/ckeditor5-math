@@ -14,7 +14,7 @@ import MathEditing from './mathediting';
 
 import mathIcon from '../assets/math.svg';
 
-const mathKeystroke = 'Shift+3';
+const mathKeystroke = 'Ctrl+4';
 
 export default class MathUI extends Plugin {
 	static get requires() {
@@ -209,11 +209,21 @@ export default class MathUI extends Plugin {
 		editor.keystrokes.set( mathKeystroke, ( keyEvtData, cancel ) => {
 			// Prevent focusing the search bar in FF and opening new tab in Edge. #153, #154.
 			cancel();
-
 			if ( mathCommand.isEnabled ) {
 				this._showUI();
 			}
 		} );
+
+		editor.editing.view.document.on( 'keydown', ( evt, data ) => {
+			if ( data.keyCode === 51 ) {
+				data.stopPropagation();
+				data.preventDefault();
+				evt.stop();
+				if ( mathCommand.isEnabled ) {
+					this._showUI();
+				}
+			}
+		}, { priority: 'highest' } );
 
 		this.editor.ui.componentFactory.add( 'math', locale => {
 			const button = new ButtonView( locale );
