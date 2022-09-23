@@ -249,9 +249,9 @@ export default class MathUI extends Plugin {
 		this.listenTo( viewDocument, 'click', () => {
 			const mathCommand = editor.commands.get( 'math' );
 			if ( mathCommand.value ) {
-				if ( mathCommand.isEnabled ) {
-
+				if ( mathCommand.isEnabled && (mathCommand.currentlyRealMathSelection || mathCommand.viewHasBeenOpened)) {
 					this._showUI();
+					mathCommand.viewHasBeenOpened = true;
 				}
 			}
 		} );

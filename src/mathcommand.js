@@ -10,6 +10,9 @@ export default class MathCommand extends Command {
 	rangeLastSelectedFormula = null;
 	keepOpen = false;
 
+	currentlyRealMathSelection = null;
+	viewHasBeenOpened = false;
+
 	execute( equation, display, outputType, forceOutputType ) {
 		const model = this.editor.model;
 		const selection = model.document.selection;
@@ -26,6 +29,7 @@ export default class MathCommand extends Command {
 				const type = forceOutputType ? outputType : typeAttr || outputType;
 
 				mathtex = writer.createElement( display ? 'mathtex-display' : 'mathtex-inline', { equation, type, display } );
+
 				model.insertContent( mathtex );
 			//updates formula even though selection in editor is not on formula
 			} else if ( this.lastSelectedFormulaSelection ) {
@@ -54,6 +58,8 @@ export default class MathCommand extends Command {
 		this.lastSelectedFormulaSelection = null;
 		this.lastSelectedElement = null;
 		this.rangeLastSelectedFormula = null;
+		this.currentlyRealMathSelection = null;
+		this.viewHasBeenOpened = false;
 		this.value = null;
 		this.display =  null;
 	}
@@ -78,6 +84,7 @@ export default class MathCommand extends Command {
 		if (selection !== null) {
 			selectedElement = selection.getSelectedElement();
 		}
+
 		//if selected element is null, also remember formula
 		this.isEnabled = selectedElement === null || (selectedElement.is('element', 'mathtex-inline') ||
 			selectedElement.is('element', 'mathtex-display'));
@@ -87,6 +94,9 @@ export default class MathCommand extends Command {
 			this.lastSelectedFormulaSelection = selection;
 			this.rangeLastSelectedFormula = model.createSelection(selection);
 			this.lastSelectedElement = selection.getSelectedElement();
+			this.currentlyRealMathSelection = selectedElement;
+		} else {
+			this.currentlyRealMathSelection = null;
 		}
 
 		if (this.keepOpen) {
