@@ -13,10 +13,10 @@ export default class MathCommand extends Command {
 	currentlyRealMathSelection = null;
 	viewHasBeenOpened = false;
 
-	execute( equation, display, outputType, forceOutputType ) {
+	execute( equation, display, outputType, forceOutputType) {
 		const model = this.editor.model;
 		const selection = model.document.selection;
-		const selectedElement = selection.getSelectedElement();
+		let selectedElement = selection.getSelectedElement();
 
 		model.change( writer => {
 			let mathtex;
@@ -24,23 +24,42 @@ export default class MathCommand extends Command {
 					selectedElement.is( 'element', 'mathtex-display' ) ) ) {
 				// Update selected element
 				const typeAttr = selectedElement.getAttribute( 'type' );
-
 				// Use already set type if found and is not forced
 				const type = forceOutputType ? outputType : typeAttr || outputType;
 
 				mathtex = writer.createElement( display ? 'mathtex-display' : 'mathtex-inline', { equation, type, display } );
+
+				//readd fontBackgoundColor and fontColor if they were already set
+				if (selectedElement.getAttribute('fontBackgroundColor')) {
+					let fontBackGroundColor = selectedElement.getAttribute('fontBackgroundColor');
+					writer.setAttribute('fontBackgroundColor', fontBackGroundColor, mathtex);
+				}
+				if (selectedElement.getAttribute('fontColor')) {
+					let fontColor = selectedElement.getAttribute('fontColor');
+					writer.setAttribute('fontColor', fontColor, mathtex);
+				}
 
 				model.insertContent( mathtex );
 			//updates formula even though selection in editor is not on formula
 			} else if ( this.lastSelectedFormulaSelection ) {
+				selectedElement = this.lastSelectedElement;
 				// Update selected element
-				const typeAttr = this.lastSelectedElement.getAttribute( 'type' );
-
+				const typeAttr = selectedElement.getAttribute( 'type' );
 				// Use already set type if found and is not forced
 				const type = forceOutputType ? outputType : typeAttr || outputType;
 
 				mathtex = writer.createElement( display ? 'mathtex-display' : 'mathtex-inline', { equation, type, display } );
-				//this.rangeLastSelectedFormula = model.createSelection( this.lastSelectedFormulaSelection );
+
+				//readd fontBackgoundColor and fontColor if they were already set
+				if (selectedElement.getAttribute('fontBackgroundColor')) {
+					let fontBackGroundColor = selectedElement.getAttribute('fontBackgroundColor');
+					writer.setAttribute('fontBackgroundColor', fontBackGroundColor, mathtex);
+				}
+				if (selectedElement.getAttribute('fontColor')) {
+					let fontColor = selectedElement.getAttribute('fontColor');
+					writer.setAttribute('fontColor', fontColor, mathtex);
+				}
+
 				model.insertContent( mathtex , this.rangeLastSelectedFormula );
 			} else {
 				// Create new model element

@@ -104,6 +104,7 @@ export default class MathUI extends Plugin {
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
+			console.log(formView);
 			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
 				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
 			this._closeFormView();
@@ -111,6 +112,7 @@ export default class MathUI extends Plugin {
 
 		// Listen to enter button click
 		formView.keystrokes.set( 'enter', () => {
+			console.log(formView);
 			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
 				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
 			this._closeFormView();
