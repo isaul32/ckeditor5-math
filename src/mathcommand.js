@@ -116,6 +116,10 @@ export default class MathCommand extends Command {
 			this.currentlyRealMathSelection = selectedElement;
 		} else {
 			this.currentlyRealMathSelection = null;
+			if ( !this.viewHasBeenOpened ) { //reset if keepopen false and therefore view not opened
+				this.resetMathCommand();
+				return;
+			}
 		}
 
 		if (this.keepOpen) {

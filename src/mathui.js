@@ -104,7 +104,6 @@ export default class MathUI extends Plugin {
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
-			console.log(formView);
 			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
 				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
 			this._closeFormView();
@@ -112,10 +111,11 @@ export default class MathUI extends Plugin {
 
 		// Listen to enter button click
 		formView.keystrokes.set( 'enter', () => {
-			console.log(formView);
-			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
-				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
-			this._closeFormView();
+			if (formView.focusTracker.focusedElement.classList.contains('ck-labeled-input')) { //enter in input (which is now div) submits formula
+				editor.execute('math', formView.equation, formView.displayButtonView.isOn,
+					mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen);
+				this._closeFormView();
+			}
 		} );
 
 		// Listen to cancel button click
@@ -250,11 +250,13 @@ export default class MathUI extends Plugin {
 		const viewDocument = this.editor.editing.view.document;
 		this.listenTo( viewDocument, 'click', () => {
 			const mathCommand = editor.commands.get( 'math' );
-			if ( mathCommand.value ) {
+			if ( mathCommand.value ) { //if you click on a formula, you want to open the view
 				if ( mathCommand.isEnabled && (mathCommand.currentlyRealMathSelection || mathCommand.viewHasBeenOpened)) {
 					this._showUI();
 					mathCommand.viewHasBeenOpened = true;
 				}
+			} else { //if you click somewhere else (and keepOpen is false, otherwise value would not change), forget previously saved fomula
+				mathCommand.resetMathCommand();
 			}
 		} );
 
@@ -275,7 +277,6 @@ export default class MathUI extends Plugin {
 				const mathCommand = editor.commands.get( 'math' );
 				if (!mathCommand.keepOpen) {
 					this._hideUI();
-					mathCommand.resetMathCommand();
 				}
 			}
 		} );
