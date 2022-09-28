@@ -31,7 +31,7 @@
 .ck.ck-labeled-input div {
 	width: inherit;
 	padding-top: 0.25rem;
-	white-space: normal
+	white-space: normal;
 }
 .ck-math-view {
 	max-width: 800px;

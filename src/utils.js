@@ -76,7 +76,7 @@ export function getMathFormsAndText( text ) {
 	return text.split(/(\\\[|\\\]|\\\(|\\\)|\$\$|\$)/g);
 }
 
-export function makeFormulas ( mathFormsAndText ) {
+export function makeFormulas( mathFormsAndText ) {
 	let a = [];
 	let displayMode = false;
 	for (let i = 0; i < mathFormsAndText.length; i++) {
@@ -102,19 +102,29 @@ export function makeFormulas ( mathFormsAndText ) {
 // Extract delimiters and figure display mode for the model
 export function extractDelimiters( equation ) {
 	equation = equation.trim();
+	let hasDelimiters = (equation.includes( '\\[' ) && equation.includes( '\\]' )) || (equation.includes( '\\(' ) && equation.includes( '\\)' ))
+		|| equation.includes('$$') || equation.includes('$');
+	let hasDisplayDelimiters = (equation.includes( '\\[' ) && equation.includes( '\\]' )) || equation.includes('$$');
+	let hasSingleLetterDelim = (equation.match(/(?<!\$)\$(?!\$)/));
 
 	// Remove delimiters (e.g. \( \) or \[ \])
-	const hasDollars = equation.substring(0,1).includes('$')
-	const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
-	const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
-	if ( hasInlineDelimiters || hasDisplayDelimiters ) {
-		equation = equation.substring( 2, equation.length - 2 ).trim();
+	if (hasDelimiters) {
+		if (hasSingleLetterDelim) {
+			equation = equation.substring(1, equation.length - 1).trim();
+		} else {
+			equation = equation.substring(2, equation.length - 2).trim();
+		}
 	}
-
 	return {
 		equation,
 		display: hasDisplayDelimiters
 	};
+}
+
+//returns true if mathformulas at [0] has a blank string, and end too, and has len == 5
+//that is only true if it is only a single formula that has no text before or after it
+export function delimitersAreAtBeginningAndEnd( mathFormulas ) {
+	return !!(mathFormulas.length === 5 && mathFormulas[0].trim().length === 0 && mathFormulas[mathFormulas.length-1].trim().length === 0);
 }
 
 export async function renderEquation(

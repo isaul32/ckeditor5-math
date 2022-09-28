@@ -15,7 +15,14 @@ import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
 
 import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
 
-import { extractDelimiters, hasDelimiters } from '../utils';
+import {
+	delimitersAreAtBeginningAndEnd,
+	delimitersAreMatching,
+	delimitersCounts,
+	extractDelimiters,
+	getMathFormsAndText,
+	hasDelimiters
+} from '../utils';
 
 import MathView from './mathview';
 
@@ -186,7 +193,10 @@ export default class MainFormView extends View {
 				let equationInput = inputView.element.textContent.trim();
 
 				// If input has delimiters
-				if ( hasDelimiters( equationInput ) ) {
+				if ( hasDelimiters( equationInput )
+					&& delimitersCounts(equationInput) % 2 === 0
+					&& delimitersAreMatching(getMathFormsAndText(equationInput))
+					&& delimitersAreAtBeginningAndEnd(getMathFormsAndText(equationInput))) {
 					// Get equation without delimiters
 					const params = extractDelimiters( equationInput );
 
