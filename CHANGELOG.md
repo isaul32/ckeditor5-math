@@ -4,6 +4,11 @@
 
 -   Add latest changes here
 
+## [34.2.0](https://github.com/isaul32/ckeditor5-math/compare/v34.1.1...v34.2.0) (2022-09-28)
+
+-   Update dependencies for CKEditor 34.2.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v34.2.0/CHANGELOG.md))
+
 ## [34.1.1](https://github.com/isaul32/ckeditor5-math/compare/v34.1.0...v34.1.1) (2022-08-03)
 
 -   New configuration setting, `katexRenderOptions` (optional) - for KaTeX engines. Accepts object of `katex.render()` / `katex.renderToString()` [options](https://katex.org/docs/options.html):
