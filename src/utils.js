@@ -1,6 +1,7 @@
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
 import katex from "katex/dist/katex.mjs";
+import {indexOf} from "lodash";
 
 export function getSelectedMathModelWidget( selection ) {
 	if (selection == null) {
@@ -105,7 +106,21 @@ export function extractDelimiters( equation ) {
 	let hasDelimiters = (equation.includes( '\\[' ) && equation.includes( '\\]' )) || (equation.includes( '\\(' ) && equation.includes( '\\)' ))
 		|| equation.includes('$$') || equation.includes('$');
 	let hasDisplayDelimiters = (equation.includes( '\\[' ) && equation.includes( '\\]' )) || equation.includes('$$');
-	let hasSingleLetterDelim = (equation.match(/(?<!\$)\$(?!\$)/));
+	let hasSingleLetterDelim = equation.indexOf('$') !== -1;
+
+	let offset = 0;
+	let positionOfDollar = 0;
+
+	//safari can't use lookbehind or lookforward regex, so custom method of finding was implemented
+	//looks if there is a '$' in string equation which is not followed or preceded by another '$'
+	while ( (positionOfDollar = equation.indexOf('$', offset)) !== -1 ) {
+		if (positionOfDollar !== 0 && positionOfDollar + 1 !== equation.length ) {
+			if (equation[positionOfDollar+1] === '$' || equation[positionOfDollar-1] === '$' ) {
+				hasSingleLetterDelim = false;
+			}
+		}
+		offset += 1;
+	}
 
 	// Remove delimiters (e.g. \( \) or \[ \])
 	if (hasDelimiters) {
@@ -115,6 +130,16 @@ export function extractDelimiters( equation ) {
 			equation = equation.substring(2, equation.length - 2).trim();
 		}
 	}
+
+
+	// // Remove delimiters (e.g. \( \) or \[ \])
+	// const hasDollars = equation.substring(0,1).includes('$')
+	// const hasInlineDelimiters = equation.includes( '\\(' ) && equation.includes( '\\)' );
+	// const hasDisplayDelimiters = equation.includes( '\\[' ) && equation.includes( '\\]' );
+	// if ( hasInlineDelimiters || hasDisplayDelimiters ) {
+	// 	equation = equation.substring( 2, equation.length - 2 ).trim();
+	// }
+
 	return {
 		equation,
 		display: hasDisplayDelimiters
