@@ -217,7 +217,7 @@ export default class MathUI extends Plugin {
 		} );
 
 		editor.editing.view.document.on( 'keydown', ( evt, data ) => {
-			if ( data.keyCode === 51 ) {
+			if ( data.keyCode === 51 && data.shiftKey ) {
 				data.stopPropagation();
 				data.preventDefault();
 				evt.stop();
