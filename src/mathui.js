@@ -110,11 +110,12 @@ export default class MathUI extends Plugin {
 		} );
 
 		// Listen to enter button click
-		formView.keystrokes.set( 'enter', () => {
+		formView.keystrokes.set( 'enter', ( data, cancel ) => {
 			if (formView.focusTracker.focusedElement.classList.contains('ck-labeled-input')) { //enter in input (which is now div) submits formula
 				editor.execute('math', formView.equation, formView.displayButtonView.isOn,
 					mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen);
 				this._closeFormView();
+				cancel();
 			}
 		} );
 
