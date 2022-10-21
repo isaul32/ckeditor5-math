@@ -71,10 +71,6 @@ export default class MainFormView extends View {
 			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName, katexRenderOptions );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
-			// Common commands label
-			this.commandsLabel = new LabelView( locale );
-			this.commandsLabel.text = t( 'Common commands' );
-
 
 			children = [
 				this.mathInputView,
@@ -82,7 +78,6 @@ export default class MainFormView extends View {
 				this.keepOpenButtonView,
 				this.previewLabel,
 				this.mathView,
-				this.commandsLabel,
 				shortcuts(this.mathInputView, this.mathView),
 			];
 		} else {
