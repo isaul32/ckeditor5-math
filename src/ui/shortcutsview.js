@@ -39,9 +39,11 @@ const categories = Object.keys(groupedCommands).map(cat => {
     if(p.id == activeCategory) p.classList.add('active');
 
     p.onmousedown = (e) => {
+		for (let a of categories) {
+			a.classList.remove('active')
+		}
 		e.preventDefault();
 		activeCategory = p.innerText;
-		document.querySelector('.active')?.classList.remove('active');
 		p.classList.add('active');
 		renderCommands(activeCategory);
 		//inputField.inputView.focus();
