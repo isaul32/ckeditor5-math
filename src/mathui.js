@@ -106,7 +106,7 @@ export default class MathUI extends Plugin {
 		this.listenTo( formView, 'submit', () => {
 			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn,
 				mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen );
-			this._closeFormView();
+			this._closeFormView(false);
 		} );
 
 		// Listen to enter button click
@@ -114,19 +114,19 @@ export default class MathUI extends Plugin {
 			if (formView.focusTracker.focusedElement.classList.contains('ck-labeled-input')) { //enter in input (which is now div) submits formula
 				editor.execute('math', formView.equation, formView.displayButtonView.isOn,
 					mathConfig.outputType, mathConfig.forceOutputType, mathCommand.keepOpen);
-				this._closeFormView();
+				this._closeFormView(false);
 				cancel();
 			}
 		} );
 
 		// Listen to cancel button click
 		this.listenTo( formView, 'cancel', () => {
-			this._closeFormView();
+			this._closeFormView(true);
 		} );
 
 		// Close plugin ui, if esc is pressed (while ui is focused)
 		formView.keystrokes.set( 'esc', ( data, cancel ) => {
-			this._closeFormView();
+			this._closeFormView(true);
 			cancel();
 		} );
 
@@ -177,10 +177,10 @@ export default class MathUI extends Plugin {
 		this._removeFormView();
 	}
 
-	_closeFormView() {
+	_closeFormView(cancel) {
 		const mathCommand = this.editor.commands.get( 'math' );
-		if ( mathCommand.value !== undefined ) {
-			mathCommand.resetMathCommand();
+		if ( mathCommand.value !== undefined) {
+			mathCommand.resetMathCommand(cancel);
 			this._removeFormView();
 		} else {
 			this._hideUI();
@@ -252,12 +252,12 @@ export default class MathUI extends Plugin {
 		this.listenTo( viewDocument, 'click', () => {
 			const mathCommand = editor.commands.get( 'math' );
 			if ( mathCommand.value ) { //if you click on a formula, you want to open the view
-				if ( mathCommand.isEnabled && (mathCommand.currentlyRealMathSelection || mathCommand.viewHasBeenOpened)) {
+				if ( mathCommand.isEnabled && (mathCommand.currentlyRealMathSelection || mathCommand.viewHasBeenOpened || mathCommand.afterEsc) ) {
 					this._showUI();
 					mathCommand.viewHasBeenOpened = true;
 				}
 			} else { //if you click somewhere else (and keepOpen is false, otherwise value would not change), forget previously saved fomula
-				mathCommand.resetMathCommand();
+				mathCommand.resetMathCommand(false);
 			}
 		} );
 

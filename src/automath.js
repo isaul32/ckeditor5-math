@@ -155,7 +155,7 @@ export default class AutoMath extends Plugin {
 				}
 			});
 			if ( editor.commands.get( 'math' ).keepOpen ) {
-				mathCommand.resetMathCommand();
+				mathCommand.resetMathCommand(false);
 			}
 		}, 100);
 	}

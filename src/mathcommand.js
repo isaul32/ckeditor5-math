@@ -9,7 +9,7 @@ export default class MathCommand extends Command {
 	lastSelectedElement = null;
 	rangeLastSelectedFormula = null;
 	keepOpen = false;
-
+	afterEsc = false;
 	currentlyRealMathSelection = null;
 	viewHasBeenOpened = false;
 
@@ -67,20 +67,23 @@ export default class MathCommand extends Command {
 				model.insertContent( mathtex );
 			}
 			if ( this.keepOpen ) {
-				this.resetMathCommand();
+				this.resetMathCommand(false);
 			}
 		} );
 	}
 
 	//Reset values after formula is updated or canceled (after cancel button in mathui is pressed)
-	resetMathCommand() {
-		this.lastSelectedFormulaSelection = null;
-		this.lastSelectedElement = null;
-		this.rangeLastSelectedFormula = null;
+	resetMathCommand(setEsc) {
 		this.currentlyRealMathSelection = null;
 		this.viewHasBeenOpened = false;
-		this.value = null;
 		this.display =  null;
+		if (!setEsc) {
+			this.lastSelectedFormulaSelection = null;
+			this.lastSelectedElement = null;
+			this.rangeLastSelectedFormula = null;
+			this.value = null;
+		}
+		this.afterEsc = setEsc;
 	}
 
 	enableChangesBeforeFormView() {
@@ -117,7 +120,7 @@ export default class MathCommand extends Command {
 		} else {
 			this.currentlyRealMathSelection = null;
 			if ( !this.viewHasBeenOpened ) { //reset if keepopen false and therefore view not opened
-				this.resetMathCommand();
+				this.resetMathCommand(false);
 				return;
 			}
 		}
