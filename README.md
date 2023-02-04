@@ -132,6 +132,7 @@ InlineEditor.defaultConfig = {
 		engine: 'mathjax', // or katex or function. E.g. (equation, element, display) => { ... }
 		lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
 		outputType: 'script', // or span
+		className: 'math-tex', // class name to use with span output type, change e.g. MathJax processClass (v2) / processHtmlClass (v3) is set
 		forceOutputType: false, // forces output to use outputType
 		enablePreview: true, // Enable preview view
 		previewClassName: [], // Class names to add to previews

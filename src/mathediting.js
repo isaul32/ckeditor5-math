@@ -26,6 +26,7 @@ export default class MathEditing extends Plugin {
 		editor.config.define( 'math', {
 			engine: 'mathjax',
 			outputType: 'script',
+			className: 'math-tex',
 			forceOutputType: false,
 			enablePreview: true,
 			previewClassName: [],
@@ -95,7 +96,7 @@ export default class MathEditing extends Plugin {
 			.elementToElement( {
 				view: {
 					name: 'span',
-					classes: [ 'math-tex' ]
+					classes: [ mathConfig.className ]
 				},
 				model: ( viewElement, { writer } ) => {
 					const equation = viewElement.getChild( 0 ).data.trim();
@@ -185,7 +186,7 @@ export default class MathEditing extends Plugin {
 
 			if ( type === 'span' ) {
 				const mathtexView = writer.createContainerElement( 'span', {
-					class: 'math-tex'
+					class: mathConfig.className
 				} );
 
 				if ( display ) {
