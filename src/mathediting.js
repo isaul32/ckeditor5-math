@@ -1,9 +1,6 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
-
 import MathCommand from './mathcommand';
-
+import { Plugin } from 'ckeditor5/src/core';
+import { toWidget, Widget, viewToModelPositionOutsideModelElement } from 'ckeditor5/src/widget';
 import { renderEquation, extractDelimiters } from './utils';
 
 export default class MathEditing extends Plugin {

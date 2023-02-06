@@ -3,6 +3,7 @@
 	align-items: flex-start;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	padding: var(--ck-spacing-standard);
 
 	@media screen and (max-width: 600px) {
 		flex-wrap: wrap;
@@ -10,7 +11,7 @@
 		& .ck-math-view {
 			flex-basis: 100%;
 
-			& .ck-labeled-input {
+			& .ck-labeled-view {
 				flex-basis: 100%;
 			}
 

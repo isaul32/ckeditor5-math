@@ -1,4 +1,4 @@
-import ClassicTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/classictesteditor';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Mathematics from '../src/math';
 import MathEditing from '../src/mathediting';
 import MathUI from '../src/mathui';
@@ -13,7 +13,7 @@ describe( 'Math', () => {
 		editorElement = global.document.createElement( 'div' );
 		global.document.body.appendChild( editorElement );
 
-		return ClassicTestEditor
+		return ClassicEditor
 			.create( editorElement, {
 				plugins: [ Mathematics ]
 			} )

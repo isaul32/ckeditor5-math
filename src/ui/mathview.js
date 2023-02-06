@@ -1,5 +1,4 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-
+import { View } from 'ckeditor5/src/ui';
 import { renderEquation } from '../utils';
 
 export default class MathView extends View {

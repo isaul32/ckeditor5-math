@@ -1,5 +1,6 @@
 node_modules/
 build/
+tmp/
+sample/ckeditor.dist.js
 package-lock.json
 yarn-error.log
-public

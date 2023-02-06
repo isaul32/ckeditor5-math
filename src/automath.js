@@ -1,10 +1,8 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
-import Undo from '@ckeditor/ckeditor5-undo/src/undo';
-import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
-import LivePosition from '@ckeditor/ckeditor5-engine/src/model/liveposition';
-import global from '@ckeditor/ckeditor5-utils/src/dom/global';
-
+import { Clipboard } from 'ckeditor5/src/clipboard';
+import { Plugin } from 'ckeditor5/src/core';
+import { LivePosition, LiveRange } from 'ckeditor5/src/engine';
+import { Undo } from 'ckeditor5/src/undo';
+import { global } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
 
 export default class AutoMath extends Plugin {

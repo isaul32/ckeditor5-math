@@ -1,5 +1,5 @@
 {
-  "name": "ckeditor5-math",
+  "name": "@isaul32/ckeditor5-math",
   "version": "36.0.2",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
@@ -11,41 +11,37 @@
     "ckeditor5-math",
 	"katex"
   ],
-  "resolutions": {
-    "postcss-loader": "^4.3.0",
-    "mini-css-extract-plugin": "2.4.2"
-  },
+  "main": "src/index.js",
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "^36.0.1",
-    "@ckeditor/ckeditor5-core": "^36.0.1",
-    "@ckeditor/ckeditor5-engine": "^36.0.1",
-    "@ckeditor/ckeditor5-inspector": "^3.0.0",
-    "@ckeditor/ckeditor5-ui": "^36.0.1",
-    "@ckeditor/ckeditor5-undo": "^36.0.1",
-    "@ckeditor/ckeditor5-utils": "^36.0.1",
-    "@ckeditor/ckeditor5-widget": "^36.0.1"
+    "ckeditor5": "^36.0.1"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^36.0.1",
-    "@ckeditor/ckeditor5-dev-tests": "^30.0.0",
-    "@ckeditor/ckeditor5-editor-classic": "^36.0.1",
-    "@ckeditor/ckeditor5-editor-inline": "^36.0.1",
-    "@ckeditor/ckeditor5-essentials": "^36.0.1",
-    "@ckeditor/ckeditor5-paragraph": "^36.0.1",
-    "@ckeditor/ckeditor5-theme-lark": "^36.0.1",
-    "css-loader": "^5.2.7",
-    "eslint": "^7.1.0",
-    "eslint-config-ckeditor5": "^3.1.1",
-    "html-webpack-plugin": "^5.3.1",
+    "@ckeditor/ckeditor5-autoformat": ">=36.0.1",
+    "@ckeditor/ckeditor5-basic-styles": ">=36.0.1",
+    "@ckeditor/ckeditor5-block-quote": ">=36.0.1",
+    "@ckeditor/ckeditor5-code-block": ">=36.0.1",
+    "@ckeditor/ckeditor5-core": ">=36.0.1",
+    "@ckeditor/ckeditor5-editor-classic": ">=36.0.1",
+    "@ckeditor/ckeditor5-essentials": ">=36.0.1",
+    "@ckeditor/ckeditor5-heading": ">=36.0.1",
+    "@ckeditor/ckeditor5-image": ">=36.0.1",
+    "@ckeditor/ckeditor5-indent": ">=36.0.1",
+    "@ckeditor/ckeditor5-inspector": ">=4.1.0",
+    "@ckeditor/ckeditor5-link": ">=36.0.1",
+    "@ckeditor/ckeditor5-list": ">=36.0.1",
+    "@ckeditor/ckeditor5-media-embed": ">=36.0.1",
+    "@ckeditor/ckeditor5-package-tools": "^1.0.0-beta.8",
+    "@ckeditor/ckeditor5-paragraph": ">=36.0.1",
+    "@ckeditor/ckeditor5-table": ">=36.0.1",
+    "@ckeditor/ckeditor5-theme-lark": ">=36.0.1",
+    "@ckeditor/ckeditor5-upload": ">=36.0.1",
+    "eslint": "^7.32.0",
+    "eslint-config-ckeditor5": ">=4.1.1",
+    "http-server": "^14.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
-    "mini-css-extract-plugin": "^2.4.2",
-    "raw-loader": "^4.0.1",
-    "stylelint": "^13.5.0",
-    "stylelint-config-ckeditor5": "^2.0.1",
-    "webpack": "^5.58.1",
-    "webpack-cli": "^4.9.0",
-    "webpack-dev-server": "^3.11.2"
+    "stylelint": "^13.13.1",
+    "stylelint-config-ckeditor5": ">=4.1.1"
   },
   "engines": {
     "node": ">=14.0.0",
@@ -61,14 +57,20 @@
   "files": [
     "lang",
     "src",
-    "theme"
+    "build",
+    "theme",
+    "ckeditor5-metadata.json",
+    "CHANGELOG.md"
   ],
   "scripts": {
+    "dll:build": "ckeditor5-package-tools dll:build",
+    "dll:serve": "http-server ./ -o sample/dll.html",
     "lint": "eslint --quiet src/**/*.js",
     "lint:fix": "eslint --quiet src/**/*.js --fix",
-    "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css' 'docs/**/*.css'",
-    "test": "node node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js",
-    "start": "node node_modules/.bin/webpack serve --mode development"
+    "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css'",
+    "test": "ckeditor5-package-tools test",
+    "prepare": "yarn run dll:build",
+    "start": "ckeditor5-package-tools start"
   },
   "lint-staged": {
     "**/*.js": [
