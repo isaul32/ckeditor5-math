@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://ckeditor.com/docs/ckeditor5/latest/assets/img/favicons/32x32.png" sizes="32x32">
+    <meta charset="utf-8">
+    <title>CKEditor 5 with ckeditor5-math – DLL Sample</title>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.13.5/dist/katex.min.css"
+        integrity="sha384-L+Gq2Cso/Y2x8fX4wausgiZT8z0QPZz7OqPuz4YqAycQJyrJT9NRLpjFBD6zlOia"
+        crossorigin="anonymous"
+    />
+    <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.13.5/dist/katex.min.js"
+        integrity="sha384-z64WtjpyrKFsxox9eI4SI8eM9toXdoYeWb5Qh+8PO+eG54Bv9BZqf9xNhlcLf/sA"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.13.5/dist/contrib/auto-render.min.js"
+        integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {'macros': {'\\test': '\\mathrel{\\char`≠}'}});"
+    ></script>
+    <style>body { max-width: 800px; margin: 20px auto; }</style>
+</head>
+<body>
+
+<h1>CKEditor 5 with ckeditor5-math – DLL Sample</h1>
+
+<div id="editor">
+    <h2>Production sample</h2>
+    <p>
+        This is a demo of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor">classic editor build</a> that loads the <code>Math</code> and <code>AutoformatMath</code> plugin.
+    </p>
+    <p>
+        <code>Math</code> inserts mathematical formulas into the editor. You can click the CKEditor 5 Math icon in the toolbar and see the results.
+    </p>
+    <p><script type="math/tex">e=mc^2</script></p>
+    <p><script type="math/tex; mode=display">e=mc^2</script></p>
+    <p>
+       This should show "\test" as ≠ via katexRenderOptions.macros:
+       <script type="math/tex">\test</script>
+    </p>
+    <!-- Quill Style Tag -->
+    <p><span class="ql-formula" data-value="e=mc^2"></span></p>
+</div>
+
+<!-- DLL builds are served from the `node_modules/` directory -->
+<script src="../node_modules/ckeditor5/build/ckeditor5-dll.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-editor-classic/build/editor-classic.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-code-block/build/code-block.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-essentials/build/essentials.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-basic-styles/build/basic-styles.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-heading/build/heading.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-autoformat/build/autoformat.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-block-quote/build/block-quote.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-image/build/image.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-link/build/link.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-indent/build/indent.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-media-embed/build/media-embed.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-list/build/list.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-table/build/table.js"></script>
+
+<!-- The "ckeditor5-math" package DLL build is served from the `build/` directory -->
+<script src="../build/math.js"></script>
+
+<script>
+    console.log( 'Objects exported by the DLL build:', CKEditor5.math );
+
+    CKEditor5.editorClassic.ClassicEditor
+        .create( document.querySelector( '#editor' ), {
+            math: {
+                engine: 'katex',
+                katexRenderOptions: {
+                    macros: {
+                        '\\test': '\\mathrel{\\char`≠}'
+                    }
+                }
+            },
+            plugins: [
+                CKEditor5.math.Math,
+                CKEditor5.math.AutoformatMath,
+                CKEditor5.essentials.Essentials,
+                CKEditor5.autoformat.Autoformat,
+                CKEditor5.blockQuote.BlockQuote,
+                CKEditor5.basicStyles.Bold,
+                CKEditor5.heading.Heading,
+                CKEditor5.image.Image,
+                CKEditor5.image.ImageCaption,
+                CKEditor5.image.ImageStyle,
+                CKEditor5.image.ImageToolbar,
+                CKEditor5.image.ImageUpload,
+                CKEditor5.indent.Indent,
+                CKEditor5.basicStyles.Italic,
+                CKEditor5.link.Link,
+                CKEditor5.list.List,
+                CKEditor5.mediaEmbed.MediaEmbed,
+                CKEditor5.paragraph.Paragraph,
+                CKEditor5.table.Table,
+                CKEditor5.table.TableToolbar,
+                CKEditor5.codeBlock.CodeBlock,
+                CKEditor5.basicStyles.Code,
+                CKEditor5.upload.Base64UploadAdapter
+            ],
+            toolbar: [
+                'math',
+                '|',
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'code',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'outdent',
+                'indent',
+                '|',
+                'uploadImage',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                'codeBlock',
+                '|',
+                'undo',
+                'redo'
+            ],
+            image: {
+                toolbar: [
+                    'imageStyle:inline',
+                    'imageStyle:block',
+                    'imageStyle:side',
+                    '|',
+                    'imageTextAlternative'
+                ]
+            },
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells'
+                ]
+            }
+        } )
+        .then( editor => {
+            window.editor = editor;
+        } )
+        .catch( error => {
+            console.error( 'There was a problem initializing the editor.', error );
+        } );
+</script>
+</body>
+</html>

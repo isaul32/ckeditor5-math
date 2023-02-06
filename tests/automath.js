@@ -1,6 +1,6 @@
 import Mathematics from '../src/math';
 import AutoMath from '../src/automath';
-import ClassicTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/classictesteditor';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
@@ -15,7 +15,7 @@ describe( 'AutoMath - integration', () => {
 		editorElement = global.document.createElement( 'div' );
 		global.document.body.appendChild( editorElement );
 
-		return ClassicTestEditor
+		return ClassicEditor
 			.create( editorElement, {
 				plugins: [ Mathematics, AutoMath, Typing, Paragraph ],
 				math: {

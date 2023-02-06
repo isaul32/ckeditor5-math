@@ -1,26 +1,14 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
-
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/switchbuttonview';
-import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
-import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
-import LabelView from '@ckeditor/ckeditor5-ui/src/label/labelview';
-
-import KeystrokeHandler from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
-import FocusTracker from '@ckeditor/ckeditor5-utils/src/focustracker';
-import FocusCycler from '@ckeditor/ckeditor5-ui/src/focuscycler';
-
-import checkIcon from '@ckeditor/ckeditor5-core/theme/icons/check.svg';
-import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
-
-import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
-
+import { icons } from 'ckeditor5/src/core';
+import {
+	ButtonView, createLabeledInputText, FocusCycler, LabelView, LabeledFieldView,
+	submitHandler, SwitchButtonView, View, ViewCollection
+} from 'ckeditor5/src/ui';
+import { FocusTracker, KeystrokeHandler } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters } from '../utils';
-
 import MathView from './mathview';
-
 import '../../theme/mathform.css';
+
+const { check: checkIcon, cancel: cancelIcon } = icons;
 
 export default class MainFormView extends View {
 	constructor( locale, engine, lazyLoad, previewEnabled, previewUid, previewClassName, popupClassName, katexRenderOptions ) {
@@ -127,11 +115,11 @@ export default class MainFormView extends View {
 	}
 
 	get equation() {
-		return this.mathInputView.inputView.element.value;
+		return this.mathInputView.fieldView.element.value;
 	}
 
 	set equation( equation ) {
-		this.mathInputView.inputView.element.value = equation;
+		this.mathInputView.fieldView.element.value = equation;
 		if ( this.previewEnabled ) {
 			this.mathView.value = equation;
 		}
@@ -157,13 +145,13 @@ export default class MainFormView extends View {
 		const t = this.locale.t;
 
 		// Create equation input
-		const mathInput = new LabeledInputView( this.locale, InputTextView );
-		const inputView = mathInput.inputView;
+		const mathInput = new LabeledFieldView( this.locale, createLabeledInputText );
+		const fieldView = mathInput.fieldView;
 		mathInput.infoText = t( 'Insert equation in TeX format.' );
 
 		const onInput = () => {
-			if ( inputView.element != null ) {
-				let equationInput = inputView.element.value.trim();
+			if ( fieldView.element != null ) {
+				let equationInput = fieldView.element.value.trim();
 
 				// If input has delimiters
 				if ( hasDelimiters( equationInput ) ) {
@@ -171,7 +159,7 @@ export default class MainFormView extends View {
 					const params = extractDelimiters( equationInput );
 
 					// Remove delimiters from input field
-					inputView.element.value = params.equation;
+					fieldView.element.value = params.equation;
 
 					equationInput = params.equation;
 
@@ -187,8 +175,8 @@ export default class MainFormView extends View {
 			}
 		};
 
-		inputView.on( 'render', onInput );
-		inputView.on( 'input', onInput );
+		fieldView.on( 'render', onInput );
+		fieldView.on( 'input', onInput );
 
 		return mathInput;
 	}

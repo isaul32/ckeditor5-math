@@ -60,8 +60,8 @@ If you get duplicated modules error, you have mismatching versions.
 
 Use official classic or inline build as a base:
 
--   [CKEditor 5 classic editor build](https://github.com/ckeditor/ckeditor5-build-classic)
--   [CKEditor 5 inline editor build](https://github.com/ckeditor/ckeditor5-build-inline)
+-   [CKEditor 5 classic editor build](https://github.com/ckeditor/ckeditor5/tree/master/packages/ckeditor5-build-classic)
+-   [CKEditor 5 inline editor build](https://github.com/ckeditor/ckeditor5/tree/master/packages/ckeditor5-build-inline)
 
 Install plugin with NPM or Yarn
 
@@ -72,7 +72,8 @@ Install plugin with NPM or Yarn
 Add import into ckeditor.js file
 
 ```js
-import Mathematics from 'ckeditor5-math/src/math';
+import Math from 'ckeditor5-math/src/math';
+import AutoformatMath from 'ckeditor5-math/src/autoformatmath';
 ```
 
 Add it to built-in plugins
@@ -80,7 +81,8 @@ Add it to built-in plugins
 ```js
 InlineEditor.builtinPlugins = [
 	// ...
-	Mathematics
+	Math,
+	AutoformatMath
 ];
 ```
 
@@ -100,6 +102,24 @@ InlineEditor.defaultConfig = {
 ### Styles for Lark theme
 
 **Copy theme/ckeditor5-math folder** from [https://github.com/isaul32/ckeditor5/tree/master/packages/ckeditor5-theme-lark](https://github.com/isaul32/ckeditor5/tree/master/packages/ckeditor5-theme-lark) to your lark theme repository
+
+### Using DLL builds
+
+Use the [official DLL build](https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/alternative-setups/dll-builds.html) and additionally load the math plugin:
+
+```html
+<script src="path/to/node_modules/isaul32/ckeditor5-math/build/math.js"></script>
+<script>
+CKEditor5.editorClassic.ClassicEditor
+	.create(editorElement, {
+		plugins: [
+			CKEditor5.math.Math,
+			...
+		],
+		...
+	});
+</script>
+```
 
 ## Configuration & Usage
 
@@ -216,12 +236,28 @@ Add following lines into your build
 
 ```js
 // ...
-import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
+import AutoformatMath from 'ckeditor5-math/src/autoformatmath';
 
 InlineEditor.builtinPlugins = [
 	// ...
-	AutoformatMathematics
+	AutoformatMath
 ];
+```
+
+or use it with DLL build
+
+```html
+<script src="path/to/node_modules/isaul32/ckeditor5-math/build/math.js"></script>
+<script>
+CKEditor5.editorInline.InlineEditorEditor
+	.create(editorElement, {
+		plugins: [
+			CKEditor5.math.AutoformatMath,
+			...
+		],
+		...
+	});
+</script>
 ```
 
 ## Preview workaround

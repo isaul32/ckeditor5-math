@@ -1,5 +1,5 @@
-import global from '@ckeditor/ckeditor5-utils/src/dom/global';
-import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
+import { BalloonPanelView } from 'ckeditor5/src/ui';
+import { global } from 'ckeditor5/src/utils';
 
 export function getSelectedMathModelWidget( selection ) {
 	const selectedElement = selection.getSelectedElement();
