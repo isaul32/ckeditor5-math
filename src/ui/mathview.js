@@ -10,6 +10,7 @@ export default class MathView extends View {
 		this.lazyLoad = lazyLoad;
 		this.previewUid = previewUid;
 		this.katexRenderOptions = katexRenderOptions;
+		this.previewClassName = previewClassName;
 
 		this.set( 'value', '' );
 		this.set( 'display', false );
