@@ -4,6 +4,12 @@
 
 -   Add latest changes here
 
+## [36.0.3](https://github.com/isaul32/ckeditor5-math/compare/v36.0.2...v36.0.3) (unreleased)
+
+- Move to a DLL compatible plugin (#83)
+
+  Credit: @DanielKulbe
+
 ## [36.0.2](https://github.com/isaul32/ckeditor5-math/compare/v36.0.1...v36.0.2) (2023-02-14)
 
 -   Fix `previewClassName` (#86)
