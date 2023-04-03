@@ -4,6 +4,16 @@
 
 -   Add latest changes here
 
+## [36.0.5](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.4) (2023-04-03)
+
+-   Update docs for new package name (#91)
+
+    -   Old: ckeditor5-math
+    -   New: @isaul32/ckeditor5-math
+
+-   New feature: Make className of span element configurable (#82, thank you
+    @DanielKulbe)
+
 ## [36.0.4](https://github.com/isaul32/ckeditor5-math/compare/v36.0.3...v36.0.4) (2023-03-13)
 
 -   New package name
