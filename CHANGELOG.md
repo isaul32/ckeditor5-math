@@ -3,6 +3,10 @@
 ## Current
 
 -   Add latest changes here
+-   Update docs for new package name (#91)
+
+    - Old: ckeditor5-math
+	- New: @isaul32/ckeditor5-math
 -   New feature: Make className of span element configurable (#82, thank you
     @DanielKulbe)
 
