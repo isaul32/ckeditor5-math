@@ -1,4 +1,4 @@
-# CKEditor 5 mathematical feature &middot; [![GitHub license](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/isaul32/ckeditor5-math/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/ckeditor5-math.svg?style=flat)](https://www.npmjs.com/package/ckeditor5-math)
+# CKEditor 5 mathematical feature &middot; [![GitHub license](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/isaul32/ckeditor5-math/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@isaul32/ckeditor5-math.svg?style=flat)](https://www.npmjs.com/package/@isaul32/ckeditor5-math)
 
 ckeditor5-math is a TeX-based mathematical plugin for CKEditor 5. You can use it to insert, edit, and view mathematical equations and formulas. This plugin supports [MathJax], [KaTeX] and custom typesetting engines.
 
@@ -65,15 +65,15 @@ Use official classic or inline build as a base:
 
 Install plugin with NPM or Yarn
 
-`npm install ckeditor5-math --save-dev`
+`npm install @isaul32/ckeditor5-math --save-dev`
 
-`yarn add ckeditor5-math --dev`
+`yarn add @isaul32/ckeditor5-math --dev`
 
 Add import into ckeditor.js file
 
 ```js
-import Math from 'ckeditor5-math/src/math';
-import AutoformatMath from 'ckeditor5-math/src/autoformatmath';
+import Math from '@isaul32/ckeditor5-math/src/math';
+import AutoformatMath from '@isaul32/ckeditor5-math/src/autoformatmath';
 ```
 
 Add it to built-in plugins
@@ -108,7 +108,7 @@ InlineEditor.defaultConfig = {
 Use the [official DLL build](https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/alternative-setups/dll-builds.html) and additionally load the math plugin:
 
 ```html
-<script src="path/to/node_modules/isaul32/ckeditor5-math/build/math.js"></script>
+<script src="path/to/node_modules/@isaul32/ckeditor5-math/build/math.js"></script>
 <script>
 CKEditor5.editorClassic.ClassicEditor
 	.create(editorElement, {
@@ -237,7 +237,7 @@ Add following lines into your build
 
 ```js
 // ...
-import AutoformatMath from 'ckeditor5-math/src/autoformatmath';
+import AutoformatMath from '@isaul32/ckeditor5-math/src/autoformatmath';
 
 InlineEditor.builtinPlugins = [
 	// ...
@@ -248,7 +248,7 @@ InlineEditor.builtinPlugins = [
 or use it with DLL build
 
 ```html
-<script src="path/to/node_modules/isaul32/ckeditor5-math/build/math.js"></script>
+<script src="path/to/node_modules/@isaul32/ckeditor5-math/build/math.js"></script>
 <script>
 CKEditor5.editorInline.InlineEditorEditor
 	.create(editorElement, {
