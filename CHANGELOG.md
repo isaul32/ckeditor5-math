@@ -3,12 +3,14 @@
 ## Current
 
 -   Add latest changes here
+-   New feature: Make className of span element configurable (#82, thank you
+    @DanielKulbe)
 
 ## [36.0.3](https://github.com/isaul32/ckeditor5-math/compare/v36.0.2...v36.0.3) (unreleased)
 
-- Move to a DLL compatible plugin (#83)
+-   Move to a DLL compatible plugin (#83)
 
-  Credit: @DanielKulbe
+    Credit: @DanielKulbe
 
 ## [36.0.2](https://github.com/isaul32/ckeditor5-math/compare/v36.0.1...v36.0.2) (2023-02-14)
 
