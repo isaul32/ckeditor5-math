@@ -348,13 +348,13 @@
     "@ckeditor/ckeditor5-utils" "^36.0.1"
     lodash-es "^4.17.15"
 
-"@ckeditor/ckeditor5-dev-transifex@^32.0.0":
-  version "32.1.2"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-transifex/-/ckeditor5-dev-transifex-32.1.2.tgz#0d1a232bbfa617eaf0c7ac45e1749e4b2c95d89c"
-  integrity sha512-ABbuRdIO5K5nPLwcNd6aYyOeXmEZVsf55lEggCIEOcIoY1mJ1SUP7iYJhmMn14ooq3St/Ac0rko1ia5a7rOERA==
+"@ckeditor/ckeditor5-dev-transifex@^35.0.0":
+  version "35.0.6"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-transifex/-/ckeditor5-dev-transifex-35.0.6.tgz#61c45c4446d77a4a8bdc5e42073e84e58352ca18"
+  integrity sha512-rSJmiTxuxvobPwtkaRHys0Eo5g0/Y3U//YLkc7PQKte9zFZ9dERlBFFZq+6HVUMeAm0uFDQ/iIshML0VRKb10Q==
   dependencies:
-    "@ckeditor/ckeditor5-dev-translations" "^32.1.2"
-    "@ckeditor/ckeditor5-dev-utils" "^32.1.2"
+    "@ckeditor/ckeditor5-dev-translations" "^35.0.6"
+    "@ckeditor/ckeditor5-dev-utils" "^35.0.6"
     "@transifex/api" "^4.2.1"
     chalk "^4.0.0"
     cli-table "^0.3.1"
@@ -363,10 +363,10 @@
     inquirer "^7.1.0"
     node-fetch "^2.6.7"
 
-"@ckeditor/ckeditor5-dev-translations@^32.0.0", "@ckeditor/ckeditor5-dev-translations@^32.1.2":
-  version "32.1.2"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-32.1.2.tgz#65b2368093d3806d750bbc4ff7e85ce8b77b9a37"
-  integrity sha512-TudMnRaiYMTNuDMWExeBh0Mk96GySWzgnh4fkXfoqiABQzd9Pp/Fcl40q0LJl4jtyS3qhQGFz88GxzkxAXXU9Q==
+"@ckeditor/ckeditor5-dev-translations@^35.0.0", "@ckeditor/ckeditor5-dev-translations@^35.0.6":
+  version "35.0.6"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-35.0.6.tgz#bd817f0b7bc6910a47516b4ac92df89cee018594"
+  integrity sha512-6SZ2adCEe03GT4r5rmYD7xGHfxI5BOVnXh2ZtwABOqx5xoXAiLfDL5mKfLGwDxJ9Bg+BHpXxXceGNQCh+xjKmA==
   dependencies:
     "@babel/parser" "^7.18.9"
     "@babel/traverse" "^7.18.9"
@@ -375,12 +375,12 @@
     rimraf "^3.0.2"
     webpack-sources "^2.0.1"
 
-"@ckeditor/ckeditor5-dev-utils@^32.0.0", "@ckeditor/ckeditor5-dev-utils@^32.1.2":
-  version "32.1.2"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-32.1.2.tgz#7106dec670a541083b2d89658af44c7b6f68ac83"
-  integrity sha512-C9c6EnWhOElN5c56xhJ7mYA9AsgZbaME6d8hTGJ43J5ZG6wg7MFwVlRpv0u2unu8whLO6vsjrW7yeqBrFvo65Q==
+"@ckeditor/ckeditor5-dev-utils@^35.0.0", "@ckeditor/ckeditor5-dev-utils@^35.0.6":
+  version "35.0.6"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-35.0.6.tgz#8bcb5a757f0d7f215afe1410a6d7f6f46e38da2b"
+  integrity sha512-5ZZv1hEDRUTdakie2J83W4opMYUV+7RIiEmxDCvyHTOZ3wz6gmfNbB4pSMToV+4feFr6UNx+HPFLVT1qAFm8aQ==
   dependencies:
-    "@ckeditor/ckeditor5-dev-translations" "^32.1.2"
+    "@ckeditor/ckeditor5-dev-translations" "^35.0.6"
     chalk "^3.0.0"
     cli-cursor "^3.1.0"
     cli-spinners "^2.6.1"
@@ -485,14 +485,14 @@
     "@ckeditor/ckeditor5-ui" "^36.0.1"
     ckeditor5 "^36.0.1"
 
-"@ckeditor/ckeditor5-package-tools@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-package-tools/-/ckeditor5-package-tools-1.0.0-beta.8.tgz#e6a44c2e1ef395edc143592e61c6a2e97de26bf0"
-  integrity sha512-EEvX8rFHHPdEt3FBHUXK8grEzZBta6g8HY5G31S61shVnetsWyLrePaSrDH6yLkitbEheGc0tPeblk4r8BeMiw==
+"@ckeditor/ckeditor5-package-tools@^1.0.0-beta.10":
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-package-tools/-/ckeditor5-package-tools-1.0.0-beta.10.tgz#dcd68bf70a086b66a76468e249f33225aaba96e4"
+  integrity sha512-v/IIsKvk0e9oKZE5cGiIUNJcjqA0wOhWq/PJmGGmgiDUk4/+wniaY4ID02gqgnHTrzY0uNGegqdGps/omwuErg==
   dependencies:
-    "@ckeditor/ckeditor5-dev-transifex" "^32.0.0"
-    "@ckeditor/ckeditor5-dev-translations" "^32.0.0"
-    "@ckeditor/ckeditor5-dev-utils" "^32.0.0"
+    "@ckeditor/ckeditor5-dev-transifex" "^35.0.0"
+    "@ckeditor/ckeditor5-dev-translations" "^35.0.0"
+    "@ckeditor/ckeditor5-dev-utils" "^35.0.0"
     buffer "^6.0.3"
     chai "^4.3.4"
     css-loader "^5.2.7"
