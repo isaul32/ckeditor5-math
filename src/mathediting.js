@@ -12,6 +12,20 @@ export default class MathEditing extends Plugin {
 		return 'MathEditing';
 	}
 
+	constructor( editor ) {
+		super( editor );
+		editor.config.define( 'math', {
+			engine: 'mathjax',
+			outputType: 'script',
+			className: 'math-tex',
+			forceOutputType: false,
+			enablePreview: true,
+			previewClassName: [],
+			popupClassName: [],
+			katexRenderOptions: {}
+		} );
+	}
+
 	init() {
 		const editor = this.editor;
 		editor.commands.add( 'math', new MathCommand( editor ) );
@@ -23,16 +37,6 @@ export default class MathEditing extends Plugin {
 			'viewToModelPosition',
 			viewToModelPositionOutsideModelElement( editor.model, viewElement => viewElement.hasClass( 'math' ) )
 		);
-		editor.config.define( 'math', {
-			engine: 'mathjax',
-			outputType: 'script',
-			className: 'math-tex',
-			forceOutputType: false,
-			enablePreview: true,
-			previewClassName: [],
-			popupClassName: [],
-			katexRenderOptions: {}
-		} );
 	}
 
 	_defineSchema() {
