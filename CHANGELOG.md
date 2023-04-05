@@ -3,11 +3,14 @@
 ## Current
 
 -   Add latest changes here
+
+## [36.0.6](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.6) (2023-04-05)
+
 -   :arrow_up: CKEditor package tools: 1.0.0-beta.8 -> beta.10
 
     See also: https://github.com/ckeditor/ckeditor5-package-generator/blob/v1.0.0-beta.10/CHANGELOG.md
 
-## [36.0.5](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.4) (2023-04-03)
+## [36.0.5](https://github.com/isaul32/ckeditor5-math/compare/v36.0.4...v36.0.5) (2023-04-03)
 
 -   Update docs for new package name (#91)
 
