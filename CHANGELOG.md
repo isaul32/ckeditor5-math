@@ -3,6 +3,11 @@
 ## Current
 
 -   Add latest changes here
+-   Fix loading of ckeditor5-math when no config object is declared in build
+	(#98)
+
+## [37.0.1](https://github.com/isaul32/ckeditor5-math/compare/v37.0.0...v36.0.1) (2023-04-05)
+
 -   Update dependencies for CKEditor 37.0.1 ([Release
     notes](https://github.com/ckeditor/ckeditor5/blob/v37.0.1/CHANGELOG.md))
 
@@ -12,6 +17,11 @@
     notes](https://github.com/ckeditor/ckeditor5/blob/v37.0.0/CHANGELOG.md))
 -   Bump minimum node version to v16 (per CKEditor v37's requirements)
 -   Add a .nvmrc for nvm users
+
+## [36.0.7](https://github.com/isaul32/ckeditor5-math/compare/v36.0.6...v36.0.7) (2023-04-05)
+
+-   Fix loading of ckeditor5-math when no config object is declared in build
+	(#97)
 
 ## [36.0.6](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.6) (2023-04-05)
 
