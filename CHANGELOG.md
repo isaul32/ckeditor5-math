@@ -3,6 +3,8 @@
 ## Current
 
 -   Add latest changes here
+-   Update dependencies for CKEditor 37.0.1 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v37.0.1/CHANGELOG.md))
 
 ## [37.0.0](https://github.com/isaul32/ckeditor5-math/compare/v36.0.6...v37.0.0) (2023-04-05)
 
