@@ -3,6 +3,8 @@
 ## Current
 
 -   Add latest changes here
+-   Fix loading of ckeditor5-math when no config object is declared in build
+	(#97)
 
 ## [36.0.6](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.6) (2023-04-05)
 
