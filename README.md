@@ -267,6 +267,43 @@ CKEditor5.editorInline.InlineEditorEditor
 
 My solution for this is use rendering element outside of CKEditor DOM and place it to right place by using absolute position. Alternative solution could be using iframe, but then typesetting engine's scripts and styles have to copy to child document.
 
+## TypeScript users
+
+ckeditor5-math does not have typings yet. TypeScript builds of CKEditor will see
+this:
+
+```sh
+src/ckeditor.ts:63:18 - error TS7016: Could not find a declaration file for module '@isaul32/ckeditor5-math/src/math'.
+'/path/to/your/project/node_modules/@isaul32/ckeditor5-math/src/math.js' implicitly has an 'any' type.
+
+Try `npm i --save-dev @types/isaul32__ckeditor5-math` if it exists or add a new declaration (.d.ts) file containing
+`declare module '@isaul32/ckeditor5-math/src/math';`
+```
+
+### Workaround for typings
+
+1. Create a `d.ts` declaration file, e.g. `typings/ckeditor5-math.d.ts`
+
+   ```typescript
+   declare module '@isaul32/ckeditor5-math';
+   declare module '@isaul32/ckeditor5-math/src/math';
+   declare module '@isaul32/ckeditor5-math/src/autoformatmath';
+   ```
+2. In your [`tsconfig.json`](https://www.typescriptlang.org/tsconfig)'s
+   root-level [`include`](https://www.typescriptlang.org/tsconfig#include)
+   option, make sure your declaration file is covered, e.g.
+
+   ```json
+   {
+     "extends": "ckeditor5/tsconfig.json",
+     "include": [
+       "src",
+       "typings",
+       "../../typings"
+      ]
+   }
+   ```
+
 ## Development
 
 Contributions, improvements and bug fixes are welcome. To aid in this, try out
