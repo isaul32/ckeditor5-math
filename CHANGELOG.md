@@ -13,6 +13,31 @@
         ([release
         notes](https://github.com/ckeditor/ckeditor5-linters-config/blob/v5.1.0/CHANGELOG.md))
 
+-   README: Note typing workaround for TypeScript builds (#105)
+
+    1.  Create a `d.ts` declaration file, e.g. `typings/ckeditor5-math.d.ts`
+
+        ```typescript
+        declare module '@isaul32/ckeditor5-math';
+        declare module '@isaul32/ckeditor5-math/src/math';
+        declare module '@isaul32/ckeditor5-math/src/autoformatmath';
+        ```
+
+    2.  In your [`tsconfig.json`](https://www.typescriptlang.org/tsconfig)'s
+        root-level [`include`](https://www.typescriptlang.org/tsconfig#include)
+        option, make sure your declaration file is covered, e.g.
+
+        ```json
+        {
+         "extends": "ckeditor5/tsconfig.json",
+         "include": [
+           "src",
+           "typings",
+           "../../typings"
+          ]
+        }
+        ```
+
 ## [38.0.1](https://github.com/isaul32/ckeditor5-math/compare/v38.0.0...v38.0.1) (2023-06-20)
 
 -   Update dependencies for CKEditor 38.0.1 ([Release
