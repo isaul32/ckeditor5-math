@@ -4,6 +4,15 @@
 
 -   Add latest changes here
 
+-   Version updates (#106)
+
+    -   ckeditor5-package-tools: v1.0.0-beta.10 -> v1.0.0
+        ([release
+        notes](https://github.com/ckeditor/ckeditor5-package-generator/blob/v1.0.0/CHANGELOG.md))
+    -   eslint-config-ckeditor5: >=4.1.1 -> ^5.0.1
+        ([release
+        notes](https://github.com/ckeditor/ckeditor5-linters-config/blob/v5.1.0/CHANGELOG.md))
+
 ## [38.0.1](https://github.com/isaul32/ckeditor5-math/compare/v38.0.0...v38.0.1) (2023-06-20)
 
 -   Update dependencies for CKEditor 38.0.1 ([Release
@@ -22,7 +31,7 @@
 ## [37.0.2](https://github.com/isaul32/ckeditor5-math/compare/v37.0.1...v37.0.2) (2023-04-05)
 
 -   Fix loading of ckeditor5-math when no config object is declared in build
-	(#98)
+    (#98)
 
 ## [37.0.1](https://github.com/isaul32/ckeditor5-math/compare/v37.0.0...v36.0.1) (2023-04-05)
 
@@ -39,7 +48,7 @@
 ## [36.0.7](https://github.com/isaul32/ckeditor5-math/compare/v36.0.6...v36.0.7) (2023-04-05)
 
 -   Fix loading of ckeditor5-math when no config object is declared in build
-	(#97)
+    (#97)
 
 ## [36.0.6](https://github.com/isaul32/ckeditor5-math/compare/v36.0.5...v36.0.6) (2023-04-05)
 
