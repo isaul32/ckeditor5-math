@@ -30,7 +30,7 @@
     "@ckeditor/ckeditor5-link": ">=38.0.1",
     "@ckeditor/ckeditor5-list": ">=38.0.1",
     "@ckeditor/ckeditor5-media-embed": ">=38.0.1",
-    "@ckeditor/ckeditor5-package-tools": "^1.0.0-beta.10",
+    "@ckeditor/ckeditor5-package-tools": "^1.0.0",
     "@ckeditor/ckeditor5-paragraph": ">=38.0.1",
     "@ckeditor/ckeditor5-table": ">=38.0.1",
     "@ckeditor/ckeditor5-theme-lark": ">=38.0.1",
