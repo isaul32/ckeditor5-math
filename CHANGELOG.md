@@ -4,11 +4,17 @@
 
 -   Add latest changes here
 
--   Version updates (#106)
+## [38.1.0](https://github.com/isaul32/ckeditor5-math/compare/v38.0.1...v38.1.0) (2023-07-26)
 
-    -   ckeditor5-package-tools: v1.0.0-beta.10 -> v1.0.0
+-   Update dependencies for CKEditor 38.1.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v38.1.0/CHANGELOG.md))
+    (#108)
+
+-   Version updates (#106, #108)
+
+    -   ckeditor5-package-tools: v1.0.0-beta.10 -> v1.1.0
         ([release
-        notes](https://github.com/ckeditor/ckeditor5-package-generator/blob/v1.0.0/CHANGELOG.md))
+        notes](https://github.com/ckeditor/ckeditor5-package-generator/blob/v1.1.0/CHANGELOG.md))
     -   eslint-config-ckeditor5: >=4.1.1 -> ^5.0.1
         ([release
         notes](https://github.com/ckeditor/ckeditor5-linters-config/blob/v5.1.0/CHANGELOG.md))
