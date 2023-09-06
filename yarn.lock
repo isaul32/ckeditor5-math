@@ -2988,21 +2988,21 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-ckeditor5@^5.0.1:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-ckeditor5/-/eslint-config-ckeditor5-5.1.0.tgz#88f96bb0ae559ddadab733a33d7167b27a649f67"
-  integrity sha512-KW9TDMaxNFR+GVkQAp7VNYQCLQ/27H7aojW++cPzzok0CuZolwDWaC8YlJ7QYMDaiIcnW+kD//ZW8XUNHLRdcg==
+eslint-config-ckeditor5@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-ckeditor5/-/eslint-config-ckeditor5-5.1.1.tgz#a1e4797048eda648cc911a99a447ea73a39009d9"
+  integrity sha512-5sgZuMFBKwo1Ac05qwnw1rw4wZBNss6KTpf6raV6XO97dUmTbwsuP2ure7+TxiSKV6ir727Abbz5I4gozC+/YQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.26.0"
     "@typescript-eslint/parser" "^5.26.0"
-    eslint-plugin-ckeditor5-rules "^5.1.0"
+    eslint-plugin-ckeditor5-rules "^5.1.1"
     eslint-plugin-mocha "^7.0.0"
     typescript "^4.7.2"
 
-eslint-plugin-ckeditor5-rules@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ckeditor5-rules/-/eslint-plugin-ckeditor5-rules-5.1.0.tgz#08f7d85cc85a2c31ae69b22f54a0802717dd1da4"
-  integrity sha512-zm92bHiqTwyKBg0UNA4Z5zXtM/e3JcWfE67nlrZLz+pfALnAVYPCUam0MzZWJ1hNBpqV1wjo1DRbbGaZElo1cg==
+eslint-plugin-ckeditor5-rules@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ckeditor5-rules/-/eslint-plugin-ckeditor5-rules-5.1.1.tgz#087efff9f2e355a538918455024b4494cde7b37e"
+  integrity sha512-wVe+eaeDPP0l0gKbz2JZucxqhRZrMEAUiHrv7YK4/czOBn+I1CvdYmsD8TMyF4opCvuiYdZ7r3rCe06ZvZyrRg==
   dependencies:
     "@es-joy/jsdoccomment" "^0.36.1"
     "@typescript-eslint/parser" "^5.52.0"
@@ -6825,13 +6825,13 @@ stylehacks@^5.1.0:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylelint-config-ckeditor5@>=4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/stylelint-config-ckeditor5/-/stylelint-config-ckeditor5-4.1.1.tgz#67c67697204a99e653ebe52321a59a61225ed842"
-  integrity sha512-MKmWMDbeC2VW19XTnVBIZUupd0D+TFwE1GOoyAkAALUZCZO6T2NrVxP5lLUB3lPGAycyFAFYrgQmpXJnScV5uA==
+stylelint-config-ckeditor5@>=5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-config-ckeditor5/-/stylelint-config-ckeditor5-5.1.1.tgz#4222dc46bf7a587ca6608baedf46f822a37ad0da"
+  integrity sha512-Uc5pM/HIFAdlHLZD0T1KxPp22ObIOWgftsMOP325RpX1V6G+/Dd0D+Skl17BzX3h2Mu+JsoZHuEL6SUYrf6Tkg==
   dependencies:
     stylelint-config-recommended "^3.0.0"
-    stylelint-plugin-ckeditor5-rules "^4.1.1"
+    stylelint-plugin-ckeditor5-rules "^5.1.1"
 
 stylelint-config-ckeditor5@^2.0.1:
   version "2.0.1"
@@ -6845,10 +6845,10 @@ stylelint-config-recommended@^3.0.0:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-3.0.0.tgz#e0e547434016c5539fe2650afd58049a2fd1d657"
   integrity sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
 
-stylelint-plugin-ckeditor5-rules@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/stylelint-plugin-ckeditor5-rules/-/stylelint-plugin-ckeditor5-rules-4.1.1.tgz#50d9a80f8854af4bb58fb5d8d618a5959ae03918"
-  integrity sha512-ty+c3f3liOXXkiS4NEa0hlxtStoyLM65XAI356byQAhqjnNV//QCd7WJikJUybvgPq357d95WEtr9LKCdyaNNg==
+stylelint-plugin-ckeditor5-rules@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-plugin-ckeditor5-rules/-/stylelint-plugin-ckeditor5-rules-5.1.1.tgz#9a785e03f844b9e0a180dad1bb6f50cd25803f89"
+  integrity sha512-fB+t9q5kqK1fkBdnVZLxulyKw1DU2Y3YOPmI14s41YRdPhO/sCrnRU2fj4q3MeRK/zYgn/Hvr0qTnLeWkmDpMA==
 
 stylelint@^13.13.1:
   version "13.13.1"
