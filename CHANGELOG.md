@@ -4,6 +4,16 @@
 
 -   Add latest changes here
 
+## [39.0.2](https://github.com/isaul32/ckeditor5-math/compare/v39.0.1...v39.0.2) (2023-09-06)
+
+-   Update dependencies for CKEditor 39.0.2 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v39.0.2/CHANGELOG.md))
+    (#115)
+-   Update lint packages (#115):
+
+    -   eslint-config-ckeditor5: ^5.0.1 → ^5.1.1
+    -   stylelint-config-ckeditor5: >=4.1.1 → >=5.1.1
+
 ## [39.0.1](https://github.com/isaul32/ckeditor5-math/compare/v39.0.0...v39.0.1) (2023-08-10)
 
 -   Update dependencies for CKEditor 39.0.1 ([Release
