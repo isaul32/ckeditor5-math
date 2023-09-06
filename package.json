@@ -36,12 +36,12 @@
     "@ckeditor/ckeditor5-theme-lark": "39.0.1",
     "@ckeditor/ckeditor5-upload": "39.0.1",
     "eslint": "^7.32.0",
-    "eslint-config-ckeditor5": "^5.0.1",
+    "eslint-config-ckeditor5": "^5.1.1",
     "http-server": "^14.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "stylelint": "^13.13.1",
-    "stylelint-config-ckeditor5": ">=4.1.1"
+    "stylelint-config-ckeditor5": ">=5.1.1"
   },
   "engines": {
     "node": ">=16.0.0",
