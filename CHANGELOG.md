@@ -4,6 +4,12 @@
 
 -   Add latest changes here
 
+## [40.1.0](https://github.com/isaul32/ckeditor5-math/compare/v40.0.0...v40.1.0) (2023-11-17)
+
+-   Update dependencies for CKEditor 40.1.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v40.1.0/CHANGELOG.md))
+    (#120)
+
 ## [40.0.0](https://github.com/isaul32/ckeditor5-math/compare/v39.0.2...v40.0.0) (2023-10-13)
 
 -   Update dependencies for CKEditor 40.0.0 ([Release
