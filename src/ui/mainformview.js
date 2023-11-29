@@ -64,6 +64,7 @@ export default class MainFormView extends View {
 				class: [
 					'ck',
 					'ck-math-form',
+					'ck-responsive-form',
 					...popupClassName
 				],
 				tabindex: '-1',
