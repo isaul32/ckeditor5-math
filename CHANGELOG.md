@@ -4,6 +4,13 @@
 
 -   Add latest changes here
 
+## [41.0.0](https://github.com/isaul32/ckeditor5-math/compare/v40.2.0...v41.0.0) (2023-12-12)
+
+-   Update dependencies for CKEditor 41.0.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v41.0.0/CHANGELOG.md))
+    (#122)
+-   ui(CSS): Update `--ck-z-modal` to `--ck-z-panel` for CKEditor5 v41.0.0 (#122)
+
 ## [40.2.0](https://github.com/isaul32/ckeditor5-math/compare/v40.1.0...v40.2.0) (2023-12-12)
 
 -   Update dependencies for CKEditor 40.2.0 ([Release
