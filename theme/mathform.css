@@ -31,5 +31,5 @@
 }
 
 .ck.ck-toolbar-container {
-	z-index: calc(var(--ck-z-modal) + 2);
+	z-index: calc(var(--ck-z-panel) + 2);
 }

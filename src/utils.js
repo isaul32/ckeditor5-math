@@ -228,6 +228,6 @@ function moveElement( parent, child ) {
 	child.style.position = 'absolute';
 	child.style.left = left + 'px';
 	child.style.top = top + 'px';
-	child.style.zIndex = 'var(--ck-z-modal)';
+	child.style.zIndex = 'var(--ck-z-panel)';
 	child.style.pointerEvents = 'none';
 }
