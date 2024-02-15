@@ -1,17 +1,20 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { global, logWarning } from 'ckeditor5/src/utils';
+// eslint-disable-next-line ckeditor5-rules/allow-imports-only-from-main-package-entry-point
 import blockAutoformatEditing from '@ckeditor/ckeditor5-autoformat/src/blockautoformatediting';
 import Math from './math';
+import type MathCommand from './mathcommand';
+import type MathUI from './mathui';
 
 export default class AutoformatMath extends Plugin {
-	static get requires() {
-		return [ Math, 'Autoformat' ];
+	public static get requires() {
+		return [ Math, 'Autoformat' ] as const;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	init() {
+	public init(): void {
 		const editor = this.editor;
 
 		if ( !editor.plugins.has( 'Math' ) ) {
@@ -19,9 +22,9 @@ export default class AutoformatMath extends Plugin {
 		}
 	}
 
-	afterInit() {
+	public afterInit(): void {
 		const editor = this.editor;
-		const command = editor.commands.get( 'math' );
+		const command: MathCommand = editor.commands.get( 'math' )! as MathCommand;
 
 		if ( command ) {
 			const callback = () => {
@@ -33,17 +36,19 @@ export default class AutoformatMath extends Plugin {
 
 				// Wait until selection is removed.
 				global.window.setTimeout(
-					() => editor.plugins.get( 'MathUI' )._showUI(),
+					() => ( editor.plugins.get( 'MathUI' ) as MathUI )._showUI(),
 					50
 				);
 			};
 
+			// @ts-expect-error - AutoformatMath implements Autoformat
 			blockAutoformatEditing( editor, this, /^\$\$$/, callback );
+			// @ts-expect-error - AutoformatMath implements Autoformat
 			blockAutoformatEditing( editor, this, /^\\\[$/, callback );
 		}
 	}
 
-	static get pluginName() {
-		return 'AutoformatMath';
+	public static get pluginName() {
+		return 'AutoformatMath' as const;
 	}
 }

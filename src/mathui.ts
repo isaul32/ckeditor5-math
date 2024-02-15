@@ -3,22 +3,31 @@ import MainFormView from './ui/mainformview';
 import mathIcon from '../theme/icons/math.svg';
 import { Plugin } from 'ckeditor5/src/core';
 import { ClickObserver } from 'ckeditor5/src/engine';
-import { ButtonView, ContextualBalloon, clickOutsideHandler } from 'ckeditor5/src/ui';
+import {
+	ButtonView,
+	ContextualBalloon,
+	clickOutsideHandler
+} from 'ckeditor5/src/ui';
 import { global, uid } from 'ckeditor5/src/utils';
 import { getBalloonPositionData } from './utils';
+import type { MathConfigDefaults } from '.';
 
 const mathKeystroke = 'Ctrl+M';
 
 export default class MathUI extends Plugin {
-	static get requires() {
-		return [ ContextualBalloon, MathEditing ];
+	public static get requires() {
+		return [ ContextualBalloon, MathEditing ] as const;
 	}
 
-	static get pluginName() {
-		return 'MathUI';
+	public static get pluginName() {
+		return 'MathUI' as const;
 	}
 
-	init() {
+	private _previewUid: string = '';
+	private _balloon: ContextualBalloon | undefined;
+	public formView: MainFormView | null = null;
+
+	public init(): void {
 		const editor = this.editor;
 		editor.editing.view.addObserver( ClickObserver );
 
@@ -33,59 +42,68 @@ export default class MathUI extends Plugin {
 		this._enableUserBalloonInteractions();
 	}
 
-	destroy() {
+	public destroy(): void {
 		super.destroy();
 
-		this.formView.destroy();
+		this.formView?.destroy();
 
 		// Destroy preview element
 		const previewEl = global.document.getElementById( this._previewUid );
 		if ( previewEl ) {
-			previewEl.parentNode.removeChild( previewEl );
+			previewEl.parentNode?.removeChild( previewEl );
 		}
 	}
 
-	_showUI() {
+	public _showUI(): void {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		if ( !mathCommand.isEnabled ) {
+		if ( !mathCommand?.isEnabled ) {
 			return;
 		}
 
 		this._addFormView();
 
+		// @ts-expect-error - Unknown plugin
 		this._balloon.showStack( 'main' );
 	}
 
-	_createFormView() {
+	private _createFormView() {
 		const editor = this.editor;
-		const mathCommand = editor.commands.get( 'math' );
+		const mathCommand = editor.commands.get( 'math' )!;
 
-		const mathConfig = editor.config.get( 'math' );
+		const mathConfig: MathConfigDefaults = editor.config.get( 'math' ) as MathConfigDefaults;
 
 		const formView = new MainFormView(
 			editor.locale,
-			mathConfig.engine,
+			mathConfig.engine!,
 			mathConfig.lazyLoad,
 			mathConfig.enablePreview,
 			this._previewUid,
-			mathConfig.previewClassName,
-			mathConfig.popupClassName,
-			mathConfig.katexRenderOptions
+			mathConfig.previewClassName!,
+			mathConfig.popupClassName!,
+			mathConfig.katexRenderOptions!
 		);
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
 		formView.displayButtonView.bind( 'isOn' ).to( mathCommand, 'display' );
 
 		// Form elements should be read-only when corresponding commands are disabled.
-		formView.mathInputView.bind( 'isReadOnly' ).to( mathCommand, 'isEnabled', value => !value );
+		formView.mathInputView
+			.bind( 'isReadOnly' )
+			.to( mathCommand, 'isEnabled', value => !value );
 		formView.saveButtonView.bind( 'isEnabled' ).to( mathCommand );
 		formView.displayButtonView.bind( 'isEnabled' ).to( mathCommand );
 
 		// Listen to submit button click
 		this.listenTo( formView, 'submit', () => {
-			editor.execute( 'math', formView.equation, formView.displayButtonView.isOn, mathConfig.outputType, mathConfig.forceOutputType );
+			editor.execute(
+				'math',
+				formView.equation,
+				formView.displayButtonView.isOn,
+				mathConfig.outputType,
+				mathConfig.forceOutputType
+			);
 			this._closeFormView();
 		} );
 
@@ -103,7 +121,7 @@ export default class MathUI extends Plugin {
 		return formView;
 	}
 
-	_addFormView() {
+	private _addFormView() {
 		if ( this._isFormInPanel ) {
 			return;
 		}
@@ -111,8 +129,8 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 
-		this._balloon.add( {
-			view: this.formView,
+		this._balloon!.add( {
+			view: this.formView!,
 			position: getBalloonPositionData( editor )
 		} );
 
@@ -131,7 +149,7 @@ export default class MathUI extends Plugin {
 		this.formView.displayButtonView.isOn = mathCommand.display || false;
 	}
 
-	_hideUI() {
+	private _hideUI() {
 		if ( !this._isFormInPanel ) {
 			return;
 		}
@@ -147,7 +165,7 @@ export default class MathUI extends Plugin {
 		this._removeFormView();
 	}
 
-	_closeFormView() {
+	private _closeFormView() {
 		const mathCommand = this.editor.commands.get( 'math' );
 		if ( mathCommand.value !== undefined ) {
 			this._removeFormView();
@@ -156,7 +174,7 @@ export default class MathUI extends Plugin {
 		}
 	}
 
-	_removeFormView() {
+	private _removeFormView() {
 		if ( this._isFormInPanel ) {
 			this.formView.saveButtonView.focus();
 
@@ -172,7 +190,7 @@ export default class MathUI extends Plugin {
 		}
 	}
 
-	_createToolbarMathButton() {
+	private _createToolbarMathButton() {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 		const t = editor.t;
@@ -205,7 +223,7 @@ export default class MathUI extends Plugin {
 		} );
 	}
 
-	_enableUserBalloonInteractions() {
+	private _enableUserBalloonInteractions() {
 		const editor = this.editor;
 		const viewDocument = this.editor.editing.view.document;
 		this.listenTo( viewDocument, 'click', () => {
@@ -227,20 +245,20 @@ export default class MathUI extends Plugin {
 
 		// Close on click outside of balloon panel element.
 		clickOutsideHandler( {
-			emitter: this.formView,
+			emitter: this.formView!,
 			activator: () => this._isFormInPanel,
 			contextElements: [ this._balloon.view.element ],
 			callback: () => this._hideUI()
 		} );
 	}
 
-	get _isUIVisible() {
+	private get _isUIVisible() {
 		const visibleView = this._balloon.visibleView;
 
 		return visibleView == this.formView;
 	}
 
-	get _isFormInPanel() {
+	private get _isFormInPanel() {
 		return this._balloon.hasView( this.formView );
 	}
 }
