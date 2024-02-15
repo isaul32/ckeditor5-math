@@ -9,18 +9,28 @@ export default class MathView extends View {
 	public previewUid: string;
 	public previewClassName: Array<string>;
 	public katexRenderOptions: KatexOptions;
-	public engine: 'mathjax' | 'katex' | ( ( equation: string, element: HTMLElement, display: boolean ) => void );
-	public lazyLoad: undefined | ( () => Promise<void> );
+	public engine:
+		| 'mathjax'
+		| 'katex'
+		| ((equation: string, element: HTMLElement, display: boolean) => void);
+	public lazyLoad: undefined | (() => Promise<void>);
 
 	constructor(
-		engine: 'mathjax' | 'katex' | ( ( equation: string, element: HTMLElement, display: boolean ) => void ),
-		lazyLoad: undefined | ( () => Promise<void> ),
+		engine:
+			| 'mathjax'
+			| 'katex'
+			| ((
+					equation: string,
+					element: HTMLElement,
+					display: boolean,
+			  ) => void),
+		lazyLoad: undefined | (() => Promise<void>),
 		locale: Locale,
 		previewUid: string,
 		previewClassName: Array<string>,
-		katexRenderOptions: KatexOptions
+		katexRenderOptions: KatexOptions,
 	) {
-		super( locale );
+		super(locale);
 
 		this.engine = engine;
 		this.lazyLoad = lazyLoad;
@@ -28,21 +38,21 @@ export default class MathView extends View {
 		this.katexRenderOptions = katexRenderOptions;
 		this.previewClassName = previewClassName;
 
-		this.set( 'value', '' );
-		this.set( 'display', false );
+		this.set('value', '');
+		this.set('display', false);
 
-		this.on( 'change', () => {
-			if ( this.isRendered ) {
+		this.on('change', () => {
+			if (this.isRendered) {
 				this.updateMath();
 			}
-		} );
+		});
 
-		this.setTemplate( {
+		this.setTemplate({
 			tag: 'div',
 			attributes: {
-				class: [ 'ck', 'ck-math-preview' ]
-			}
-		} );
+				class: ['ck', 'ck-math-preview'],
+			},
+		});
 	}
 
 	public updateMath(): void {
@@ -55,7 +65,7 @@ export default class MathView extends View {
 			true,
 			this.previewUid,
 			this.previewClassName,
-			this.katexRenderOptions
+			this.katexRenderOptions,
 		);
 	}
 

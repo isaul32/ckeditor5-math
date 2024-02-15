@@ -7,7 +7,7 @@ import AutoMath from './automath';
 
 export default class Math extends Plugin {
 	public static get requires() {
-		return [ MathEditing, MathUI, AutoMath, Widget ] as const;
+		return [MathEditing, MathUI, AutoMath, Widget] as const;
 	}
 
 	public static get pluginName() {

@@ -8,8 +8,12 @@ export { default as Math } from './math';
 export { default as AutoformatMath } from './autoformatmath';
 
 export interface MathConfig {
-	engine?: 'mathjax' | 'katex' | ( ( equation: string, element: HTMLElement, display: boolean ) => void ) | undefined;
-	lazyLoad?: undefined | ( () => Promise<void> );
+	engine?:
+		| 'mathjax'
+		| 'katex'
+		| ((equation: string, element: HTMLElement, display: boolean) => void)
+		| undefined;
+	lazyLoad?: undefined | (() => Promise<void>);
 	outputType?: 'script' | 'span' | undefined;
 	className?: string | undefined;
 	forceOutputType?: boolean | undefined;
@@ -20,8 +24,11 @@ export interface MathConfig {
 }
 
 export interface MathConfigDefaults {
-	engine: 'mathjax' | 'katex' | ( ( equation: string, element: HTMLElement, display: boolean ) => void );
-	lazyLoad: undefined | ( () => Promise<void> );
+	engine:
+		| 'mathjax'
+		| 'katex'
+		| ((equation: string, element: HTMLElement, display: boolean) => void);
+	lazyLoad: undefined | (() => Promise<void>);
 	outputType: 'script' | 'span';
 	className: string;
 	forceOutputType: boolean;
@@ -29,5 +36,4 @@ export interface MathConfigDefaults {
 	previewClassName: Array<string>;
 	popupClassName: Array<string>;
 	katexRenderOptions: Partial<KatexOptions>;
-
 }

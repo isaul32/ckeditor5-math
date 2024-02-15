@@ -8,7 +8,7 @@ import type { MathConfigDefaults } from '.';
 
 export default class AutoMath extends Plugin {
 	public static get requires() {
-		return [ Clipboard, Undo ] as const;
+		return [Clipboard, Undo] as const;
 	}
 
 	public static get pluginName() {
@@ -18,8 +18,8 @@ export default class AutoMath extends Plugin {
 	private _timeoutId: null | number;
 	private _positionToInsert: null | LivePosition;
 
-	constructor( editor: Editor ) {
-		super( editor );
+	constructor(editor: Editor) {
+		super(editor);
 
 		this._timeoutId = null;
 
@@ -31,21 +31,21 @@ export default class AutoMath extends Plugin {
 		const modelDocument = editor.model.document;
 
 		this.listenTo(
-			editor.plugins.get( Clipboard ),
+			editor.plugins.get(Clipboard),
 			'inputTransformation',
 			() => {
 				const firstRange = modelDocument.selection.getFirstRange();
-				if ( !firstRange ) {
+				if (!firstRange) {
 					return;
 				}
 
 				const leftLivePosition = LivePosition.fromPosition(
-					firstRange.start
+					firstRange.start,
 				);
 				leftLivePosition.stickiness = 'toPrevious';
 
 				const rightLivePosition = LivePosition.fromPosition(
-					firstRange.end
+					firstRange.end,
 				);
 				rightLivePosition.stickiness = 'toNext';
 
@@ -54,48 +54,48 @@ export default class AutoMath extends Plugin {
 					() => {
 						this._mathBetweenPositions(
 							leftLivePosition,
-							rightLivePosition
+							rightLivePosition,
 						);
 
 						leftLivePosition.detach();
 						rightLivePosition.detach();
 					},
-					{ priority: 'high' }
+					{ priority: 'high' },
 				);
-			}
+			},
 		);
 
-		editor.commands.get( 'undo' )?.on(
+		editor.commands.get('undo')?.on(
 			'execute',
 			() => {
-				if ( this._timeoutId ) {
-					global.window.clearTimeout( this._timeoutId );
+				if (this._timeoutId) {
+					global.window.clearTimeout(this._timeoutId);
 					this._positionToInsert?.detach();
 
 					this._timeoutId = null;
 					this._positionToInsert = null;
 				}
 			},
-			{ priority: 'high' }
+			{ priority: 'high' },
 		);
 	}
 
 	private _mathBetweenPositions(
 		leftPosition: LivePosition,
-		rightPosition: LivePosition
+		rightPosition: LivePosition,
 	) {
 		const editor = this.editor;
 
-		const mathConfig = this.editor.config.get( 'math' ) as MathConfigDefaults;
+		const mathConfig = this.editor.config.get('math') as MathConfigDefaults;
 
-		const equationRange = new LiveRange( leftPosition, rightPosition );
-		const walker = equationRange.getWalker( { ignoreElementEnd: true } );
+		const equationRange = new LiveRange(leftPosition, rightPosition);
+		const walker = equationRange.getWalker({ ignoreElementEnd: true });
 
 		let text = '';
 
 		// Get equation text
-		for ( const node of walker ) {
-			if ( node.item.is( '$textProxy' ) ) {
+		for (const node of walker) {
+			if (node.item.is('$textProxy')) {
 				text += node.item.data;
 			}
 		}
@@ -103,50 +103,50 @@ export default class AutoMath extends Plugin {
 		text = text.trim();
 
 		// Skip if don't have delimiters
-		if ( !hasDelimiters( text ) || delimitersCounts( text ) !== 2 ) {
+		if (!hasDelimiters(text) || delimitersCounts(text) !== 2) {
 			return;
 		}
 
-		const mathCommand = editor.commands.get( 'math' );
+		const mathCommand = editor.commands.get('math');
 
 		// Do not anything if math element cannot be inserted at the current position
-		if ( !mathCommand?.isEnabled ) {
+		if (!mathCommand?.isEnabled) {
 			return;
 		}
 
-		this._positionToInsert = LivePosition.fromPosition( leftPosition );
+		this._positionToInsert = LivePosition.fromPosition(leftPosition);
 
 		// With timeout user can undo conversation if want use plain text
-		this._timeoutId = global.window.setTimeout( () => {
-			editor.model.change( writer => {
+		this._timeoutId = global.window.setTimeout(() => {
+			editor.model.change((writer) => {
 				this._timeoutId = null;
 
-				writer.remove( equationRange );
+				writer.remove(equationRange);
 
 				let insertPosition: LivePosition | null;
 
 				// Check if position where the math element should be inserted is still valid.
-				if ( this._positionToInsert?.root.rootName !== '$graveyard' ) {
+				if (this._positionToInsert?.root.rootName !== '$graveyard') {
 					insertPosition = this._positionToInsert;
 				}
 
-				editor.model.change( innerWriter => {
-					const params = Object.assign( extractDelimiters( text ), {
-						type: mathConfig.outputType
-					} );
+				editor.model.change((innerWriter) => {
+					const params = Object.assign(extractDelimiters(text), {
+						type: mathConfig.outputType,
+					});
 					const mathElement = innerWriter.createElement(
 						params.display ? 'mathtex-display' : 'mathtex-inline',
-						params
+						params,
 					);
 
-					editor.model.insertContent( mathElement, insertPosition );
+					editor.model.insertContent(mathElement, insertPosition);
 
-					innerWriter.setSelection( mathElement, 'on' );
-				} );
+					innerWriter.setSelection(mathElement, 'on');
+				});
 
 				this._positionToInsert?.detach();
 				this._positionToInsert = null;
-			} );
-		}, 100 );
+			});
+		}, 100);
 	}
 }

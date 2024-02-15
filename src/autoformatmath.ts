@@ -8,7 +8,7 @@ import type MathUI from './mathui';
 
 export default class AutoformatMath extends Plugin {
 	public static get requires() {
-		return [ Math, 'Autoformat' ] as const;
+		return [Math, 'Autoformat'] as const;
 	}
 
 	/**
@@ -17,18 +17,20 @@ export default class AutoformatMath extends Plugin {
 	public init(): void {
 		const editor = this.editor;
 
-		if ( !editor.plugins.has( 'Math' ) ) {
-			logWarning( 'autoformat-math-feature-missing', editor );
+		if (!editor.plugins.has('Math')) {
+			logWarning('autoformat-math-feature-missing', editor);
 		}
 	}
 
 	public afterInit(): void {
 		const editor = this.editor;
-		const command: MathCommand = editor.commands.get( 'math' )! as MathCommand;
+		const command: MathCommand = editor.commands.get(
+			'math',
+		)! as MathCommand;
 
-		if ( command ) {
+		if (command) {
 			const callback = () => {
-				if ( !command.isEnabled ) {
+				if (!command.isEnabled) {
 					return false;
 				}
 
@@ -36,15 +38,15 @@ export default class AutoformatMath extends Plugin {
 
 				// Wait until selection is removed.
 				global.window.setTimeout(
-					() => ( editor.plugins.get( 'MathUI' ) as MathUI )._showUI(),
-					50
+					() => (editor.plugins.get('MathUI') as MathUI)._showUI(),
+					50,
 				);
 			};
 
 			// @ts-expect-error - AutoformatMath implements Autoformat
-			blockAutoformatEditing( editor, this, /^\$\$$/, callback );
+			blockAutoformatEditing(editor, this, /^\$\$$/, callback);
 			// @ts-expect-error - AutoformatMath implements Autoformat
-			blockAutoformatEditing( editor, this, /^\\\[$/, callback );
+			blockAutoformatEditing(editor, this, /^\\\[$/, callback);
 		}
 	}
 

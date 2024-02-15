@@ -29,19 +29,26 @@ export default class MainFormView extends View {
 	public previewLabel?: LabelView;
 	public mathView?: MathView;
 	public locale: Locale = new Locale();
-	public lazyLoad: undefined | ( () => Promise<void> );
+	public lazyLoad: undefined | (() => Promise<void>);
 
 	constructor(
 		locale: Locale,
-		engine: 'mathjax' | 'katex' | ( ( equation: string, element: HTMLElement, display: boolean ) => void ),
-		lazyLoad: undefined | ( () => Promise<void> ),
+		engine:
+			| 'mathjax'
+			| 'katex'
+			| ((
+				equation: string,
+				element: HTMLElement,
+				display: boolean,
+			) => void),
+		lazyLoad: undefined | (() => Promise<void>),
 		previewEnabled: boolean = false,
 		previewUid: string,
 		previewClassName: Array<string>,
 		popupClassName: Array<string>,
-		katexRenderOptions: KatexOptions
+		katexRenderOptions: KatexOptions,
 	) {
-		super( locale );
+		super(locale);
 
 		const t = locale.t;
 
@@ -50,10 +57,10 @@ export default class MainFormView extends View {
 
 		// Submit button
 		this.saveButtonView = this._createButton(
-			t( 'Save' ),
+			t('Save'),
 			checkIcon,
 			'ck-button-save',
-			null
+			null,
 		);
 		this.saveButtonView.type = 'submit';
 
@@ -65,19 +72,19 @@ export default class MainFormView extends View {
 
 		// Cancel button
 		this.cancelButtonView = this._createButton(
-			t( 'Cancel' ),
+			t('Cancel'),
 			cancelIcon,
 			'ck-button-cancel',
-			'cancel'
+			'cancel',
 		);
 
 		this.previewEnabled = previewEnabled;
 
 		let children = [];
-		if ( this.previewEnabled ) {
+		if (this.previewEnabled) {
 			// Preview label
-			this.previewLabel = new LabelView( locale );
-			this.previewLabel.text = t( 'Equation preview' );
+			this.previewLabel = new LabelView(locale);
+			this.previewLabel.text = t('Equation preview');
 
 			// Math element
 			this.mathView = new MathView(
@@ -86,65 +93,65 @@ export default class MainFormView extends View {
 				locale,
 				previewUid,
 				previewClassName,
-				katexRenderOptions
+				katexRenderOptions,
 			);
-			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
+			this.mathView.bind('display').to(this.displayButtonView, 'isOn');
 
 			children = [
 				this.mathInputView,
 				this.displayButtonView,
 				this.previewLabel,
-				this.mathView
+				this.mathView,
 			];
 		} else {
-			children = [ this.mathInputView, this.displayButtonView ];
+			children = [this.mathInputView, this.displayButtonView];
 		}
 
 		// Add UI elements to template
-		this.setTemplate( {
+		this.setTemplate({
 			tag: 'form',
 			attributes: {
-				class: [ 'ck', 'ck-math-form', ...popupClassName ],
+				class: ['ck', 'ck-math-form', ...popupClassName],
 				tabindex: '-1',
-				spellcheck: 'false'
+				spellcheck: 'false',
 			},
 			children: [
 				{
 					tag: 'div',
 					attributes: {
-						class: [ 'ck-math-view' ]
+						class: ['ck-math-view'],
 					},
-					children
+					children,
 				},
 				this.saveButtonView,
-				this.cancelButtonView
-			]
-		} );
+				this.cancelButtonView,
+			],
+		});
 	}
 
 	public render(): void {
 		super.render();
 
 		// Prevent default form submit event & trigger custom 'submit'
-		submitHandler( {
-			view: this
-		} );
+		submitHandler({
+			view: this,
+		});
 
 		// Register form elements to focusable elements
 		const childViews = [
 			this.mathInputView,
 			this.displayButtonView,
 			this.saveButtonView,
-			this.cancelButtonView
+			this.cancelButtonView,
 		];
 
-		childViews.forEach( v => {
-			this._focusables!.add( v );
-			this.focusTracker!.add( v.element! );
-		} );
+		childViews.forEach((v) => {
+			this._focusables!.add(v);
+			this.focusTracker!.add(v.element!);
+		});
 
 		// Listen to keypresses inside form element
-		this.keystrokes!.listenTo( this.element! );
+		this.keystrokes!.listenTo(this.element!);
 	}
 
 	public focus(): void {
@@ -155,9 +162,9 @@ export default class MainFormView extends View {
 		return this.mathInputView.fieldView.element?.value ?? '';
 	}
 
-	public set equation( equation: string ) {
+	public set equation(equation: string) {
 		this.mathInputView.fieldView.element!.value = equation;
-		if ( this.previewEnabled ) {
+		if (this.previewEnabled) {
 			this.mathView!.value = equation;
 		}
 	}
@@ -172,15 +179,15 @@ export default class MainFormView extends View {
 		this.keystrokes = new KeystrokeHandler();
 		this._focusables = new ViewCollection();
 
-		this._focusCycler = new FocusCycler( {
+		this._focusCycler = new FocusCycler({
 			focusables: this._focusables,
 			focusTracker: this.focusTracker,
 			keystrokeHandler: this.keystrokes,
 			actions: {
 				focusPrevious: 'shift + tab',
-				focusNext: 'tab'
-			}
-		} );
+				focusNext: 'tab',
+			},
+		});
 	}
 
 	private _createMathInput() {
@@ -189,19 +196,19 @@ export default class MainFormView extends View {
 		// Create equation input
 		const mathInput = new LabeledFieldView(
 			this.locale,
-			createLabeledInputText
+			createLabeledInputText,
 		);
 		const fieldView = mathInput.fieldView;
-		mathInput.infoText = t( 'Insert equation in TeX format.' );
+		mathInput.infoText = t('Insert equation in TeX format.');
 
 		const onInput = () => {
-			if ( fieldView.element != null ) {
+			if (fieldView.element != null) {
 				let equationInput = fieldView.element.value.trim();
 
 				// If input has delimiters
-				if ( hasDelimiters( equationInput ) ) {
+				if (hasDelimiters(equationInput)) {
 					// Get equation without delimiters
-					const params = extractDelimiters( equationInput );
+					const params = extractDelimiters(equationInput);
 
 					// Remove delimiters from input field
 					fieldView.element.value = params.equation;
@@ -211,7 +218,7 @@ export default class MainFormView extends View {
 					// update display button and preview
 					this.displayButtonView.isOn = params.display;
 				}
-				if ( this.previewEnabled ) {
+				if (this.previewEnabled) {
 					// Update preview view
 					this.mathView!.value = equationInput;
 				}
@@ -220,29 +227,34 @@ export default class MainFormView extends View {
 			}
 		};
 
-		fieldView.on( 'render', onInput );
-		fieldView.on( 'input', onInput );
+		fieldView.on('render', onInput);
+		fieldView.on('input', onInput);
 
 		return mathInput;
 	}
 
-	private _createButton( label: string, icon: string, className: string, eventName: string | null ) {
-		const button = new ButtonView( this.locale );
+	private _createButton(
+		label: string,
+		icon: string,
+		className: string,
+		eventName: string | null,
+	) {
+		const button = new ButtonView(this.locale);
 
-		button.set( {
+		button.set({
 			label,
 			icon,
-			tooltip: true
-		} );
+			tooltip: true,
+		});
 
-		button.extendTemplate( {
+		button.extendTemplate({
 			attributes: {
-				class: className
-			}
-		} );
+				class: className,
+			},
+		});
 
-		if ( eventName ) {
-			button.delegate( 'execute' ).to( this, eventName );
+		if (eventName) {
+			button.delegate('execute').to(this, eventName);
 		}
 
 		return button;
@@ -251,28 +263,28 @@ export default class MainFormView extends View {
 	private _createDisplayButton() {
 		const t = this.locale.t;
 
-		const switchButton = new SwitchButtonView( this.locale );
+		const switchButton = new SwitchButtonView(this.locale);
 
-		switchButton.set( {
-			label: t( 'Display mode' ),
-			withText: true
-		} );
+		switchButton.set({
+			label: t('Display mode'),
+			withText: true,
+		});
 
-		switchButton.extendTemplate( {
+		switchButton.extendTemplate({
 			attributes: {
-				class: 'ck-button-display-toggle'
-			}
-		} );
+				class: 'ck-button-display-toggle',
+			},
+		});
 
-		switchButton.on( 'execute', () => {
+		switchButton.on('execute', () => {
 			// Toggle state
 			switchButton.isOn = !switchButton.isOn;
 
-			if ( this.previewEnabled ) {
+			if (this.previewEnabled) {
 				// Update preview view
 				this.mathView!.display = switchButton.isOn;
 			}
-		} );
+		});
 
 		return switchButton;
 	}
