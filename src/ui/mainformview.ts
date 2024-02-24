@@ -52,9 +52,6 @@ export default class MainFormView extends View {
 
 		const t = locale.t;
 
-		// Create key event & focus trackers
-		this._createKeyAndFocusTrackers();
-
 		// Submit button
 		this.saveButtonView = this._createButton(
 			t('Save'),
@@ -169,26 +166,18 @@ export default class MainFormView extends View {
 		}
 	}
 
-	public focusTracker: FocusTracker | null = null;
-	public keystrokes: KeystrokeHandler | null = null;
-	private _focusables: ViewCollection<FocusableView> | null = null;
-	private _focusCycler: FocusCycler | null = null;
-
-	public _createKeyAndFocusTrackers(): void {
-		this.focusTracker = new FocusTracker();
-		this.keystrokes = new KeystrokeHandler();
-		this._focusables = new ViewCollection();
-
-		this._focusCycler = new FocusCycler({
-			focusables: this._focusables,
-			focusTracker: this.focusTracker,
-			keystrokeHandler: this.keystrokes,
-			actions: {
-				focusPrevious: 'shift + tab',
-				focusNext: 'tab',
-			},
-		});
-	}
+	public focusTracker: FocusTracker = new FocusTracker();
+	public keystrokes: KeystrokeHandler = new KeystrokeHandler();
+	private _focusables: ViewCollection<FocusableView> = new ViewCollection();
+	private _focusCycler: FocusCycler = new FocusCycler({
+		focusables: this._focusables,
+		focusTracker: this.focusTracker,
+		keystrokeHandler: this.keystrokes,
+		actions: {
+			focusPrevious: 'shift + tab',
+			focusNext: 'tab',
+		},
+	});
 
 	private _createMathInput() {
 		const t = this.locale.t;

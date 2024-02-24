@@ -43,9 +43,9 @@ export default class AutoformatMath extends Plugin {
 				);
 			};
 
-			// @ts-expect-error - AutoformatMath implements Autoformat
+			// @ts-expect-error: blockAutoformatEditing expects an Autoformat instance even though it works with any Plugin instance
 			blockAutoformatEditing(editor, this, /^\$\$$/, callback);
-			// @ts-expect-error - AutoformatMath implements Autoformat
+			// @ts-expect-error: blockAutoformatEditing expects an Autoformat instance even though it works with any Plugin instance
 			blockAutoformatEditing(editor, this, /^\\\[$/, callback);
 		}
 	}

@@ -2,6 +2,7 @@ import { Command } from 'ckeditor5/src/core';
 import { getSelectedMathModelWidget } from './utils';
 
 export default class MathCommand extends Command {
+	public value: string | null = null;
 	public execute(
 		equation: string,
 		display?: boolean,
@@ -55,11 +56,9 @@ export default class MathCommand extends Command {
 			selectedElement.is('element', 'mathtex-display');
 
 		const selectedEquation = getSelectedMathModelWidget(selection);
-		this.value = selectedEquation
-			? selectedEquation.getAttribute('equation')
-			: null;
-		this.display = selectedEquation
-			? (selectedEquation.getAttribute('display') as boolean)
-			: null;
+		const value = selectedEquation?.getAttribute("equation");
+		this.value = typeof value === "string" ? value : null;
+		const display = selectedEquation?.getAttribute("display");
+		this.display = typeof display === "boolean" ? display : null;
 	}
 }

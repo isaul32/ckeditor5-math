@@ -7,7 +7,7 @@ import {
 } from 'ckeditor5/src/widget';
 import { renderEquation, extractDelimiters } from './utils';
 import type { MathConfigDefaults } from '.';
-import type { DowncastWriter, Element } from 'ckeditor5/src/engine';
+import { DowncastWriter, Element } from 'ckeditor5/src/engine';
 
 export default class MathEditing extends Plugin {
 	public static get requires() {
@@ -81,14 +81,18 @@ export default class MathEditing extends Plugin {
 					},
 				},
 				model: (viewElement, { writer }) => {
-					const equation = viewElement.getChild(0).data.trim();
-					return writer.createElement('mathtex-inline', {
-						equation,
-						type: mathConfig.forceOutputType
-							? mathConfig.outputType
-							: 'script',
-						display: false,
-					});
+					const child = viewElement.getChild(0);
+					if (child?.is("$text")) {
+						const equation = child.data.trim();
+						return writer.createElement('mathtex-inline', {
+							equation,
+							type: mathConfig.forceOutputType
+								? mathConfig.outputType
+								: 'script',
+							display: false,
+						});
+					}
+					return null;
 				},
 			})
 			// MathJax display way (e.g. <script type="math/tex; mode=display">\sqrt{\frac{a}{b}}</script>)
@@ -100,14 +104,18 @@ export default class MathEditing extends Plugin {
 					},
 				},
 				model: (viewElement, { writer }) => {
-					const equation = viewElement.getChild(0).data.trim();
-					return writer.createElement('mathtex-display', {
-						equation,
-						type: mathConfig.forceOutputType
-							? mathConfig.outputType
-							: 'script',
-						display: true,
-					});
+					const child = viewElement.getChild(0);
+					if (child?.is("$text")) {
+						const equation = child.data.trim();
+						return writer.createElement('mathtex-display', {
+							equation,
+							type: mathConfig.forceOutputType
+								? mathConfig.outputType
+								: 'script',
+							display: true,
+						});
+					}
+					return null;
 				},
 			})
 			// CKEditor 4 way (e.g. <span class="math-tex">\( \sqrt{\frac{a}{b}} \)</span>)
@@ -117,18 +125,23 @@ export default class MathEditing extends Plugin {
 					classes: [mathConfig.className],
 				},
 				model: (viewElement, { writer }) => {
-					const equation = viewElement.getChild(0).data.trim();
+					const child = viewElement.getChild(0);
+					if (child?.is("$text")) {
+						const equation = child.data.trim();
 
-					const params = Object.assign(extractDelimiters(equation), {
-						type: mathConfig.forceOutputType
-							? mathConfig.outputType
-							: 'span',
-					});
+						const params = Object.assign(extractDelimiters(equation), {
+							type: mathConfig.forceOutputType
+								? mathConfig.outputType
+								: 'span',
+						});
 
-					return writer.createElement(
-						params.display ? 'mathtex-display' : 'mathtex-inline',
-						params,
-					);
+						return writer.createElement(
+							params.display ? 'mathtex-display' : 'mathtex-inline',
+							params,
+						);
+					}
+
+					return null;
 				},
 			})
 			// KaTeX from Quill: https://github.com/quilljs/quill/blob/develop/formats/formula.js
@@ -213,7 +226,7 @@ export default class MathEditing extends Plugin {
 			const uiElement = writer.createUIElement(
 				'div',
 				null,
-				function (domDocument) {
+				function(domDocument) {
 					const domElement = this.toDomElement(domDocument);
 
 					renderEquation(
