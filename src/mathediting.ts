@@ -8,6 +8,7 @@ import {
 import { renderEquation, extractDelimiters } from './utils';
 import type { MathConfigDefaults } from '.';
 import { DowncastWriter, Element } from 'ckeditor5/src/engine';
+import { uid } from 'ckeditor5/src/utils';
 
 export default class MathEditing extends Plugin {
 	public static get requires() {
@@ -174,7 +175,7 @@ export default class MathEditing extends Plugin {
 						modelItem,
 						writer,
 					);
-					return toWidget(widgetElement, writer, 'span');
+					return toWidget(widgetElement, writer);
 				},
 			})
 			.elementToElement({
@@ -184,7 +185,7 @@ export default class MathEditing extends Plugin {
 						modelItem,
 						writer,
 					);
-					return toWidget(widgetElement, writer, 'div');
+					return toWidget(widgetElement, writer);
 				},
 			});
 
@@ -205,8 +206,8 @@ export default class MathEditing extends Plugin {
 			modelItem: Element,
 			writer: DowncastWriter,
 		) {
-			const equation = modelItem.getAttribute('equation') as string;
-			const display = modelItem.getAttribute('display') as boolean;
+			const equation = `${modelItem.getAttribute('equation')}`;
+			const display = !!modelItem.getAttribute('display');
 
 			const styles =
 				'user-select: none; ' +
@@ -230,14 +231,14 @@ export default class MathEditing extends Plugin {
 					const domElement = this.toDomElement(domDocument);
 
 					renderEquation(
-						equation!,
+						equation,
 						domElement,
 						mathConfig.engine,
 						mathConfig.lazyLoad,
 						display,
 						false,
+						`math-editing-${uid()}`,
 						mathConfig.previewClassName,
-						null,
 						mathConfig.katexRenderOptions,
 					);
 

@@ -20,9 +20,19 @@ import type { KatexOptions } from 'katex';
 
 const { check: checkIcon, cancel: cancelIcon } = icons;
 
+class MathInputView extends LabeledFieldView<InputTextView> {
+	value: null | string = null;
+	isReadOnly = false;
+
+	constructor(locale: Locale) {
+		super(locale, createLabeledInputText);
+
+	}
+}
+
 export default class MainFormView extends View {
 	public saveButtonView: ButtonView;
-	public mathInputView: LabeledFieldView<InputTextView>;
+	public mathInputView: MathInputView;
 	public displayButtonView: SwitchButtonView;
 	public cancelButtonView: ButtonView;
 	public previewEnabled: boolean;
@@ -183,10 +193,7 @@ export default class MainFormView extends View {
 		const t = this.locale.t;
 
 		// Create equation input
-		const mathInput = new LabeledFieldView(
-			this.locale,
-			createLabeledInputText,
-		);
+		const mathInput = new MathInputView(this.locale);
 		const fieldView = mathInput.fieldView;
 		mathInput.infoText = t('Insert equation in TeX format.');
 

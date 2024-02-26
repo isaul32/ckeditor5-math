@@ -43,7 +43,7 @@ export default class MathCommand extends Command {
 		});
 	}
 
-	public display: boolean | null = null;
+	public display = false
 
 	public refresh(): void {
 		const model = this.editor.model;
@@ -59,6 +59,6 @@ export default class MathCommand extends Command {
 		const value = selectedEquation?.getAttribute("equation");
 		this.value = typeof value === "string" ? value : null;
 		const display = selectedEquation?.getAttribute("display");
-		this.display = typeof display === "boolean" ? display : null;
+		this.display = typeof display === "boolean" ? display : false;
 	}
 }

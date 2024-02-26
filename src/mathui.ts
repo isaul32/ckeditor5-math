@@ -65,6 +65,9 @@ export default class MathUI extends Plugin {
 	private _createFormView() {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get('math')!;
+		if (!(mathCommand instanceof MathCommand)) {
+			throw ("Missing math command");
+		}
 
 		const mathConfig: MathConfigDefaults = editor.config.get(
 			'math',
@@ -81,7 +84,7 @@ export default class MathUI extends Plugin {
 			mathConfig.katexRenderOptions!,
 		);
 
-		formView.mathInputView.bind('value')
+		formView.mathInputView.bind('value').to(mathCommand, 'value');
 		formView.displayButtonView.bind('isOn').to(mathCommand, 'display');
 
 		// Form elements should be read-only when corresponding commands are disabled.
