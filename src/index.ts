@@ -11,9 +11,9 @@ export interface MathConfig {
 	engine?:
 		| 'mathjax'
 		| 'katex'
-		| ((equation: string, element: HTMLElement, display: boolean) => void)
+		| ( ( equation: string, element: HTMLElement, display: boolean ) => void )
 		| undefined;
-	lazyLoad?: undefined | (() => Promise<void>);
+	lazyLoad?: undefined | ( () => Promise<void> );
 	outputType?: 'script' | 'span' | undefined;
 	className?: string | undefined;
 	forceOutputType?: boolean | undefined;
@@ -27,8 +27,8 @@ export interface MathConfigDefaults {
 	engine:
 		| 'mathjax'
 		| 'katex'
-		| ((equation: string, element: HTMLElement, display: boolean) => void);
-	lazyLoad: undefined | (() => Promise<void>);
+		| ( ( equation: string, element: HTMLElement, display: boolean ) => void );
+	lazyLoad: undefined | ( () => Promise<void> );
 	outputType: 'script' | 'span';
 	className: string;
 	forceOutputType: boolean;

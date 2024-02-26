@@ -1,11 +1,11 @@
 import type { Editor } from 'ckeditor5/src/core';
 import type {
 	Element as CKElement,
-	DocumentSelection,
+	DocumentSelection
 } from 'ckeditor5/src/engine';
 import { BalloonPanelView } from 'ckeditor5/src/ui';
-import type { PositioningFunction } from 'ckeditor5/src/utils';
-import katex, { type KatexOptions } from 'katex';
+import { CKEditorError, type PositioningFunction } from 'ckeditor5/src/utils';
+import { type KatexOptions } from 'katex';
 
 type MathJax3 = {
 	version: string;
@@ -25,7 +25,7 @@ declare global {
 }
 
 export function getSelectedMathModelWidget(
-	selection: DocumentSelection,
+	selection: DocumentSelection
 ): null | CKElement {
 	const selectedElement = selection.getSelectedElement();
 
@@ -77,7 +77,7 @@ export function extractDelimiters(equation: string): {
 
 	return {
 		equation,
-		display: hasDisplayDelimiters,
+		display: hasDisplayDelimiters
 	};
 }
 
@@ -98,7 +98,7 @@ export async function renderEquation(
 	preview = false,
 	previewUid: string = '',
 	previewClassName: Array<string> = [],
-	katexRenderOptions: KatexOptions = {},
+	katexRenderOptions: KatexOptions = {}
 ): Promise<void> {
 	if (engine == 'mathjax' && MathJax != null) {
 		if ('version' in MathJax && isMathJaxVersion3(MathJax.version)) {
@@ -107,14 +107,14 @@ export async function renderEquation(
 				preview,
 				previewUid,
 				previewClassName,
-				(el) => {
+				el => {
 					renderMathJax3(equation, el, display, () => {
 						if (preview) {
 							moveAndScaleElement(element, el);
 							el.style.visibility = 'visible';
 						}
 					});
-				},
+				}
 			);
 		} else {
 			selectRenderMode(
@@ -122,7 +122,7 @@ export async function renderEquation(
 				preview,
 				previewUid,
 				previewClassName,
-				(el) => {
+				el => {
 					// Fixme: MathJax typesetting cause occasionally math processing error without asynchronous call
 					global.window.setTimeout(() => {
 						renderMathJax2(equation, el, display);
@@ -136,35 +136,35 @@ export async function renderEquation(
 							});
 						}
 					});
-				},
+				}
 			);
 		}
-	} else if (engine === 'katex' && typeof katex !== 'undefined') {
+	} else if (engine === 'katex' && katex != null) {
 		selectRenderMode(
 			element,
 			preview,
 			previewUid,
 			previewClassName,
-			(el) => {
+			el => {
 				katex.render(equation, el, {
 					throwOnError: false,
 					displayMode: display,
-					...katexRenderOptions,
+					...katexRenderOptions
 				});
 				if (preview) {
 					moveAndScaleElement(element, el);
 					el.style.visibility = 'visible';
 				}
-			},
+			}
 		);
 	} else if (typeof engine === 'function') {
 		engine(equation, element, display);
 	} else {
-		const foo = async () => new Promise((resolve) => resolve(''));
+		const foo = async () => new Promise(resolve => resolve(''));
 		const bar = foo();
 		await bar;
 
-		if (typeof lazyLoad !== 'undefined') {
+		if (lazyLoad != null) {
 			try {
 				if (!global.window.CKEDITOR_MATH_LAZY_LOAD) {
 					global.window.CKEDITOR_MATH_LAZY_LOAD = lazyLoad();
@@ -180,18 +180,18 @@ export async function renderEquation(
 					preview,
 					previewUid,
 					previewClassName,
-					katexRenderOptions,
+					katexRenderOptions
 				);
 			} catch (err) {
 				element.innerHTML = equation;
 				console.error(
-					`math-tex-typesetting-lazy-load-failed: Lazy load failed: ${err}`,
+					`math-tex-typesetting-lazy-load-failed: Lazy load failed: ${err}`
 				);
 			}
 		} else {
 			element.innerHTML = equation;
 			console.warn(
-				`math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.`,
+				`math-tex-typesetting-missing: Missing the mathematical typesetting engine (${engine}) for tex.`
 			);
 		}
 	}
@@ -211,20 +211,28 @@ export function getBalloonPositionData(editor: Editor): {
 			positions: [
 				defaultPositions.southArrowNorth,
 				defaultPositions.southArrowNorthWest,
-				defaultPositions.southArrowNorthEast,
-			],
+				defaultPositions.southArrowNorthEast
+			]
 		};
 	} else {
 		const viewDocument = view.document;
+		const firstRange = viewDocument.selection.getFirstRange();
+		if (!firstRange) {
+			/**
+			* Missing first range.
+			* @error math-missing-range
+					*/
+			throw new CKEditorError('math-missing-range');
+		}
 		return {
 			target: view.domConverter.viewRangeToDom(
-				viewDocument.selection.getFirstRange()!,
+				firstRange
 			),
 			positions: [
 				defaultPositions.southArrowNorth,
 				defaultPositions.southArrowNorthWest,
-				defaultPositions.southArrowNorthEast,
-			],
+				defaultPositions.southArrowNorthEast
+			]
 		};
 	}
 }
@@ -234,16 +242,16 @@ function selectRenderMode(
 	preview: boolean,
 	previewUid: string,
 	previewClassName: Array<string>,
-	cb: (previewEl: HTMLElement) => void,
+	cb: (previewEl: HTMLElement) => void
 ) {
 	if (preview) {
 		createPreviewElement(
 			element,
 			previewUid,
 			previewClassName,
-			(previewEl) => {
+			previewEl => {
 				cb(previewEl);
-			},
+			}
 		);
 	} else {
 		cb(element);
@@ -297,7 +305,7 @@ function createPreviewElement(
 function getPreviewElement(
 	element: HTMLElement,
 	previewUid: string,
-	previewClassName: Array<string>,
+	previewClassName: Array<string>
 ) {
 	let previewEl = global.document.getElementById(previewUid);
 	// Create if not found
@@ -313,8 +321,10 @@ function getPreviewElement(
 		const renderTransformation = () => {
 			if (!ticking) {
 				global.window.requestAnimationFrame(() => {
-					moveElement(element, previewEl!);
-					ticking = false;
+					if (previewEl) {
+						moveElement(element, previewEl);
+						ticking = false;
+					}
 				});
 
 				ticking = true;

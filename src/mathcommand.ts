@@ -7,43 +7,43 @@ export default class MathCommand extends Command {
 		equation: string,
 		display?: boolean,
 		outputType: 'script' | 'span' = 'script',
-		forceOutputType?: boolean,
+		forceOutputType?: boolean
 	): void {
 		const model = this.editor.model;
 		const selection = model.document.selection;
 		const selectedElement = selection.getSelectedElement();
 
-		model.change((writer) => {
+		model.change( writer => {
 			let mathtex;
 			if (
 				selectedElement &&
-				(selectedElement.is('element', 'mathtex-inline') ||
-					selectedElement.is('element', 'mathtex-display'))
+				( selectedElement.is( 'element', 'mathtex-inline' ) ||
+					selectedElement.is( 'element', 'mathtex-display' ) )
 			) {
 				// Update selected element
-				const typeAttr = selectedElement.getAttribute('type');
+				const typeAttr = selectedElement.getAttribute( 'type' );
 
 				// Use already set type if found and is not forced
-				const type = forceOutputType
-					? outputType
-					: typeAttr || outputType;
+				const type = forceOutputType ?
+					outputType :
+					typeAttr || outputType;
 
 				mathtex = writer.createElement(
 					display ? 'mathtex-display' : 'mathtex-inline',
-					{ equation, type, display },
+					{ equation, type, display }
 				);
 			} else {
 				// Create new model element
 				mathtex = writer.createElement(
 					display ? 'mathtex-display' : 'mathtex-inline',
-					{ equation, type: outputType, display },
+					{ equation, type: outputType, display }
 				);
 			}
-			model.insertContent(mathtex);
-		});
+			model.insertContent( mathtex );
+		} );
 	}
 
-	public display = false
+	public display = false;
 
 	public refresh(): void {
 		const model = this.editor.model;
@@ -52,13 +52,13 @@ export default class MathCommand extends Command {
 
 		this.isEnabled =
 			selectedElement === null ||
-			selectedElement.is('element', 'mathtex-inline') ||
-			selectedElement.is('element', 'mathtex-display');
+			selectedElement.is( 'element', 'mathtex-inline' ) ||
+			selectedElement.is( 'element', 'mathtex-display' );
 
-		const selectedEquation = getSelectedMathModelWidget(selection);
-		const value = selectedEquation?.getAttribute("equation");
-		this.value = typeof value === "string" ? value : null;
-		const display = selectedEquation?.getAttribute("display");
-		this.display = typeof display === "boolean" ? display : false;
+		const selectedEquation = getSelectedMathModelWidget( selection );
+		const value = selectedEquation?.getAttribute( 'equation' );
+		this.value = typeof value === 'string' ? value : null;
+		const display = selectedEquation?.getAttribute( 'display' );
+		this.display = typeof display === 'boolean' ? display : false;
 	}
 }
