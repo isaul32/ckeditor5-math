@@ -9,7 +9,7 @@ import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 describe( 'Math', () => {
 	let editorElement, editor;
 
-	beforeEach( () => {
+	beforeEach( async () => {
 		editorElement = global.document.createElement( 'div' );
 		global.document.body.appendChild( editorElement );
 

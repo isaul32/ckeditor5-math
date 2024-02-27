@@ -26,7 +26,7 @@ export default class MathUI extends Plugin {
 
 	private _previewUid: string = `math-preview-${ uid() }`;
 	private _balloon: ContextualBalloon = this.editor.plugins.get( ContextualBalloon );
-	public formView: MainFormView = this._createFormView();
+	public formView: MainFormView | null = null;
 
 	public init(): void {
 		const editor = this.editor;
@@ -35,6 +35,8 @@ export default class MathUI extends Plugin {
 		this._createToolbarMathButton();
 
 		this._enableUserBalloonInteractions();
+
+		this.formView = this._createFormView();
 	}
 
 	public destroy(): void {
@@ -125,6 +127,10 @@ export default class MathUI extends Plugin {
 			throw new CKEditorError( 'plugin-load', { pluginName: 'math' } );
 		}
 
+		if ( this.formView == null ) {
+			return;
+		}
+
 		this._balloon.add( {
 			view: this.formView,
 			position: getBalloonPositionData( editor )
@@ -173,7 +179,7 @@ export default class MathUI extends Plugin {
 	}
 
 	private _removeFormView() {
-		if ( this._isFormInPanel ) {
+		if ( this._isFormInPanel && this.formView ) {
 			this.formView.saveButtonView.focus();
 
 			this._balloon.remove( this.formView );
@@ -253,12 +259,14 @@ export default class MathUI extends Plugin {
 		} );
 
 		// Close on click outside of balloon panel element.
-		clickOutsideHandler( {
-			emitter: this.formView,
-			activator: () => this._isFormInPanel,
-			contextElements: this._balloon.view.element ? [ this._balloon.view.element ] : [],
-			callback: () => this._hideUI()
-		} );
+		if ( this.formView ) {
+			clickOutsideHandler( {
+				emitter: this.formView,
+				activator: () => this._isFormInPanel,
+				contextElements: this._balloon.view.element ? [ this._balloon.view.element ] : [],
+				callback: () => this._hideUI()
+			} );
+		}
 	}
 
 	private get _isUIVisible() {
@@ -268,6 +276,6 @@ export default class MathUI extends Plugin {
 	}
 
 	private get _isFormInPanel() {
-		return this._balloon.hasView( this.formView );
+		return this.formView && this._balloon.hasView( this.formView );
 	}
 }
