@@ -69,9 +69,7 @@ export default class MathUI extends Plugin {
 			throw ( 'Missing math command' );
 		}
 
-		const mathConfig = editor.config.get(
-			'math'
-		) as MathConfigDefaults;
+		const mathConfig = editor.config.get( 'math' ) as MathConfigDefaults;
 
 		const formView = new MainFormView(
 			editor.locale,

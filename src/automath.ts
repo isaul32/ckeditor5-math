@@ -30,39 +30,30 @@ export default class AutoMath extends Plugin {
 		const editor = this.editor;
 		const modelDocument = editor.model.document;
 
-		this.listenTo(
-			editor.plugins.get( Clipboard ),
-			'inputTransformation',
-			() => {
-				const firstRange = modelDocument.selection.getFirstRange();
-				if ( !firstRange ) {
-					return;
-				}
-
-				const leftLivePosition = LivePosition.fromPosition(
-					firstRange.start
-				);
-				leftLivePosition.stickiness = 'toPrevious';
-
-				const rightLivePosition = LivePosition.fromPosition(
-					firstRange.end
-				);
-				rightLivePosition.stickiness = 'toNext';
-
-				modelDocument.once(
-					'change:data',
-					() => {
-						this._mathBetweenPositions(
-							leftLivePosition,
-							rightLivePosition
-						);
-
-						leftLivePosition.detach();
-						rightLivePosition.detach();
-					},
-					{ priority: 'high' }
-				);
+		this.listenTo( editor.plugins.get( Clipboard ), 'inputTransformation', () => {
+			const firstRange = modelDocument.selection.getFirstRange();
+			if ( !firstRange ) {
+				return;
 			}
+
+			const leftLivePosition = LivePosition.fromPosition( firstRange.start );
+			leftLivePosition.stickiness = 'toPrevious';
+
+			const rightLivePosition = LivePosition.fromPosition( firstRange.end );
+			rightLivePosition.stickiness = 'toNext';
+
+			modelDocument.once( 'change:data', () => {
+				this._mathBetweenPositions(
+					leftLivePosition,
+					rightLivePosition
+				);
+
+				leftLivePosition.detach();
+				rightLivePosition.detach();
+			},
+			{ priority: 'high' }
+			);
+		}
 		);
 
 		editor.commands.get( 'undo' )?.on( 'execute', () => {
