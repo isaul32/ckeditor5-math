@@ -34,9 +34,9 @@ export default class MathUI extends Plugin {
 
 		this._createToolbarMathButton();
 
-		this._enableUserBalloonInteractions();
-
 		this.formView = this._createFormView();
+
+		this._enableUserBalloonInteractions();
 	}
 
 	public destroy(): void {
@@ -266,6 +266,8 @@ export default class MathUI extends Plugin {
 				contextElements: this._balloon.view.element ? [ this._balloon.view.element ] : [],
 				callback: () => this._hideUI()
 			} );
+		} else {
+			throw new Error( 'missing form view' );
 		}
 	}
 
