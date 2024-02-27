@@ -62,12 +62,7 @@ export default class MainFormView extends View {
 		const t = locale.t;
 
 		// Submit button
-		this.saveButtonView = this._createButton(
-			t( 'Save' ),
-			checkIcon,
-			'ck-button-save',
-			null
-		);
+		this.saveButtonView = this._createButton( t( 'Save' ), checkIcon, 'ck-button-save', null );
 		this.saveButtonView.type = 'submit';
 
 		// Equation input
@@ -77,12 +72,7 @@ export default class MainFormView extends View {
 		this.displayButtonView = this._createDisplayButton();
 
 		// Cancel button
-		this.cancelButtonView = this._createButton(
-			t( 'Cancel' ),
-			cancelIcon,
-			'ck-button-cancel',
-			'cancel'
-		);
+		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
 
 		this.previewEnabled = previewEnabled;
 
@@ -93,14 +83,7 @@ export default class MainFormView extends View {
 			this.previewLabel.text = t( 'Equation preview' );
 
 			// Math element
-			this.mathView = new MathView(
-				engine,
-				lazyLoad,
-				locale,
-				previewUid,
-				previewClassName,
-				katexRenderOptions
-			);
+			this.mathView = new MathView( engine, lazyLoad, locale, previewUid, previewClassName, katexRenderOptions );
 			this.mathView.bind( 'display' ).to( this.displayButtonView, 'isOn' );
 
 			children = [
@@ -110,14 +93,21 @@ export default class MainFormView extends View {
 				this.mathView
 			];
 		} else {
-			children = [ this.mathInputView, this.displayButtonView ];
+			children = [
+				this.mathInputView,
+				this.displayButtonView
+			];
 		}
 
 		// Add UI elements to template
 		this.setTemplate( {
 			tag: 'form',
 			attributes: {
-				class: [ 'ck', 'ck-math-form', ...popupClassName ],
+				class: [
+					'ck',
+					'ck-math-form',
+					...popupClassName
+				],
 				tabindex: '-1',
 				spellcheck: 'false'
 			},
@@ -125,7 +115,9 @@ export default class MainFormView extends View {
 				{
 					tag: 'div',
 					attributes: {
-						class: [ 'ck-math-view' ]
+						class: [
+							'ck-math-view'
+						]
 					},
 					children
 				},

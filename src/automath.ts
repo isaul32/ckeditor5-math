@@ -65,19 +65,15 @@ export default class AutoMath extends Plugin {
 			}
 		);
 
-		editor.commands.get( 'undo' )?.on(
-			'execute',
-			() => {
-				if ( this._timeoutId ) {
-					global.window.clearTimeout( this._timeoutId );
-					this._positionToInsert?.detach();
+		editor.commands.get( 'undo' )?.on( 'execute', () => {
+			if ( this._timeoutId ) {
+				global.window.clearTimeout( this._timeoutId );
+				this._positionToInsert?.detach();
 
-					this._timeoutId = null;
-					this._positionToInsert = null;
-				}
-			},
-			{ priority: 'high' }
-		);
+				this._timeoutId = null;
+				this._positionToInsert = null;
+			}
+		}, { priority: 'high' } );
 	}
 
 	private _mathBetweenPositions(
@@ -134,9 +130,7 @@ export default class AutoMath extends Plugin {
 					const params = Object.assign( extractDelimiters( text ), {
 						type: mathConfig.outputType
 					} );
-					const mathElement = innerWriter.createElement(
-						params.display ? 'mathtex-display' : 'mathtex-inline',
-						params
+					const mathElement = innerWriter.createElement( params.display ? 'mathtex-display' : 'mathtex-inline', params
 					);
 
 					editor.model.insertContent( mathElement, insertPosition );

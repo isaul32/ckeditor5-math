@@ -24,9 +24,7 @@ export default class AutoformatMath extends Plugin {
 
 	public afterInit(): void {
 		const editor = this.editor;
-		const command = editor.commands.get(
-			'math'
-		);
+		const command = editor.commands.get( 'math' );
 
 		if ( command instanceof MathCommand ) {
 			const callback = () => {
