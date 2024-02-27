@@ -262,7 +262,7 @@ export default class MathUI extends Plugin {
 		if ( this.formView ) {
 			clickOutsideHandler( {
 				emitter: this.formView,
-				activator: () => this._isFormInPanel,
+				activator: () => !!this._isFormInPanel,
 				contextElements: this._balloon.view.element ? [ this._balloon.view.element ] : [],
 				callback: () => this._hideUI()
 			} );
