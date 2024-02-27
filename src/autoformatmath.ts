@@ -4,7 +4,7 @@ import { global, logWarning } from 'ckeditor5/src/utils';
 import blockAutoformatEditing from '@ckeditor/ckeditor5-autoformat/src/blockautoformatediting';
 import Math from './math';
 import MathCommand from './mathcommand';
-import type MathUI from './mathui';
+import MathUI from './mathui';
 
 export default class AutoformatMath extends Plugin {
 	public static get requires() {
@@ -38,7 +38,12 @@ export default class AutoformatMath extends Plugin {
 
 				// Wait until selection is removed.
 				global.window.setTimeout(
-					() => ( editor.plugins.get( 'MathUI' ) as MathUI )._showUI(),
+					() => {
+						const mathUIInstance = editor.plugins.get( 'MathUI' );
+						if ( mathUIInstance instanceof MathUI ) {
+							mathUIInstance._showUI();
+						}
+					},
 					50
 				);
 			};
