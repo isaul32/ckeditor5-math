@@ -4,3 +4,4 @@ tmp/
 sample/ckeditor.dist.js
 package-lock.json
 yarn-error.log
+src/**/*.js

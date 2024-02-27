@@ -22,6 +22,8 @@ declare global {
 	var CKEDITOR_MATH_LAZY_LOAD: undefined | Promise<void>;
 	// eslint-disable-next-line no-var
 	var MathJax: undefined | MathJax2 | MathJax3;
+	// eslint-disable-next-line no-var
+	var katex: typeof katex;
 }
 
 export function getSelectedMathModelWidget(
