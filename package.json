@@ -9,7 +9,7 @@
     "ckeditor5-feature",
     "ckeditor5-plugin",
     "ckeditor5-math",
-	"katex"
+    "katex"
   ],
   "main": "src/index.js",
   "dependencies": {
@@ -90,5 +90,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "packageManager": "yarn@4.1.0"
 }
