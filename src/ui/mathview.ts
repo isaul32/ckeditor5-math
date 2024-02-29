@@ -1,11 +1,11 @@
 import { View } from 'ckeditor5/src/ui';
 import { renderEquation } from '../utils';
 import type { Locale } from 'ckeditor5/src/utils';
-import type { KatexOptions } from 'katex';
+import type { KatexOptions } from '../katex';
 
 export default class MathView extends View {
 	public value: string;
-	public display: boolean ;
+	public display: boolean;
 	public previewUid: string;
 	public previewClassName: Array<string>;
 	public katexRenderOptions: KatexOptions;
@@ -59,7 +59,7 @@ export default class MathView extends View {
 
 	public updateMath(): void {
 		if ( this.element ) {
-			renderEquation(
+			void renderEquation(
 				this.value,
 				this.element,
 				this.engine,

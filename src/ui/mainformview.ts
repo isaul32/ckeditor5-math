@@ -16,7 +16,7 @@ import { Locale, FocusTracker, KeystrokeHandler } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters } from '../utils';
 import MathView from './mathview';
 import '../../theme/mathform.css';
-import type { KatexOptions } from 'katex';
+import type { KatexOptions } from '../katex';
 
 const { check: checkIcon, cancel: cancelIcon } = icons;
 
@@ -175,7 +175,7 @@ export default class MainFormView extends View {
 
 	public focusTracker: FocusTracker = new FocusTracker();
 	public keystrokes: KeystrokeHandler = new KeystrokeHandler();
-	private _focusables: ViewCollection<FocusableView> = new ViewCollection();
+	private _focusables = new ViewCollection<FocusableView>();
 	private _focusCycler: FocusCycler = new FocusCycler( {
 		focusables: this._focusables,
 		focusTracker: this.focusTracker,

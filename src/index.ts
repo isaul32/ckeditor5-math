@@ -2,7 +2,7 @@
  * @module math
  */
 
-import { type KatexOptions } from 'katex';
+import type { KatexOptions } from './katex';
 
 export { default as Math } from './math';
 export { default as AutoformatMath } from './autoformatmath';

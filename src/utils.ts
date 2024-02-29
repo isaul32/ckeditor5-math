@@ -5,26 +5,7 @@ import type {
 } from 'ckeditor5/src/engine';
 import { BalloonPanelView } from 'ckeditor5/src/ui';
 import { CKEditorError, type PositioningFunction } from 'ckeditor5/src/utils';
-import { type KatexOptions } from 'katex';
-
-type MathJax3 = {
-	version: string;
-	tex2chtmlPromise?: ( input: string, options: { display: boolean } ) => Promise<HTMLElement>;
-	tex2svgPromise?: ( input: string, options: { display: boolean } ) => Promise<HTMLElement>;
-};
-
-type MathJax2 = {
-	Hub: { Queue: ( callback: [string, MathJax2['Hub'], string | HTMLElement] | ( () => void ) ) => void };
-};
-
-declare global {
-	// eslint-disable-next-line no-var
-	var CKEDITOR_MATH_LAZY_LOAD: undefined | Promise<void>;
-	// eslint-disable-next-line no-var
-	var MathJax: undefined | MathJax2 | MathJax3;
-	// eslint-disable-next-line no-var
-	var katex: typeof katex;
-}
+import type { KatexOptions, MathJax2, MathJax3 } from './katex';
 
 export function getSelectedMathModelWidget(
 	selection: DocumentSelection
@@ -104,7 +85,7 @@ export async function renderEquation(
 	lazyLoad?: () => Promise<void>,
 	display = false,
 	preview = false,
-	previewUid: string = '',
+	previewUid = '',
 	previewClassName: Array<string> = [],
 	katexRenderOptions: KatexOptions = {}
 ): Promise<void> {
@@ -147,18 +128,21 @@ export async function renderEquation(
 				}
 			);
 		}
-	} else if ( engine === 'katex' && katex != null ) {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	} else if ( engine === 'katex' ) {
 		selectRenderMode(
 			element,
 			preview,
 			previewUid,
 			previewClassName,
 			el => {
-				katex.render( equation, el, {
-					throwOnError: false,
-					displayMode: display,
-					...katexRenderOptions
-				} );
+				if ( katex ) {
+					katex.render( equation, el, {
+						throwOnError: false,
+						displayMode: display,
+						...katexRenderOptions
+					} );
+				}
 				if ( preview ) {
 					moveAndScaleElement( element, el );
 					el.style.visibility = 'visible';
@@ -168,18 +152,12 @@ export async function renderEquation(
 	} else if ( typeof engine === 'function' ) {
 		engine( equation, element, display );
 	} else {
-		const foo = async () => new Promise( resolve => resolve( '' ) );
-		const bar = foo();
-		await bar;
-
 		if ( lazyLoad != null ) {
 			try {
-				if ( !global.window.CKEDITOR_MATH_LAZY_LOAD ) {
-					global.window.CKEDITOR_MATH_LAZY_LOAD = lazyLoad();
-				}
+				global.window.CKEDITOR_MATH_LAZY_LOAD ??= lazyLoad();
 				element.innerHTML = equation;
 				await global.window.CKEDITOR_MATH_LAZY_LOAD;
-				renderEquation(
+				await renderEquation(
 					equation,
 					element,
 					engine,
@@ -193,13 +171,13 @@ export async function renderEquation(
 			} catch ( err ) {
 				element.innerHTML = equation;
 				console.error(
-					`math-tex-typesetting-lazy-load-failed: Lazy load failed: ${ err }`
+					`math-tex-typesetting-lazy-load-failed: Lazy load failed: ${ String( err ) }`
 				);
 			}
 		} else {
 			element.innerHTML = equation;
 			console.warn(
-				`math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ engine }) for tex.`
+				`math-tex-typesetting-missing: Missing the mathematical typesetting engine (${ String( engine ) }) for tex.`
 			);
 		}
 	}
@@ -278,7 +256,7 @@ function renderMathJax3( equation: string, element: HTMLElement, display: boolea
 	}
 
 	if ( promiseFunction != null ) {
-		promiseFunction( equation, { display } ).then( ( node: Element ) => {
+		void promiseFunction( equation, { display } ).then( ( node: Element ) => {
 			if ( element.firstChild ) {
 				element.removeChild( element.firstChild );
 			}

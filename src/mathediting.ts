@@ -211,7 +211,7 @@ export default class MathEditing extends Plugin {
 			modelItem: Element,
 			writer: DowncastWriter
 		) {
-			const equation = `${ modelItem.getAttribute( 'equation' ) }`;
+			const equation = String( modelItem.getAttribute( 'equation' ) );
 			const display = !!modelItem.getAttribute( 'display' );
 
 			const styles =
@@ -235,7 +235,7 @@ export default class MathEditing extends Plugin {
 				function( domDocument ) {
 					const domElement = this.toDomElement( domDocument );
 
-					renderEquation(
+					void renderEquation(
 						equation,
 						domElement,
 						mathConfig.engine,

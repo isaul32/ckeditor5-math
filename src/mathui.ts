@@ -24,7 +24,7 @@ export default class MathUI extends Plugin {
 		return 'MathUI' as const;
 	}
 
-	private _previewUid: string = `math-preview-${ uid() }`;
+	private _previewUid = `math-preview-${ uid() }`;
 	private _balloon: ContextualBalloon = this.editor.plugins.get( ContextualBalloon );
 	public formView: MainFormView | null = null;
 
@@ -68,7 +68,11 @@ export default class MathUI extends Plugin {
 		const editor = this.editor;
 		const mathCommand = editor.commands.get( 'math' );
 		if ( !( mathCommand instanceof MathCommand ) ) {
-			throw ( 'Missing math command' );
+			/**
+			 * Missing Math command
+			 * @error math-command
+			 */
+			throw new CKEditorError( 'math-command' );
 		}
 
 		const mathConfig = editor.config.get( 'math' ) as MathConfigDefaults;
@@ -147,9 +151,7 @@ export default class MathUI extends Plugin {
 			this.formView.mathView?.updateMath();
 		}
 
-		if ( this.formView ) {
-			this.formView.equation = mathCommand.value || '';
-		}
+		this.formView.equation = mathCommand.value ?? '';
 		this.formView.displayButtonView.isOn = mathCommand.display || false;
 	}
 
@@ -228,7 +230,9 @@ export default class MathUI extends Plugin {
 
 			button.bind( 'isEnabled' ).to( mathCommand, 'isEnabled' );
 
-			this.listenTo( button, 'execute', () => this._showUI() );
+			this.listenTo( button, 'execute', () => {
+				this._showUI();
+			} );
 
 			return button;
 		} );
@@ -239,14 +243,8 @@ export default class MathUI extends Plugin {
 		const viewDocument = this.editor.editing.view.document;
 		this.listenTo( viewDocument, 'click', () => {
 			const mathCommand = editor.commands.get( 'math' );
-			if ( !mathCommand?.isEnabled ) {
-				return;
-			}
-
-			if ( mathCommand.value ) {
-				if ( mathCommand.isEnabled ) {
-					this._showUI();
-				}
+			if ( mathCommand?.isEnabled && mathCommand.value ) {
+				this._showUI();
 			}
 		} );
 
@@ -264,7 +262,7 @@ export default class MathUI extends Plugin {
 				emitter: this.formView,
 				activator: () => !!this._isFormInPanel,
 				contextElements: this._balloon.view.element ? [ this._balloon.view.element ] : [],
-				callback: () => this._hideUI()
+				callback: () => { this._hideUI(); }
 			} );
 		} else {
 			throw new Error( 'missing form view' );

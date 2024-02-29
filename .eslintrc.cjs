@@ -1,14 +1,18 @@
-/* eslint-env node */
-
-'use strict';
-
 module.exports = {
-	extends: 'ckeditor5',
-	parserOptions: {
-		parser: '@typescript-eslint/parser',
-		project: [ './tsconfig.json' ]
-	},
+    extends: [
+      "ckeditor5",
+      "plugin:@typescript-eslint/strict-type-checked",
+      "plugin:@typescript-eslint/stylistic-type-checked",
+    ],
 	root: true,
+	plugins: ["@typescript-eslint"],
+	parser: "@typescript-eslint/parser",
+	parserOptions: {
+		project: true,
+		__tsconfigRootDir: __dirname,
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+	},
 	globals: {
 		MathJax: true,
 		katex: true,
@@ -26,7 +30,9 @@ module.exports = {
 		'ckeditor5-rules/ckeditor-imports': 'error',
 
 		// This rule could not be found ???
-		'ckeditor5-rules/use-require-for-debug-mode-imports': 'off'
+		'ckeditor5-rules/use-require-for-debug-mode-imports': 'off',
+
+		'no-void': ['error', { 'allowAsStatement': true }]
 	},
 	overrides: [
 		{
@@ -36,6 +42,17 @@ module.exports = {
 				// Hence, imports CKEditor 5 packages in test files are not checked.
 				'ckeditor5-rules/ckeditor-imports': 'off'
 			}
-		}
+		},
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
 	]
 };
