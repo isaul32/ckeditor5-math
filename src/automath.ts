@@ -4,7 +4,6 @@ import { LivePosition, LiveRange } from 'ckeditor5/src/engine';
 import { Undo } from 'ckeditor5/src/undo';
 import { global } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
-import type { MathConfigDefaults } from '.';
 
 export default class AutoMath extends Plugin {
 	public static get requires() {
@@ -73,7 +72,8 @@ export default class AutoMath extends Plugin {
 	) {
 		const editor = this.editor;
 
-		const mathConfig = this.editor.config.get( 'math' ) as MathConfigDefaults;
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const mathConfig = this.editor.config.get( 'math' )!;
 
 		const equationRange = new LiveRange( leftPosition, rightPosition );
 		const walker = equationRange.getWalker( { ignoreElementEnd: true } );

@@ -6,7 +6,6 @@ import {
 	viewToModelPositionOutsideModelElement
 } from 'ckeditor5/src/widget';
 import { renderEquation, extractDelimiters } from './utils';
-import type { MathConfigDefaults } from '.';
 import type { DowncastWriter, Element } from 'ckeditor5/src/engine';
 import { CKEditorError, uid } from 'ckeditor5/src/utils';
 
@@ -68,7 +67,8 @@ export default class MathEditing extends Plugin {
 
 	private _defineConverters() {
 		const conversion = this.editor.conversion;
-		const mathConfig = this.editor.config.get( 'math' ) as MathConfigDefaults;
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const mathConfig = this.editor.config.get( 'math' )!;
 
 		// View -> Model
 		conversion
@@ -123,7 +123,8 @@ export default class MathEditing extends Plugin {
 			.elementToElement( {
 				view: {
 					name: 'span',
-					classes: [ mathConfig.className ]
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					classes: [ mathConfig.className! ]
 				},
 				model: ( viewElement, { writer } ) => {
 					const child = viewElement.getChild( 0 );

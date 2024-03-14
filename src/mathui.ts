@@ -10,7 +10,6 @@ import {
 } from 'ckeditor5/src/ui';
 import { CKEditorError, global, uid } from 'ckeditor5/src/utils';
 import { getBalloonPositionData } from './utils';
-import type { MathConfigDefaults } from '.';
 import MathCommand from './mathcommand';
 
 const mathKeystroke = 'Ctrl+M';
@@ -75,17 +74,22 @@ export default class MathUI extends Plugin {
 			throw new CKEditorError( 'math-command' );
 		}
 
-		const mathConfig = editor.config.get( 'math' ) as MathConfigDefaults;
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const mathConfig = editor.config.get( 'math' )!;
 
 		const formView = new MainFormView(
 			editor.locale,
-			mathConfig.engine,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			mathConfig.engine!,
 			mathConfig.lazyLoad,
 			mathConfig.enablePreview,
 			this._previewUid,
-			mathConfig.previewClassName,
-			mathConfig.popupClassName,
-			mathConfig.katexRenderOptions
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			mathConfig.previewClassName!,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			mathConfig.popupClassName!,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			mathConfig.katexRenderOptions!
 		);
 
 		formView.mathInputView.bind( 'value' ).to( mathCommand, 'value' );
