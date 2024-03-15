@@ -9,7 +9,7 @@
     "ckeditor5-feature",
     "ckeditor5-plugin",
     "ckeditor5-math",
-	"katex"
+    "katex"
   ],
   "main": "src/index.js",
   "dependencies": {
@@ -35,13 +35,16 @@
     "@ckeditor/ckeditor5-table": "41.2.0",
     "@ckeditor/ckeditor5-theme-lark": "41.2.0",
     "@ckeditor/ckeditor5-upload": "41.2.0",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
     "eslint-config-ckeditor5": "^5.3.0",
     "http-server": "^14.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "stylelint": "^13.13.1",
-    "stylelint-config-ckeditor5": ">=5.3.0"
+    "stylelint-config-ckeditor5": ">=5.3.0",
+    "typescript": "^5.4.2"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -65,15 +68,15 @@
   "scripts": {
     "dll:build": "ckeditor5-package-tools dll:build",
     "dll:serve": "http-server ./ -o sample/dll.html",
-    "lint": "eslint --quiet src/**/*.js",
-    "lint:fix": "eslint --quiet src/**/*.js --fix",
+    "lint": "eslint --quiet --ext .ts src/",
+    "lint:fix": "eslint --quiet --fix --ext .ts src/",
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css'",
     "test": "ckeditor5-package-tools test",
     "prepare": "yarn run dll:build",
     "start": "ckeditor5-package-tools start"
   },
   "lint-staged": {
-    "**/*.js": [
+    "**/*.ts": [
       "eslint --quiet"
     ],
     "**/*.css": [
