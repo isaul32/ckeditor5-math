@@ -66,6 +66,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "ts:build": "tsc -p ./tsconfig.release.json",
+    "ts:clear": "npx rimraf \"src/**/*.@(js|d.ts)\"",
     "dll:build": "ckeditor5-package-tools dll:build",
     "dll:serve": "http-server ./ -o sample/dll.html",
     "lint": "eslint --quiet --ext .ts src/",
@@ -73,6 +75,8 @@
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css'",
     "test": "ckeditor5-package-tools test",
     "prepare": "yarn run dll:build",
+    "prepublishOnly": "yarn run ts:build && ckeditor5-package-tools export-package-as-javascript",
+    "postpublish": "yarn run ts:clear && ckeditor5-package-tools export-package-as-typescript",
     "start": "ckeditor5-package-tools start"
   },
   "lint-staged": {
