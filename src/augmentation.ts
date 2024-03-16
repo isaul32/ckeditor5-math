@@ -1,4 +1,4 @@
-import type { KatexOptions } from './katex';
+import type { KatexOptions } from './typings-external';
 
 declare module '@ckeditor/ckeditor5-core' {
 	interface EditorConfig {

@@ -1,14 +1,17 @@
-interface MathJax3 {
+/**
+ * Basic typings for third party, external libraries (KaTeX, MathJax).
+ */
+export interface MathJax3 {
 	version: string;
 	tex2chtmlPromise?: ( input: string, options: { display: boolean } ) => Promise<HTMLElement>;
 	tex2svgPromise?: ( input: string, options: { display: boolean } ) => Promise<HTMLElement>;
 }
 
-interface MathJax2 {
+export interface MathJax2 {
 	Hub: { Queue: ( callback: [string, MathJax2['Hub'], string | HTMLElement] | ( () => void ) ) => void };
 }
 
-interface Katex {
+export interface Katex {
 	render( equation: string, el: HTMLElement, options: KatexOptions ): void;
 }
 
