@@ -2,8 +2,8 @@ import { Command } from 'ckeditor5/src/core';
 import { getSelectedMathModelWidget } from './utils';
 
 export default class MathCommand extends Command {
-	public value: string | null = null;
-	public execute(
+	public override value: string | null = null;
+	public override execute(
 		equation: string,
 		display?: boolean,
 		outputType: 'script' | 'span' = 'script',
@@ -45,7 +45,7 @@ export default class MathCommand extends Command {
 
 	public display = false;
 
-	public refresh(): void {
+	public override refresh(): void {
 		const model = this.editor.model;
 		const selection = model.document.selection;
 		const selectedElement = selection.getSelectedElement();
