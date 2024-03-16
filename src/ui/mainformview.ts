@@ -16,7 +16,7 @@ import { Locale, FocusTracker, KeystrokeHandler } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters } from '../utils';
 import MathView from './mathview';
 import '../../theme/mathform.css';
-import type { KatexOptions } from '../katex';
+import type { KatexOptions } from '../typings-external';
 
 const { check: checkIcon, cancel: cancelIcon } = icons;
 
