@@ -1,6 +1,6 @@
 {
   "name": "@isaul32/ckeditor5-math",
-  "version": "41.2.0",
+  "version": "41.2.1-alpha.0",
   "description": "Math feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
