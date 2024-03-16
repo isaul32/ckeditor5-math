@@ -142,7 +142,7 @@ export interface KatexOptions {
      *
      * @default false
      */
-    trust?: boolean | ( ( context: TrustContext ) => boolean ) | undefined;
+    trust?: boolean | ( ( context: object ) => boolean ) | undefined;
 
     /**
      * Place KaTeX code in the global group.
