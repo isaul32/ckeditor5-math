@@ -38,7 +38,7 @@ export default class MathUI extends Plugin {
 		this._enableUserBalloonInteractions();
 	}
 
-	public destroy(): void {
+	public override destroy(): void {
 		super.destroy();
 
 		this.formView?.destroy();

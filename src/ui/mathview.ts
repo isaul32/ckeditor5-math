@@ -73,7 +73,7 @@ export default class MathView extends View {
 		}
 	}
 
-	public render(): void {
+	public override render(): void {
 		super.render();
 		this.updateMath();
 	}

@@ -37,7 +37,7 @@ export default class MainFormView extends View {
 	public previewEnabled: boolean;
 	public previewLabel?: LabelView;
 	public mathView?: MathView;
-	public locale: Locale = new Locale();
+	public override locale: Locale = new Locale();
 	public lazyLoad: undefined | ( () => Promise<void> );
 
 	constructor(
@@ -127,7 +127,7 @@ export default class MainFormView extends View {
 		} );
 	}
 
-	public render(): void {
+	public override render(): void {
 		super.render();
 
 		// Prevent default form submit event & trigger custom 'submit'
