@@ -21,6 +21,10 @@ module.exports = {
 	ignorePatterns: [
 		// Ignore the entire `build/` (the DLL build).
 		"build/**",
+		// Ignore compiled JavaScript files, as they are generated automatically.
+		'src/**/*.js',
+		// Also, do not check typing declarations, too.
+		'src/**/*.d.ts'
 	],
 	rules: {
 		// This rule disallows importing core DLL packages directly. Imports should be done using the `ckeditor5` package.
@@ -36,7 +40,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ["tests/**/*.js", "sample/**/*.js"],
+			files: [ 'tests/**/*.[jt]s', 'sample/**/*.[jt]s' ],
 			rules: {
 				// To write complex tests, you may need to import files that are not exported in DLL files by default.
 				// Hence, imports CKEditor 5 packages in test files are not checked.
