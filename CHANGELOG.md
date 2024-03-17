@@ -4,10 +4,19 @@
 
 -   Add latest changes here
 
+## [41.2.2](https://github.com/isaul32/ckeditor5-math/compare/v41.2.1...v41.2.2) (2024-03-17)
+
+-   README updates ([#133](https://github.com/isaul32/ckeditor5-math/pull/133)):
+
+    -   Note plugin supports DLL-based builds and is in TypeScript.
+    -   Remove old TypeScript workaround sections.
+
+-   Chore: Typo fixes ([#133](https://github.com/isaul32/ckeditor5-math/pull/133))
+
 ## [41.2.1](https://github.com/isaul32/ckeditor5-math/compare/v41.2.0...v41.2.1) (2024-03-17)
 
-- Rewritten in TypeScript, credit @fedemp
-  ([#130](https://github.com/isaul32/ckeditor5-math/pull/130)).
+-   Rewritten in TypeScript, credit @fedemp
+    ([#130](https://github.com/isaul32/ckeditor5-math/pull/130)).
 
 ## [41.2.0](https://github.com/isaul32/ckeditor5-math/compare/v41.1.0...v41.2.0) (2024-03-08)
 
