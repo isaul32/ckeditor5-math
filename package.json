@@ -59,7 +59,8 @@
   },
   "files": [
     "lang",
-    "src",
+    "src/**/*.js",
+    "src/**/*.d.ts",
     "build",
     "theme",
     "ckeditor5-metadata.json",
