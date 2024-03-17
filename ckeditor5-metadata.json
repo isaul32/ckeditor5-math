@@ -3,7 +3,7 @@
 		{
 			"name": "Math",
 			"className": "Math",
-			"description": "Adds mathematical formulars to the editor.",
+			"description": "Adds mathematical formulas to the editor.",
 			"path": "src/math.js",
 			"uiComponents": [
 				{
