@@ -161,19 +161,19 @@ InlineEditor.defaultConfig = {
 
 -   `katexRenderOptions` - pass [options](https://katex.org/docs/options.html).
 
-	```js
-	InlineEditor.defaultConfig = {
-		// ...
-		math: {
-			engine: 'katex'
-			katexRenderOptions: {
-				macros: {
-					"\\neq": "\\mathrel{\\char`≠}",
-				},
-			},
-		}
-	}
-	```
+    ```js
+    InlineEditor.defaultConfig = {
+    	// ...
+    	math: {
+    		engine: 'katex'
+    		katexRenderOptions: {
+    			macros: {
+    				"\\neq": "\\mathrel{\\char`≠}",
+    			},
+    		},
+    	}
+    }
+    ```
 
 **Custom typesetting**
 
