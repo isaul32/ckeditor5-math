@@ -4,6 +4,11 @@
 
 -   Add latest changes here
 
+## [41.2.1](https://github.com/isaul32/ckeditor5-math/compare/v41.2.0...v41.2.1) (2024-03-17)
+
+- Rewritten in TypeScript, credit @fedemp
+  ([#130](https://github.com/isaul32/ckeditor5-math/pull/130)).
+
 ## [41.2.0](https://github.com/isaul32/ckeditor5-math/compare/v41.1.0...v41.2.0) (2024-03-08)
 
 -   Update dependencies for CKEditor 41.2.0 ([Release
