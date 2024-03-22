@@ -4,6 +4,10 @@
 
 -   Add latest changes here
 
+-   Update dependencies for CKEditor 41.2.1 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v41.2.1/CHANGELOG.md))
+    (#134)
+
 ## [41.2.2](https://github.com/isaul32/ckeditor5-math/compare/v41.2.1...v41.2.2) (2024-03-17)
 
 -   README updates ([#133](https://github.com/isaul32/ckeditor5-math/pull/133)):
