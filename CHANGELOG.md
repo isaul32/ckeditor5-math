@@ -3,6 +3,8 @@
 ## Current
 
 -   Add latest changes here
+-   Move tests to TypeScript, kudos @fedemp
+    ([#135](https://github.com/isaul32/ckeditor5-math/pull/135))
 
 ## [41.4.2](https://github.com/isaul32/ckeditor5-math/compare/v41.3.1...v41.4.2) (2024-05-18)
 
