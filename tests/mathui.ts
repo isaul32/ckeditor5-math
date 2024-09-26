@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* globals document, Event  */
 
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
-import { setData as setModelData } from '@ckeditor/ckeditor5-engine/src/dev-utils/model';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard.js';
+import { setData as setModelData } from '@ckeditor/ckeditor5-engine/src/dev-utils/model.js';
 
 import MathUI from '../src/mathui';
 import MainFormView from '../src/ui/mainformview';
-import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon.js';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview.js';
+import View from '@ckeditor/ckeditor5-ui/src/view.js';
+import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 
-import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
+import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver.js';
 import { expect } from 'chai';
 import type { SinonSpy } from 'sinon';
 
@@ -49,8 +49,8 @@ describe( 'MathUI', () => {
 				formView = mathUIFeature.formView;
 
 				// There is no point to execute BalloonPanelView attachTo and pin methods so lets override it.
-				sinon.stub( balloon.view, 'attachTo' ).returns( );
-				sinon.stub( balloon.view, 'pin' ).returns( );
+				sinon.stub( balloon.view, 'attachTo' ).returns( false );
+				sinon.stub( balloon.view, 'pin' ).returns();
 
 				formView?.render();
 			} );
