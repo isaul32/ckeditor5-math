@@ -4,6 +4,10 @@
 
 -   Add latest changes here
 
+## [43.1.2](https://github.com/isaul32/ckeditor5-math/compare/v43.1.1...v43.1.2) (2024-09-26)
+
+-   Downgrade ckeditor5-package-tools from 2 to 1. Fixes test for now.
+
 ## [43.1.1](https://github.com/isaul32/ckeditor5-math/compare/v41.4.2...v43.1.1) (2024-09-26)
 
 -   Update dependencies for CKEditor 43.1.1 ([Release
