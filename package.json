@@ -8,95 +8,78 @@
     "ckeditor 5",
     "ckeditor5-feature",
     "ckeditor5-plugin",
+    "ckeditor5-package-generator",
     "ckeditor5-math",
     "katex"
   ],
-  "main": "src/index.ts",
-  "dependencies": {
-    "ckeditor5": "43.2.0"
+  "type": "module",
+  "main": "dist/index.ts",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": "./dist/*",
+    "./browser/*": null,
+    "./package.json": "./package.json"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=5.7.1"
+  },
+  "files": [
+    "dist",
+    "ckeditor5-metadata.json"
+  ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-autoformat": "43.2.0",
-    "@ckeditor/ckeditor5-basic-styles": "43.2.0",
-    "@ckeditor/ckeditor5-block-quote": "43.2.0",
-    "@ckeditor/ckeditor5-code-block": "43.2.0",
-    "@ckeditor/ckeditor5-core": "43.2.0",
-    "@ckeditor/ckeditor5-editor-classic": "43.2.0",
-    "@ckeditor/ckeditor5-essentials": "43.2.0",
-    "@ckeditor/ckeditor5-heading": "43.2.0",
-    "@ckeditor/ckeditor5-image": "43.2.0",
-    "@ckeditor/ckeditor5-indent": "43.2.0",
-    "@ckeditor/ckeditor5-inspector": "4.1.0",
-    "@ckeditor/ckeditor5-link": "43.2.0",
-    "@ckeditor/ckeditor5-list": "43.2.0",
-    "@ckeditor/ckeditor5-media-embed": "43.2.0",
-    "@ckeditor/ckeditor5-package-tools": "^1.1.0",
-    "@ckeditor/ckeditor5-paragraph": "43.2.0",
-    "@ckeditor/ckeditor5-table": "43.2.0",
-    "@ckeditor/ckeditor5-theme-lark": "43.2.0",
-    "@ckeditor/ckeditor5-upload": "43.2.0",
-    "@types/chai": "^4.3.13",
-    "@types/mocha": "^10.0.6",
+    "@ckeditor/ckeditor5-dev-build-tools": "43.0.0",
+    "@ckeditor/ckeditor5-inspector": ">=4.1.0",
+    "@ckeditor/ckeditor5-package-tools": "^2.1.0",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
     "@types/sinon": "^17.0.3",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "eslint": "^8.57.0",
-    "eslint-config-ckeditor5": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "~5.43.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "ckeditor5": "latest",
+    "eslint": "^7.32.0",
+    "eslint-config-ckeditor5": ">=7.1.0",
     "http-server": "^14.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "stylelint": "^13.13.1",
     "stylelint-config-ckeditor5": ">=7.1.0",
-    "typescript": "^5.4.2"
+    "ts-node": "^10.9.1",
+    "typescript": "5.0.4"
   },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=5.7.1"
+  "peerDependencies": {
+    "ckeditor5": ">=43.2.0 || ^0.0.0-nightly"
   },
-  "author": "Sauli Anto",
-  "license": "ISC",
-  "bugs": "https://github.com/isaul32/ckeditor5-math/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/isaul32/ckeditor5-math.git"
-  },
-  "files": [
-    "lang",
-    "src/**/*.js",
-    "src/**/*.d.ts",
-    "build",
-    "theme",
-    "ckeditor5-metadata.json",
-    "CHANGELOG.md"
-  ],
   "scripts": {
+    "build:dist": "node ./scripts/build-dist.mjs",
     "ts:build": "tsc -p ./tsconfig.release.json",
     "ts:clear": "npx rimraf \"src/**/*.@(js|d.ts)\"",
-    "dll:build": "ckeditor5-package-tools dll:build",
-    "dll:serve": "http-server ./ -o sample/dll.html",
-    "lint": "eslint --quiet --ext .ts src/",
-    "lint:fix": "eslint --quiet --fix --ext .ts src/",
+    "lint": "eslint \"**/*.{js,ts}\" --quiet",
+    "start": "ckeditor5-package-tools start",
     "stylelint": "stylelint --quiet --allow-empty-input 'theme/**/*.css'",
     "test": "ckeditor5-package-tools test",
-    "prepare": "yarn run dll:build",
+    "prepare": "yarn run build:dist",
     "prepublishOnly": "yarn run ts:build && ckeditor5-package-tools export-package-as-javascript",
     "postpublish": "yarn run ts:clear && ckeditor5-package-tools export-package-as-typescript",
-    "start": "ckeditor5-package-tools start"
+    "translations:collect": "ckeditor5-package-tools translations:collect",
+    "translations:download": "ckeditor5-package-tools translations:download",
+    "translations:upload": "ckeditor5-package-tools translations:upload"
   },
   "lint-staged": {
-    "**/*.ts": [
+    "**/*.{js,ts}": [
       "eslint --quiet"
     ],
     "**/*.css": [
       "stylelint --quiet --allow-empty-input"
     ]
   },
-  "eslintIgnore": [
-    "node_modules/**",
-    "packages/*/node_modules/**",
-    "packages/*/build/**",
-    "packages/*/src/lib/**"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

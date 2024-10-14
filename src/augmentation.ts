@@ -1,4 +1,5 @@
-import type { KatexOptions } from './typings-external';
+import type { KatexOptions } from './typings-external.js';
+import type { Math } from './index.js';
 
 declare module '@ckeditor/ckeditor5-core' {
 	interface EditorConfig {
@@ -18,5 +19,7 @@ declare module '@ckeditor/ckeditor5-core' {
 			katexRenderOptions?: Partial<KatexOptions> | undefined;
 		};
 	}
+	interface PluginsMap {
+		[ Math.pluginName ]: Math;
+	}
 }
-

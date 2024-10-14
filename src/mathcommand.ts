@@ -1,5 +1,5 @@
-import { Command } from 'ckeditor5/src/core';
-import { getSelectedMathModelWidget } from './utils';
+import { Command } from 'ckeditor5';
+import { getSelectedMathModelWidget } from './utils.js';
 
 export default class MathCommand extends Command {
 	public override value: string | null = null;
