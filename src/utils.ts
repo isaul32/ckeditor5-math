@@ -89,7 +89,7 @@ export async function renderEquation(
 	previewClassName: Array<string> = [],
 	katexRenderOptions: KatexOptions = {}
 ): Promise<void> {
-	if ( engine == 'mathjax' ) {
+	if ( engine == 'mathjax' && window.MathJax !== undefined ) {
 		if ( isMathJaxVersion3( MathJax ) ) {
 			selectRenderMode(
 				element,
@@ -129,7 +129,7 @@ export async function renderEquation(
 			);
 		}
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	} else if ( engine === 'katex' ) {
+	} else if ( engine === 'katex' && window.katex !== undefined ) {
 		selectRenderMode(
 			element,
 			preview,
