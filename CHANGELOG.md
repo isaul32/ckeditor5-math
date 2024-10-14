@@ -4,6 +4,14 @@
 
 -   Add latest changes here
 
+## [43.2.0](https://github.com/isaul32/ckeditor5-math/compare/v43.1.2...v43.2.0) (2024-10-14)
+
+-   Update dependencies for CKEditor 43.2.0 ([Release
+    notes](https://github.com/ckeditor/ckeditor5/blob/v43.2.0/CHANGELOG.md))
+    ([#153](https://github.com/isaul32/ckeditor5-math/pull/153))
+
+    **Note** This does **not** yet support the [new installation method](https://ckeditor.com/docs/ckeditor5/latest/updating/nim-migration/migration-to-new-installation-methods.html) for [custom plugins](https://ckeditor.com/docs/ckeditor5/latest/updating/nim-migration/custom-plugins.html). That will come in a future release.
+
 ## [43.1.2](https://github.com/isaul32/ckeditor5-math/compare/v43.1.1...v43.1.2) (2024-09-26)
 
 -   Downgrade ckeditor5-package-tools from 2 to 1. Fixes test for now.
