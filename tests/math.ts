@@ -1,10 +1,10 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Mathematics from '../src/math';
 import MathEditing from '../src/mathediting';
 import MathUI from '../src/mathui';
 import AutoMath from '../src/automath';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
-import global from '@ckeditor/ckeditor5-utils/src/dom/global';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import { Widget } from '@ckeditor/ckeditor5-widget';
+import { global } from '@ckeditor/ckeditor5-utils';
 import { expect } from 'chai';
 
 describe( 'Math', () => {

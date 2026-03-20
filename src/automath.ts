@@ -1,6 +1,6 @@
 import { Clipboard } from 'ckeditor5/src/clipboard';
 import { Plugin, type Editor } from 'ckeditor5/src/core';
-import { LivePosition, LiveRange } from 'ckeditor5/src/engine';
+import { ModelLivePosition, ModelLiveRange } from 'ckeditor5/src/engine';
 import { Undo } from 'ckeditor5/src/undo';
 import { global } from 'ckeditor5/src/utils';
 import { extractDelimiters, hasDelimiters, delimitersCounts } from './utils';
@@ -15,7 +15,7 @@ export default class AutoMath extends Plugin {
 	}
 
 	private _timeoutId: null | number;
-	private _positionToInsert: null | LivePosition;
+	private _positionToInsert: null | ModelLivePosition;
 
 	constructor( editor: Editor ) {
 		super( editor );
@@ -35,10 +35,10 @@ export default class AutoMath extends Plugin {
 				return;
 			}
 
-			const leftLivePosition = LivePosition.fromPosition( firstRange.start );
+			const leftLivePosition = ModelLivePosition.fromPosition( firstRange.start );
 			leftLivePosition.stickiness = 'toPrevious';
 
-			const rightLivePosition = LivePosition.fromPosition( firstRange.end );
+			const rightLivePosition = ModelLivePosition.fromPosition( firstRange.end );
 			rightLivePosition.stickiness = 'toNext';
 
 			modelDocument.once( 'change:data', () => {
@@ -67,15 +67,15 @@ export default class AutoMath extends Plugin {
 	}
 
 	private _mathBetweenPositions(
-		leftPosition: LivePosition,
-		rightPosition: LivePosition
+		leftPosition: ModelLivePosition,
+		rightPosition: ModelLivePosition
 	) {
 		const editor = this.editor;
 
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const mathConfig = this.editor.config.get( 'math' )!;
 
-		const equationRange = new LiveRange( leftPosition, rightPosition );
+		const equationRange = new ModelLiveRange( leftPosition, rightPosition );
 		const walker = equationRange.getWalker( { ignoreElementEnd: true } );
 
 		let text = '';
@@ -101,7 +101,7 @@ export default class AutoMath extends Plugin {
 			return;
 		}
 
-		this._positionToInsert = LivePosition.fromPosition( leftPosition );
+		this._positionToInsert = ModelLivePosition.fromPosition( leftPosition );
 
 		// With timeout user can undo conversation if want use plain text
 		this._timeoutId = global.window.setTimeout( () => {
@@ -110,7 +110,7 @@ export default class AutoMath extends Plugin {
 
 				writer.remove( equationRange );
 
-				let insertPosition: LivePosition | null;
+				let insertPosition: ModelLivePosition | null;
 
 				// Check if position where the math element should be inserted is still valid.
 				if ( this._positionToInsert?.root.rootName !== '$graveyard' ) {

@@ -6,7 +6,7 @@ import {
 	viewToModelPositionOutsideModelElement
 } from 'ckeditor5/src/widget';
 import { renderEquation, extractDelimiters } from './utils';
-import type { DowncastWriter, Element } from 'ckeditor5/src/engine';
+import type { ViewDowncastWriter, ModelElement } from 'ckeditor5/src/engine';
 import { CKEditorError, uid } from 'ckeditor5/src/utils';
 
 export default class MathEditing extends Plugin {
@@ -209,8 +209,8 @@ export default class MathEditing extends Plugin {
 
 		// Create view for editor
 		function createMathtexEditingView(
-			modelItem: Element,
-			writer: DowncastWriter
+			modelItem: ModelElement,
+			writer: ViewDowncastWriter
 		) {
 			const equation = String( modelItem.getAttribute( 'equation' ) );
 			const display = !!modelItem.getAttribute( 'display' );
@@ -259,8 +259,8 @@ export default class MathEditing extends Plugin {
 
 		// Create view for data
 		function createMathtexView(
-			modelItem: Element,
-			{ writer }: { writer: DowncastWriter }
+			modelItem: ModelElement,
+			{ writer }: { writer: ViewDowncastWriter }
 		) {
 			const equation = modelItem.getAttribute( 'equation' );
 			if ( typeof equation != 'string' ) {

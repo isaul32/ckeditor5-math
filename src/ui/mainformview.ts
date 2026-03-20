@@ -1,4 +1,4 @@
-import { icons } from 'ckeditor5/src/core';
+import { IconCheck, IconCancel } from 'ckeditor5/src/icons';
 import {
 	ButtonView,
 	createLabeledInputText,
@@ -17,8 +17,6 @@ import { extractDelimiters, hasDelimiters } from '../utils';
 import MathView from './mathview';
 import '../../theme/mathform.css';
 import type { KatexOptions } from '../typings-external';
-
-const { check: checkIcon, cancel: cancelIcon } = icons;
 
 class MathInputView extends LabeledFieldView<InputTextView> {
 	public value: null | string = null;
@@ -62,7 +60,7 @@ export default class MainFormView extends View {
 		const t = locale.t;
 
 		// Submit button
-		this.saveButtonView = this._createButton( t( 'Save' ), checkIcon, 'ck-button-save', null );
+		this.saveButtonView = this._createButton( t( 'Save' ), IconCheck, 'ck-button-save', null );
 		this.saveButtonView.type = 'submit';
 
 		// Equation input
@@ -72,7 +70,7 @@ export default class MainFormView extends View {
 		this.displayButtonView = this._createDisplayButton();
 
 		// Cancel button
-		this.cancelButtonView = this._createButton( t( 'Cancel' ), cancelIcon, 'ck-button-cancel', 'cancel' );
+		this.cancelButtonView = this._createButton( t( 'Cancel' ), IconCancel, 'ck-button-cancel', 'cancel' );
 
 		this.previewEnabled = previewEnabled;
 

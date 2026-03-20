@@ -1,7 +1,7 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { global, logWarning } from 'ckeditor5/src/utils';
 // eslint-disable-next-line ckeditor5-rules/allow-imports-only-from-main-package-entry-point
-import blockAutoformatEditing from '@ckeditor/ckeditor5-autoformat/src/blockautoformatediting';
+import { blockAutoformatEditing } from '@ckeditor/ckeditor5-autoformat/src/blockautoformatediting';
 import Math from './math';
 import MathCommand from './mathcommand';
 import MathUI from './mathui';
